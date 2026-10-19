@@ -168,3 +168,21 @@ modifiers, gray inherited rows/branch-only overrides, guarded deletion and stale
 are implemented. 161 JS regressions pass. Current original/native census is retained in
 `../../parity/finish-manifest.json`; full 1:1 remains unchecked. Matching dialog interiors and
 common page frames do not close the remaining per-page form/preview/context differences.
+
+## Task 11: Authorized Preview Packaging And Store Submission
+
+User explicitly requested complete packages, source push and DBX marketplace submission.
+This authorizes a disclosed Preview, not changing the failed 1:1 gate to PASS. The new
+repository baseline is committed locally so release changes can use a separate worktree;
+the unrelated DBX core checkout is untouched. Native worktree tooling is rooted to that
+different DBX repository, so secondary plugin/store repositories use git worktree fallback.
+
+- [x] Replace the nonexistent reusable workflow reference with standalone release CI.
+- [x] Test explicit five-target builds, actual CPU headers, full package checksums, source/UI
+  identity, immutable release metadata and native packaged-sidecar smoke flows.
+- [ ] Audit source/secrets/licenses, then push the plugin's public source and immutable
+  v0.1.2 tag to caichangqing1120/dbx-plugin-apollo; publish an honest unsigned Preview.
+- [ ] Download and verify all published bytes and submit only a candidate JSON in one PR
+  to t8y2/dbx-store:main. Official signing/merge remain maintainer-owned gates.
+- [ ] Preserve the issue's OPEN state and failed parity/live/native acceptance boundaries;
+  stop owned processes and turn off only the display, not the computer.

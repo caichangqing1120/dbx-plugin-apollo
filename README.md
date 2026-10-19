@@ -9,8 +9,9 @@ user controls, dedicated warning flows, real lock-info modifiers and gray inheri
 It also fixes stale editor/rollback responses, precision-losing JSON formatting and a footer
 hit-testing regression found during final browser traversal.
 See [current repairs, measurements and remaining differences](docs/parity-finish.md).
-The strict all-page, all-dialog 1:1 gate still FAILS; this is an unsigned local development
-candidate, not an accepted replica.
+The strict all-page, all-dialog 1:1 gate still FAILS; this is an unsigned Preview/development
+candidate, not an accepted replica. The [v0.1.2 release](https://github.com/caichangqing1120/dbx-plugin-apollo/releases/tag/v0.1.2)
+contains complete native candidate packages, not a promise of completed visual parity.
 
 ## Current Route Coverage (Not Original-Workflow Parity)
 
@@ -38,7 +39,8 @@ verified separately. These checks do not close the remaining page/form/context d
 
 ## Local Development
 
-Requirements: Node.js 22+, Go 1.22+, DBX plugin CLI 0.1.9+.
+Requirements: Node.js 22+, Go 1.22+, Python 3.10+, DBX plugin CLI 0.1.9+ for the dev host.
+The release workflow pins Go 1.26.3 and uses only standard-library cross-target packaging.
 
 ```sh
 npm ci
@@ -63,12 +65,23 @@ that host is for development only, not the DBX production Secret Store.
 
 ```sh
 npm run package:macos
+npm run package:all
+python3 scripts/verify-package.py dist/release-v0.1.2/io.github.caichangqing1120.apollo-0.1.2-darwin-arm64.dbxp --handshake
 ```
 
-This explicitly builds a Darwin ARM64 unsigned candidate under `dist/`. Mixed Node/Go
-architectures can otherwise give a misleading filename; the verifier checks the actual
-Mach-O CPU type, not only the manifest path. Installation requires
-explicitly enabling unsigned development packages in DBX. No store publication is performed.
+`package:macos` builds Darwin ARM64 under `dist/release-v0.1.2/darwin-arm64/`; `package:all`
+builds Darwin ARM64/x64, Windows x64 and Linux x64/ARM64 under `dist/release-v0.1.2/`.
+Single-target output never replaces the complete set's merged index. Every package contains the complete UI, licensed
+assets and its native Go sidecar. Explicit GOOS/GOARCH/CGO settings and actual Mach-O/PE/ELF
+headers prevent misleading target labels. All file checksums, source/UI equality, package
+metadata and the current-host initialize handshake are checked. Cross-target runtime
+acceptance is separate. The merged `release-candidates.json` follows the store synchronizer's
+`plugin` plus `artifacts` contract; it is not a catalog entry.
+
+Unsigned packages require explicitly enabling development packages in DBX. Official
+marketplace installation requires DBX Store review, signing and merge; the author cannot
+self-assign official trust or publish signed catalog entries. See [release notes](docs/release-notes-v0.1.2.md)
+and [privacy/security boundaries](docs/security.md).
 
 ## Testing Boundaries
 

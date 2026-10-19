@@ -5,7 +5,7 @@
   "name": "Apollo Config",
   "version": "0.1.2",
   "publisher": "caichangqing1120",
-  "description": "Handwritten Apollo 2.x management UI with ordinary password authentication",
+  "description": "Preview: independently authored Apollo 2.x management UI with password login; full 1:1 parity is incomplete",
   "icon": "assets/apollo.png",
   "engines": {
     "dbx": ">=0.6.0",

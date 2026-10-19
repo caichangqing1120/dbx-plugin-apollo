@@ -6,6 +6,16 @@ embedded Portal or an accepted full replica. Current repairs and precise remaini
 in [parity-finish.md](parity-finish.md) and [parity/finish-manifest.json](parity/finish-manifest.json).
 The older audit and 0.1.1 repair records remain historical evidence.
 
+## Authorized Preview Delivery Continuation
+
+The user subsequently authorized packaging, source push and marketplace submission while
+the failed parity gate remains disclosed. Release-only changes do not modify `src/` or the
+verified handwritten UI bytes. Current delivery checks and the exact boundary between
+unsigned author candidates and official signing are in [release-verification.md](release-verification.md).
+The single-target [package-verification.json](package-verification.json) is retained as a
+historical local pre-publication record; published hashes are authoritative in the immutable
+Release's `release-candidates.json` and `SHA256SUMS-v0.1.2.txt`, not that older snapshot.
+
 ## Current Automated Checks
 
 - `npm test`: **161/161 pass**, zero failures. Coverage includes DOM events, literal API/DTO
@@ -77,6 +87,8 @@ below-fold states. Source-inspired layout and passing APIs do not prove 1:1 equi
 No real Apollo deployment is accessed. Role fixtures record the exact grant scope but do not
 prove persistence/readback on a real authorization service. Native desktop installation,
 Secret Store/restart and actual save-file integration are not verified by the browser host.
-No commit, push, publication, issue writeback, deployment or real Apollo mutation is performed.
+The pre-publication checks in this report performed no push, publication, issue writeback,
+deployment or real Apollo mutation. The separately authorized Preview delivery is tracked
+through the source repository/Release and DBX Store candidate PR, not inferred from these tests.
 Task-owned browser contexts and services are stopped after verification; user Chrome and
 unrelated original DBX files are preserved.

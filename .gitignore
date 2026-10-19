@@ -10,3 +10,6 @@
 /backend/dbx-plugin-dbx-plugin-apollo
 
 /.playwright-cli/
+
+__pycache__/
+*.pyc
