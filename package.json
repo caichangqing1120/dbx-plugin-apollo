@@ -1,0 +1,20 @@
+{
+  "name": "dbx-plugin-apollo",
+  "version": "0.1.2",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:backend": "cd backend && go test -race ./...",
+    "test:smoke": "node scripts/smoke.mjs",
+    "package:macos": "npm run build && GOOS=darwin GOARCH=arm64 dbx-plugin package . --target darwin-arm64"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.12",
+    "happy-dom": "^21.0.3"
+  }
+}

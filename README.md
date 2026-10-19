@@ -1,0 +1,83 @@
+# DBX Apollo Config Plugin
+
+DBX issue [#12466](https://github.com/t8y2/dbx/issues/12466).
+
+**Independently authored management pages**, using Apollo 2.5.2 as the visual/interaction
+reference. Not an embedded website and not the original Portal frontend packaged in DBX.
+The 0.1.2 continuation restores all-environment role groups, independently authored searchable
+user controls, dedicated warning flows, real lock-info modifiers and gray inherited configuration.
+It also fixes stale editor/rollback responses, precision-losing JSON formatting and a footer
+hit-testing regression found during final browser traversal.
+See [current repairs, measurements and remaining differences](docs/parity-finish.md).
+The strict all-page, all-dialog 1:1 gate still FAILS; this is an unsigned local development
+candidate, not an accepted replica.
+
+## Current Route Coverage (Not Original-Workflow Parity)
+
+- Ordinary Portal username/password login; DBX Secret Store and isolated in-memory Go sessions.
+- Application search, favorites/recent/public namespaces, creation/editing and administrators.
+- Configuration table/text editing, typed String/Number/Boolean/JSON items, YAML validation,
+  unpublished-change revocation, filtered/paged commit history, publishing and version rollback.
+- Gray branch editing, client IP/label rules, gray publishing, full-release merge and cleanup.
+- Multi-environment/cluster sync preview/apply, draft comparison and release comparison.
+- Namespace and ZIP import/export; chunked RPC and native Host file-transfer save support.
+- Cluster/namespace management, public namespace linking, app/env/cluster namespace permissions,
+  access-key lifecycle and identifier-confirmed app/cluster/namespace deletion.
+- Consumers/OpenAPI authorization, system roles/parameters, service information/health,
+  audit list/trace, global key/value search and client instances.
+- Chinese/English, original-style light UI on light/dark Hosts; narrow screens retain the
+  original desktop layout with horizontal scrolling.
+
+All pages, dialogs, CSS, router and API clients are independently written. The original
+Apollo 2.5.2 frontend is used only as an external reference, never loaded by the plugin.
+The developer re-captured all 24 management pages and 53 native normal page/dialog/subview
+states, triggered 14 warning scenarios on both original and SDK surfaces, and compared
+normalized copy, computed fonts, dialog geometry and cropped pixels. Key workflows, user
+controls, gray inheritance, language/theme/narrow contexts and sidebar hit-testing are
+verified separately. These checks do not close the remaining page/form/context differences.
+
+## Local Development
+
+Requirements: Node.js 22+, Go 1.22+, DBX plugin CLI 0.1.9+.
+
+```sh
+npm ci
+npm test
+npm run test:backend
+npm run test:smoke
+npm run build
+dbx-plugin dev --path . --port 5198
+```
+
+Create a DBX Apollo connection with:
+
+- Hostname only (not a full URL), port (normally 8070), protocol HTTP/HTTPS.
+- Optional context path such as `/apollo`.
+- Existing Portal username and password. SSO/OIDC, LDAP and token-only auth are out of scope.
+
+Connection passwords and session cookies never enter the workbench context, UI persistent state or backend error messages.
+HTTP is supported for existing internal deployments; use HTTPS for untrusted networks.
+TLS uses system trust; verification is not disabled. Responses/requests are capped at 4 MiB.
+The development host stores its connection credentials in plaintext under ignored `.dbx-dev/`;
+that host is for development only, not the DBX production Secret Store.
+
+```sh
+npm run package:macos
+```
+
+This explicitly builds a Darwin ARM64 unsigned candidate under `dist/`. Mixed Node/Go
+architectures can otherwise give a misleading filename; the verifier checks the actual
+Mach-O CPU type, not only the manifest path. Installation requires
+explicitly enabling unsigned development packages in DBX. No store publication is performed.
+
+## Testing Boundaries
+
+`npm run test:smoke` starts a controlled loopback HTTP fixture and a real Go sidecar and checks
+JSON-RPC login/edit/publish/history/rollback, gray merge, sync, key/consumer/role/admin APIs,
+commit history/revocation and 2 MiB chunked requests/replies under the Host message limit. This fixture is
+NOT an actual Apollo installation. UI screenshots also use that fixture and the actual DBX
+SDK sandbox. Neither is evidence of production or live Apollo acceptance.
+
+See [reference evidence](docs/reference.md), [verification](docs/verification.md), and the
+[implementation spec](docs/specs/001-apollo-portal/spec.md). The SDK in `backend/sdk` is vendored
+from DBX under Apache-2.0 to avoid requiring a local DBX checkout to build.

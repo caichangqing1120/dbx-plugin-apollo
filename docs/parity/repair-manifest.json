@@ -1,0 +1,666 @@
+{
+  "auditDate": "2026-10-19",
+  "referenceTag": "v2.5.2",
+  "referenceCommit": "ed9785c87b390c22efece9ea7ec7eeab2d20a042",
+  "verdict": "FAIL",
+  "acceptancePassed": false,
+  "environment": "loopback controlled fixture + real SDK sandbox and Go sidecar; original UI separate reference only",
+  "viewport": {
+    "reference": [
+      1304,
+      876
+    ],
+    "nativeInner": [
+      1304,
+      876
+    ]
+  },
+  "pages": [
+    {
+      "source": "index.html",
+      "native": "index",
+      "status": "FAIL",
+      "evidenceKind": "current-browser-pair-and-source; strict-parity-not-passed",
+      "referenceImage": "reference-index.png",
+      "nativeImage": "native-index.png",
+      "finding": "导航搜索控件、图标和页脚间距仍不同；外部链接使用明确的 sandbox 适配。",
+      "remediation": "Language 下拉已恢复；主页及配置入口保留"
+    },
+    {
+      "source": "app.html",
+      "native": "app",
+      "status": "FAIL",
+      "evidenceKind": "current-browser-pair-and-source; strict-parity-not-passed",
+      "referenceImage": "reference-app.png",
+      "nativeImage": "native-app.png",
+      "finding": "用户选择器仍为 datalist；部分输入宽度、标签和间距未与原版完全一致。",
+      "remediation": "字段顺序和说明已恢复，独立创建页面"
+    },
+    {
+      "source": "config.html",
+      "native": "config",
+      "status": "FAIL",
+      "evidenceKind": "current-browser-pair-and-source; strict-parity-not-passed",
+      "referenceImage": "reference-config.png",
+      "nativeImage": "native-config.png",
+      "finding": "主灰度切换和控件细节仍不同；新增灰度说明和部分权限警告分支尚未全部同构。",
+      "remediation": "排序、完整值查看、折叠、文本编辑/检查/格式化、实例和更改历史、主灰度布局"
+    },
+    {
+      "source": "app/setting.html",
+      "native": "app-setting",
+      "status": "FAIL",
+      "evidenceKind": "current-browser-pair-and-source; strict-parity-not-passed",
+      "referenceImage": "reference-app-setting.png",
+      "nativeImage": "native-app-setting.png",
+      "finding": "内联用户选择器/按钮横排、基本信息列宽与纵向高度仍不同。",
+      "remediation": "管理员区域在前，基础信息默认只读，显式进入修改"
+    },
+    {
+      "source": "app/access_key.html",
+      "native": "app-access_key",
+      "status": "FAIL",
+      "evidenceKind": "current-browser-pair-and-source; strict-parity-not-passed",
+      "referenceImage": "reference-app-access_key.png",
+      "nativeImage": "native-app-access_key.png",
+      "finding": "原版明文改为默认脱敏；布局、列宽及按钮位置仍不同，不擅自接受安全例外。",
+      "remediation": "说明、全部环境区域、修改人/时间、环境隔离操作"
+    },
+    {
+      "source": "app/manage_cluster.html",
+      "native": "app-manage_cluster",
+      "status": "FAIL",
+      "evidenceKind": "current-browser-pair-and-source; strict-parity-not-passed",
+      "referenceImage": "reference-app-manage_cluster.png",
+      "nativeImage": "native-app-manage_cluster.png",
+      "finding": "原版紧凑行仍被较高卡片替代，授权位置和额外配置入口不同。",
+      "remediation": "按环境显示集群及授权入口"
+    },
+    {
+      "source": "cluster.html",
+      "native": "cluster",
+      "status": "FAIL",
+      "evidenceKind": "current-browser-pair-and-source; strict-parity-not-passed",
+      "referenceImage": "reference-cluster.png",
+      "nativeImage": "native-cluster.png",
+      "finding": "说明内容、输入宽度/高度、标签和按钮仍不同。",
+      "remediation": "独立创建页、说明、备注及多环境创建"
+    },
+    {
+      "source": "cluster/ns_role.html",
+      "native": "cluster-ns_role",
+      "status": "FAIL",
+      "evidenceKind": "current-browser-pair-and-source; strict-parity-not-passed",
+      "referenceImage": "reference-cluster-ns_role.png",
+      "nativeImage": "native-cluster-ns_role.png",
+      "finding": "用户选择器、控件横向比例和整体高度仍不同。",
+      "remediation": "内联用户选择、真实 DTO 标签、添加/删除权限"
+    },
+    {
+      "source": "namespace.html",
+      "native": "namespace",
+      "status": "FAIL",
+      "evidenceKind": "current-browser-pair-and-source; strict-parity-not-passed",
+      "referenceImage": "reference-namespace.png",
+      "nativeImage": "native-namespace.png",
+      "finding": "创建页宽度、单选/选择器横排、格式栏和部分提示仍不同。",
+      "remediation": "创建/关联模式、私有/公共类型、格式、选择集群及原版说明"
+    },
+    {
+      "source": "namespace/role.html",
+      "native": "namespace-role",
+      "status": "FAIL",
+      "evidenceKind": "current-browser-pair-and-source; strict-parity-not-passed",
+      "referenceImage": "reference-namespace-role.png",
+      "nativeImage": "native-namespace-role.png",
+      "finding": "原版同时展开全部环境授权组；当前仅显示所选环境标签，未通过全量 1:1。",
+      "remediation": "每个角色独立选择环境、真实用户标签、pending 期间拒绝写入"
+    },
+    {
+      "source": "config/history.html",
+      "native": "config-history",
+      "status": "FAIL",
+      "evidenceKind": "current-browser-pair-and-source; strict-parity-not-passed",
+      "referenceImage": "reference-config-history.png",
+      "nativeImage": "native-config-history.png",
+      "finding": "正常时间线结构已重新对齐；文本版本详情、操作标记和按钮细节仍需逐态一致性验收。",
+      "remediation": "真实 compare、首灰基线、重试、静态操作图例、时间线、10 条分页及隐藏保护"
+    },
+    {
+      "source": "config/sync.html",
+      "native": "config-sync",
+      "status": "FAIL",
+      "evidenceKind": "current-browser-pair-and-source; strict-parity-not-passed",
+      "referenceImage": "reference-config-sync.png",
+      "nativeImage": "native-config-sync.png",
+      "finding": "原版默认目标勾选、源集群展示、表格宽度及说明位置仍不同。",
+      "remediation": "两步流程、日期过滤、排序、预览与应用"
+    },
+    {
+      "source": "config/diff.html",
+      "native": "config-diff",
+      "status": "FAIL",
+      "evidenceKind": "current-browser-pair-and-source; strict-parity-not-passed",
+      "referenceImage": "reference-config-diff.png",
+      "nativeImage": "native-config-diff.png",
+      "finding": "选择表的宽度/留白和说明文字仍不同；不能只据 API 测试判为 1:1。",
+      "remediation": "两步表格/文本比较、联合 Key、差异/备注开关、空源比较"
+    },
+    {
+      "source": "user-manage.html",
+      "native": "user-manage",
+      "status": "FAIL",
+      "evidenceKind": "current-browser-pair-and-source; strict-parity-not-passed",
+      "referenceImage": "reference-user-manage.png",
+      "nativeImage": "native-user-manage.png",
+      "finding": "搜索栏、表头文案、按钮布局和编辑字段比例仍不同。",
+      "remediation": "同页新增/修改，过滤/重置与状态操作"
+    },
+    {
+      "source": "server_config_manage.html",
+      "native": "server_config_manage",
+      "status": "FAIL",
+      "evidenceKind": "current-browser-pair-and-source; strict-parity-not-passed",
+      "referenceImage": "reference-server_config_manage.png",
+      "nativeImage": "native-server_config_manage.png",
+      "finding": "说明文案、行高/间距和新增/编辑状态仍需像素对齐。",
+      "remediation": "Portal/ConfigDB 页签、过滤/重置、内联参数编辑"
+    },
+    {
+      "source": "system-role-manage.html",
+      "native": "system-role-manage",
+      "status": "FAIL",
+      "evidenceKind": "current-browser-pair-and-source; strict-parity-not-passed",
+      "referenceImage": "reference-system-role-manage.png",
+      "nativeImage": "native-system-role-manage.png",
+      "finding": "内联选择器/查询/操作按钮位置与原版不同。",
+      "remediation": "补齐 Master 查询、允许/禁止和目标输入失效"
+    },
+    {
+      "source": "system_info.html",
+      "native": "system_info",
+      "status": "FAIL",
+      "evidenceKind": "current-browser-pair-and-source; strict-parity-not-passed",
+      "referenceImage": "reference-system_info.png",
+      "nativeImage": "native-system_info.png",
+      "finding": "表格行高、段落间距及长页面高度仍不同。",
+      "remediation": "每环境 Config/Admin 独立表格和服务健康查询"
+    },
+    {
+      "source": "open/manage.html",
+      "native": "open-manage",
+      "status": "FAIL",
+      "evidenceKind": "current-browser-pair-and-source; strict-parity-not-passed",
+      "referenceImage": "reference-open-manage.png",
+      "nativeImage": "native-open-manage.png",
+      "finding": "空表占位、表头及按钮细节仍不同；全部原版弹窗尚未逐态验证。",
+      "remediation": "消费者列表及创建/授权路由"
+    },
+    {
+      "source": "open/add-consumer.html",
+      "native": "open-add-consumer",
+      "status": "FAIL",
+      "evidenceKind": "current-browser-pair-and-source; strict-parity-not-passed",
+      "referenceImage": "reference-open-add-consumer.png",
+      "nativeImage": "native-open-add-consumer.png",
+      "finding": "查询、创建及赋权表单的行宽/横排/高度明显不同，未达 1:1。",
+      "remediation": "独立查询/创建，实际 Token 查询，按环境 App/Namespace 赋权"
+    },
+    {
+      "source": "config_export.html",
+      "native": "config_export",
+      "status": "FAIL",
+      "evidenceKind": "current-browser-pair-and-source; strict-parity-not-passed",
+      "referenceImage": "reference-config_export.png",
+      "nativeImage": "native-config_export.png",
+      "finding": "环境选项、冲突选项、上传控件和按钮位置仍不同。",
+      "remediation": "按环境/按应用集群两个页签、独立导入表单及查询后导出"
+    },
+    {
+      "source": "delete_app_cluster_namespace.html",
+      "native": "delete_app_cluster_namespace",
+      "status": "FAIL",
+      "evidenceKind": "current-browser-pair-and-source; strict-parity-not-passed",
+      "referenceImage": "reference-delete_app_cluster_namespace.png",
+      "nativeImage": "native-delete_app_cluster_namespace.png",
+      "finding": "查询按钮和删除按钮未与字段同行，说明/字段比例及页面高度不同。",
+      "remediation": "三种资源独立查询/回显后删除，变更条件立即失效"
+    },
+    {
+      "source": "audit_log_menu.html",
+      "native": "audit_log_menu",
+      "status": "FAIL",
+      "evidenceKind": "current-browser-pair-and-source; strict-parity-not-passed",
+      "referenceImage": "reference-audit_log_menu.png",
+      "nativeImage": "native-audit_log_menu.png",
+      "finding": "查询区宽度、按钮位置和表头布局仍不同。",
+      "remediation": "查询日期/操作名、真实列表与链路入口"
+    },
+    {
+      "source": "audit_log_trace_detail.html",
+      "native": "audit_log_trace_detail",
+      "status": "FAIL",
+      "evidenceKind": "current-browser-pair-and-source; strict-parity-not-passed",
+      "referenceImage": "reference-audit_log_trace_detail.png",
+      "nativeImage": "native-audit_log_trace_detail.png",
+      "finding": "空态留白、标题/徽标/按钮位置仍不同；正常截图不冒充非空属性历史浏览器验收。",
+      "remediation": "树、实体、属性历史三栏联动及分页"
+    },
+    {
+      "source": "global_search_value.html",
+      "native": "global_search_value",
+      "status": "FAIL",
+      "evidenceKind": "current-browser-pair-and-source; strict-parity-not-passed",
+      "referenceImage": "reference-global_search_value.png",
+      "nativeImage": "native-global_search_value.png",
+      "finding": "空表额外占位及留白导致空态图和页面高度不同。",
+      "remediation": "查询表和原版许可空态图片"
+    }
+  ],
+  "dialogs": [
+    {
+      "source": "app/setting.html",
+      "id": "warning",
+      "kind": "confirm",
+      "line": 171,
+      "status": "FAIL",
+      "evidenceKind": "source-and-focused-tests-only; not-current-browser-triggered",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "仍存在原版专用流程与通用提示/确认的差异，或尚未触发当前全部分支；保留 FAIL，不冒充已修复/已浏览器验收。",
+      "remediation": "本项未列入已完成的异常态浏览器验收。"
+    },
+    {
+      "source": "config/history.html",
+      "id": "rollbackAlertDialog",
+      "kind": "confirm",
+      "line": 317,
+      "status": "FAIL",
+      "evidenceKind": "current-native-state-and-source; reference-image-historical-when-present",
+      "referenceImage": null,
+      "nativeImage": "native-modal-rollback-confirm.png",
+      "finding": "业务修复与正常截图不能代替该声明所有上下文的完整 1:1；原版布局/文案/控件和异常态仍未全部验收。",
+      "remediation": "已实现预览后的独立确认；SDK 实测回滚及显式撤销。"
+    },
+    {
+      "source": "config.html",
+      "id": "createBranchTips",
+      "kind": "modal",
+      "line": 347,
+      "status": "FAIL",
+      "evidenceKind": "source-and-focused-tests-only; not-current-browser-triggered",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "仍存在原版专用流程与通用提示/确认的差异，或尚未触发当前全部分支；保留 FAIL，不冒充已修复/已浏览器验收。",
+      "remediation": "本项未列入已完成的异常态浏览器验收。"
+    },
+    {
+      "source": "config.html",
+      "id": "deleteConfirmDialog",
+      "kind": "confirm",
+      "line": 260,
+      "status": "FAIL",
+      "evidenceKind": "current-native-state-and-source; reference-image-historical-when-present",
+      "referenceImage": "../parity/reference-modal-item-delete.png",
+      "nativeImage": "native-modal-item-delete.png",
+      "finding": "仍存在原版专用流程与通用提示/确认的差异，或尚未触发当前全部分支；保留 FAIL，不冒充已修复/已浏览器验收。",
+      "remediation": "本项未列入已完成的异常态浏览器验收。"
+    },
+    {
+      "source": "config.html",
+      "id": "releaseNoPermissionDialog",
+      "kind": "confirm",
+      "line": 265,
+      "status": "FAIL",
+      "evidenceKind": "source-and-focused-tests-only; not-current-browser-triggered",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "仍存在原版专用流程与通用提示/确认的差异，或尚未触发当前全部分支；保留 FAIL，不冒充已修复/已浏览器验收。",
+      "remediation": "本项未列入已完成的异常态浏览器验收。"
+    },
+    {
+      "source": "config.html",
+      "id": "modifyNoPermissionDialog",
+      "kind": "confirm",
+      "line": 271,
+      "status": "FAIL",
+      "evidenceKind": "source-and-focused-tests-only; not-current-browser-triggered",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "仍存在原版专用流程与通用提示/确认的差异，或尚未触发当前全部分支；保留 FAIL，不冒充已修复/已浏览器验收。",
+      "remediation": "本项未列入已完成的异常态浏览器验收。"
+    },
+    {
+      "source": "config.html",
+      "id": "masterNoPermissionDialog",
+      "kind": "confirm",
+      "line": 277,
+      "status": "FAIL",
+      "evidenceKind": "source-and-focused-tests-only; not-current-browser-triggered",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "仍存在原版专用流程与通用提示/确认的差异，或尚未触发当前全部分支；保留 FAIL，不冒充已修复/已浏览器验收。",
+      "remediation": "本项未列入已完成的异常态浏览器验收。"
+    },
+    {
+      "source": "config.html",
+      "id": "namespaceLockedDialog",
+      "kind": "confirm",
+      "line": 283,
+      "status": "FAIL",
+      "evidenceKind": "source-and-focused-tests-only; not-current-browser-triggered",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "业务修复与正常截图不能代替该声明所有上下文的完整 1:1；原版布局/文案/控件和异常态仍未全部验收。",
+      "remediation": "已实现锁拥有者提示和跨导航过期响应隔离，DOM 回归已验证。"
+    },
+    {
+      "source": "config.html",
+      "id": "rollbackAlertDialog",
+      "kind": "confirm",
+      "line": 288,
+      "status": "FAIL",
+      "evidenceKind": "current-native-state-and-source; reference-image-historical-when-present",
+      "referenceImage": null,
+      "nativeImage": "native-modal-rollback-confirm.png",
+      "finding": "业务修复与正常截图不能代替该声明所有上下文的完整 1:1；原版布局/文案/控件和异常态仍未全部验收。",
+      "remediation": "已实现预览后的独立确认；SDK 实测回滚及显式撤销。"
+    },
+    {
+      "source": "config.html",
+      "id": "emergencyPublishAlertDialog",
+      "kind": "confirm",
+      "line": 293,
+      "status": "FAIL",
+      "evidenceKind": "source-and-focused-tests-only; not-current-browser-triggered",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "业务修复与正常截图不能代替该声明所有上下文的完整 1:1；原版布局/文案/控件和异常态仍未全部验收。",
+      "remediation": "已实现额外紧急发布警告和最终开关重查，DOM 回归已验证。"
+    },
+    {
+      "source": "config.html",
+      "id": "deleteBranchDialog",
+      "kind": "confirm",
+      "line": 299,
+      "status": "FAIL",
+      "evidenceKind": "current-native-state-and-source; reference-image-historical-when-present",
+      "referenceImage": "../parity/reference-modal-delete-gray.png",
+      "nativeImage": "native-modal-delete-gray.png",
+      "finding": "仍存在原版专用流程与通用提示/确认的差异，或尚未触发当前全部分支；保留 FAIL，不冒充已修复/已浏览器验收。",
+      "remediation": "本项未列入已完成的异常态浏览器验收。"
+    },
+    {
+      "source": "config.html",
+      "id": "updateRuleTips",
+      "kind": "confirm",
+      "line": 305,
+      "status": "FAIL",
+      "evidenceKind": "source-and-focused-tests-only; not-current-browser-triggered",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "仍存在原版专用流程与通用提示/确认的差异，或尚未触发当前全部分支；保留 FAIL，不冒充已修复/已浏览器验收。",
+      "remediation": "本项未列入已完成的异常态浏览器验收。"
+    },
+    {
+      "source": "config.html",
+      "id": "mergeAndReleaseDenyDialog",
+      "kind": "confirm",
+      "line": 309,
+      "status": "FAIL",
+      "evidenceKind": "current-native-state-and-source; reference-image-historical-when-present",
+      "referenceImage": "../parity/reference-merge-denied.png",
+      "nativeImage": "native-gray-merge-blocked.png",
+      "finding": "业务修复与正常截图不能代替该声明所有上下文的完整 1:1；原版布局/文案/控件和异常态仍未全部验收。",
+      "remediation": "已实测主版本草稿阻断，且最终提交前再次检查。"
+    },
+    {
+      "source": "config.html",
+      "id": "grayReleaseWithoutRulesTips",
+      "kind": "confirm",
+      "line": 313,
+      "status": "FAIL",
+      "evidenceKind": "source-and-focused-tests-only; not-current-browser-triggered",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "仍存在原版专用流程与通用提示/确认的差异，或尚未触发当前全部分支；保留 FAIL，不冒充已修复/已浏览器验收。",
+      "remediation": "本项未列入已完成的异常态浏览器验收。"
+    },
+    {
+      "source": "config.html",
+      "id": "deleteNamespaceDenyForMasterInstanceDialog",
+      "kind": "confirm",
+      "line": 318,
+      "status": "FAIL",
+      "evidenceKind": "source-and-focused-tests-only; not-current-browser-triggered",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "仍存在原版专用流程与通用提示/确认的差异，或尚未触发当前全部分支；保留 FAIL，不冒充已修复/已浏览器验收。",
+      "remediation": "本项未列入已完成的异常态浏览器验收。"
+    },
+    {
+      "source": "config.html",
+      "id": "deleteNamespaceDenyForBranchInstanceDialog",
+      "kind": "confirm",
+      "line": 324,
+      "status": "FAIL",
+      "evidenceKind": "source-and-focused-tests-only; not-current-browser-triggered",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "仍存在原版专用流程与通用提示/确认的差异，或尚未触发当前全部分支；保留 FAIL，不冒充已修复/已浏览器验收。",
+      "remediation": "本项未列入已完成的异常态浏览器验收。"
+    },
+    {
+      "source": "config.html",
+      "id": "deleteNamespaceDenyForPublicNamespaceDialog",
+      "kind": "confirm",
+      "line": 330,
+      "status": "FAIL",
+      "evidenceKind": "source-and-focused-tests-only; not-current-browser-triggered",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "仍存在原版专用流程与通用提示/确认的差异，或尚未触发当前全部分支；保留 FAIL，不冒充已修复/已浏览器验收。",
+      "remediation": "本项未列入已完成的异常态浏览器验收。"
+    },
+    {
+      "source": "config.html",
+      "id": "syntaxCheckFailedDialog",
+      "kind": "confirm",
+      "line": 335,
+      "status": "FAIL",
+      "evidenceKind": "source-and-focused-tests-only; not-current-browser-triggered",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "仍存在原版专用流程与通用提示/确认的差异，或尚未触发当前全部分支；保留 FAIL，不冒充已修复/已浏览器验收。",
+      "remediation": "本项未列入已完成的异常态浏览器验收。"
+    },
+    {
+      "source": "config.html",
+      "id": "revokeItemConfirmDialog",
+      "kind": "confirm",
+      "line": 340,
+      "status": "FAIL",
+      "evidenceKind": "current-native-state-and-source; reference-image-historical-when-present",
+      "referenceImage": "../parity/reference-modal-revoke.png",
+      "nativeImage": "native-modal-revoke.png",
+      "finding": "仍存在原版专用流程与通用提示/确认的差异，或尚未触发当前全部分支；保留 FAIL，不冒充已修复/已浏览器验收。",
+      "remediation": "本项未列入已完成的异常态浏览器验收。"
+    },
+    {
+      "source": "open/grant-permission-modal.html",
+      "id": "grantPermissionModal",
+      "kind": "modal",
+      "line": 1,
+      "status": "FAIL",
+      "evidenceKind": "source-and-focused-tests-only; not-current-browser-triggered",
+      "referenceImage": "../parity/reference-modal-consumer-authorize.png",
+      "nativeImage": null,
+      "finding": "仍存在原版专用流程与通用提示/确认的差异，或尚未触发当前全部分支；保留 FAIL，不冒充已修复/已浏览器验收。",
+      "remediation": "本项未列入已完成的异常态浏览器验收。"
+    },
+    {
+      "source": "open/manage.html",
+      "id": "deleteConsumerDialog",
+      "kind": "confirm",
+      "line": 112,
+      "status": "FAIL",
+      "evidenceKind": "source-and-focused-tests-only; not-current-browser-triggered",
+      "referenceImage": "../parity/reference-modal-consumer-delete.png",
+      "nativeImage": null,
+      "finding": "仍存在原版专用流程与通用提示/确认的差异，或尚未触发当前全部分支；保留 FAIL，不冒充已修复/已浏览器验收。",
+      "remediation": "本项未列入已完成的异常态浏览器验收。"
+    },
+    {
+      "source": "views/component/confirm-dialog.html",
+      "id": "{{dialogId}}",
+      "kind": "modal",
+      "line": 1,
+      "status": "FAIL",
+      "evidenceKind": "source-and-focused-tests-only; not-current-browser-triggered",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "仍存在原版专用流程与通用提示/确认的差异，或尚未触发当前全部分支；保留 FAIL，不冒充已修复/已浏览器验收。",
+      "remediation": "本项未列入已完成的异常态浏览器验收。"
+    },
+    {
+      "source": "views/component/delete-namespace-modal.html",
+      "id": "deleteNamespaceModal",
+      "kind": "modal",
+      "line": 1,
+      "status": "FAIL",
+      "evidenceKind": "current-native-state-and-source; reference-image-historical-when-present",
+      "referenceImage": "../parity/reference-modal-delete-namespace.png",
+      "nativeImage": "native-modal-delete-namespace.png",
+      "finding": "业务修复与正常截图不能代替该声明所有上下文的完整 1:1；原版布局/文案/控件和异常态仍未全部验收。",
+      "remediation": "已实现使用情况与强制确认，提交前重新查询，零实例但仍有使用记录也需确认。"
+    },
+    {
+      "source": "views/component/gray-release-rules-modal.html",
+      "id": "rulesModal",
+      "kind": "modal",
+      "line": 1,
+      "status": "FAIL",
+      "evidenceKind": "current-native-state-and-source; reference-image-historical-when-present",
+      "referenceImage": "../parity/reference-modal-gray-rule.png",
+      "nativeImage": "native-modal-gray-rule.png",
+      "finding": "业务修复与正常截图不能代替该声明所有上下文的完整 1:1；原版布局/文案/控件和异常态仍未全部验收。",
+      "remediation": "已实现实例/IP/标签、去重删除、仅标签、全部实例、关联公共和异步输入保护。"
+    },
+    {
+      "source": "views/component/import-namespace-modal.html",
+      "id": "importNamespaceModal",
+      "kind": "modal",
+      "line": 1,
+      "status": "FAIL",
+      "evidenceKind": "current-native-state-and-source; reference-image-historical-when-present",
+      "referenceImage": "../parity/reference-modal-import-namespace.png",
+      "nativeImage": "native-modal-import-namespace.png",
+      "finding": "仍存在原版专用流程与通用提示/确认的差异，或尚未触发当前全部分支；保留 FAIL，不冒充已修复/已浏览器验收。",
+      "remediation": "本项未列入已完成的异常态浏览器验收。"
+    },
+    {
+      "source": "views/component/item-modal.html",
+      "id": "itemModal",
+      "kind": "modal",
+      "line": 1,
+      "status": "FAIL",
+      "evidenceKind": "current-native-state-and-source; reference-image-historical-when-present",
+      "referenceImage": "../parity/reference-modal-item-edit.png",
+      "nativeImage": "native-modal-item-edit.png",
+      "finding": "业务修复与正常截图不能代替该声明所有上下文的完整 1:1；原版布局/文案/控件和异常态仍未全部验收。",
+      "remediation": "已修复空值/类型/只读 Key/跨集群/JSON 格式化/展开与全选；正常编辑器已重拍。"
+    },
+    {
+      "source": "views/component/merge-and-publish-modal.html",
+      "id": "mergeAndPublishModal",
+      "kind": "modal",
+      "line": 1,
+      "status": "FAIL",
+      "evidenceKind": "current-native-state-and-source; reference-image-historical-when-present",
+      "referenceImage": "../parity/reference-modal-merge.png",
+      "nativeImage": "native-modal-merge.png",
+      "finding": "业务修复与正常截图不能代替该声明所有上下文的完整 1:1；原版布局/文案/控件和异常态仍未全部验收。",
+      "remediation": "已实现先选择分支处置再预览差异及最终确认。"
+    },
+    {
+      "source": "views/component/publish-deny-modal.html",
+      "id": "publishDenyModal",
+      "kind": "modal",
+      "line": 1,
+      "status": "FAIL",
+      "evidenceKind": "source-and-focused-tests-only; not-current-browser-triggered",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "业务修复与正常截图不能代替该声明所有上下文的完整 1:1；原版布局/文案/控件和异常态仍未全部验收。",
+      "remediation": "已实现编辑/发布分离检查和显式紧急发布入口，使用真实 LockInfo 字段。"
+    },
+    {
+      "source": "views/component/release-modal.html",
+      "id": "releaseModal",
+      "kind": "modal",
+      "line": 1,
+      "status": "FAIL",
+      "evidenceKind": "current-native-state-and-source; reference-image-historical-when-present",
+      "referenceImage": "../parity/reference-modal-release.png",
+      "nativeImage": "native-modal-release.png",
+      "finding": "业务修复与正常截图不能代替该声明所有上下文的完整 1:1；原版布局/文案/控件和异常态仍未全部验收。",
+      "remediation": "已修复真实发布值/草稿预览及上下文；正常预览和无提前写入已在 SDK 验证。"
+    },
+    {
+      "source": "views/component/rollback-modal.html",
+      "id": "rollbackModal",
+      "kind": "modal",
+      "line": 1,
+      "status": "FAIL",
+      "evidenceKind": "current-native-state-and-source; reference-image-historical-when-present",
+      "referenceImage": "../parity/reference-modal-rollback.png",
+      "nativeImage": "native-modal-rollback.png",
+      "finding": "业务修复与正常截图不能代替该声明所有上下文的完整 1:1；原版布局/文案/控件和异常态仍未全部验收。",
+      "remediation": "已修复真实差异预览、第二次确认和草稿保留。"
+    },
+    {
+      "source": "views/component/show-text-modal.html",
+      "id": "showTextModal",
+      "kind": "modal",
+      "line": 1,
+      "status": "FAIL",
+      "evidenceKind": "current-native-state-and-source; reference-image-historical-when-present",
+      "referenceImage": "../parity/reference-modal-show-text.png",
+      "nativeImage": "native-modal-show-text.png",
+      "finding": "业务修复与正常截图不能代替该声明所有上下文的完整 1:1；原版布局/文案/控件和异常态仍未全部验收。",
+      "remediation": "已实现 Key/Value 完整文本查看，已重拍。"
+    }
+  ],
+  "exclusions": [
+    {
+      "source": "login.html",
+      "reason": "DBX-owned connection/Secret Store login adaptation; not a management-page clone claim; separately tested username/password."
+    },
+    {
+      "source": "default_sso_heartbeat.html",
+      "reason": "SSO excluded by confirmed ordinary-password scope."
+    },
+    {
+      "source": "open/grant-permission-modal.html",
+      "reason": "Included in dialog census rather than counted twice as a page."
+    }
+  ],
+  "nativeSourceSHA256": "e764f5222cbf7abd99c21e18a941c727deb1210a5a56c2596e10f5f9dc9afb29",
+  "captureNotes": [
+    "Viewport screenshots use matching 1304px inner widths. Longer original pages additionally retain full-page scroll content; do not compute a whole-image similarity percentage across unequal heights.",
+    "Opening and revisiting reference pages uses unique audit query strings to avoid retaining an old modal on same-URL navigation.",
+    "Rejected early reference modal captures taken during Bootstrap fade/translate; accepted recaptures wait for opacity=1 and zero dialog transform, then disable remaining screenshot animations.",
+    "Some permission/lock/error warning declarations have no same-structure native flow. Those are source-audited FAIL records, not claims of browser triggering.",
+    "Controlled fixture data and API aliases are source-inspected; no live Apollo compatibility or business acceptance is inferred."
+  ],
+  "referenceCSSSHA256": "42c9b4ef04537e125ca7f0c57cdebdb8ca41019bd342aa7bcf43be87ee603f0c",
+  "referenceCSSVerification": "GitHub raw pinned-commit common-style.css equals local file; not a claim about every archive file.",
+  "phase": "repair",
+  "baseline": "manifest.json",
+  "evidenceDirectory": "output/playwright/repair",
+  "nativeSourceHashAlgorithm": "sha256 of sorted src/name + NUL + file bytes",
+  "nativeUISHA256": "3eaae9484c9d1c03cf89041a180f85c6ad4c28366f4a86022be932aa07fe1b58",
+  "browserWriteChecks": 17,
+  "capturedNativeStates": 54,
+  "note": "Seven review defects repaired; normal pages re-captured and manually inspected. All original UI parity remains FAIL, including significant layout/grouping and warning-flow differences. Not live Apollo acceptance."
+}

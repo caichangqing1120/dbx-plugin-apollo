@@ -1,0 +1,603 @@
+{
+  "auditDate": "2026-10-19",
+  "referenceTag": "v2.5.2",
+  "referenceCommit": "ed9785c87b390c22efece9ea7ec7eeab2d20a042",
+  "verdict": "FAIL",
+  "acceptancePassed": false,
+  "environment": "loopback controlled fixture + real SDK sandbox and Go sidecar; original UI separate reference only",
+  "viewport": {
+    "reference": [
+      1304,
+      876
+    ],
+    "nativeInner": [
+      1304,
+      876
+    ]
+  },
+  "pages": [
+    {
+      "source": "index.html",
+      "native": "index",
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-index.png",
+      "nativeImage": "native-index.png",
+      "finding": "全局导航不是同一交互：Language 为直接切换而非下拉，帮助/GitHub 为复制链接；未达到逐控件一致。"
+    },
+    {
+      "source": "app.html",
+      "native": "app",
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-app.png",
+      "nativeImage": "native-app.png",
+      "finding": "创建应用表单顺序、字段宽度、负责人/管理员用户选择器及帮助提示不同。"
+    },
+    {
+      "source": "config.html",
+      "native": "config",
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-config.png",
+      "nativeImage": "native-config.png",
+      "finding": "表头排序、旧值查看、折叠及主/灰度切换、文本工具栏未完整还原；单看八列表格不足以判定一致。"
+    },
+    {
+      "source": "app/setting.html",
+      "native": "app-setting",
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-app-setting.png",
+      "nativeImage": "native-app-setting.png",
+      "finding": "原版管理员选择器/标签区域在前、基础信息在后且默认只读；插件顺序相反且使用始终可编辑文本框。"
+    },
+    {
+      "source": "app/access_key.html",
+      "native": "app-access_key",
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-app-access_key.png",
+      "nativeImage": "native-app-access_key.png",
+      "finding": "原版多环境分组、密钥使用说明和最后修改人/时间列缺失；插件替换成环境标签及另一组列。密钥脱敏是安全差异，不应静默称为1:1。"
+    },
+    {
+      "source": "app/manage_cluster.html",
+      "native": "app-manage_cluster",
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-app-manage_cluster.png",
+      "nativeImage": "native-app-manage_cluster.png",
+      "finding": "原版按环境分组的集群卡片被替换成统一表格，布局与操作入口不同。"
+    },
+    {
+      "source": "cluster.html",
+      "native": "cluster",
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-cluster.png",
+      "nativeImage": "native-cluster.png",
+      "finding": "原版独立页面含环境多选/集群说明；插件变为当前环境下只有名称的弹窗。"
+    },
+    {
+      "source": "cluster/ns_role.html",
+      "native": "cluster-ns_role",
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-cluster-ns_role.png",
+      "nativeImage": "native-cluster-ns_role.png",
+      "finding": "原版纵向角色区+可搜索用户选择器/已授权标签；插件为左右表格加用户名弹窗。"
+    },
+    {
+      "source": "namespace.html",
+      "native": "namespace",
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-namespace.png",
+      "nativeImage": "native-namespace.png",
+      "finding": "原版说明区、创建/关联切换及分步流程被简化为另一套表单和选择器。"
+    },
+    {
+      "source": "namespace/role.html",
+      "native": "namespace-role",
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-namespace-role.png",
+      "nativeImage": "native-namespace-role.png",
+      "finding": "原版每个角色区自带环境选择/用户标签；插件改成全局环境页签和两列表格。"
+    },
+    {
+      "source": "config/history.html",
+      "native": "config-history",
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-config-history.png",
+      "nativeImage": "native-config-history.png",
+      "finding": "原版分类过滤、时间轴、选中版本变化/全部配置及回滚预览；插件用每条版本JSON卡片替代。"
+    },
+    {
+      "source": "config/sync.html",
+      "native": "config-sync",
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-config-sync.png",
+      "nativeImage": "native-config-sync.png",
+      "finding": "原版分步页面、时间过滤和可排序条目表缺失；插件一次展示源项与目标并列面板。"
+    },
+    {
+      "source": "config/diff.html",
+      "native": "config-diff",
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-config-diff.png",
+      "nativeImage": "native-config-diff.png",
+      "finding": "原版表格/文本比对选择、仅差异项和备注比较流程未完整实现；插件复用了同步页面。"
+    },
+    {
+      "source": "user-manage.html",
+      "native": "user-manage",
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-user-manage.png",
+      "nativeImage": "native-user-manage.png",
+      "finding": "原版表内编辑入口切换同页表单、过滤/重置/状态标签；插件变成弹窗且工具栏、列样式不同。"
+    },
+    {
+      "source": "server_config_manage.html",
+      "native": "server_config_manage",
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-server_config_manage.png",
+      "nativeImage": "native-server_config_manage.png",
+      "finding": "原版PortalDB/ConfigDB两级组织、过滤/重置/新增配置及内联编辑布局未复现；插件只有环境按钮/编辑弹窗。"
+    },
+    {
+      "source": "system-role-manage.html",
+      "native": "system-role-manage",
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-system-role-manage.png",
+      "nativeImage": "native-system-role-manage.png",
+      "finding": "原版“修改应用管理员分配权限”整块及允许/禁止Master操作缺失，不只是样式差异。"
+    },
+    {
+      "source": "system_info.html",
+      "native": "system_info",
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-system_info.png",
+      "nativeImage": "native-system_info.png",
+      "finding": "原版说明、环境Active状态、Config/Admin分表和服务列不同；插件将服务合并为表格。"
+    },
+    {
+      "source": "open/manage.html",
+      "native": "open-manage",
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-open-manage.png",
+      "nativeImage": "native-open-manage.png",
+      "finding": "原版允许创建app/QPS/部门/负责人邮箱列缺失；Token与授权入口重新设计。"
+    },
+    {
+      "source": "open/add-consumer.html",
+      "native": "open-add-consumer",
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-open-add-consumer.png",
+      "nativeImage": "native-open-add-consumer.png",
+      "finding": "原版独立页面包含查询第三方应用、创建及Token赋权两个区；插件改为单个创建弹窗，查询流程缺失。"
+    },
+    {
+      "source": "config_export.html",
+      "native": "config_export",
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-config_export.png",
+      "nativeImage": "native-config_export.png",
+      "finding": "原版按环境/按应用集群两种操作页签和内联导入表单；插件采用不同的面板和导入弹窗。"
+    },
+    {
+      "source": "delete_app_cluster_namespace.html",
+      "native": "delete_app_cluster_namespace",
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-delete_app_cluster_namespace.png",
+      "nativeImage": "native-delete_app_cluster_namespace.png",
+      "finding": "原版应用/集群/AppNamespace三个独立查询后删除流程被单表单替换，查询/回显保护流程未复现。"
+    },
+    {
+      "source": "audit_log_menu.html",
+      "native": "audit_log_menu",
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-audit_log_menu.png",
+      "nativeImage": "native-audit_log_menu.png",
+      "finding": "原版日期时间输入、表列顺序和整行进入链路；插件多一组条件/详情列、分页与布局不同。"
+    },
+    {
+      "source": "audit_log_trace_detail.html",
+      "native": "audit_log_trace_detail",
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-audit_log_trace_detail.png",
+      "nativeImage": "native-audit_log_trace_detail.png",
+      "finding": "原版链路树、实体变更和属性历史三栏；插件扁平列表，缺树选择联动。"
+    },
+    {
+      "source": "global_search_value.html",
+      "native": "global_search_value",
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-global_search_value.png",
+      "nativeImage": "native-global_search_value.png",
+      "finding": "原版单行Key/Value输入、空态插画、列宽/表格布局不同；插件上下两个面板。"
+    }
+  ],
+  "dialogs": [
+    {
+      "source": "app/setting.html",
+      "id": "warning",
+      "kind": "confirm",
+      "line": 171,
+      "status": "FAIL",
+      "evidenceKind": "source-inventory-and-native-code",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "应用管理员删除原版确认交互与插件通用typed-confirm不同；没有单独捕获此原版分支。"
+    },
+    {
+      "source": "config/history.html",
+      "id": "rollbackAlertDialog",
+      "kind": "confirm",
+      "line": 317,
+      "status": "FAIL",
+      "evidenceKind": "source-inventory-and-native-code",
+      "referenceImage": null,
+      "nativeImage": "native-modal-rollback.png",
+      "finding": "缺原版预览后第二次确认的分阶段流程。"
+    },
+    {
+      "source": "config.html",
+      "id": "createBranchTips",
+      "kind": "modal",
+      "line": 347,
+      "status": "FAIL",
+      "evidenceKind": "source-inventory-and-native-code",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "原版创建灰度说明及确认缺失，插件创建按钮直接发送创建请求。"
+    },
+    {
+      "source": "config.html",
+      "id": "deleteConfirmDialog",
+      "kind": "confirm",
+      "line": 260,
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-modal-item-delete.png",
+      "nativeImage": "native-modal-item-delete.png",
+      "finding": "原版显示待删Key/Value；插件只显示通用删除提示。"
+    },
+    {
+      "source": "config.html",
+      "id": "releaseNoPermissionDialog",
+      "kind": "confirm",
+      "line": 265,
+      "status": "FAIL",
+      "evidenceKind": "source-inventory-and-native-code",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "原版独立守卫/权限/锁/紧急发布/使用情况/语法失败确认分支，在插件中没有同构的专门弹窗流程（以源码核对，不冒充浏览器已触发）。"
+    },
+    {
+      "source": "config.html",
+      "id": "modifyNoPermissionDialog",
+      "kind": "confirm",
+      "line": 271,
+      "status": "FAIL",
+      "evidenceKind": "source-inventory-and-native-code",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "原版独立守卫/权限/锁/紧急发布/使用情况/语法失败确认分支，在插件中没有同构的专门弹窗流程（以源码核对，不冒充浏览器已触发）。"
+    },
+    {
+      "source": "config.html",
+      "id": "masterNoPermissionDialog",
+      "kind": "confirm",
+      "line": 277,
+      "status": "FAIL",
+      "evidenceKind": "source-inventory-and-native-code",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "原版独立守卫/权限/锁/紧急发布/使用情况/语法失败确认分支，在插件中没有同构的专门弹窗流程（以源码核对，不冒充浏览器已触发）。"
+    },
+    {
+      "source": "config.html",
+      "id": "namespaceLockedDialog",
+      "kind": "confirm",
+      "line": 283,
+      "status": "FAIL",
+      "evidenceKind": "source-inventory-and-native-code",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "原版独立守卫/权限/锁/紧急发布/使用情况/语法失败确认分支，在插件中没有同构的专门弹窗流程（以源码核对，不冒充浏览器已触发）。"
+    },
+    {
+      "source": "config.html",
+      "id": "rollbackAlertDialog",
+      "kind": "confirm",
+      "line": 288,
+      "status": "FAIL",
+      "evidenceKind": "source-inventory-and-native-code",
+      "referenceImage": null,
+      "nativeImage": "native-modal-rollback.png",
+      "finding": "缺原版预览后第二次确认的分阶段流程。"
+    },
+    {
+      "source": "config.html",
+      "id": "emergencyPublishAlertDialog",
+      "kind": "confirm",
+      "line": 293,
+      "status": "FAIL",
+      "evidenceKind": "source-inventory-and-native-code",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "原版独立守卫/权限/锁/紧急发布/使用情况/语法失败确认分支，在插件中没有同构的专门弹窗流程（以源码核对，不冒充浏览器已触发）。"
+    },
+    {
+      "source": "config.html",
+      "id": "deleteBranchDialog",
+      "kind": "confirm",
+      "line": 299,
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-modal-delete-gray.png",
+      "nativeImage": "native-modal-delete-gray.png",
+      "finding": "原版放弃灰度提示；插件用通用资源删除/输入标识确认。"
+    },
+    {
+      "source": "config.html",
+      "id": "updateRuleTips",
+      "kind": "confirm",
+      "line": 305,
+      "status": "FAIL",
+      "evidenceKind": "source-inventory-and-native-code",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "原版独立守卫/权限/锁/紧急发布/使用情况/语法失败确认分支，在插件中没有同构的专门弹窗流程（以源码核对，不冒充浏览器已触发）。"
+    },
+    {
+      "source": "config.html",
+      "id": "mergeAndReleaseDenyDialog",
+      "kind": "confirm",
+      "line": 309,
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-merge-denied.png",
+      "nativeImage": "native-modal-merge.png",
+      "finding": "同一主版本含未发布改动的场景：原版显示禁止全量发布提示；插件仍展示可提交发布表单，缺少前端阻断。"
+    },
+    {
+      "source": "config.html",
+      "id": "grayReleaseWithoutRulesTips",
+      "kind": "confirm",
+      "line": 313,
+      "status": "FAIL",
+      "evidenceKind": "source-inventory-and-native-code",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "原版独立守卫/权限/锁/紧急发布/使用情况/语法失败确认分支，在插件中没有同构的专门弹窗流程（以源码核对，不冒充浏览器已触发）。"
+    },
+    {
+      "source": "config.html",
+      "id": "deleteNamespaceDenyForMasterInstanceDialog",
+      "kind": "confirm",
+      "line": 318,
+      "status": "FAIL",
+      "evidenceKind": "source-inventory-and-native-code",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "原版独立守卫/权限/锁/紧急发布/使用情况/语法失败确认分支，在插件中没有同构的专门弹窗流程（以源码核对，不冒充浏览器已触发）。"
+    },
+    {
+      "source": "config.html",
+      "id": "deleteNamespaceDenyForBranchInstanceDialog",
+      "kind": "confirm",
+      "line": 324,
+      "status": "FAIL",
+      "evidenceKind": "source-inventory-and-native-code",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "原版独立守卫/权限/锁/紧急发布/使用情况/语法失败确认分支，在插件中没有同构的专门弹窗流程（以源码核对，不冒充浏览器已触发）。"
+    },
+    {
+      "source": "config.html",
+      "id": "deleteNamespaceDenyForPublicNamespaceDialog",
+      "kind": "confirm",
+      "line": 330,
+      "status": "FAIL",
+      "evidenceKind": "source-inventory-and-native-code",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "原版独立守卫/权限/锁/紧急发布/使用情况/语法失败确认分支，在插件中没有同构的专门弹窗流程（以源码核对，不冒充浏览器已触发）。"
+    },
+    {
+      "source": "config.html",
+      "id": "syntaxCheckFailedDialog",
+      "kind": "confirm",
+      "line": 335,
+      "status": "FAIL",
+      "evidenceKind": "source-inventory-and-native-code",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "原版独立守卫/权限/锁/紧急发布/使用情况/语法失败确认分支，在插件中没有同构的专门弹窗流程（以源码核对，不冒充浏览器已触发）。"
+    },
+    {
+      "source": "config.html",
+      "id": "revokeItemConfirmDialog",
+      "kind": "confirm",
+      "line": 340,
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-modal-revoke.png",
+      "nativeImage": "native-modal-revoke.png",
+      "finding": "有对应确认，但标题/内容/尺寸/按钮不同，不能判为像素与交互一致。"
+    },
+    {
+      "source": "open/grant-permission-modal.html",
+      "id": "grantPermissionModal",
+      "kind": "modal",
+      "line": 1,
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-modal-consumer-authorize.png",
+      "nativeImage": "native-modal-consumer-authorize.png",
+      "finding": "原版Token只读展示与赋权上下文/环境选项未完整还原。"
+    },
+    {
+      "source": "open/manage.html",
+      "id": "deleteConsumerDialog",
+      "kind": "confirm",
+      "line": 112,
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-modal-consumer-delete.png",
+      "nativeImage": "native-modal-consumer-delete.png",
+      "finding": "原版确认框与插件完整标识输入确认不同。"
+    },
+    {
+      "source": "views/component/confirm-dialog.html",
+      "id": "{{dialogId}}",
+      "kind": "modal",
+      "line": 1,
+      "status": "FAIL",
+      "evidenceKind": "source-inventory-and-native-code",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "公共确认组件模板：插件通用框的标题/按钮/尺寸/内容布局不同，不按独立业务分支计数。"
+    },
+    {
+      "source": "views/component/delete-namespace-modal.html",
+      "id": "deleteNamespaceModal",
+      "kind": "modal",
+      "line": 1,
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-modal-delete-namespace.png",
+      "nativeImage": "native-modal-delete-namespace.png",
+      "finding": "缺使用情况表及强制删除提示；新增输入标识确认不能替代原版上下文。"
+    },
+    {
+      "source": "views/component/gray-release-rules-modal.html",
+      "id": "rulesModal",
+      "kind": "modal",
+      "line": 1,
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-modal-gray-rule.png",
+      "nativeImage": "native-modal-gray-rule.png",
+      "finding": "原版客户端AppId/IP选择与分组规则交互、尺寸和帮助不同。"
+    },
+    {
+      "source": "views/component/import-namespace-modal.html",
+      "id": "importNamespaceModal",
+      "kind": "modal",
+      "line": 1,
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-modal-import-namespace.png",
+      "nativeImage": "native-modal-import-namespace.png",
+      "finding": "标题/布局、说明及按钮不同。"
+    },
+    {
+      "source": "views/component/item-modal.html",
+      "id": "itemModal",
+      "kind": "modal",
+      "line": 1,
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-modal-item-edit.png",
+      "nativeImage": "native-modal-item-edit.png",
+      "finding": "缺跨集群选择、空值行为和Boolean专用控件；宽度、字段必填和Key编辑规则不同。"
+    },
+    {
+      "source": "views/component/merge-and-publish-modal.html",
+      "id": "mergeAndPublishModal",
+      "kind": "modal",
+      "line": 1,
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-modal-merge.png",
+      "nativeImage": "native-modal-merge.png",
+      "finding": "缺主/灰度配置差异预览和原版全量发布流程。"
+    },
+    {
+      "source": "views/component/publish-deny-modal.html",
+      "id": "publishDenyModal",
+      "kind": "modal",
+      "line": 1,
+      "status": "FAIL",
+      "evidenceKind": "source-inventory-and-native-code",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "没有原版发布限制说明与紧急发布入口弹窗。"
+    },
+    {
+      "source": "views/component/release-modal.html",
+      "id": "releaseModal",
+      "kind": "modal",
+      "line": 1,
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-modal-release.png",
+      "nativeImage": "native-modal-release.png",
+      "finding": "缺发布改动/旧值/待发布值对照和完整发布上下文。"
+    },
+    {
+      "source": "views/component/rollback-modal.html",
+      "id": "rollbackModal",
+      "kind": "modal",
+      "line": 1,
+      "status": "FAIL",
+      "evidenceKind": "browser-pair-and-source",
+      "referenceImage": "reference-modal-rollback.png",
+      "nativeImage": "native-modal-rollback.png",
+      "finding": "缺回滚变更预览，直接变成通用确定弹窗。"
+    },
+    {
+      "source": "views/component/show-text-modal.html",
+      "id": "showTextModal",
+      "kind": "modal",
+      "line": 1,
+      "status": "FAIL",
+      "evidenceKind": "browser-reference-and-native-source",
+      "referenceImage": "reference-modal-show-text.png",
+      "nativeImage": null,
+      "finding": "插件没有原版点击Key/Value查看完整文本的独立弹窗。"
+    }
+  ],
+  "exclusions": [
+    {
+      "source": "login.html",
+      "reason": "DBX-owned connection/Secret Store login adaptation; not a management-page clone claim; separately tested username/password."
+    },
+    {
+      "source": "default_sso_heartbeat.html",
+      "reason": "SSO excluded by confirmed ordinary-password scope."
+    },
+    {
+      "source": "open/grant-permission-modal.html",
+      "reason": "Included in dialog census rather than counted twice as a page."
+    }
+  ],
+  "nativeSourceSHA256": "0a31f553cd9fa53e262a1b864513e380b280c562d39381b9b6a3ab9c98b0d06d",
+  "captureNotes": [
+    "Viewport screenshots use matching 1304px inner widths. Longer original pages additionally retain full-page scroll content; do not compute a whole-image similarity percentage across unequal heights.",
+    "Opening and revisiting reference pages uses unique audit query strings to avoid retaining an old modal on same-URL navigation.",
+    "Rejected early reference modal captures taken during Bootstrap fade/translate; accepted recaptures wait for opacity=1 and zero dialog transform, then disable remaining screenshot animations.",
+    "Some permission/lock/error warning declarations have no same-structure native flow. Those are source-audited FAIL records, not claims of browser triggering.",
+    "Controlled fixture data and API aliases are source-inspected; no live Apollo compatibility or business acceptance is inferred."
+  ],
+  "referenceCSSSHA256": "42c9b4ef04537e125ca7f0c57cdebdb8ca41019bd342aa7bcf43be87ee603f0c",
+  "referenceCSSVerification": "GitHub raw pinned-commit common-style.css equals local file; not a claim about every archive file."
+}

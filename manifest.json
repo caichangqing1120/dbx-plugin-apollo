@@ -1,0 +1,152 @@
+{
+  "$schema": "https://raw.githubusercontent.com/t8y2/dbx/main/plugins/manifest.schema.json",
+  "manifest_version": 1,
+  "id": "io.github.caichangqing1120.apollo",
+  "name": "Apollo Config",
+  "version": "0.1.2",
+  "publisher": "caichangqing1120",
+  "description": "Handwritten Apollo 2.x management UI with ordinary password authentication",
+  "icon": "assets/apollo.png",
+  "engines": {
+    "dbx": ">=0.6.0",
+    "host_api": "1"
+  },
+  "permissions": [
+    "host.storage"
+  ],
+  "entrypoints": {
+    "backend": {
+      "executable": "bin/dbx-plugin-apollo",
+      "protocol_versions": [
+        1
+      ],
+      "transport": "stdio-jsonl"
+    },
+    "ui": {
+      "root": "ui",
+      "entry": "ui/index.html"
+    }
+  },
+  "contributions": [
+    {
+      "type": "connection-provider",
+      "id": "io.github.caichangqing1120.apollo.connection",
+      "label": "Apollo Config",
+      "icon": "assets/apollo.png",
+      "database_type": "apollo-config",
+      "fields": [
+        {
+          "key": "display_name",
+          "label": "Connection name",
+          "type": "text",
+          "binding": "name",
+          "default": "Apollo",
+          "required": true
+        },
+        {
+          "key": "host",
+          "label": "Portal host",
+          "type": "text",
+          "binding": "host",
+          "default": "localhost",
+          "required": true
+        },
+        {
+          "key": "port",
+          "label": "Portal port",
+          "type": "number",
+          "binding": "port",
+          "default": 8070,
+          "required": true
+        },
+        {
+          "key": "scheme",
+          "label": "Protocol",
+          "type": "select",
+          "binding": "config",
+          "default": "http",
+          "options": [
+            {
+              "label": "HTTP",
+              "value": "http"
+            },
+            {
+              "label": "HTTPS",
+              "value": "https"
+            }
+          ]
+        },
+        {
+          "key": "context_path",
+          "label": "Context path (optional)",
+          "type": "text",
+          "binding": "config",
+          "placeholder": "/apollo"
+        },
+        {
+          "key": "username",
+          "label": "Username",
+          "type": "text",
+          "binding": "username",
+          "required": true
+        },
+        {
+          "key": "password",
+          "label": "Password",
+          "type": "password",
+          "binding": "secret",
+          "required": true
+        }
+      ],
+      "workbench": "io.github.caichangqing1120.apollo.workbench",
+      "capabilities": [
+        "test",
+        "connect",
+        "disconnect"
+      ]
+    },
+    {
+      "type": "workbench",
+      "id": "io.github.caichangqing1120.apollo.workbench",
+      "label": "Apollo Portal",
+      "icon": "assets/apollo.png"
+    }
+  ],
+  "localizations": {
+    "zh-CN": {
+      "name": "Apollo \u914d\u7f6e\u4e2d\u5fc3",
+      "description": "\u72ec\u7acb\u7f16\u5199\u7684 Apollo \u7ba1\u7406\u754c\u9762\uff0c\u652f\u6301\u666e\u901a\u8d26\u53f7\u5bc6\u7801\u767b\u5f55\uff08\u5f00\u53d1\u5019\u9009\u7248\uff09",
+      "contributions": {
+        "io.github.caichangqing1120.apollo.connection": {
+          "label": "Apollo \u914d\u7f6e\u4e2d\u5fc3",
+          "fields": {
+            "display_name": {
+              "label": "\u8fde\u63a5\u540d\u79f0"
+            },
+            "host": {
+              "label": "Portal \u4e3b\u673a"
+            },
+            "port": {
+              "label": "Portal \u7aef\u53e3"
+            },
+            "scheme": {
+              "label": "\u534f\u8bae"
+            },
+            "context_path": {
+              "label": "\u4e0a\u4e0b\u6587\u8def\u5f84\uff08\u53ef\u9009\uff09"
+            },
+            "username": {
+              "label": "\u7528\u6237\u540d"
+            },
+            "password": {
+              "label": "\u5bc6\u7801"
+            }
+          }
+        },
+        "io.github.caichangqing1120.apollo.workbench": {
+          "label": "Apollo \u7ba1\u7406\u540e\u53f0"
+        }
+      }
+    }
+  }
+}

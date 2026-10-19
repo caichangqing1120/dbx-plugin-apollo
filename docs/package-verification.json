@@ -1,0 +1,24 @@
+{
+  "artifact": "dist/io.github.caichangqing1120.apollo-0.1.2-darwin-arm64.dbxp",
+  "sha256": "ac9a7f65d7a7517778d59baf48f81c44472d267798cb31b00a1dcefd51d1fa6e",
+  "size": 5198930,
+  "archiveEntries": 23,
+  "verifiedChecksumEntries": 22,
+  "initializePlugin": {
+    "id": "io.github.caichangqing1120.apollo",
+    "version": "0.1.2"
+  },
+  "platform": "darwin-arm64",
+  "binary": "Mach-O 64-bit executable arm64",
+  "nativeUISHA256": "306372e3fd343780419c543c5d420676b31ce00d4152b0235ce001b6a1dfdeef",
+  "nativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519",
+  "unsigned": true,
+  "packagedSidecarSmoke": {
+    "passed": true,
+    "binarySHA256": "5103f6fe226d91f39e789e810abb1027eba0e2c09b984f6ff3a7bae144b179fb",
+    "architecture": "arm64",
+    "fixture": "loopback-only",
+    "oversizedNamespaceBORejected": true,
+    "largeReply": "2 MiB raw ItemDTO through real chunked RPC"
+  }
+}

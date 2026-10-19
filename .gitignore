@@ -1,0 +1,12 @@
+/dist/
+/.dbx-dev/
+.dbx-repository-signing-key.env
+.DS_Store
+*.log
+
+/node_modules/
+/output/
+/backend/dbx-plugin-apollo
+/backend/dbx-plugin-dbx-plugin-apollo
+
+/.playwright-cli/
