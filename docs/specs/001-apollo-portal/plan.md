@@ -180,9 +180,14 @@ different DBX repository, so secondary plugin/store repositories use git worktre
 - [x] Replace the nonexistent reusable workflow reference with standalone release CI.
 - [x] Test explicit five-target builds, actual CPU headers, full package checksums, source/UI
   identity, immutable release metadata and native packaged-sidecar smoke flows.
-- [ ] Audit source/secrets/licenses, then push the plugin's public source and immutable
+- [x] Audit source/secrets/licenses, then push the plugin's public source and immutable
   v0.1.2 tag to caichangqing1120/dbx-plugin-apollo; publish an honest unsigned Preview.
-- [ ] Download and verify all published bytes and submit only a candidate JSON in one PR
+- [x] Download and verify all published bytes and submit only a candidate JSON in one PR
   to t8y2/dbx-store:main. Official signing/merge remain maintainer-owned gates.
-- [ ] Preserve the issue's OPEN state and failed parity/live/native acceptance boundaries;
-  stop owned processes and turn off only the display, not the computer.
+- [x] Preserve the issue's OPEN state and failed parity/live/native acceptance boundaries;
+  leave no task-owned browser or fixture server. Display-only shutdown is execution
+  housekeeping, never a system-sleep/shutdown request.
+
+Author delivery is recorded in `../../delivery-0.1.2.json`: source/tag/CI-built Preview
+assets are published and re-downloaded, candidate PR #295 is open. Official signing and
+merge remain pending; this completes author-side submission only, not full parity or listing.

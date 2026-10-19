@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-10-19T12:23:10.772925+00:00",
+  "plugin": {
+    "id": "io.github.caichangqing1120.apollo",
+    "name": "Apollo Config",
+    "version": "0.1.2",
+    "publisher": "caichangqing1120",
+    "description": "Preview: independently authored Apollo 2.x management UI with password login; full 1:1 parity is incomplete",
+    "permissions": [
+      "host.storage"
+    ]
+  },
+  "source": {
+    "repository": "https://github.com/caichangqing1120/dbx-plugin-apollo",
+    "branch": "main",
+    "tag": "v0.1.2",
+    "tagCommit": "d19dc4acf32e3f741543328a28ea563e124941e1"
+  },
+  "release": {
+    "url": "https://github.com/caichangqing1120/dbx-plugin-apollo/releases/tag/v0.1.2",
+    "prerelease": true,
+    "unsigned": true,
+    "workflow": "https://github.com/caichangqing1120/dbx-plugin-apollo/actions/runs/39250298164",
+    "workflowConclusion": "success",
+    "downloadedAndVerifiedTargets": 5,
+    "localAndCIBytesIdentical": true,
+    "artifacts": [
+      {
+        "target": "darwin-arm64",
+        "url": "io.github.caichangqing1120.apollo-0.1.2-darwin-arm64.dbxp",
+        "sha256": "6c0960774f8ea2fa66d2e4b74eb950092b7f4551c1ae658b411168349d384ff7",
+        "size": 2771870
+      },
+      {
+        "target": "darwin-x64",
+        "url": "io.github.caichangqing1120.apollo-0.1.2-darwin-x64.dbxp",
+        "sha256": "e506b7a7a6682b006c1564f31bee306f60f2e09129ddb8e4523a5d920068cf06",
+        "size": 2984384
+      },
+      {
+        "target": "windows-x64",
+        "url": "io.github.caichangqing1120.apollo-0.1.2-windows-x64.dbxp",
+        "sha256": "11ededea10c1584ee6f0c6cb4ff9d1aa8a8d14977a0cb77cf18ad92ece5fea36",
+        "size": 3001585
+      },
+      {
+        "target": "linux-x64",
+        "url": "io.github.caichangqing1120.apollo-0.1.2-linux-x64.dbxp",
+        "sha256": "e8b4f82b9941710d5bb255de238d9d6664a015e54589ae11fbf744b76416868f",
+        "size": 2960299
+      },
+      {
+        "target": "linux-arm64",
+        "url": "io.github.caichangqing1120.apollo-0.1.2-linux-arm64.dbxp",
+        "sha256": "11ac5d48dceb3298a3e0ab7ebb917d3aca61172024a9be6d0846378748f0a48a",
+        "size": 2698882
+      }
+    ]
+  },
+  "validation": {
+    "javascriptTests": 161,
+    "packagingRegressionTests": 12,
+    "goRaceTests": 14,
+    "goVet": "pass",
+    "storeSyncTests": 6,
+    "archiveFilesPerPackage": 23,
+    "verifiedContentChecksumsPerPackage": 22,
+    "downloadedMacArm64HandshakeAndFullFixtureSmoke": "pass",
+    "downloadedMacX64HandshakeAndFullFixtureSmoke": "pass",
+    "ciPackagedLinuxX64HandshakeAndFullFixtureSmoke": "pass",
+    "nativeUISHA256": "306372e3fd343780419c543c5d420676b31ce00d4152b0235ce001b6a1dfdeef",
+    "nativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+  },
+  "visualEvidence": {
+    "url": "https://github.com/caichangqing1120/dbx-plugin-apollo/releases/download/v0.1.2/apollo-parity-report.html",
+    "sha256": "b632595f524dbf3a13bca7ab6b51b8230fe4d01f8ce250b9f63f8ed9c0a173cc",
+    "size": 10846798,
+    "sections": 55,
+    "embeddedImages": 102
+  },
+  "marketplace": {
+    "pullRequest": "https://github.com/t8y2/dbx-store/pull/295",
+    "base": "t8y2/dbx-store:main",
+    "head": "caichangqing1120/dbx-store:codex/apollo-store-0.1.2",
+    "headCommit": "3ac223ce6caaece865a5c2347242794a554fd8bb",
+    "changedFiles": [
+      "candidates/io.github.caichangqing1120.apollo.json"
+    ],
+    "maintainerCanModify": true,
+    "state": "open",
+    "merged": false,
+    "officialSigning": "pending DBX Store maintainers",
+    "officialCatalogListing": "not yet published",
+    "validationWorkflow": "https://github.com/t8y2/dbx-store/actions/runs/39251145960",
+    "validationConclusion": "failure - documented open-candidate pending-signing guard, not package/schema failure"
+  },
+  "boundaries": {
+    "fullAllPagesAndDialogs1to1": "FAIL",
+    "realApolloAcceptance": "not performed",
+    "nativeDesktopInstallationAcceptance": "not performed",
+    "windowsX64AndLinuxArm64RuntimeAcceptance": "not performed",
+    "request": "https://github.com/t8y2/dbx/issues/12466",
+    "requestState": "open, assigned to caichangqing1120; not closed by Preview delivery"
+  }
+}

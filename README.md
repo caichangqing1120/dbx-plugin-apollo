@@ -13,6 +13,9 @@ The strict all-page, all-dialog 1:1 gate still FAILS; this is an unsigned Previe
 candidate, not an accepted replica. The [v0.1.2 release](https://github.com/caichangqing1120/dbx-plugin-apollo/releases/tag/v0.1.2)
 contains complete native candidate packages, not a promise of completed visual parity.
 
+[Delivery receipt](docs/delivery-0.1.2.json) | [Source CI](https://github.com/caichangqing1120/dbx-plugin-apollo/actions/runs/39250298164) | [Marketplace candidate PR #295](https://github.com/t8y2/dbx-store/pull/295).
+Official signing and maintainer merge are separate from the published unsigned Preview.
+
 ## Current Route Coverage (Not Original-Workflow Parity)
 
 - Ordinary Portal username/password login; DBX Secret Store and isolated in-memory Go sessions.
