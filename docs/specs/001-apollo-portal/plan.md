@@ -244,11 +244,20 @@ The user's existing release authorization is unchanged: add source automation re
 but use a manually initiated release and candidate submission for this validation iteration.
 Preserve the signed 0.1.2 catalog, tag and bytes; do not alter signing or discovery policy.
 
-- [ ] Push the reviewed repair source and README to the author's main branch, then create
+- [x] Push the reviewed repair source and README to the author's main branch, then create
   an immutable `v0.1.3-rc.1` tag and GitHub Prerelease with CI-built assets only.
-- [ ] Download every published target, verify exact hashes/size/content/native identities,
+- [x] Download every published target, verify exact hashes/size/content/native identities,
   and run downloaded macOS packaged-sidecar handshake and full loopback smoke.
-- [ ] Submit one candidate-only Store PR from the latest official main, leaving protected
+- [x] Submit one candidate-only Store PR from the latest official main, leaving protected
   signing and merge to maintainers; keep automation PR #298 separate.
-- [ ] Update README and the versioned delivery receipt with actual release/submission state;
+- [x] Update README and the versioned delivery receipt with actual release/submission state;
   close only task-owned browser/services and retain unfinished parity work/evidence.
+
+Author RC delivery: source tag `v0.1.3-rc.1` is immutable at `727c0a6`; source CI run
+`39375019013` passed. All five downloaded candidates match their local/CI bytes; both
+downloaded macOS sidecars pass full loopback smoke, and CI passed packaged Linux x64 smoke.
+Store PR #304 changes only the candidate JSON and is pending maintainer review/signing.
+Its red validation is the confirmed unsigned-candidate signing gate. Automation PR #298
+remains separate and pending merge. Exact receipts are in `../../delivery-0.1.3-rc.1.json`.
+The owned browser/session and three loopback services are closed. No parity/live/native
+acceptance gate was promoted; the active unfinished plan and evidence remain preserved.

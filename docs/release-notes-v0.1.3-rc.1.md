@@ -37,3 +37,16 @@ Ordinary Portal password authentication only; no SSO/OIDC/LDAP. Source/generated
 are independently authored; selected Apache-2.0 assets/copy and the vendored DBX SDK are
 attributed in NOTICE. Official signing and review remain required; no private key or fake
 `verified` flag is included. This iteration uses a manually submitted marketplace candidate.
+
+## Author Delivery
+
+- [Author Preview and all five unsigned native packages](https://github.com/caichangqing1120/dbx-plugin-apollo/releases/tag/v0.1.3-rc.1)
+- [Successful source/package CI](https://github.com/caichangqing1120/dbx-plugin-apollo/actions/runs/39375019013)
+- [Versioned visual report with explicit FAIL boundaries](https://github.com/caichangqing1120/dbx-plugin-apollo/releases/download/v0.1.3-rc.1/apollo-parity-report-v0.1.3-rc.1.html)
+- [Manual Store candidate PR #304](https://github.com/t8y2/dbx-store/pull/304), pending maintainer review/signing
+
+All five published packages and the report were downloaded again and verified against
+their exact bytes. Both downloaded macOS native sidecars pass initialize and the full
+controlled-fixture smoke; CI verifies the packaged Linux x64 smoke. Source-discovery
+registration is separate [PR #298](https://github.com/t8y2/dbx-store/pull/298), pending merge.
+The signed Store version remains 0.1.2 until maintainers process this candidate.

@@ -1,0 +1,156 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-10-20T05:39:44.464675+00:00",
+  "plugin": {
+    "id": "io.github.caichangqing1120.apollo",
+    "name": "Apollo Portal Console",
+    "version": "0.1.3-rc.1",
+    "publisher": "caichangqing1120",
+    "description": "Preview: independently authored Apollo 2.x management UI with password login; full 1:1 parity is incomplete",
+    "permissions": [
+      "host.storage"
+    ]
+  },
+  "source": {
+    "repository": "https://github.com/caichangqing1120/dbx-plugin-apollo",
+    "branch": "main",
+    "tag": "v0.1.3-rc.1",
+    "tagCommit": "727c0a689ed89508db0c166cab41838961c63b23",
+    "productRepairCommit": "6b2bdd343d7b405b7eb32eccac780aa061581c43",
+    "independentProductReview": "2bb1572..6b2bdd3; no actionable correctness/regression/security findings",
+    "immutablePreviousTagCommit": "d19dc4acf32e3f741543328a28ea563e124941e1"
+  },
+  "release": {
+    "url": "https://github.com/caichangqing1120/dbx-plugin-apollo/releases/tag/v0.1.3-rc.1",
+    "publishedAt": "2026-10-20T05:27:45Z",
+    "prerelease": true,
+    "unsigned": true,
+    "workflow": "https://github.com/caichangqing1120/dbx-plugin-apollo/actions/runs/39375019013",
+    "workflowConclusion": "success",
+    "downloadedAndVerifiedTargets": 5,
+    "localAndCIBytesIdentical": true,
+    "assetCountIncludingVisualReport": 14,
+    "artifacts": [
+      {
+        "target": "darwin-arm64",
+        "url": "io.github.caichangqing1120.apollo-0.1.3-rc.1-darwin-arm64.dbxp",
+        "sha256": "000ab57db763335ffb8f9314518a1b31ab3e084e1f270774b4930ad57033f619",
+        "size": 2781834
+      },
+      {
+        "target": "darwin-x64",
+        "url": "io.github.caichangqing1120.apollo-0.1.3-rc.1-darwin-x64.dbxp",
+        "sha256": "0d935812d3b7f56ff3c920419ff893d0a0383de77d771f3d067caa13e9333326",
+        "size": 2994371
+      },
+      {
+        "target": "windows-x64",
+        "url": "io.github.caichangqing1120.apollo-0.1.3-rc.1-windows-x64.dbxp",
+        "sha256": "2e3ee4974d50cc03f35f00a03fc5748d53ea15dff9bc38e8336b8eb127cb996b",
+        "size": 3011616
+      },
+      {
+        "target": "linux-x64",
+        "url": "io.github.caichangqing1120.apollo-0.1.3-rc.1-linux-x64.dbxp",
+        "sha256": "356dde5547ff67d6253fc3a88533d20bea5ecda0d73e6fe59fcc1cb1e22dd33c",
+        "size": 2970275
+      },
+      {
+        "target": "linux-arm64",
+        "url": "io.github.caichangqing1120.apollo-0.1.3-rc.1-linux-arm64.dbxp",
+        "sha256": "9b1ac6dff1eaa383340486efa62930c1190e2e5f9b15ed7c3f5dbe6e26078cc6",
+        "size": 2708751
+      }
+    ]
+  },
+  "validation": {
+    "javascriptTests": 176,
+    "packagingRegressionTests": 14,
+    "goRaceTests": 14,
+    "goVet": "pass",
+    "storeSyncTests": 6,
+    "archiveFilesPerPackage": 24,
+    "verifiedContentChecksumsPerPackage": 23,
+    "downloadedMacArm64HandshakeAndFullFixtureSmoke": "pass",
+    "downloadedMacX64HandshakeAndFullFixtureSmoke": "pass",
+    "ciPackagedLinuxX64HandshakeAndFullFixtureSmoke": "pass",
+    "nativeUISHA256": "69feb497f53c0064c38863243a59a919d11913a9915ccc22b2b2e68411705efe",
+    "nativeSourceSHA256": "30cd8a8d84c44f715a9ef6ac0bae9a313bd85e37ba2af68b05bbb46b75f5f211",
+    "currentBrowserChecks": {
+      "normalFormControls": {
+        "passed": 16,
+        "failed": 0
+      },
+      "creation": {
+        "passed": 7,
+        "failed": 0
+      },
+      "keyboard": {
+        "passed": 4,
+        "failed": 0
+      },
+      "contexts": {
+        "passed": 5,
+        "failed": 0
+      },
+      "sidebarFlow": {
+        "passed": 3,
+        "failed": 0
+      },
+      "warnings": {
+        "passed": 14,
+        "failed": 0
+      }
+    },
+    "pairedWarningInteriorExactPixels": "14/14 100%; excluding 3px border/shadow; scoped states only",
+    "localRelativeReadmeLinks": "checked"
+  },
+  "visualEvidence": {
+    "url": "https://github.com/caichangqing1120/dbx-plugin-apollo/releases/download/v0.1.3-rc.1/apollo-parity-report-v0.1.3-rc.1.html",
+    "sha256": "3bc569f124355d79f8600ff39944487f54f19410863b93ec4095c65217f31a3e",
+    "size": 11884744,
+    "sections": 63,
+    "embeddedImages": 113,
+    "decodedEmbeddedImages": 113,
+    "brokenImages": 0,
+    "historicalEvidenceExplicitlyMarked": true,
+    "verdict": "FAIL"
+  },
+  "marketplace": {
+    "pullRequest": "https://github.com/t8y2/dbx-store/pull/304",
+    "base": "t8y2/dbx-store:main",
+    "head": "caichangqing1120/dbx-store:codex/apollo-store-0.1.3-rc.1",
+    "headCommit": "640510f8abe2af1e719306a2ea3b1ebf1c4b712b",
+    "changedFiles": [
+      "candidates/io.github.caichangqing1120.apollo.json"
+    ],
+    "maintainerCanModify": true,
+    "state": "open",
+    "merged": false,
+    "officialSigning": "pending DBX Store maintainers",
+    "officialCatalogListing": "0.1.2 signed; 0.1.3-rc.1 not yet listed",
+    "validationWorkflow": "https://github.com/t8y2/dbx-store/actions/runs/39375929843",
+    "validationConclusion": "failure - confirmed open-candidate pending-signing guard, not package/schema failure",
+    "planCandidatesValidation": "pass",
+    "transport": "Git HTTPS route stalled; GitHub Git API uploaded identical tree and commit, exact local/public SHA matched; no force update"
+  },
+  "automation": {
+    "pullRequest": "https://github.com/t8y2/dbx-store/pull/298",
+    "state": "open",
+    "headCommit": "bfe99846deef574c8f8f17365f09d401a2101cae",
+    "validation": "success",
+    "scope": "registry only; autoUpdate true; GitHub Draft/Prerelease discovery still skipped; no signing/merge permission changes",
+    "currentIteration": "manual author Preview and candidate PR"
+  },
+  "localCompletePackageDirectory": "dist/release-v0.1.3-rc.1 (original author checkout)",
+  "boundaries": {
+    "fullAllPagesAndDialogs1to1": "FAIL",
+    "realApolloAcceptance": "not performed",
+    "nativeDesktopInstallationAcceptance": "not performed",
+    "windowsX64AndLinuxArm64RuntimeAcceptance": "not performed",
+    "remainingWork": "navigation/search picker internals, other admin tables/forms, previews/editors and some conditional/delete contexts",
+    "request": "https://github.com/t8y2/dbx/issues/12466",
+    "followUpIssues": "https://github.com/caichangqing1120/dbx-plugin-apollo/issues",
+    "officialSigningAndMerge": "maintainer-owned; not bypassed"
+  }
+}

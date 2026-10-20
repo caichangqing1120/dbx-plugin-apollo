@@ -2,7 +2,10 @@
 
 DBX issue [#12466](https://github.com/t8y2/dbx/issues/12466).
 
-Development identity: **Apollo Portal Console / Apollo Portal 控制台**, `0.1.3-rc.1` (not yet released).
+Current author Preview: **Apollo Portal Console / Apollo Portal 控制台**, [`0.1.3-rc.1`](https://github.com/caichangqing1120/dbx-plugin-apollo/releases/tag/v0.1.3-rc.1).
+All five unsigned native packages are published and re-downloaded/verified. The Store update
+is [PR #304](https://github.com/t8y2/dbx-store/pull/304), pending maintainer review/signing;
+the last officially signed Store version remains `0.1.2`.
 The new names and explicit SemVer prerelease avoid the separate Apollo plugin's identical
 listing labels. The already signed `0.1.2` artifacts and source tag are preserved unchanged.
 See [review follow-up](docs/review-follow-up-2026-10-20.md) for the exact current boundaries.
@@ -17,14 +20,14 @@ The next-version continuation repairs shared form columns/help/static values, ke
 creation on the original success page, and restores public Namespace department-prefix
 display, draft retention and keyboard focus. See [current repairs and verification scope](docs/parity-polish.md)
 and the [historical 0.1.2 audit](docs/parity-finish.md).
-The strict all-page, all-dialog 1:1 gate still FAILS; this is an unsigned Preview/development
-candidate, not an accepted replica. The [v0.1.2 release](https://github.com/caichangqing1120/dbx-plugin-apollo/releases/tag/v0.1.2)
-contains complete native candidate packages, not a promise of completed visual parity.
+The strict all-page, all-dialog 1:1 gate still FAILS; the author Release contains unsigned
+Preview candidates, not an accepted replica or a promise of completed visual parity.
 
-[Delivery receipt](docs/delivery-0.1.2.json) | [Source CI](https://github.com/caichangqing1120/dbx-plugin-apollo/actions/runs/39250298164) | [Marketplace candidate PR #295](https://github.com/t8y2/dbx-store/pull/295).
+[Current delivery receipt](docs/delivery-0.1.3-rc.1.json) | [Source CI](https://github.com/caichangqing1120/dbx-plugin-apollo/actions/runs/39375019013) | [Marketplace candidate PR #304](https://github.com/t8y2/dbx-store/pull/304) | [Self-contained visual report](https://github.com/caichangqing1120/dbx-plugin-apollo/releases/download/v0.1.3-rc.1/apollo-parity-report-v0.1.3-rc.1.html).
 Official signing of all five `0.1.2` targets and PR #295's maintainer merge completed on
 2026-10-20. The author Release assets remain unsigned review candidates, distinct from
-the official signed Store artifacts.
+the official signed Store artifacts. The [historical 0.1.2 receipt](docs/delivery-0.1.2.json)
+records that version's author-submission snapshot, not the current Store review state.
 
 ## Installation And Connection
 
@@ -69,7 +72,7 @@ verified separately. These checks do not close the remaining page/form/context d
 
 ## Current Repair Scope
 
-These changes apply to the development version, not the immutable signed `0.1.2` release.
+These changes apply to the `0.1.3-rc.1` author Preview, not the immutable signed `0.1.2` release.
 
 - Creation/settings forms use independently authored column gutters, correctly grouped help
   text, source labels/format ordering and non-editable route identities that retain form data.
@@ -147,15 +150,25 @@ and [privacy/security boundaries](docs/security.md).
 
 ## Release And Update Policy
 
-- Current development identity is `0.1.3-rc.1`; it is not a published update yet. Preserve
+- The author Preview `0.1.3-rc.1` is published with five CI-built unsigned native packages,
+  exact-byte readback and a versioned visual report. Store update PR #304 is awaiting
+  maintainer review/signing; it is not an officially signed catalog update yet. Preserve
   existing version-addressed source tags, unsigned candidates and official signed assets.
 - This validation iteration uses manual release submission: an author-initiated tag/Preview
   Release, CI-built candidate packages and an author-submitted Store candidate PR. Review,
   protected signing and maintainer merge are still required.
 - [Automation registration PR #298](https://github.com/t8y2/dbx-store/pull/298) registers future
-  release discovery only. It does not publish this development version or change signing policy.
+  release discovery only and is pending merge. It does not publish this Preview or change signing policy.
 - Store discovery currently skips GitHub Draft/Prerelease releases. An RC remains a Preview
   and is submitted manually; do not disguise it as a stable release to bypass that filter.
+
+## Source And Feedback
+
+Source code and follow-up Apollo feature requests/bugs belong in
+[this repository's issues](https://github.com/caichangqing1120/dbx-plugin-apollo/issues).
+Include the plugin version, OS/CPU target, Apollo version, affected page and reproduction
+steps. Redact connection passwords, session cookies, tokens and sensitive configuration
+values from screenshots and logs. The original DBX request is not the ongoing plugin tracker.
 
 ## Testing Boundaries
 
@@ -163,7 +176,9 @@ Current scoped checks: **176 JS + 14 packaging regressions**, **14 Go race tests
 **16 normal form controls**, **14 paired warning interiors**, and the creation, keyboard,
 language/theme/narrow and sidebar-flow checks documented in [the current audit](docs/parity-polish.md).
 The [current package proof](docs/package-verification-0.1.3-rc.1.json) records exact unsigned
-hashes and native targets. None of these counts is a full 1:1 or live-installation verdict.
+local hashes and native targets. The [published delivery receipt](docs/delivery-0.1.3-rc.1.json)
+records the matching CI/published bytes, downloaded macOS smoke and separate Store gates.
+None of these counts is a full 1:1 or live-installation verdict.
 
 `npm run test:smoke` starts a controlled loopback HTTP fixture and a real Go sidecar and checks
 JSON-RPC login/edit/publish/history/rollback, gray merge, sync, key/consumer/role/admin APIs,
