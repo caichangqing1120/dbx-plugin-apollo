@@ -150,11 +150,11 @@ function masterPage(s, t) {
 }
 function clustersPage(s, t) {
   return page(
-    head(t("manageCluster"), appSubtitle(s), back(t)) +
+    `<header class="reference-heading"><h4 class="cluster-management-title">${t('manageCluster')} ( AppId: <label>${e(s.route.appId)}</label> )</h4><div>${back(t)}</div></header>` +
       (s.advTree || [])
         .map(
           (node) =>
-            `<section class="reference-section"><h4>${t("environment")}: ${e(node.env)}</h4>${(node.clusters || []).map((cluster) => `<div class="reference-cluster-card"><strong>${t("cluster")}: ${e(cluster.name)}</strong>${btn("cluster-roles", t("authorize"), `data-env="${attr(node.env)}" data-name="${attr(cluster.name)}"`)}</div>`).join("")}</section>`,
+            `<section class="reference-cluster-group"><hr><h4>${t("environment")}: ${e(node.env)}</h4>${(node.clusters || []).map((cluster) => `<div class="reference-cluster-card"><header><strong>${t("cluster")}: ${e(cluster.name)}</strong><div>${btn("cluster-roles", t("authorize"), `data-env="${attr(node.env)}" data-name="${attr(cluster.name)}"`).replace('>', '>' + assetImage('assign.png'))}</div></header></div>`).join("")}</section>`,
         )
         .join(""),
     "clusters-page",

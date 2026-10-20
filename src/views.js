@@ -8,9 +8,10 @@ import {
   localTimestamp,
   assetImage,
 } from "./ui.js";
-import { renderAdvanced, advancedAdminMenu } from "./advanced-views.js";
+import { renderAdvanced } from "./advanced-views.js";
 import { referenceAdminView } from "./reference-pages.js";
 import { grayPanel, syncPage, historyPage } from "./config-panels.js";
+import { appSearchMarkup } from './app-search.js';
 function homeView(s, t) {
   const tabs = [
     ["mine", "myProjects", "\ue64a"],
@@ -118,8 +119,12 @@ function configCommits(name, s, t, extra) {
   }${data?.hasMore ? actionButton("more-commits", t("loadMore"), extra) : ""}</div>`;
 }
 function iconAction(action, label, extra, off, shape) {
-  return `<button type="button" class="btn btn-link config-icon" data-action="${action}" ${extra}${disabled(off)} aria-label="${attr(label)}" title="${attr(label)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${shape}" fill="none" stroke="currentColor" stroke-width="2.5"/></svg></button>`;
+  return `<button type="button" class="btn btn-link config-icon" data-action="${action}" ${extra}${disabled(off)} aria-label="${attr(label)}" title="${attr(label)}">${assetImage(action === 'edit-item' ? 'edit.png' : 'cancel.png', '', 'config-action-image') || `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${shape}" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>`}</button>`;
 }
+const itemPreview = value => {
+  const text = String(value ?? '');
+  return escapeHTML(text.slice(0, 250) + (text.length > 250 ? '...' : ''));
+};
 function namespacePanel(ns, index, s, t) {
   const name = ns.baseInfo.namespaceName;
   const extra = `data-ns="${attr(name)}"`;
@@ -215,9 +220,10 @@ function namespacePanel(ns, index, s, t) {
                     const i = row.item,
                       changed =
                         row.isDeleted || row.isModified || row.isNewlyAdded;
-                    return `<tr class="${row.isDeleted ? "deleted-row" : row.isModified ? "modified-row" : row.isNewlyAdded ? "new-row" : ""}"><td><span class="status-label ${changed ? "status-pending" : ""}">${t(changed ? "pendingShort" : "published")}</span></td><td class="key-cell">${actionButton("show-config-value", i.key, extra + ` data-item="${attr(i.id)}" data-field="key"`, false, "value-inspect")}${(s.branches?.[name]?.items || []).some(branchRow=>branchRow.item.key===i.key && !branchRow.isDeleted) ? actionButton('gray',t('Component.Namespace.Master.Items.Body.Grayscale'),extra+` data-gray-item="${attr(i.key)}"`,false,'gray-item-link') : ''}</td><td>${["String", "Number", "Boolean", "JSON"][i.type] || ""}</td><td class="value-cell"><button type="button" class="value-inspect" data-action="show-config-value" ${extra} data-item="${attr(i.id)}" data-field="value"><pre>${escapeHTML(i.value)}</pre></button></td><td>${escapeHTML(i.comment)}</td><td>${escapeHTML(i.dataChangeLastModifiedByDisplayName || "")}(${escapeHTML(i.dataChangeLastModifiedBy)})</td><td class="date-cell">${escapeHTML(localTimestamp(i.dataChangeLastModifiedTime))}</td><td class="row-actions">${permission.modify ? iconAction("edit-item", t("edit"), extra + ` data-item="${attr(i.id)}"`, !canModify || row.isDeleted, "M14 5H3v16h16V10M10 14l1-5L19 1l4 4-8 8z") + iconAction("delete-item", t("remove"), extra + ` data-item="${attr(i.id)}"`, !canModify || row.isDeleted, "M4 4l16 16M20 4L4 20") : ""}</td></tr>`;
+                    const marker = row.isDeleted ? 'Deleted' : row.isNewlyAdded ? 'NewAdded' : row.isModified ? 'Modified' : '';
+                    return `<tr class="${row.isDeleted ? "deleted-row" : row.isModified ? "modified-row" : row.isNewlyAdded ? "new-row" : ""}${!i.value ? ' empty-value-row' : ''}"><td><span class="status-label ${changed ? "status-pending" : ""}">${t(changed ? "pendingShort" : "published")}</span></td><td class="key-cell">${actionButton("show-config-value", String(i.key || "").slice(0,250) + (String(i.key || "").length > 250 ? "..." : ""), extra + ` data-item="${attr(i.id)}" data-field="key"`, false, "value-inspect")}${(s.branches?.[name]?.items || []).some(branchRow=>branchRow.item.key===i.key && !branchRow.isDeleted) ? actionButton('gray',t('Component.Namespace.Master.Items.Body.Grayscale'),extra+` data-gray-item="${attr(i.key)}"`,false,'gray-item-link') : ''}${marker ? `<span class="config-change-badge change-${marker}">${t('Component.Namespace.Master.Items.Body.' + marker)}</span>` : ''}</td><td>${["String", "Number", "Boolean", "JSON"][i.type] || ""}</td><td class="value-cell"><button type="button" class="value-inspect" data-action="show-config-value" ${extra} data-item="${attr(i.id)}" data-field="value">${itemPreview(i.value)}</button></td><td title="${attr(i.comment || '')}">${itemPreview(i.comment)}</td><td>${escapeHTML(i.dataChangeLastModifiedByDisplayName || "")}(${escapeHTML(i.dataChangeLastModifiedBy)})</td><td class="date-cell">${escapeHTML(localTimestamp(i.dataChangeLastModifiedTime))}</td><td class="row-actions">${permission.modify && !row.isDeleted ? iconAction("edit-item", t("edit"), extra + ` data-item="${attr(i.id)}"`, !canModify || row.isDeleted, "M14 5H3v16h16V10M10 14l1-5L19 1l4 4-8 8z") + iconAction("delete-item", t("remove"), extra + ` data-item="${attr(i.id)}"`, !canModify || row.isDeleted, "M4 4l16 16M20 4L4 20") : ""}</td></tr>`;
                   })
-                  .join("") || emptyRow(8, t("noData"))
+                  .join("")
               }</tbody></table></div>`
   }</section>`;
 }
@@ -251,8 +257,18 @@ function renderNamespaceInstances(name, s, t, extra) {
   return `<div class="namespace-instances"><p>${t("instances")}</p><table class="reference-table"><thead><tr><th>AppId</th><th>Cluster Name</th><th>IP</th></tr></thead><tbody>${(page?.content || []).map((instance) => `<tr><td>${escapeHTML(instance.appId)}</td><td>${escapeHTML(instance.clusterName)}</td><td>${escapeHTML(instance.ip)}</td></tr>`).join("") || emptyRow(3, t("noData"))}</tbody></table>${actionButton("instances", t("refresh"), extra)}</div>`;
 }
 const documentViews = new Set(['create-project','project','app-roles','access-keys','clusters','cluster-create','cluster-roles','namespace-create','permissions','permissions-env','history','sync','diff','users','server-config','audit','audit-trace','global-search','instances','release-diff']);
+function navigationTools(s, t) {
+  const entries = s.isRoot ? [
+    ['users', 'Common.Nav.UserManage'], ['system-roles', 'Common.Nav.SystemRoleManage'],
+    ['consumers', 'Common.Nav.OpenMange'], ['server-config', 'Common.Nav.SystemConfig'],
+    ['delete', 'Common.Nav.DeleteApp-Cluster-Namespace'], ['system-info', 'Common.Nav.SystemInfo'],
+    ['transfer', 'Common.Nav.ConfigExport'], ['audit', 'ApolloAuditLog.Title'],
+    ['global-search', 'Global.Title'],
+  ] : [['users', 'Common.Nav.UserManage'], ['transfer', 'Common.Nav.ConfigExport']];
+  return `<details class="nav-dropdown" data-navigation-tools><summary><svg class="nav-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.5 0h3l.5 2 1.3.7 2-.6 1.5 2.6-1.5 1.4v1.8l1.5 1.4-1.5 2.6-2-.6-1.3.7-.5 2h-3l-.5-2-1.3-.7-2 .6L1.2 11l1.5-1.4V7.8L1.2 6.4l1.5-2.6 2 .6L6 3.7z" fill="currentColor"/><circle cx="8" cy="7.8" r="2.2" fill="white"/></svg> ${t(s.isRoot ? 'admin' : 'Common.Nav.NonAdminTools')} <span class="nav-caret"></span></summary><div class="dropdown-menu">${entries.map(([action, label]) => actionButton(action, t(label))).join('')}</div></details>`;
+}
 export function renderPortal(s, t, logo = "") {
-  const header = `<header class="apollo-nav"><button class="apollo-brand" data-action="home" aria-label="Apollo">${logo ? `<img src="${attr(logo)}" alt="Apollo">` : "<b>APOLLO</b>"}</button><div class="nav-actions"><form class="app-search" data-form="search"><input name="query" aria-label="${t("search")}" placeholder="${t("search")}" autocomplete="off"><button type="button" data-action="submit-form" aria-label="${t("search")}">⌕</button></form><button class="nav-button" data-action="help"><svg class="nav-help-icon" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="M5.5 5.5c.2-3 5.1-3 5.1 0 0 1.6-2.5 1.8-2.5 3.7" fill="none" stroke="white" stroke-width="1.4"/><circle cx="8.1" cy="12" r=".8" fill="white"/></svg> ${t("help")}</button><details class="nav-dropdown nav-language-menu"><summary role="button" aria-label="Language">◎ Language<span class="nav-language-caret">▾</span></summary><div class="dropdown-menu"><button data-action="language" data-locale="zh-CN">简体中文</button><button data-action="language" data-locale="en">English</button></div></details>${s.isRoot ? `<details class="nav-dropdown"><summary><svg class="nav-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.5 0h3l.5 2 1.3.7 2-.6 1.5 2.6-1.5 1.4v1.8l1.5 1.4-1.5 2.6-2-.6-1.3.7-.5 2h-3l-.5-2-1.3-.7-2 .6L1.2 11l1.5-1.4V7.8L1.2 6.4l1.5-2.6 2 .6L6 3.7z" fill="currentColor"/><circle cx="8" cy="7.8" r="2.2" fill="white"/></svg> ${t("admin")} <span>⌄</span></summary><div class="dropdown-menu"><button data-action="users">${t("users")}</button><button data-action="server-config">${t("systemConfig")}</button>${advancedAdminMenu(t)}</div></details>` : ""}<details class="nav-dropdown"><summary><svg class="nav-icon" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="4" r="3" fill="currentColor"/><path d="M1 16v-3c0-5 14-5 14 0v3z" fill="currentColor"/></svg> ${escapeHTML(s.user?.name || "")}(${escapeHTML(s.user?.userId || "")}) ⌄</summary><div class="dropdown-menu"><button data-action="users">${t("users")}</button><button data-action="logout">${t("logout")}</button></div></details></div></header>`;
+  const header = `<header class="apollo-nav"><button class="apollo-brand" data-action="home" aria-label="Apollo">${logo ? `<img src="${attr(logo)}" alt="Apollo">` : "<b>APOLLO</b>"}</button><div class="nav-actions">${appSearchMarkup(t)}<button class="nav-button" data-action="help"><svg class="nav-help-icon" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="M5.5 5.5c.2-3 5.1-3 5.1 0 0 1.6-2.5 1.8-2.5 3.7" fill="none" stroke="white" stroke-width="1.4"/><circle cx="8.1" cy="12" r=".8" fill="white"/></svg> ${t("help")}</button><details class="nav-dropdown nav-language-menu"><summary role="button" aria-label="Language">${assetImage("language.png", "", "nav-language-icon")} &nbsp;Language<span class="nav-caret"></span></summary><div class="dropdown-menu"><button data-action="language" data-locale="zh-CN">简体中文</button><button data-action="language" data-locale="en">English</button></div></details>${navigationTools(s, t)}<details class="nav-dropdown" data-navigation-user><summary><svg class="nav-icon" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="4" r="3" fill="currentColor"/><path d="M1 16v-3c0-5 14-5 14 0v3z" fill="currentColor"/></svg> ${escapeHTML(s.user?.name || "")}(${escapeHTML(s.user?.userId || "")}) <span class="nav-caret"></span></summary><div class="dropdown-menu"><button data-action="logout">${t("logout")}</button></div></details></div></header>`;
   const body = s.loading
     ? `<main class="loading" role="status"><span class="spinner"></span>${t("loading")}</main>`
     : (referenceAdminView(s, t) ??

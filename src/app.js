@@ -1,5 +1,6 @@
 import { translator } from "./i18n.js";
 import { renderPortal } from "./views.js";
+import { createAppSearch } from './app-search.js';
 import { selectedHistory, historyBaseReleaseId } from "./history.js";
 import { loadNamespaceAssignments } from "./roles.js";
 import { sourceNotice, publishDeniedFields } from "./notices.js";
@@ -34,6 +35,7 @@ export function createPortalApp(root, options) {
     commitRevision = {},
     roleRevision = {},
     disposed = false;
+  let successTimer = null, successNotice = null, successRevision = 0, appSearch;
   const s = {
     route: { view: "home" },
     homeTab: "mine",
@@ -92,7 +94,9 @@ export function createPortalApp(root, options) {
   }
   function render() {
     if (disposed) return;
+    appSearch?.reset();
     root.innerHTML = renderPortal(s, t, options.logo || "");
+    successNotice = root.querySelector('.notice.success');
     if (s.dialog?.values) {
       restoreValues(root.querySelector("[role=dialog] form"), s.dialog.values);
     }
@@ -114,16 +118,39 @@ export function createPortalApp(root, options) {
         section.hidden =
           section.dataset.namespaceSection !== namespaceMode.value;
   }
+  function clearSuccess() {
+    successRevision++;
+    if (successTimer !== null) win.clearTimeout(successTimer);
+    successTimer = null;
+    successNotice?.remove();
+    successNotice = null;
+    s.success = false;
+  }
+  function notifySuccess() {
+    if (disposed) return;
+    clearSuccess();
+    s.success = true;
+    const ticket = successRevision;
+    successTimer = win.setTimeout(() => {
+      if (disposed || ticket !== successRevision) return;
+      successTimer = null;
+      s.success = false;
+      // Expiry must not recreate editors or disturb unsaved fields and focus.
+      successNotice?.remove();
+      successNotice = null;
+    }, 5000);
+  }
   function fail(error) {
     s.error = error.message || String(error);
     s.expired =
       error.status === 401 ||
       error.code === -32001 ||
       String(error.message).includes("Apollo connection is not active");
-    s.success = false;
+    clearSuccess();
     render();
   }
   function run(task) {
+    clearSuccess();
     const promise = (async () => {
       try {
         return await task();
@@ -150,7 +177,7 @@ export function createPortalApp(root, options) {
     const ticket = ++revision;
     s.loading = true;
     s.error = "";
-    s.success = false;
+    clearSuccess();
     render();
     try {
       const data = {};
@@ -314,6 +341,12 @@ export function createPortalApp(root, options) {
       }
       if (ticket !== revision || disposed) return;
       s.advancedFormValues = null;
+      if (route.view === 'config' && route.namespace && route.item !== undefined) {
+        data.filters = { ...s.filters, [route.namespace]: route.item };
+        data.filterOpen = { ...s.filterOpen, [route.namespace]: true };
+        data.collapsed = { ...s.collapsed, [route.namespace]: false };
+        data.modes = { ...s.modes, [route.namespace]: 'table' };
+      }
       Object.assign(s, data, { route: data.route || route, loading: false });
       render();
       await persist();
@@ -334,6 +367,7 @@ export function createPortalApp(root, options) {
     return run(() => loadRoute(route));
   }
   function openDialog(title, fields, submit, extra = {}) {
+    clearSuccess();
     s.dialog = { title, fields, submit, ...extra };
     render();
     root
@@ -493,7 +527,7 @@ export function createPortalApp(root, options) {
         return;
       }
       if (!currentSyntax()) return;
-      s.success = true;
+      notifySuccess();
       render();
       return;
     }
@@ -678,7 +712,7 @@ export function createPortalApp(root, options) {
     }
     if (action === "dismiss") {
       s.error = "";
-      s.success = false;
+      clearSuccess();
       render();
       return;
     }
@@ -1413,6 +1447,7 @@ export function createPortalApp(root, options) {
     const form = event.target;
     if (!form.dataset.form) return;
     event.preventDefault();
+    clearSuccess();
     if (!form.checkValidity()) {
       form.reportValidity();
       return;
@@ -1449,16 +1484,7 @@ export function createPortalApp(root, options) {
       return;
     }
     if (form.dataset.form === "search") {
-      run(async () => {
-        if (Object.keys(s.drafts).length) throw Error(t("unsaved"));
-        const ticket = ++revision;
-        const results = await client.search(data.query);
-        if (ticket !== revision) return;
-        if (Object.keys(s.drafts).length) throw Error(t("unsaved"));
-        s.route = { view: "home" };
-        s.searchResults = results.content || [];
-        render();
-      });
+      run(() => appSearch.submit());
       return;
     }
     if (s.busy || !s.dialog) return;
@@ -1477,7 +1503,7 @@ export function createPortalApp(root, options) {
         s.dialog = null;
         s.busy = false;
         await loadRoute(s.route);
-        s.success = true;
+        notifySuccess();
         render();
       } catch (error) {
         s.busy = false;
@@ -1488,6 +1514,7 @@ export function createPortalApp(root, options) {
       }
     });
   }
+  appSearch = createAppSearch(root, { client, navigate, state: () => s, track: run, fail });
   root.addEventListener("click", onClick);
   root.addEventListener("submit", onSubmit);
   root.addEventListener("input", onInput);
@@ -1498,7 +1525,7 @@ export function createPortalApp(root, options) {
     await persist();
   }
   function advancedContext() {
-    return { s, t, client, options, navigate, openDialog, render, root, ensureEditLock };
+    return { s, t, client, options, navigate, openDialog, render, root, ensureEditLock, notifySuccess };
   }
   return {
     async start() {
@@ -1533,6 +1560,8 @@ export function createPortalApp(root, options) {
     destroy() {
       disposed = true;
       revision++;
+      clearSuccess();
+      appSearch.destroy();
       root.removeEventListener("click", onClick);
       root.removeEventListener("submit", onSubmit);
       root.removeEventListener("input", onInput);

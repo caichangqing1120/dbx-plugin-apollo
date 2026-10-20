@@ -1,5 +1,18 @@
 // Selected Apache-2.0 Apollo UI copy, not frontend runtime or templates.
 export const referenceCopy = {
+  'Common.Nav.NonAdminTools': ['工具', 'Tools'],
+  'Common.Nav.UserManage': ['用户管理', 'User Management'],
+  'Common.Nav.SystemRoleManage': ['系统权限管理', 'System Permission Management'],
+  'Common.Nav.OpenMange': ['开放平台授权管理', 'Open Platform Authorization Management'],
+  'Common.Nav.SystemConfig': ['系统参数', 'System Configuration'],
+  'Common.Nav.DeleteApp-Cluster-Namespace': ['删除应用、集群、AppNamespace', 'Delete Apps, Clusters, AppNamespace'],
+  'Common.Nav.SystemInfo': ['系统信息', 'System Information'],
+  'Common.Nav.ConfigExport': ['配置导出导入', 'Config Export / Import'],
+  'ApolloAuditLog.Title': ['审计日志', 'Audit Log'],
+  'Global.Title': ['Value的全局搜索', 'Global Search for Value'],
+  'Component.Namespace.Master.Items.Body.NewAdded': ['新', 'New'],
+  'Component.Namespace.Master.Items.Body.Modified': ['改', 'Modified'],
+  'Component.Namespace.Master.Items.Body.Deleted': ['删', 'Deleted'],
   "Namespace.Link.Tips1": [
     "应用可以通过关联公共 Namespace 来覆盖公共 Namespace 的配置",
     "Applications can override the configuration of a public namespace by associating a public namespace"

@@ -56,7 +56,7 @@ const selection = (model) => ({
 const identity = (kind, model) =>
   JSON.stringify([kind, ...Object.values(selection(model))]);
 export async function handleReferenceAction(action, element, ctx, data = {}) {
-  const { s, t, client, navigate, render, openDialog, root, options } = ctx,
+  const { s, t, client, navigate, render, openDialog, root, options, notifySuccess } = ctx,
     route = s.route;
   const check = (value) => {
     if (!value) throw Error(t("denied"));
@@ -479,7 +479,7 @@ export async function handleReferenceAction(action, element, ctx, data = {}) {
       check(!s.readOnly);
       await client.importConfigs(data.file, [], data.conflict, target);
       s.advancedFormValues = null;
-      s.success = true;
+      notifySuccess();
       render();
       return;
     }
@@ -492,7 +492,7 @@ export async function handleReferenceAction(action, element, ctx, data = {}) {
         ),
         response,
       );
-    if (!result?.canceled) s.success = true;
+    if (!result?.canceled) notifySuccess();
     render();
     return;
   }
@@ -502,7 +502,7 @@ export async function handleReferenceAction(action, element, ctx, data = {}) {
     if (!envs.length) throw Error(t("chooseEnvironment"));
     await client.importConfigs(data.file, envs, data.conflict);
     s.advancedFormValues = null;
-    s.success = true;
+    notifySuccess();
     render();
     return;
   }
@@ -573,7 +573,7 @@ export async function handleReferenceAction(action, element, ctx, data = {}) {
       (s.consumerEnvs || []).filter((env) => data["env_" + env]),
       { appId: data.managedAppId, namespaceName: data.namespace },
     );
-    s.success = true;
+    notifySuccess();
     render();
     return;
   }

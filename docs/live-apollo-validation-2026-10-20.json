@@ -1,0 +1,553 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-10-20T15:09:55.969987+08:00",
+  "verdict": "SCOPED PASS WITH OPEN UX FINDING",
+  "full1to1Acceptance": "FAIL",
+  "scope": "15 focused manual native cases and independent real HTTP readbacks, not full-page/full-dialog or production acceptance",
+  "nativeHost": {
+    "name": "DBX",
+    "version": "0.6.49",
+    "bundle": "com.dbx.app",
+    "surface": "tauri://localhost > independently authored about:srcdoc plugin UI"
+  },
+  "plugin": {
+    "id": "io.github.caichangqing1120.apollo",
+    "version": "0.1.3-rc.1",
+    "target": "darwin-arm64",
+    "unsignedDevelopmentPackage": true,
+    "userConfirmedInstallation": true,
+    "sourceTag": "v0.1.3-rc.1",
+    "sourceCommit": "727c0a689ed89508db0c166cab41838961c63b23",
+    "packageSHA256": "000ab57db763335ffb8f9314518a1b31ab3e084e1f270774b4930ad57033f619",
+    "uiSHA256": "69feb497f53c0064c38863243a59a919d11913a9915ccc22b2b2e68411705efe",
+    "sourceSHA256": "30cd8a8d84c44f715a9ef6ac0bae9a313bd85e37ba2af68b05bbb46b75f5f211",
+    "productChangedDuringValidation": false
+  },
+  "realApollo": {
+    "version": "2.5.2",
+    "sourceCommit": "ed9785c87b390c22efece9ea7ec7eeab2d20a042",
+    "archiveSHA256": "2ed08319ae7580ae52e941971348df041dea9e097c734df6853beafdb92da691",
+    "assemblyJarSHA256": "c9b3366f8f719d9fdf7d2bcd4b5b74333ff6205f9e8ba2693d4a5682f790213d",
+    "java": "Microsoft OpenJDK 17.0.16 ARM64",
+    "profiles": [
+      "github",
+      "auth",
+      "h2",
+      "database-discovery"
+    ],
+    "database": "two persistent H2 files and official SQL; no fixture API emulation",
+    "portal": "http://127.0.0.1:8070",
+    "configService": "http://127.0.0.1:8080",
+    "adminService": "http://127.0.0.1:8090",
+    "loopbackOnly": true,
+    "runtime": "session-only user launchd job; KeepAlive false; no login-autostart folder changes",
+    "jobLabel": "com.caichangqing1120.apollo.local-qa-20261020",
+    "upstreamBuild": "12 reactor modules package successfully; upstream unit tests skipped for deployment"
+  },
+  "dataScope": {
+    "application": "DBXNative20261020",
+    "organization": "TEST2",
+    "user": "official local seed user apollo",
+    "key": "native.acceptance",
+    "cluster": "native-lab",
+    "publicNamespace": "TEST2.native.public",
+    "currentPublishedValue": "native-v1",
+    "currentDraftValue": "native-v2",
+    "existingBusinessConnectionsOrDataChanged": false,
+    "trustSettingsChanged": false,
+    "permissionInitialization": "two normal initPermission requests on loading the new namespace permission page, not manual grants on existing resources"
+  },
+  "passedCases": 15,
+  "cases": [
+    {
+      "id": "native-install",
+      "description": "Exact published RC installed and identified in native DBX",
+      "status": "PASS",
+      "evidence": [
+        "01-native-rc-installed.png"
+      ]
+    },
+    {
+      "id": "password-auth",
+      "description": "Wrong password rejected and ordinary correct password accepted",
+      "status": "PASS",
+      "evidence": [
+        "03-native-wrong-password-rejected.ax.txt",
+        "04-native-correct-password-connected.ax.txt"
+      ]
+    },
+    {
+      "id": "native-workbench",
+      "description": "Saved loopback connection opens independent native workbench",
+      "status": "PASS",
+      "evidence": [
+        "13-native-saved-credentials-reconnected.ax.txt"
+      ]
+    },
+    {
+      "id": "app-create",
+      "description": "Native app creation matches real Portal readback",
+      "status": "PASS",
+      "evidence": [
+        "app-created-readback.json"
+      ]
+    },
+    {
+      "id": "owner-enter-safe",
+      "description": "Closed owner Enter opens choices with no application created",
+      "status": "PASS",
+      "evidence": [
+        "app-before-owner-enter.json",
+        "app-after-owner-enter.json",
+        "05-native-owner-enter-safe.ax.txt"
+      ]
+    },
+    {
+      "id": "config-create",
+      "description": "Native String draft is persisted with no release before publish",
+      "status": "PASS",
+      "evidence": [
+        "draft-v1-readback.json",
+        "config-before-first-publish.status"
+      ]
+    },
+    {
+      "id": "publish-v1",
+      "description": "Native publish makes real clients receive v1",
+      "status": "PASS",
+      "evidence": [
+        "06-native-published-v1.ax.txt",
+        "config-published-v1.json"
+      ]
+    },
+    {
+      "id": "draft-isolation",
+      "description": "V2 edit is a draft while clients still receive v1",
+      "status": "PASS",
+      "evidence": [
+        "07-native-v2-draft.png",
+        "draft-v2-readback.json",
+        "config-before-second-publish.json"
+      ]
+    },
+    {
+      "id": "cancel-enter-safe",
+      "description": "Keyboard-focused Cancel Enter does not delete",
+      "status": "PASS",
+      "evidence": [
+        "after-cancel-enter-readback.json",
+        "real-portal-access.log"
+      ]
+    },
+    {
+      "id": "publish-v2",
+      "description": "Native preview compares v1/v2 and second publish reaches clients",
+      "status": "PASS",
+      "evidence": [
+        "08-native-v2-publish-preview.ax.txt",
+        "config-published-v2.json",
+        "releases-before-rollback.json"
+      ]
+    },
+    {
+      "id": "rollback",
+      "description": "Confirmed native rollback abandons v2, activates v1 and preserves draft",
+      "status": "PASS",
+      "evidence": [
+        "09-native-rollback-complete.ax.txt",
+        "config-after-rollback.json",
+        "abandoned-v2-release.json",
+        "draft-after-rollback.json",
+        "active-releases-after-rollback.json"
+      ]
+    },
+    {
+      "id": "cluster-create",
+      "description": "Native cluster success page and real cluster navigation are correct",
+      "status": "PASS",
+      "evidence": [
+        "10-native-cluster-created.ax.txt",
+        "envclusters-after-create.json"
+      ]
+    },
+    {
+      "id": "public-namespace",
+      "description": "Public switch preserves draft and real TEST2-prefixed definition",
+      "status": "PASS",
+      "evidence": [
+        "11-native-public-namespace-draft.ax.txt",
+        "12-native-public-namespace-created.ax.txt",
+        "public-namespace-created.json"
+      ]
+    },
+    {
+      "id": "format-enter-safe",
+      "description": "Enter on format selector in valid form creates no Namespace",
+      "status": "PASS",
+      "evidence": [
+        "namespaces-before-format-enter.json",
+        "namespaces-after-format-enter.json"
+      ]
+    },
+    {
+      "id": "restart-reconnect",
+      "description": "Real H2 restart preserves data and saved-credential native reconnect works",
+      "status": "PASS",
+      "evidence": [
+        "after-real-backend-restart.json",
+        "after-restart-envtree.json",
+        "after-restart-public-namespace.json",
+        "after-restart-draft.json",
+        "after-restart-client-config.json",
+        "13-native-saved-credentials-reconnected.ax.txt",
+        "final-runtime-health.json"
+      ]
+    }
+  ],
+  "realMutationRequests": [
+    {
+      "method": "POST",
+      "path": "/apps",
+      "count": 1,
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/apps/DBXNative20261020/appnamespaces",
+      "count": 1,
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/apps/DBXNative20261020/envs/LOCAL/clusters",
+      "count": 1,
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/apps/DBXNative20261020/envs/LOCAL/clusters/default/namespaces/application/item",
+      "count": 1,
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/apps/DBXNative20261020/envs/LOCAL/clusters/default/namespaces/application/releases",
+      "count": 2,
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/apps/DBXNative20261020/initPermission",
+      "count": 2,
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/apps/DBXNative20261020/envs/LOCAL/clusters/default/namespaces/application/item",
+      "count": 1,
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/envs/LOCAL/releases/2/rollback",
+      "count": 1,
+      "status": 200
+    }
+  ],
+  "deleteRequests": 0,
+  "findings": [
+    {
+      "id": "NATIVE-UX-01",
+      "priority": "P2",
+      "status": "OPEN - not changed in this validation task",
+      "title": "Success notice never auto-dismisses and can remain beneath subsequent dialogs",
+      "actual": "Success flag remains until explicit dismiss or route load; no auto-dismiss timer exists. It is not a stalled backend operation.",
+      "source": [
+        "src/app.js success assignments and dismiss handler",
+        "src/views.js success renderer"
+      ],
+      "evidence": [
+        "user-confirmed-rollback-preview.png"
+      ],
+      "recommendation": "Auto-dismiss success notices and clear stale successes without losing drafts or focus; keep manual close and preserve important error alerts."
+    }
+  ],
+  "notVerified": [
+    "all 24 pages/all dialogs/all conditional 1:1 parity",
+    "production/MySQL/multi-environment deployment",
+    "multi-account permission/403 matrix",
+    "cold restart of the DBX desktop app or cold Secret Store unlock",
+    "native read-only mode/import/export/save-file acceptance",
+    "gray merge/sync/system administration native flows",
+    "Windows/Linux native runtime"
+  ],
+  "localEvidenceDirectory": "output/playwright/live-apollo-20261020",
+  "evidenceFiles": [
+    {
+      "name": "01-native-rc-installed.png",
+      "sha256": "7ef2b58714b2e7e1f2a657d88a38c10eb90584eca1a709ca46aac01e39411457",
+      "size": 188732
+    },
+    {
+      "name": "02-native-backend-unavailable.ax.txt",
+      "sha256": "11f032167702e8a25486120a3581e80a336a0bd121bfe5810c6c4da8b5014fab",
+      "size": 709
+    },
+    {
+      "name": "02-native-backend-unavailable.png",
+      "sha256": "b624d5ba9d936eab5ecf789daf5021d591ff7faf26a1bfbeaeb8dce17526be7b",
+      "size": 146092
+    },
+    {
+      "name": "03-native-wrong-password-rejected.ax.txt",
+      "sha256": "e23d516a631c9b0fdb0b3a516536b5f7a2342dfe38a7c4a5df384263ec8e984d",
+      "size": 649
+    },
+    {
+      "name": "03-native-wrong-password-rejected.png",
+      "sha256": "ad8a5a42e45e17c10dfc5a5cdd89e42a4197601b586bd16c149a9bab75cb6ad6",
+      "size": 144573
+    },
+    {
+      "name": "04-native-correct-password-connected.ax.txt",
+      "sha256": "0cbdd381c9749c4f332e16e444f309a02ea6c64ba903e7d899c7cdf0f5f4f1c1",
+      "size": 2077
+    },
+    {
+      "name": "04-native-correct-password-connected.png",
+      "sha256": "c92f8af89d57dc605e3e0e413dd2ea2e1dab2d257b83b6ae5c9c2bf5a45ac516",
+      "size": 147652
+    },
+    {
+      "name": "05-native-owner-enter-safe.ax.txt",
+      "sha256": "f64fbb55f056036c4feb4bbdaf6962bb5dc2f8900866a51a28cf2f1f586547b3",
+      "size": 3689
+    },
+    {
+      "name": "05-native-owner-enter-safe.png",
+      "sha256": "681a314ab184df1c9717f01eed01d62161d5df09e22725c28480bda4a263012d",
+      "size": 113639
+    },
+    {
+      "name": "06-native-published-v1.ax.txt",
+      "sha256": "05b3b59a4da33eb15e573cef528637d44015c9e6ecfc09a0ae315e4f367794c5",
+      "size": 4648
+    },
+    {
+      "name": "06-native-published-v1.png",
+      "sha256": "977de592524a3f3690ca978c5348521b2c41f03176f89ff4ff2281c311ca0ed5",
+      "size": 156753
+    },
+    {
+      "name": "07-native-v2-draft.png",
+      "sha256": "6b9c0ba4e2b596622bb97295e69b9976135ea7729c98e8a172316a3c16baecd6",
+      "size": 158752
+    },
+    {
+      "name": "08-native-v2-publish-preview.ax.txt",
+      "sha256": "04ed312ddf61990d993666bd0b12225f0940b91b602b91020dfcb0505f009475",
+      "size": 5808
+    },
+    {
+      "name": "08-native-v2-publish-preview.png",
+      "sha256": "a2ed1fd95bbf5cd248d87b3dc5eec4e0c26fb6742db67b7c21a55359667b904d",
+      "size": 144106
+    },
+    {
+      "name": "09-native-rollback-complete.ax.txt",
+      "sha256": "88d700561ff8ea4c9097fc0fea4c6e8bf15d3a06704e6d280f1cdc26f6264255",
+      "size": 4675
+    },
+    {
+      "name": "09-native-rollback-complete.png",
+      "sha256": "c7805a0f497cdc8c40b01ae77b350dde7ca0a202e61c2f1ab92fda2fa3090324",
+      "size": 158244
+    },
+    {
+      "name": "10-native-cluster-created.ax.txt",
+      "sha256": "8c0cba197f0dc80b402608ee617c7ee09e7f1f2e41c15ec2c1145586d747f0a7",
+      "size": 4255
+    },
+    {
+      "name": "10-native-cluster-created.png",
+      "sha256": "e9db9e62da242bcab7495b1b86f6501a4e45beae1c5ee8c3b79c54ad06a372bf",
+      "size": 131315
+    },
+    {
+      "name": "11-native-public-namespace-draft.ax.txt",
+      "sha256": "7e878e4e5f8c6de46313dec7b78c51ffbbacac157e73a1ae1b7b7be65b39c10d",
+      "size": 5010
+    },
+    {
+      "name": "11-native-public-namespace-draft.png",
+      "sha256": "3e7ba7dae4e7a1850db83eb89e98cf279647fa82f786cc34d3536757cef8e922",
+      "size": 150000
+    },
+    {
+      "name": "12-native-public-namespace-created.ax.txt",
+      "sha256": "aaff84950434404195a7ff721b8954c06eb9b9e0923cbf105698a049355d2b24",
+      "size": 3733
+    },
+    {
+      "name": "12-native-public-namespace-created.png",
+      "sha256": "a7644b669ec93388d6315a58fed16848226c43fe3c23e11d16e5f81ca97cce16",
+      "size": 115334
+    },
+    {
+      "name": "13-native-saved-credentials-reconnected.ax.txt",
+      "sha256": "d153035ad6ea728ea5fb4e483e6e1ba1fb0331e474c76ab4c927022d0b7065ce",
+      "size": 5636
+    },
+    {
+      "name": "13-native-saved-credentials-reconnected.png",
+      "sha256": "e77803542787e8c5c07c61291ba7db8630a18af8b68802a421b84a7c2f13c80b",
+      "size": 205494
+    },
+    {
+      "name": "abandoned-v2-release.json",
+      "sha256": "fc660069f644dad8eeb5456d5ffd2a56566126212b723775a86fa722a48c8fa3",
+      "size": 476
+    },
+    {
+      "name": "active-releases-after-rollback.json",
+      "sha256": "651dd6209eec863fdb940089ef9254d431120e85953d3d474f4c13cab9961fee",
+      "size": 479
+    },
+    {
+      "name": "after-cancel-enter-readback.json",
+      "sha256": "48746c93a63bbb1ed7c7f9210aaf4a75af056fb822a779a562568e77a3523bb4",
+      "size": 968
+    },
+    {
+      "name": "after-real-backend-restart.json",
+      "sha256": "d6b8c98ad6e6d531d761fe8e0c1882288f9aa53db3c881a488bddfa0f99beaee",
+      "size": 446
+    },
+    {
+      "name": "after-restart-client-config.json",
+      "sha256": "704a8a5624c59cac0573322415ecd009339747e21aa5de46edc31c50a2fe9c52",
+      "size": 177
+    },
+    {
+      "name": "after-restart-draft.json",
+      "sha256": "e7cd4635cafbedc2f1d9d6f11e22c14caf0b528a6e9fe04a62040896b04fdf89",
+      "size": 1445
+    },
+    {
+      "name": "after-restart-envtree.json",
+      "sha256": "fd21ed363cb3fd6b6220e747f6a3d4107814f1dc52ec073fdc8a9d138a78cb04",
+      "size": 662
+    },
+    {
+      "name": "after-restart-public-namespace.json",
+      "sha256": "92711e51fb434ab4d99684c214c3b1c10953c5d93e71995c4e151ef8641284ca",
+      "size": 342
+    },
+    {
+      "name": "app-after-owner-enter.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "size": 2
+    },
+    {
+      "name": "app-before-owner-enter.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "size": 2
+    },
+    {
+      "name": "app-created-readback.json",
+      "sha256": "e7639fad92c8b365b9823e37809da544528f0fe27a8ce3685e185de8c9d9a858",
+      "size": 460
+    },
+    {
+      "name": "config-after-rollback.json",
+      "sha256": "a07f72f5566055c5e284538c1d98a668f3d662841708f06c8bc7eddb29d2e1fb",
+      "size": 208
+    },
+    {
+      "name": "config-before-first-publish.json",
+      "sha256": "3e8cdcf58f7c5e70aab442f753553dcd46aa91b83b3c62a79e84a88ff117a9ac",
+      "size": 133
+    },
+    {
+      "name": "config-before-first-publish.status",
+      "sha256": "f8bf41177a5f5e808a7ccb648b51080b031f15ca8018d91a576263d6cc626eb6",
+      "size": 4
+    },
+    {
+      "name": "config-before-second-publish.json",
+      "sha256": "704a8a5624c59cac0573322415ecd009339747e21aa5de46edc31c50a2fe9c52",
+      "size": 177
+    },
+    {
+      "name": "config-published-v1.json",
+      "sha256": "704a8a5624c59cac0573322415ecd009339747e21aa5de46edc31c50a2fe9c52",
+      "size": 177
+    },
+    {
+      "name": "config-published-v2.json",
+      "sha256": "8b6cf5fd7993b9c78161fcf384387c481bd395877e40dd685200fd5a5ca2b46d",
+      "size": 177
+    },
+    {
+      "name": "draft-after-rollback.json",
+      "sha256": "48746c93a63bbb1ed7c7f9210aaf4a75af056fb822a779a562568e77a3523bb4",
+      "size": 968
+    },
+    {
+      "name": "draft-v1-readback.json",
+      "sha256": "55c6e74265196da6050b190f60c59a94398620e368445c4688d397bc45d60196",
+      "size": 958
+    },
+    {
+      "name": "draft-v2-readback.json",
+      "sha256": "48746c93a63bbb1ed7c7f9210aaf4a75af056fb822a779a562568e77a3523bb4",
+      "size": 968
+    },
+    {
+      "name": "envclusters-after-create.json",
+      "sha256": "fd21ed363cb3fd6b6220e747f6a3d4107814f1dc52ec073fdc8a9d138a78cb04",
+      "size": 662
+    },
+    {
+      "name": "final-runtime-health.json",
+      "sha256": "4b608b2f7e852f9e5baf10fe254d7ecd4598351e82b28565da7718df3ac4a6b5",
+      "size": 837
+    },
+    {
+      "name": "namespaces-after-format-enter.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "size": 2
+    },
+    {
+      "name": "namespaces-before-format-enter.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "size": 2
+    },
+    {
+      "name": "public-namespace-created.json",
+      "sha256": "92711e51fb434ab4d99684c214c3b1c10953c5d93e71995c4e151ef8641284ca",
+      "size": 342
+    },
+    {
+      "name": "real-portal-access.log",
+      "sha256": "0000b6f3e03b118f1ef03c1b71d3fc3d0e37fedaf7258e66d1908c4a4dd2b8ee",
+      "size": 22766
+    },
+    {
+      "name": "releases-before-rollback.json",
+      "sha256": "066dbedd84bc2f6aaafb58ebb1a4da62dd1cc623d181add9c4697f390c541f9d",
+      "size": 957
+    },
+    {
+      "name": "user-confirmed-rollback-preview.png",
+      "sha256": "3ba6b653fab0ea19050a5486ab75cc2c3a0505a59f84cfd10e9d1514682b0243",
+      "size": 135184
+    }
+  ],
+  "toolingNotes": [
+    "Native UI uses CUA only. Capture/focus drift is recovered by observing state, never blindly repeating mutations.",
+    "Independent test-probe 400/404 and Python cookie-jar issues are distinguished from plugin requests. Final assertions use the literal client/controller routes and real authenticated responses.",
+    "A short-lived command-owned restart process exited with the command session; final runtime is a user launchd job verified alive after command completion, not a plugin reconnect defect."
+  ],
+  "delivery": "local verification/documentation only; no new package, source push, Store change or production mutation"
+}

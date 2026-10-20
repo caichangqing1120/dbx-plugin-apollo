@@ -1,0 +1,1707 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-10-20T17:00:37.131957+08:00",
+  "developmentVersion": "0.1.3-rc.2",
+  "verdict": "SCOPED REPAIRS AND FOCUSED NATIVE RC2 VERIFIED; FULL1TO1 FAIL",
+  "full1to1Acceptance": "FAIL",
+  "scope": "Independently authored local RC2 UI in the real SDK host against real upstream Apollo; selected geometry and focused behavior only. Not a full 24-page/31-dialog/all-state census.",
+  "reference": {
+    "version": "2.5.2",
+    "commit": "ed9785c87b390c22efece9ea7ec7eeab2d20a042",
+    "runtime": "real Assembly, ordinary authentication and persistent H2, loopback ports 8070/8080/8090",
+    "data": "DBXNative20261020 / TEST2; official local seed account",
+    "fixtureUsedForBrowserResults": false
+  },
+  "source": {
+    "head": "786ba57912a7bdd530bfa48b537599a0e25463e3",
+    "uncommittedAuthorizedRepairs": true,
+    "nativeSourceSHA256": "37382be7b2423f15fc6905c0bd05675b5506b2f0696a1bd700e7247e644c71a7",
+    "uiSHA256": "8b27d57514a7bbb4fa57a4292d4eb4c7238462b4dc166f4347283259f93356b6",
+    "upstreamHTMLStylesOrRuntimePackaged": false
+  },
+  "tests": {
+    "javascriptPassed": 207,
+    "javascriptFailed": 0,
+    "pythonPackagingPassed": 14,
+    "goRacePassed": 14,
+    "goVet": "pass",
+    "controlledSidecarSmoke": "pass",
+    "searchRegressions": 14,
+    "noticeLifecycleRegressions": 10
+  },
+  "review": {
+    "type": "fresh independent scoped read-only review followed by one fix pass",
+    "critical": 0,
+    "important": 2,
+    "minor": 0,
+    "findings": [
+      {
+        "id": "KEY-TARGET-PRESENTATION",
+        "priority": "P2",
+        "status": "FIXED",
+        "regression": "collapsed/text target route now reveals only the filtered target; other namespace state retained"
+      },
+      {
+        "id": "MERGED-ENV-PAGINATION",
+        "priority": "P2",
+        "status": "FIXED",
+        "regression": "40 merged rows, size20/total30 continue to page1; 60 distinct rows then stop; missing-total fallback/dedup also tested"
+      }
+    ],
+    "redGreen": "new four search cases: RED 10pass/4fail, GREEN14pass/0fail; full suite207pass/0fail",
+    "allStateAndNativeAcceptanceReviewed": false
+  },
+  "viewport": {
+    "reference": [
+      1304,
+      876
+    ],
+    "sdkIframe": [
+      1304,
+      876
+    ],
+    "coordinateTolerancePx": 0.1
+  },
+  "scopedGeometry": {
+    "layout": [
+      {
+        "id": "search",
+        "row": 0,
+        "delta": {
+          "x": -0.015625,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "selectedGeometryPassed": true
+      },
+      {
+        "id": "cluster-page",
+        "row": 0,
+        "delta": {
+          "x": 0.015625,
+          "y": 0,
+          "width": 0.0,
+          "height": 0.0
+        },
+        "selectedGeometryPassed": true
+      },
+      {
+        "id": "page-header",
+        "row": 0,
+        "delta": {
+          "x": 0.015625,
+          "y": 0,
+          "width": 0.0,
+          "height": 0
+        },
+        "selectedGeometryPassed": true
+      },
+      {
+        "id": "environment",
+        "row": 0,
+        "delta": {
+          "x": 0.015625,
+          "y": 0,
+          "width": 0.0,
+          "height": 0.0
+        },
+        "selectedGeometryPassed": true
+      },
+      {
+        "id": "cluster-row",
+        "row": 0,
+        "delta": {
+          "x": 0.015625,
+          "y": 0.0,
+          "width": 0.0,
+          "height": 0
+        },
+        "selectedGeometryPassed": true
+      },
+      {
+        "id": "cluster-row",
+        "row": 1,
+        "delta": {
+          "x": 0.015625,
+          "y": 0.0,
+          "width": 0.0,
+          "height": 0
+        },
+        "selectedGeometryPassed": true
+      },
+      {
+        "id": "cluster-label",
+        "row": 0,
+        "delta": {
+          "x": 0.015625,
+          "y": 0.0,
+          "width": 0.0,
+          "height": 0
+        },
+        "selectedGeometryPassed": true
+      },
+      {
+        "id": "cluster-label",
+        "row": 1,
+        "delta": {
+          "x": 0.015625,
+          "y": 0.0,
+          "width": 0.0,
+          "height": 0
+        },
+        "selectedGeometryPassed": true
+      },
+      {
+        "id": "cluster-action",
+        "row": 0,
+        "delta": {
+          "x": 0.015625,
+          "y": 0.0,
+          "width": 0,
+          "height": 0
+        },
+        "selectedGeometryPassed": true
+      },
+      {
+        "id": "cluster-action",
+        "row": 1,
+        "delta": {
+          "x": 0.015625,
+          "y": 0.0,
+          "width": 0,
+          "height": 0
+        },
+        "selectedGeometryPassed": true
+      }
+    ],
+    "autocomplete": [
+      {
+        "id": "selection",
+        "delta": {
+          "x": -0.015625,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "selectedGeometryPassed": true
+      },
+      {
+        "id": "dropdown",
+        "delta": {
+          "x": -0.015625,
+          "y": 0,
+          "width": 0,
+          "height": 0.0
+        },
+        "selectedGeometryPassed": true
+      },
+      {
+        "id": "query",
+        "delta": {
+          "x": -0.015625,
+          "y": 0,
+          "width": 0,
+          "height": 0.0
+        },
+        "selectedGeometryPassed": true
+      },
+      {
+        "id": "result",
+        "delta": {
+          "x": -0.015625,
+          "y": 0.0,
+          "width": 0,
+          "height": 0.0
+        },
+        "selectedGeometryPassed": true
+      }
+    ],
+    "configurationTable": [
+      {
+        "id": "table",
+        "row": 0,
+        "delta": {
+          "x": 0,
+          "y": 62.875,
+          "width": 0,
+          "height": 0.0
+        },
+        "widthHeightPassed": true,
+        "fullBoxPassed": false
+      },
+      {
+        "id": "headers",
+        "row": 0,
+        "delta": {
+          "x": 0.0,
+          "y": 62.875,
+          "width": 0.0,
+          "height": 0.0
+        },
+        "widthHeightPassed": true,
+        "fullBoxPassed": false
+      },
+      {
+        "id": "headers",
+        "row": 1,
+        "delta": {
+          "x": 0.0,
+          "y": 62.875,
+          "width": 0.0,
+          "height": 0.0
+        },
+        "widthHeightPassed": true,
+        "fullBoxPassed": false
+      },
+      {
+        "id": "headers",
+        "row": 2,
+        "delta": {
+          "x": 0.0,
+          "y": 62.875,
+          "width": 0.0,
+          "height": 0.0
+        },
+        "widthHeightPassed": true,
+        "fullBoxPassed": false
+      },
+      {
+        "id": "headers",
+        "row": 3,
+        "delta": {
+          "x": 0.0,
+          "y": 62.875,
+          "width": 0.0,
+          "height": 0.0
+        },
+        "widthHeightPassed": true,
+        "fullBoxPassed": false
+      },
+      {
+        "id": "headers",
+        "row": 4,
+        "delta": {
+          "x": 0.0,
+          "y": 62.875,
+          "width": 0.0,
+          "height": 0.0
+        },
+        "widthHeightPassed": true,
+        "fullBoxPassed": false
+      },
+      {
+        "id": "headers",
+        "row": 5,
+        "delta": {
+          "x": 0.0,
+          "y": 62.875,
+          "width": 0.0,
+          "height": 0.0
+        },
+        "widthHeightPassed": true,
+        "fullBoxPassed": false
+      },
+      {
+        "id": "headers",
+        "row": 6,
+        "delta": {
+          "x": 0.0,
+          "y": 62.875,
+          "width": 0.0,
+          "height": 0.0
+        },
+        "widthHeightPassed": true,
+        "fullBoxPassed": false
+      },
+      {
+        "id": "headers",
+        "row": 7,
+        "delta": {
+          "x": 0.0,
+          "y": 62.875,
+          "width": 0.0,
+          "height": 0.0
+        },
+        "widthHeightPassed": true,
+        "fullBoxPassed": false
+      },
+      {
+        "id": "cells",
+        "row": 0,
+        "delta": {
+          "x": 0.0,
+          "y": 62.875,
+          "width": 0.0,
+          "height": 0.0
+        },
+        "widthHeightPassed": true,
+        "fullBoxPassed": false
+      },
+      {
+        "id": "cells",
+        "row": 1,
+        "delta": {
+          "x": 0.0,
+          "y": 62.875,
+          "width": 0.0,
+          "height": 0.0
+        },
+        "widthHeightPassed": true,
+        "fullBoxPassed": false
+      },
+      {
+        "id": "cells",
+        "row": 2,
+        "delta": {
+          "x": 0.0,
+          "y": 62.875,
+          "width": 0.0,
+          "height": 0.0
+        },
+        "widthHeightPassed": true,
+        "fullBoxPassed": false
+      },
+      {
+        "id": "cells",
+        "row": 3,
+        "delta": {
+          "x": 0.0,
+          "y": 62.875,
+          "width": 0.0,
+          "height": 0.0
+        },
+        "widthHeightPassed": true,
+        "fullBoxPassed": false
+      },
+      {
+        "id": "cells",
+        "row": 4,
+        "delta": {
+          "x": 0.0,
+          "y": 62.875,
+          "width": 0.0,
+          "height": 0.0
+        },
+        "widthHeightPassed": true,
+        "fullBoxPassed": false
+      },
+      {
+        "id": "cells",
+        "row": 5,
+        "delta": {
+          "x": 0.0,
+          "y": 62.875,
+          "width": 0.0,
+          "height": 0.0
+        },
+        "widthHeightPassed": true,
+        "fullBoxPassed": false
+      },
+      {
+        "id": "cells",
+        "row": 6,
+        "delta": {
+          "x": 0.0,
+          "y": 62.875,
+          "width": 0.0,
+          "height": 0.0
+        },
+        "widthHeightPassed": true,
+        "fullBoxPassed": false
+      },
+      {
+        "id": "cells",
+        "row": 7,
+        "delta": {
+          "x": 0.0,
+          "y": 62.875,
+          "width": 0.0,
+          "height": 0.0
+        },
+        "widthHeightPassed": true,
+        "fullBoxPassed": false
+      },
+      {
+        "id": "actions",
+        "row": 0,
+        "delta": {
+          "x": 0.0,
+          "y": 62.875,
+          "width": 0,
+          "height": 0
+        },
+        "widthHeightPassed": true,
+        "fullBoxPassed": false
+      },
+      {
+        "id": "actions",
+        "row": 1,
+        "delta": {
+          "x": 0.0,
+          "y": 62.875,
+          "width": 0,
+          "height": 0
+        },
+        "widthHeightPassed": true,
+        "fullBoxPassed": false
+      }
+    ],
+    "configurationFullBoxAcceptance": "FAIL: all selected sizes match but vertical position is offset; broader page differences remain"
+  },
+  "browser": {
+    "layout": {
+      "scope": "Real Apollo data; selected normal search/cluster-management geometry, not whole-page acceptance",
+      "rows": [
+        {
+          "name": "search",
+          "native": [
+            {
+              "text": "\u641c\u7d22 AppId\u3001\u5e94\u7528\u540d\u3001\u914d\u7f6e\u9879 Key",
+              "x": 441.203125,
+              "y": 8,
+              "width": 375,
+              "height": 34,
+              "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+              "margin": "0px 15px 0px 0px",
+              "padding": "0px",
+              "border": "0px none rgb(121, 121, 121)",
+              "display": "block",
+              "background": "rgba(0, 0, 0, 0)"
+            }
+          ],
+          "reference": [
+            {
+              "text": "\u641c\u7d22 AppId\u3001\u5e94\u7528\u540d\u3001\u914d\u7f6e\u9879 Key",
+              "x": 441.21875,
+              "y": 8,
+              "width": 375,
+              "height": 34,
+              "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+              "margin": "0px",
+              "padding": "0px",
+              "border": "0px none rgb(121, 121, 121)",
+              "display": "inline-block",
+              "background": "rgba(0, 0, 0, 0)"
+            }
+          ]
+        },
+        {
+          "name": "cluster-page",
+          "native": [
+            {
+              "text": "\u7ba1\u7406\u96c6\u7fa4 ( AppId: DBXNative20261020 )\u8fd4\u56de\u5230\u5e94\u7528\u9996\u9875\u73af\u5883: LOCAL\u96c6\u7fa4: default\u6388\u6743\u96c6\u7fa4: native-lab\u6388\u6743",
+              "x": 121.171875,
+              "y": 70,
+              "width": 1061.65625,
+              "height": 333.796875,
+              "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+              "margin": "0px",
+              "padding": "15px",
+              "border": "1px solid rgb(227, 227, 227)",
+              "display": "block",
+              "background": "rgb(255, 255, 255)"
+            }
+          ],
+          "reference": [
+            {
+              "text": "\u7ba1\u7406\u96c6\u7fa4 (\n            AppId: DBXNative20261020 )\n          \n        \n        \n          \u8fd4\u56de\u5230\u5e94\u7528\u9996\u9875\n          \n        \n      \n    \n\n    \n\n      \n\n        \n        \n          \n          \u73af\u5883: LOCAL\n          \n          \n            \n              \n                \n                  \n                    \u96c6\u7fa4: default\n                  \n                \n                \n                  \n                    \n                    \u6388\u6743\n                  \n                \n              \n            \n          \n            \n              \n                \n                  \n                    \u96c6\u7fa4: native-lab\n                  \n                \n                \n                  \n                    \n                    \u6388\u6743",
+              "x": 121.15625,
+              "y": 70,
+              "width": 1061.65625,
+              "height": 333.796875,
+              "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+              "margin": "0px 0px 20px 106.156px",
+              "padding": "0px 15px",
+              "border": "1px solid rgb(221, 221, 221)",
+              "display": "block",
+              "background": "rgb(255, 255, 255)"
+            }
+          ]
+        },
+        {
+          "name": "page-header",
+          "native": [
+            {
+              "text": "\u7ba1\u7406\u96c6\u7fa4 ( AppId: DBXNative20261020 )\u8fd4\u56de\u5230\u5e94\u7528\u9996\u9875",
+              "x": 137.171875,
+              "y": 71,
+              "width": 1029.65625,
+              "height": 55,
+              "font": "300 16px / 22.8571px \"Open Sans\", sans-serif",
+              "margin": "-15px 0px 20px",
+              "padding": "10px 15px",
+              "border": "",
+              "display": "flex",
+              "background": "rgba(0, 0, 0, 0)"
+            }
+          ],
+          "reference": [
+            {
+              "text": "\u7ba1\u7406\u96c6\u7fa4 (\n            AppId: DBXNative20261020 )\n          \n        \n        \n          \u8fd4\u56de\u5230\u5e94\u7528\u9996\u9875",
+              "x": 137.15625,
+              "y": 71,
+              "width": 1029.65625,
+              "height": 55,
+              "font": "300 16px / 22.8571px \"Open Sans\", sans-serif",
+              "margin": "0px",
+              "padding": "10px 15px",
+              "border": "",
+              "display": "block",
+              "background": "rgba(0, 0, 0, 0)"
+            }
+          ]
+        },
+        {
+          "name": "environment",
+          "native": [
+            {
+              "text": "\u73af\u5883: LOCAL",
+              "x": 167.171875,
+              "y": 202,
+              "width": 969.65625,
+              "height": 19.796875,
+              "font": "500 18px / 19.8px \"Open Sans\", sans-serif",
+              "margin": "10px 0px",
+              "padding": "0px",
+              "border": "0px none rgb(121, 121, 121)",
+              "display": "block",
+              "background": "rgba(0, 0, 0, 0)"
+            }
+          ],
+          "reference": [
+            {
+              "text": "\u73af\u5883: LOCAL",
+              "x": 167.15625,
+              "y": 202,
+              "width": 969.65625,
+              "height": 19.796875,
+              "font": "500 18px / 19.8px \"Open Sans\", sans-serif",
+              "margin": "10px 0px",
+              "padding": "0px",
+              "border": "0px none rgb(121, 121, 121)",
+              "display": "block",
+              "background": "rgba(0, 0, 0, 0)"
+            }
+          ]
+        },
+        {
+          "name": "cluster-row",
+          "native": [
+            {
+              "text": "\u96c6\u7fa4: default\u6388\u6743",
+              "x": 167.171875,
+              "y": 241.796875,
+              "width": 969.65625,
+              "height": 53,
+              "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+              "margin": "20px 0px",
+              "padding": "0px",
+              "border": "1px solid rgb(221, 221, 221)",
+              "display": "block",
+              "background": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "\u96c6\u7fa4: native-lab\u6388\u6743",
+              "x": 167.171875,
+              "y": 314.796875,
+              "width": 969.65625,
+              "height": 53,
+              "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+              "margin": "20px 0px",
+              "padding": "0px",
+              "border": "1px solid rgb(221, 221, 221)",
+              "display": "block",
+              "background": "rgba(0, 0, 0, 0)"
+            }
+          ],
+          "reference": [
+            {
+              "text": "\u96c6\u7fa4: default\n                  \n                \n                \n                  \n                    \n                    \u6388\u6743",
+              "x": 167.15625,
+              "y": 241.796875,
+              "width": 969.65625,
+              "height": 53,
+              "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+              "margin": "20px 0px",
+              "padding": "0px",
+              "border": "1px solid rgb(221, 221, 221)",
+              "display": "block",
+              "background": "rgb(255, 255, 255)"
+            },
+            {
+              "text": "\u96c6\u7fa4: native-lab\n                  \n                \n                \n                  \n                    \n                    \u6388\u6743",
+              "x": 167.15625,
+              "y": 314.796875,
+              "width": 969.65625,
+              "height": 53,
+              "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+              "margin": "20px 0px",
+              "padding": "0px",
+              "border": "1px solid rgb(221, 221, 221)",
+              "display": "block",
+              "background": "rgb(255, 255, 255)"
+            }
+          ]
+        },
+        {
+          "name": "cluster-label",
+          "native": [
+            {
+              "text": "\u96c6\u7fa4: default",
+              "x": 183.171875,
+              "y": 252.796875,
+              "width": 106.65625,
+              "height": 25,
+              "font": "700 18px / 25px \"Open Sans\", sans-serif",
+              "margin": "0px",
+              "padding": "0px",
+              "border": "0px none rgb(121, 121, 121)",
+              "display": "block",
+              "background": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "\u96c6\u7fa4: native-lab",
+              "x": 183.171875,
+              "y": 325.796875,
+              "width": 135.078125,
+              "height": 25,
+              "font": "700 18px / 25px \"Open Sans\", sans-serif",
+              "margin": "0px",
+              "padding": "0px",
+              "border": "0px none rgb(121, 121, 121)",
+              "display": "block",
+              "background": "rgba(0, 0, 0, 0)"
+            }
+          ],
+          "reference": [
+            {
+              "text": "\u96c6\u7fa4: default",
+              "x": 183.15625,
+              "y": 252.796875,
+              "width": 106.65625,
+              "height": 25,
+              "font": "700 18px / 25.7143px \"Open Sans\", sans-serif",
+              "margin": "0px",
+              "padding": "0px",
+              "border": "0px none rgb(121, 121, 121)",
+              "display": "inline",
+              "background": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "\u96c6\u7fa4: native-lab",
+              "x": 183.15625,
+              "y": 325.796875,
+              "width": 135.078125,
+              "height": 25,
+              "font": "700 18px / 25.7143px \"Open Sans\", sans-serif",
+              "margin": "0px",
+              "padding": "0px",
+              "border": "0px none rgb(121, 121, 121)",
+              "display": "inline",
+              "background": "rgba(0, 0, 0, 0)"
+            }
+          ]
+        },
+        {
+          "name": "cluster-action",
+          "native": [
+            {
+              "text": "\u6388\u6743",
+              "x": 1058.828125,
+              "y": 252.796875,
+              "width": 62,
+              "height": 30,
+              "font": "12px / 18px \"Open Sans\", sans-serif",
+              "margin": "0px",
+              "padding": "5px 10px",
+              "border": "1px solid rgb(204, 204, 204)",
+              "display": "inline-block",
+              "background": "rgb(255, 255, 255)"
+            },
+            {
+              "text": "\u6388\u6743",
+              "x": 1058.828125,
+              "y": 325.796875,
+              "width": 62,
+              "height": 30,
+              "font": "12px / 18px \"Open Sans\", sans-serif",
+              "margin": "0px",
+              "padding": "5px 10px",
+              "border": "1px solid rgb(204, 204, 204)",
+              "display": "inline-block",
+              "background": "rgb(255, 255, 255)"
+            }
+          ],
+          "reference": [
+            {
+              "text": "\u6388\u6743",
+              "x": 1058.8125,
+              "y": 252.796875,
+              "width": 62,
+              "height": 30,
+              "font": "12px / 18px \"Open Sans\", sans-serif",
+              "margin": "0px",
+              "padding": "5px 10px",
+              "border": "1px solid rgb(204, 204, 204)",
+              "display": "inline-block",
+              "background": "rgb(255, 255, 255)"
+            },
+            {
+              "text": "\u6388\u6743",
+              "x": 1058.8125,
+              "y": 325.796875,
+              "width": 62,
+              "height": 30,
+              "font": "12px / 18px \"Open Sans\", sans-serif",
+              "margin": "0px",
+              "padding": "5px 10px",
+              "border": "1px solid rgb(204, 204, 204)",
+              "display": "inline-block",
+              "background": "rgb(255, 255, 255)"
+            }
+          ]
+        }
+      ]
+    },
+    "search": {
+      "scope": "Real Apollo original/plugin normal autocomplete state and keyboard selection; no full-page claim",
+      "states": [
+        {
+          "name": "selection",
+          "native": {
+            "x": 441.203125,
+            "y": 8,
+            "width": 375,
+            "height": 34,
+            "font": "14px / 34px \"Open Sans\", sans-serif",
+            "padding": "0px 20px 0px 8px",
+            "border": "1px solid rgb(170, 170, 170)",
+            "color": "rgb(153, 153, 153)"
+          },
+          "reference": {
+            "x": 441.21875,
+            "y": 8,
+            "width": 375,
+            "height": 34,
+            "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+            "padding": "0px",
+            "border": "1px solid rgb(170, 170, 170)",
+            "color": "rgb(121, 121, 121)"
+          }
+        },
+        {
+          "name": "dropdown",
+          "native": {
+            "x": 441.203125,
+            "y": 42,
+            "width": 375,
+            "height": 68.125,
+            "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+            "padding": "0px",
+            "border": "",
+            "color": "rgb(121, 121, 121)"
+          },
+          "reference": {
+            "x": 441.21875,
+            "y": 42,
+            "width": 375,
+            "height": 68.125,
+            "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+            "padding": "0px",
+            "border": "",
+            "color": "rgb(121, 121, 121)"
+          }
+        },
+        {
+          "name": "query",
+          "native": {
+            "x": 446.203125,
+            "y": 46,
+            "width": 365,
+            "height": 28.5625,
+            "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+            "padding": "4px",
+            "border": "1px solid rgb(170, 170, 170)",
+            "color": "rgb(121, 121, 121)"
+          },
+          "reference": {
+            "x": 446.21875,
+            "y": 46,
+            "width": 365,
+            "height": 28.5625,
+            "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+            "padding": "4px",
+            "border": "1px solid rgb(170, 170, 170)",
+            "color": "rgb(121, 121, 121)"
+          }
+        },
+        {
+          "name": "result",
+          "native": {
+            "x": 442.203125,
+            "y": 78.5625,
+            "width": 373,
+            "height": 30.5625,
+            "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+            "padding": "6px",
+            "border": "0px none rgb(255, 255, 255)",
+            "color": "rgb(255, 255, 255)"
+          },
+          "reference": {
+            "x": 442.21875,
+            "y": 78.5625,
+            "width": 373,
+            "height": 30.5625,
+            "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+            "padding": "6px",
+            "border": "0px none rgb(255, 255, 255)",
+            "color": "rgb(255, 255, 255)"
+          }
+        }
+      ],
+      "escapeClosed": true,
+      "selectedAppVisible": true,
+      "requests": [
+        {
+          "path": "/apps/search/by-appid-or-name",
+          "query": "?query=&page=0&size=20",
+          "status": 200
+        },
+        {
+          "path": "/apps/search/by-appid-or-name",
+          "query": "?query=DBXNative&page=0&size=20",
+          "status": 200
+        }
+      ],
+      "errors": []
+    },
+    "config": {
+      "scope": "Real normal application table at aligned 1304x876, not all config/gray states",
+      "native": {
+        "table": [
+          {
+            "text": "\u53d1\u5e03\u72b6\u6001Key\u7c7b\u578bValue\u5907\u6ce8\u6700\u540e\u4fee\u6539\u4eba\u6700\u540e\u4fee\u6539\u65f6\u95f4\u64cd\u4f5c\u672a\u53d1\u5e03native.acceptance\u6539Stringnative-v2Native DBX real Apollo acceptanceapollo(apollo)2026-10-20 14:31:51",
+            "x": 236,
+            "y": 324,
+            "width": 1052,
+            "height": 119.125,
+            "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgb(255, 255, 255)",
+            "padding": "0px",
+            "whiteSpace": "normal"
+          }
+        ],
+        "headers": [
+          {
+            "text": "\u53d1\u5e03\u72b6\u6001",
+            "x": 236.5,
+            "y": 324.5,
+            "width": 84.078125,
+            "height": 54.625,
+            "font": "700 13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgb(255, 255, 255)",
+            "padding": "8px",
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "Key",
+            "x": 320.578125,
+            "y": 324.5,
+            "width": 210.1875,
+            "height": 54.625,
+            "font": "700 13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgb(255, 255, 255)",
+            "padding": "8px",
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "\u7c7b\u578b",
+            "x": 530.765625,
+            "y": 324.5,
+            "width": 63.046875,
+            "height": 54.625,
+            "font": "700 13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgb(255, 255, 255)",
+            "padding": "8px",
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "Value",
+            "x": 593.8125,
+            "y": 324.5,
+            "width": 262.765625,
+            "height": 54.625,
+            "font": "700 13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgb(255, 255, 255)",
+            "padding": "8px",
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "\u5907\u6ce8",
+            "x": 856.578125,
+            "y": 324.5,
+            "width": 157.640625,
+            "height": 54.625,
+            "font": "700 13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgb(255, 255, 255)",
+            "padding": "8px",
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "\u6700\u540e\u4fee\u6539\u4eba",
+            "x": 1014.21875,
+            "y": 324.5,
+            "width": 105.09375,
+            "height": 54.625,
+            "font": "700 13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgb(255, 255, 255)",
+            "padding": "8px",
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "\u6700\u540e\u4fee\u6539\u65f6\u95f4",
+            "x": 1119.3125,
+            "y": 324.5,
+            "width": 105.09375,
+            "height": 54.625,
+            "font": "700 13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgb(255, 255, 255)",
+            "padding": "8px",
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "\u64cd\u4f5c",
+            "x": 1224.40625,
+            "y": 324.5,
+            "width": 63.09375,
+            "height": 54.625,
+            "font": "700 13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgb(255, 255, 255)",
+            "padding": "8px",
+            "whiteSpace": "normal"
+          }
+        ],
+        "cells": [
+          {
+            "text": "\u672a\u53d1\u5e03",
+            "x": 236.5,
+            "y": 379.125,
+            "width": 84.078125,
+            "height": 63.5,
+            "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgb(249, 249, 249)",
+            "padding": "8px",
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "native.acceptance\u6539",
+            "x": 320.578125,
+            "y": 379.125,
+            "width": 210.1875,
+            "height": 63.5,
+            "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgb(249, 249, 249)",
+            "padding": "8px",
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "String",
+            "x": 530.765625,
+            "y": 379.125,
+            "width": 63.046875,
+            "height": 63.5,
+            "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgb(249, 249, 249)",
+            "padding": "8px",
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "native-v2",
+            "x": 593.8125,
+            "y": 379.125,
+            "width": 262.765625,
+            "height": 63.5,
+            "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgb(249, 249, 249)",
+            "padding": "8px",
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "Native DBX real Apollo acceptance",
+            "x": 856.578125,
+            "y": 379.125,
+            "width": 157.640625,
+            "height": 63.5,
+            "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgb(249, 249, 249)",
+            "padding": "8px",
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "apollo(apollo)",
+            "x": 1014.21875,
+            "y": 379.125,
+            "width": 105.09375,
+            "height": 63.5,
+            "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgb(249, 249, 249)",
+            "padding": "8px",
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "2026-10-20 14:31:51",
+            "x": 1119.3125,
+            "y": 379.125,
+            "width": 105.09375,
+            "height": 63.5,
+            "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgb(249, 249, 249)",
+            "padding": "8px",
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "",
+            "x": 1224.40625,
+            "y": 379.125,
+            "width": 63.09375,
+            "height": 63.5,
+            "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgb(249, 249, 249)",
+            "padding": "8px",
+            "whiteSpace": "normal"
+          }
+        ],
+        "actions": [
+          {
+            "text": "",
+            "x": 1244.453125,
+            "y": 388.125,
+            "width": 23,
+            "height": 23,
+            "font": "12px / 17.1429px \"Open Sans\", sans-serif",
+            "background": "rgba(0, 0, 0, 0)",
+            "padding": "0px",
+            "whiteSpace": "nowrap"
+          },
+          {
+            "text": "",
+            "x": 1246.953125,
+            "y": 411.125,
+            "width": 23,
+            "height": 23,
+            "font": "12px / 17.1429px \"Open Sans\", sans-serif",
+            "background": "rgba(0, 0, 0, 0)",
+            "padding": "0px",
+            "whiteSpace": "nowrap"
+          }
+        ]
+      },
+      "reference": {
+        "table": [
+          {
+            "text": "\u53d1\u5e03\u72b6\u6001\n                                  \n                                \n                                \n                                    Key\u00a0\n                                    \n                                \n                                \n                                    \u7c7b\u578b\n                                \n                                \n                                    Value\n                                \n                                \n                                    \u5907\u6ce8\n                                \n                                \n                                    \u6700\u540e\u4fee\u6539\u4eba\n                                    \n\n                                \n                                \n                                    \u6700\u540e\u4fee\u6539\u65f6\u95f4\n                                    \n                                \n\n                                \n                                    \u64cd\u4f5c\n                                \n                            \n                        \n                        \n                            \n\n                                \n                                    \u672a\u53d1\u5e03\n                                    \n                                \n                                \n                                    native.acceptance\n                                    \n                                    \n                                    \n                                    \u6539\n                                    \n                                \n                                \n                                    String\n                                    \n                                    \n                                    \n                                \n                                \n                                    native-v2\n                                    \n                                \n                                \n                                    Native DBX real Apollo acceptance\n                                    \n                                \n                                apollo(apollo)\n                                2026-10-20 14:31:51",
+            "x": 236,
+            "y": 261.125,
+            "width": 1052,
+            "height": 119.125,
+            "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgba(0, 0, 0, 0)",
+            "padding": "0px",
+            "whiteSpace": "normal"
+          }
+        ],
+        "headers": [
+          {
+            "text": "\u53d1\u5e03\u72b6\u6001",
+            "x": 236.5,
+            "y": 261.625,
+            "width": 84.078125,
+            "height": 54.625,
+            "font": "700 13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgba(0, 0, 0, 0)",
+            "padding": "8px",
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "Key",
+            "x": 320.578125,
+            "y": 261.625,
+            "width": 210.1875,
+            "height": 54.625,
+            "font": "700 13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgba(0, 0, 0, 0)",
+            "padding": "8px",
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "\u7c7b\u578b",
+            "x": 530.765625,
+            "y": 261.625,
+            "width": 63.046875,
+            "height": 54.625,
+            "font": "700 13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgba(0, 0, 0, 0)",
+            "padding": "8px",
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "Value",
+            "x": 593.8125,
+            "y": 261.625,
+            "width": 262.765625,
+            "height": 54.625,
+            "font": "700 13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgba(0, 0, 0, 0)",
+            "padding": "8px",
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "\u5907\u6ce8",
+            "x": 856.578125,
+            "y": 261.625,
+            "width": 157.640625,
+            "height": 54.625,
+            "font": "700 13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgba(0, 0, 0, 0)",
+            "padding": "8px",
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "\u6700\u540e\u4fee\u6539\u4eba",
+            "x": 1014.21875,
+            "y": 261.625,
+            "width": 105.09375,
+            "height": 54.625,
+            "font": "700 13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgba(0, 0, 0, 0)",
+            "padding": "8px",
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "\u6700\u540e\u4fee\u6539\u65f6\u95f4",
+            "x": 1119.3125,
+            "y": 261.625,
+            "width": 105.09375,
+            "height": 54.625,
+            "font": "700 13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgba(0, 0, 0, 0)",
+            "padding": "8px",
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "\u64cd\u4f5c",
+            "x": 1224.40625,
+            "y": 261.625,
+            "width": 63.09375,
+            "height": 54.625,
+            "font": "700 13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgba(0, 0, 0, 0)",
+            "padding": "8px",
+            "whiteSpace": "normal"
+          }
+        ],
+        "cells": [
+          {
+            "text": "\u672a\u53d1\u5e03",
+            "x": 236.5,
+            "y": 316.25,
+            "width": 84.078125,
+            "height": 63.5,
+            "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgba(0, 0, 0, 0)",
+            "padding": "8px",
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "native.acceptance\n                                    \n                                    \n                                    \n                                    \u6539",
+            "x": 320.578125,
+            "y": 316.25,
+            "width": 210.1875,
+            "height": 63.5,
+            "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgba(0, 0, 0, 0)",
+            "padding": "8px",
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "String",
+            "x": 530.765625,
+            "y": 316.25,
+            "width": 63.046875,
+            "height": 63.5,
+            "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgba(0, 0, 0, 0)",
+            "padding": "8px",
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "native-v2",
+            "x": 593.8125,
+            "y": 316.25,
+            "width": 262.765625,
+            "height": 63.5,
+            "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgba(0, 0, 0, 0)",
+            "padding": "8px",
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "Native DBX real Apollo acceptance",
+            "x": 856.578125,
+            "y": 316.25,
+            "width": 157.640625,
+            "height": 63.5,
+            "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgba(0, 0, 0, 0)",
+            "padding": "8px",
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "apollo(apollo)",
+            "x": 1014.21875,
+            "y": 316.25,
+            "width": 105.09375,
+            "height": 63.5,
+            "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgba(0, 0, 0, 0)",
+            "padding": "8px",
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "2026-10-20 14:31:51",
+            "x": 1119.3125,
+            "y": 316.25,
+            "width": 105.09375,
+            "height": 63.5,
+            "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgba(0, 0, 0, 0)",
+            "padding": "8px",
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "",
+            "x": 1224.40625,
+            "y": 316.25,
+            "width": 63.09375,
+            "height": 63.5,
+            "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgba(0, 0, 0, 0)",
+            "padding": "8px",
+            "whiteSpace": "normal"
+          }
+        ],
+        "actions": [
+          {
+            "text": "",
+            "x": 1244.453125,
+            "y": 325.25,
+            "width": 23,
+            "height": 23,
+            "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgba(0, 0, 0, 0)",
+            "padding": "0px",
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "",
+            "x": 1246.953125,
+            "y": 348.25,
+            "width": 23,
+            "height": 23,
+            "font": "13px / 18.5714px \"Open Sans\", sans-serif",
+            "background": "rgba(0, 0, 0, 0)",
+            "padding": "0px",
+            "whiteSpace": "normal"
+          }
+        ]
+      }
+    },
+    "key-search": {
+      "scope": "Real Apollo key-search navigation after retained collapse/text state; no configuration writes",
+      "cases": [
+        {
+          "id": "key-result-after-fold-namespace",
+          "passed": true,
+          "keys": [
+            "native.acceptance"
+          ]
+        },
+        {
+          "id": "key-result-after-text-mode",
+          "passed": true,
+          "keys": [
+            "native.acceptance"
+          ]
+        }
+      ],
+      "passed": 2,
+      "failed": 0
+    },
+    "notice": {
+      "scope": "Real Apollo SDK host; favorite writes only on the local test app; no item writes",
+      "autoClosedAfterMs": 5416,
+      "before": {
+        "value": "native",
+        "start": 5,
+        "end": 5
+      },
+      "after": {
+        "value": "native",
+        "start": 5,
+        "end": 5,
+        "connected": true,
+        "focused": true
+      },
+      "filterNodeAndFocusPreserved": true,
+      "staleClearedOnDialog": true
+    },
+    "contexts": {
+      "scope": "Representative real-backend SDK pages, language/theme/narrow and unsaved fields; no original full-page parity claim",
+      "cases": [
+        {
+          "id": "search-keeps-unsaved-form",
+          "passed": true
+        },
+        {
+          "id": "locale-keeps-application-draft",
+          "passed": true
+        },
+        {
+          "id": "dark-host-light-portal",
+          "passed": true,
+          "appearance": {
+            "color": "rgb(255, 255, 255)"
+          }
+        },
+        {
+          "id": "narrow-host-draft-and-search-control",
+          "passed": true
+        },
+        {
+          "id": "search-on-users",
+          "passed": true
+        },
+        {
+          "id": "search-on-server-config",
+          "passed": true
+        },
+        {
+          "id": "search-on-system-roles",
+          "passed": true
+        }
+      ],
+      "passed": 7,
+      "failed": 0
+    }
+  },
+  "nativeValidation": {
+    "status": "SCOPED_NATIVE_PASS",
+    "record": "native-rc2-validation-2026-10-20.json",
+    "host": "DBX0.6.49",
+    "installedVersion": "0.1.3-rc.2",
+    "candidateTarget": "darwin-arm64",
+    "candidateSHA256": "2753212b424b227352c3f05b97450a4b236461fd7b16f7745cafd62971c5701f",
+    "passedCases": 10,
+    "failedCases": 0,
+    "historicalFinding": "NATIVE-UX-01 fixed in RC2 and now natively verified; original RC1 evidence is preserved",
+    "repeatRollbackExecuted": false
+  },
+  "packages": {
+    "goVersion": "go version go1.26.3 darwin/amd64",
+    "packages": [
+      {
+        "target": "darwin-arm64",
+        "url": "io.github.caichangqing1120.apollo-0.1.3-rc.2-darwin-arm64.dbxp",
+        "sha256": "2753212b424b227352c3f05b97450a4b236461fd7b16f7745cafd62971c5701f",
+        "size": 2812660,
+        "archiveEntries": 26,
+        "verifiedChecksumEntries": 25,
+        "binary": "Mach-O 64-bit arm64",
+        "nativeUISHA256": "8b27d57514a7bbb4fa57a4292d4eb4c7238462b4dc166f4347283259f93356b6",
+        "nativeSourceSHA256": "37382be7b2423f15fc6905c0bd05675b5506b2f0696a1bd700e7247e644c71a7",
+        "unsigned": true,
+        "initializeHandshake": "pass",
+        "initializePlugin": {
+          "id": "io.github.caichangqing1120.apollo",
+          "version": "0.1.3-rc.2"
+        },
+        "fullControlledSidecarSmoke": "pass"
+      },
+      {
+        "target": "darwin-x64",
+        "url": "io.github.caichangqing1120.apollo-0.1.3-rc.2-darwin-x64.dbxp",
+        "sha256": "c3bd6bb0a6ed3c8bc252289aa53ea1ff5e2ff0bd370c0dfefaf95e3b1953c73b",
+        "size": 3025192,
+        "archiveEntries": 26,
+        "verifiedChecksumEntries": 25,
+        "binary": "Mach-O 64-bit x64",
+        "nativeUISHA256": "8b27d57514a7bbb4fa57a4292d4eb4c7238462b4dc166f4347283259f93356b6",
+        "nativeSourceSHA256": "37382be7b2423f15fc6905c0bd05675b5506b2f0696a1bd700e7247e644c71a7",
+        "unsigned": true,
+        "initializeHandshake": "pass",
+        "initializePlugin": {
+          "id": "io.github.caichangqing1120.apollo",
+          "version": "0.1.3-rc.2"
+        },
+        "fullControlledSidecarSmoke": "pass"
+      },
+      {
+        "target": "windows-x64",
+        "url": "io.github.caichangqing1120.apollo-0.1.3-rc.2-windows-x64.dbxp",
+        "sha256": "cee97a4f1c04611c2f5487121383abe2cca3e4a59d9a5a4a56a57ff7d44336df",
+        "size": 3042445,
+        "archiveEntries": 26,
+        "verifiedChecksumEntries": 25,
+        "binary": "PE32+ x64",
+        "nativeUISHA256": "8b27d57514a7bbb4fa57a4292d4eb4c7238462b4dc166f4347283259f93356b6",
+        "nativeSourceSHA256": "37382be7b2423f15fc6905c0bd05675b5506b2f0696a1bd700e7247e644c71a7",
+        "unsigned": true,
+        "initializeHandshake": "not run (cross target)"
+      },
+      {
+        "target": "linux-x64",
+        "url": "io.github.caichangqing1120.apollo-0.1.3-rc.2-linux-x64.dbxp",
+        "sha256": "409843ab9508b988b6d1e507c3762b2f7bf4b1c52b07151ca662240eb3436aef",
+        "size": 3001102,
+        "archiveEntries": 26,
+        "verifiedChecksumEntries": 25,
+        "binary": "ELF 64-bit x64",
+        "nativeUISHA256": "8b27d57514a7bbb4fa57a4292d4eb4c7238462b4dc166f4347283259f93356b6",
+        "nativeSourceSHA256": "37382be7b2423f15fc6905c0bd05675b5506b2f0696a1bd700e7247e644c71a7",
+        "unsigned": true,
+        "initializeHandshake": "not run (cross target)"
+      },
+      {
+        "target": "linux-arm64",
+        "url": "io.github.caichangqing1120.apollo-0.1.3-rc.2-linux-arm64.dbxp",
+        "sha256": "d069d0a5795e1eaf406e828cf7ce1d72e1b0cc8fd5a27e81fc7b870fbc460699",
+        "size": 2739566,
+        "archiveEntries": 26,
+        "verifiedChecksumEntries": 25,
+        "binary": "ELF 64-bit arm64",
+        "nativeUISHA256": "8b27d57514a7bbb4fa57a4292d4eb4c7238462b4dc166f4347283259f93356b6",
+        "nativeSourceSHA256": "37382be7b2423f15fc6905c0bd05675b5506b2f0696a1bd700e7247e644c71a7",
+        "unsigned": true,
+        "initializeHandshake": "not run (cross target)"
+      }
+    ],
+    "version": "0.1.3-rc.2",
+    "distribution": "local unsigned candidate only; not published or submitted"
+  },
+  "remoteDelivery": {
+    "newPush": false,
+    "newTag": false,
+    "newRelease": false,
+    "newStoreSubmission": false,
+    "storePRsReadOnlyStatus": [
+      {
+        "headRefOid": "bfe99846deef574c8f8f17365f09d401a2101cae",
+        "mergedAt": null,
+        "number": 298,
+        "state": "OPEN",
+        "url": "https://github.com/t8y2/dbx-store/pull/298"
+      },
+      {
+        "headRefOid": "640510f8abe2af1e719306a2ea3b1ebf1c4b712b",
+        "mergedAt": null,
+        "number": 304,
+        "state": "OPEN",
+        "url": "https://github.com/t8y2/dbx-store/pull/304"
+      }
+    ],
+    "immutableTags": {
+      "v0.1.2": "d19dc4acf32e3f741543328a28ea563e124941e1",
+      "v0.1.3-rc.1": "727c0a689ed89508db0c166cab41838961c63b23"
+    },
+    "rc2ManualReleaseAuthorized": true,
+    "publicationReceipt": "delivery-0.1.3-rc.2.json will record actual author publication and Store candidate separately"
+  },
+  "remaining": [
+    "Full 24-page/31-dialog/all-state 1:1 remains FAIL. Historical census is not reclassified by these selected checks.",
+    "Configuration toolbar/sidebar/icon/badge details and source never-published hints/instance counters remain visibly different.",
+    "Selected normal config table is 1.125px vertically offset; matching widths/heights are not a full table/page pass.",
+    "Cluster rows still differ in corner/shadow details; matching row/action geometry is not whole-page pixel parity.",
+    "Other admin forms/tables, preview/editor and conditional/delete contexts have incomplete parity evidence.",
+    "Production/MySQL, multi-account permission matrices, native cold-start/file transfer and Windows/Linux runtime are unverified."
+  ],
+  "images": [
+    {
+      "path": "output/playwright/continue/english-dark-narrow.png",
+      "sha256": "0d0e925a795f105b5a41dd4c232f01ec8f5751d5fd09e142720e1d1676ad7574",
+      "width": 390,
+      "height": 900,
+      "bytes": 34914
+    },
+    {
+      "path": "output/playwright/continue/key-search-revealed.png",
+      "sha256": "a76e8260f042176b34ecefd976edeccca3db009a00c51cd83c32b3acb08b6f5c",
+      "width": 1304,
+      "height": 876,
+      "bytes": 130397
+    },
+    {
+      "path": "output/playwright/continue/native-clusters-current.png",
+      "sha256": "34b7c66671727bac888c0f676351b5e6b5c82f448e101ca0360ddd95f9758fc7",
+      "width": 1304,
+      "height": 876,
+      "bytes": 37598
+    },
+    {
+      "path": "output/playwright/continue/native-config-current.png",
+      "sha256": "ee5a118141bea40b152e70bc65ba2e09134bb1f2bcaa35a9d91088390a726733",
+      "width": 1304,
+      "height": 876,
+      "bytes": 130247
+    },
+    {
+      "path": "output/playwright/continue/native-search-results.png",
+      "sha256": "1ec86fd288f8270a59c99ad6d6146f6b433e6782cd587a608141c13f14e95165",
+      "width": 1304,
+      "height": 876,
+      "bytes": 131802
+    },
+    {
+      "path": "output/playwright/continue/native-success-auto-closed.png",
+      "sha256": "c4a587352b436888b577dbc30d199dfc4cf923ee057c8d9d51fdcdf691216589",
+      "width": 1304,
+      "height": 876,
+      "bytes": 130679
+    },
+    {
+      "path": "output/playwright/continue/reference-clusters-current.png",
+      "sha256": "514f37fd7bd973b8eb4b00c284ef6e60fc7024f12859833bf27510e0830ea857",
+      "width": 1304,
+      "height": 876,
+      "bytes": 38109
+    },
+    {
+      "path": "output/playwright/continue/reference-config-current.png",
+      "sha256": "4dcbecc5a2f595fdb66b9d371f770bf2869986090f719ff401f35cb22a00978a",
+      "width": 1304,
+      "height": 876,
+      "bytes": 152011
+    },
+    {
+      "path": "output/playwright/continue/reference-search-results.png",
+      "sha256": "e0e2df5bd40e9c4aed2ca5954dc9e1556edbc92c7a2a2d29b6109290a8a49cdb",
+      "width": 1304,
+      "height": 876,
+      "bytes": 43402
+    }
+  ],
+  "logs": [
+    {
+      "name": "full-tests",
+      "path": "output/playwright/continue/full-tests.log",
+      "sha256": "d81a3ed147556ca1a020f88de55fc1466da471d11fded350c9498c0890367394"
+    },
+    {
+      "name": "go-race-vet",
+      "path": "output/playwright/continue/go-race-vet.log",
+      "sha256": "9f5299e70bbe8423005f77f63a690b52b4e03e763e2b058546ff6080096536be"
+    },
+    {
+      "name": "controlled-sidecar-smoke",
+      "path": "output/playwright/continue/controlled-sidecar-smoke.log",
+      "sha256": "789750f5fa079486b089450094c462298aa7e29f3e6c2915694d15e98dd603ef"
+    },
+    {
+      "name": "five-target-packaging",
+      "path": "output/playwright/continue/five-target-packaging.log",
+      "sha256": "8b14d7f7785edb12e8af53777e8889c9d61e733ae81cd3a40807dc1b0ee96c6f"
+    }
+  ],
+  "evidenceRetention": "Raw screenshots/logs remain local under ignored output/playwright/continue. This tracked JSON preserves result extracts and hashes; no new public upload.",
+  "cleanup": {
+    "verifiedAt": "2026-10-20T17:05:58.248635+08:00",
+    "taskBrowser": "apollo-continue closed; daemon50483 and Chrome50492 exited",
+    "sdkHost": "wrapper50080/runtime50143/sidecar50184 exited;5198 no listener",
+    "reportServer": "PID25530 exited;18071 no listener",
+    "realApollo": "kept manual session-only launchd job29621;8070/8080/8090 all UP",
+    "nativeDBX": "Only dedicated local test connection closed for authorized upgrade;RC2 installed and original saved connection restored;user app/unrelated sessions preserved",
+    "worktreeAndRawEvidence": "preserved;full-parity plan unfinished",
+    "releaseReportQA": "Owned apollo-rc2-release browser closed and report loopback server stopped after11sections/16images decode with zero broken images"
+  },
+  "visualReport": {
+    "path": "output/playwright/continue/report.html",
+    "sha256": "568a34d168898d96a5e23f1cc1b19c210285f3387a18b7a61834cee9c7024533",
+    "bytes": 1111387,
+    "qa": {
+      "url": "http://127.0.0.1:18071/report.html",
+      "sections": 6,
+      "images": [
+        {
+          "label": "Original Apollo 2.5.2",
+          "width": 1304,
+          "height": 876,
+          "complete": true
+        },
+        {
+          "label": "Handwritten plugin in SDK, not native DBX",
+          "width": 1304,
+          "height": 876,
+          "complete": true
+        },
+        {
+          "label": "Original Apollo 2.5.2",
+          "width": 1304,
+          "height": 876,
+          "complete": true
+        },
+        {
+          "label": "Handwritten plugin in SDK, not native DBX",
+          "width": 1304,
+          "height": 876,
+          "complete": true
+        },
+        {
+          "label": "Original Apollo 2.5.2",
+          "width": 1304,
+          "height": 876,
+          "complete": true
+        },
+        {
+          "label": "Handwritten plugin in SDK, not native DBX",
+          "width": 1304,
+          "height": 876,
+          "complete": true
+        },
+        {
+          "label": "Handwritten plugin in SDK, not native DBX",
+          "width": 1304,
+          "height": 876,
+          "complete": true
+        },
+        {
+          "label": "Handwritten plugin in SDK, not native DBX",
+          "width": 1304,
+          "height": 876,
+          "complete": true
+        },
+        {
+          "label": "Handwritten plugin in SDK, not native DBX",
+          "width": 390,
+          "height": 900,
+          "complete": true
+        }
+      ],
+      "broken": 0,
+      "title": "Apollo RC2 Local Repairs - Full 1:1 FAIL"
+    }
+  },
+  "authorReleaseVisualReport": {
+    "path": "dist/release-v0.1.3-rc.2/apollo-parity-report-v0.1.3-rc.2.html",
+    "sha256": "b166a25fb00b0c94457affffa3b9e9d9987d221c276afef4f5b87758ef851497",
+    "bytes": 2784052,
+    "expectedSections": 11,
+    "expectedImages": 16,
+    "scope": "9 real-Apollo SDK/reference images plus7 actual native DBX images; full1to1 FAIL",
+    "qa": {
+      "sections": 11,
+      "images": 16,
+      "broken": 0,
+      "title": "Apollo RC2 Local Repairs - Full 1:1 FAIL"
+    }
+  }
+}

@@ -21,10 +21,20 @@ of scope. The plugin does not operate Apollo's database directly.
 
 ## Contracts
 
-- Plugin ID `io.github.caichangqing1120.apollo`, development version `0.1.3-rc.1`, Host API `1`.
+- Plugin ID `io.github.caichangqing1120.apollo`, development version `0.1.3-rc.2`, Host API `1`.
   Display identity is `Apollo Portal Console` / `Apollo Portal 控制台`; the already signed
-  `0.1.2` tag/assets remain immutable. This metadata-only follow-up is not a new release
-  or a change to the failed full 1:1 acceptance gate.
+  `0.1.2` and published `0.1.3-rc.1` tag/assets remain immutable. This local continuation
+  is not a new release or a change to the failed full 1:1 acceptance gate.
+- Success feedback automatically disappears after 5000ms; later successes have independent
+  intervals. Starting another action/dialog/navigation clears old success feedback. Expiry
+  must not rerender editors, discard unsaved drafts/focus/selection or dismiss important
+  errors. Successful mutations close their submitted dialog; a preview or intermediate
+  confirmation is not a completed mutation and remains an explicit confirmation step.
+- Header autocomplete uses `GET /apps/search/by-appid-or-name?query=...&page=...&size=20`
+  after a 400ms debounce. Keep distinct same-app Key matches by environment/cluster/Namespace;
+  Key navigation expands only the target and selects its filtered table view. Apollo merges
+  environment pages while `total` is the maximum environment count, so pagination follows
+  the page cursor and `total/size`, not the merged result count. Unsaved-draft guards apply.
 - Connection fields: host, port, scheme (`http`/`https`), optional context path, username,
   password (`binding: secret`); password and cookies never enter UI context or storage.
 - `connection/test`, `connection/connect`, `connection/disconnect` follow DBX SDK v1.

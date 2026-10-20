@@ -261,3 +261,78 @@ Its red validation is the confirmed unsigned-candidate signing gate. Automation 
 remains separate and pending merge. Exact receipts are in `../../delivery-0.1.3-rc.1.json`.
 The owned browser/session and three loopback services are closed. No parity/live/native
 acceptance gate was promoted; the active unfinished plan and evidence remain preserved.
+
+## Task 15: Real Local Apollo And Native DBX Validation
+
+User requested an actual local Apollo backend and native DBX validation, explicitly
+confirmed installation of the reviewed unsigned RC, and later confirmed the specific
+local v2-to-v1 rollback. This is focused validation, not another package/Store release.
+
+- [x] Build pinned upstream Apollo 2.5.2 Assembly with official H2 file schemas and ordinary
+  authentication; bind all three real services to loopback only, not the controlled fixture.
+- [x] Install the exact published macOS ARM64 RC in DBX 0.6.49 with user confirmation;
+  preserve existing business connections and the already enabled development trust setting.
+- [x] Exercise native login/create/edit/publish/rollback, closed-combobox/selector Enter,
+  Cancel Enter, cluster success and public Namespace prefix/draft flows with real readbacks.
+- [x] Restart the real backend with existing H2 files and reconnect the saved native DBX
+  connection without retyping its password; keep only the requested test service running.
+- [x] Record 15 scoped scenarios and update local README/evidence with current boundaries.
+
+Results are in `../../live-apollo-validation-2026-10-20.md` and its JSON record. All 15
+focused cases pass; open finding NATIVE-UX-01 is the persistent success notice without an
+auto-dismiss timer, not a stalled backend. It is recorded but not repaired in this validation
+task. All-page/all-state 1:1 remains FAIL; MySQL/production, native cold-start/file-transfer,
+multi-account permission matrices and other native advanced flows remain unverified.
+No product bytes, immutable tags/assets, Store candidates or production data changed.
+
+## Task 16: Success Notice Lifecycle Repair
+
+User explicitly requested implementing the remaining gaps and automatically closing success
+notices. Reuse the isolated worktree and retain Task 15's original RC evidence as historical.
+
+- [x] RED/GREEN: success disappears after the original 5000ms delay, a later success gets
+  its own interval, and harmless rerenders do not indefinitely extend an existing notice.
+- [x] Remove stale success on a new operation/dialog/navigation; preserve important errors,
+  unrelated form nodes, in-memory drafts, focus and selection when the timer expires.
+- [x] Route core/advanced/reference successes through one lifecycle and cancel owned timers
+  on disposal; cover expiry, replacement, dialog entry, error and disposed-view regression.
+- [x] Run `npm test`; Expected: all JS and packaging regressions pass, including the new
+  behavior tests. Update local evidence/README without rewriting the published RC bytes.
+
+## Task 17: Continue Source-Measured Shared And Management Layouts
+
+- [x] Compare the remaining shared navigation/search, core configuration table and compact
+  cluster-management structures against pinned Apollo 2.5.2 before choosing layout changes.
+- [x] Implement the measured deltas with regression tests; preserve API paths, roles,
+  read-only state and all explicit write targets. Do not import original HTML/CSS/runtime.
+- [x] Browser-check affected pages and representative contexts against the real loopback
+  Apollo, keeping selected geometry and full-page/all-state acceptance separate.
+- [x] Verify the final local candidate in native DBX after required install consent.
+- [x] Run complete suites/smoke/package proof and one fresh scoped final review; fix both
+  reviewed Key-search findings with RED/GREEN regression and a green full suite.
+- [x] Finish current per-entry evidence and README with the native result or explicit pending
+  installation boundary. Unverified entries never become blanket PASS.
+
+Pre-flight: notice expiry must not call the full render function while an editor is active;
+shared layout fixes must not alter permission/namespace/action datasets. New local packaging
+needs a new prerelease identity so no published 0.1.3-rc.1 artifact/evidence is overwritten.
+
+## Task 18: Authorized RC2 Verification And Manual Preview Delivery
+
+User explicitly requested verification and one new release after the exact RC2 installation
+confirmation request. Preserve the full 1:1 FAIL and all prior immutable source/assets.
+
+- [x] Install the verified ARM64 RC2 in native DBX with confirmation, closing only the local
+  test connection required by Host upgrade protection; preserve trust and saved credentials.
+- [x] Verify success dismissal, focus/cursor retention, next-dialog cleanup, submitted-editor
+  closure, folded/text Key navigation, unrelated state, cluster page and ordinary app search.
+- [x] Record actual native proof and independent unchanged draft/published HTTP readbacks;
+  rerun full JS/Python/Go race/vet before source delivery.
+- [ ] Commit/push the reviewed RC2 product/docs to author main; create the immutable
+  `v0.1.3-rc.2` tag and manually trigger the existing CI unsigned Preview release workflow.
+- [ ] Download all five CI-published targets, verify exact source/UI/native/checksum metadata,
+  and execute both downloaded macOS sidecars' initialize/full controlled smoke.
+- [ ] Update the existing candidate-only Store PR #304 to the verified RC2 rather than open
+  a competing candidate for the same plugin. Keep automation PR #298/signing policy separate.
+- [ ] Update README/release notes/delivery receipt with actual results; preserve real Apollo
+  and native DBX, and close any task-owned validation/browser services.

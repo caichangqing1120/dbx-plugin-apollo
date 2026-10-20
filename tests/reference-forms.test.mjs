@@ -1,8 +1,14 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 import { Window } from 'happy-dom';
-import { referenceAdminView } from '../src/reference-pages.js';
 import { translator } from '../src/i18n.js';
+
+globalThis.APOLLO_DESIGN_ASSETS = {
+  'assign.png': 'data:image/png;base64,' +
+    (await readFile(new URL('../assets/reference/assign.png', import.meta.url))).toString('base64'),
+};
+const { referenceAdminView } = await import('../src/reference-pages.js');
 
 function render(view, extra = {}) {
   const window = new Window();
@@ -57,4 +63,24 @@ test('namespace form retains original format order and required type/name captio
   const data = new window.FormData(root.querySelector('form'));
   assert.equal(data.get('namespaceType'), 'private');
   assert.equal(data.get('format'), 'json');
+});
+
+test('cluster authorization rows keep each exact environment and cluster destination', () => {
+  const { root } = render('clusters', {
+    advTree: [
+      { env: 'DEV', clusters: [{ name: 'default' }, { name: '<unsafe>' }] },
+      { env: 'UAT', clusters: [{ name: 'default' }] },
+    ],
+  });
+  const rows = [...root.querySelectorAll('.reference-cluster-card')];
+  assert.equal(rows.length, 3);
+  assert.deepEqual(rows.map(row => {
+    const button = row.querySelector('[data-action="cluster-roles"]');
+    return [button.dataset.env, button.dataset.name, button.textContent.trim()];
+  }), [['DEV', 'default', '授权'], ['DEV', '<unsafe>', '授权'], ['UAT', 'default', '授权']]);
+  assert.equal(rows[1].querySelector('strong').textContent, '集群: <unsafe>');
+  assert.equal(rows[1].querySelector('unsafe'), null);
+  assert.ok(rows.every(row => row.querySelector('img[alt=""]')),
+    'each authorization action must show the source assignment icon');
+  assert.equal(root.querySelectorAll('.reference-cluster-group>hr').length, 2);
 });

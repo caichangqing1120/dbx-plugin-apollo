@@ -112,7 +112,7 @@ func (p *plugin) Handle(_ sdk.RequestContext, method string, raw json.RawMessage
 }
 
 func main() {
-	server := sdk.NewServer(sdk.Metadata{ID: pluginID, Version: "0.1.3-rc.1", Capabilities: []string{"connections"}}, newPlugin())
+	server := sdk.NewServer(sdk.Metadata{ID: pluginID, Version: "0.1.3-rc.2", Capabilities: []string{"connections"}}, newPlugin())
 	if err := server.Serve(); err != nil {
 		log.Fatal(err)
 	}

@@ -49,6 +49,7 @@ class ReleaseTests(unittest.TestCase):
         for directory in ("assets", "ui", "src"):
             (self.root / directory).mkdir()
         self.manifest = json.loads((ROOT / "manifest.json").read_text())
+        self.manifest["version"] = "0.1.3-rc.1"
         (self.root / "manifest.json").write_text(json.dumps(self.manifest))
         (self.root / "package.json").write_text(json.dumps({"version": "0.1.3-rc.1"}))
         (self.root / "assets/icon.png").write_bytes(b"controlled-test-icon")

@@ -456,7 +456,7 @@ export async function loadAdvancedRoute(route, s, client) {
 }
 
 export async function handleAdvancedAction(action, element, ctx, form = {}) {
-  const { s, t, client, options, navigate, openDialog, render, root } = ctx;
+  const { s, t, client, options, navigate, openDialog, render, root, notifySuccess } = ctx;
   const check = (value) => {
     if (!value) throw Error(t("denied"));
   };
@@ -502,7 +502,7 @@ export async function handleAdvancedAction(action, element, ctx, form = {}) {
       await task();
       s.busy = false;
       await navigate(s.route);
-      if (!s.error) s.success = true;
+      if (!s.error) notifySuccess();
     } finally {
       s.busy = false;
       render();
@@ -569,7 +569,7 @@ export async function handleAdvancedAction(action, element, ctx, form = {}) {
       response,
     );
     if (result?.canceled) return;
-    s.success = true;
+    notifySuccess();
     render();
   }
 
@@ -725,7 +725,7 @@ export async function handleAdvancedAction(action, element, ctx, form = {}) {
         : client.favorite(userId, appId));
       if (current()) {
         s.favoriteId = favorite ? null : result?.id || true;
-        s.success = true;
+        notifySuccess();
       }
     } finally {
       s.busy = false;

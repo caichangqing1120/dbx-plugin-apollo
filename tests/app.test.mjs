@@ -670,7 +670,7 @@ test("parity: configuration key sorting and complete value inspection work witho
   root.querySelector('[data-action="sort-items"][data-sort="key"]').click();
   await app.idle();
   assert.equal(
-    root.querySelector(".config-table tbody .key-cell").textContent.trim(),
+    root.querySelector('.config-table tbody .key-cell [data-field="key"]').textContent.trim(),
     "sample.key",
   );
   root

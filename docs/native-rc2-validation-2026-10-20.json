@@ -1,0 +1,460 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-10-20T17:25:31.280444+08:00",
+  "verdict": "SCOPED NATIVE PASS",
+  "full1to1Acceptance": "FAIL",
+  "plugin": {
+    "id": "io.github.caichangqing1120.apollo",
+    "version": "0.1.3-rc.2",
+    "target": "darwin-arm64",
+    "packageSHA256": "2753212b424b227352c3f05b97450a4b236461fd7b16f7745cafd62971c5701f",
+    "uiSHA256": "8b27d57514a7bbb4fa57a4292d4eb4c7238462b4dc166f4347283259f93356b6",
+    "unsignedDevelopmentPackage": true,
+    "installationConfirmedByUser": true
+  },
+  "host": {
+    "name": "DBX",
+    "version": "0.6.49",
+    "surface": "actual native macOS app about:srcdoc, not SDK browser",
+    "wholeHostRestarted": false,
+    "trustSettingsChanged": false,
+    "unrelatedConnectionsChanged": false
+  },
+  "realApollo": {
+    "version": "2.5.2",
+    "commit": "ed9785c87b390c22efece9ea7ec7eeab2d20a042",
+    "portal": "http://127.0.0.1:8070",
+    "configService": "http://127.0.0.1:8080",
+    "adminService": "http://127.0.0.1:8090",
+    "auth": "ordinary official local seed account",
+    "database": "persistent H2",
+    "fixture": false
+  },
+  "passedCases": 10,
+  "failedCases": 0,
+  "cases": [
+    {
+      "id": "native-install",
+      "description": "Exact verified macOS ARM64 rc2 installed; only test connection closed for upgrade",
+      "status": "PASS",
+      "evidence": [
+        "01-installed.ax.txt",
+        "01-installed.png"
+      ]
+    },
+    {
+      "id": "saved-credential-reconnect",
+      "description": "Existing local connection reopens without password re-entry",
+      "status": "PASS",
+      "evidence": [
+        "02-saved-connection.ax.txt",
+        "02-saved-connection.png"
+      ]
+    },
+    {
+      "id": "notice-auto-dismiss",
+      "description": "Success visible before and gone later without dismiss or another action",
+      "status": "PASS",
+      "evidence": [
+        "03-success-visible.ax.txt",
+        "03-success-visible.png",
+        "04-input-during-success.ax.txt",
+        "04-input-during-success.png",
+        "05-success-auto-closed.ax.txt",
+        "05-success-auto-closed.png"
+      ]
+    },
+    {
+      "id": "focus-selection-retention",
+      "description": "Focused input native retains cursor; typing x after expiry produces nativxe",
+      "status": "PASS",
+      "evidence": [
+        "04-input-during-success.ax.txt",
+        "04-input-during-success.png",
+        "05-success-auto-closed.ax.txt",
+        "05-success-auto-closed.png",
+        "06-focus-selection-preserved.ax.txt",
+        "06-focus-selection-preserved.png"
+      ]
+    },
+    {
+      "id": "stale-success-new-dialog",
+      "description": "Opening next item dialog removes the old success; new dialog canceled, not submitted",
+      "status": "PASS",
+      "evidence": [
+        "08-second-success.ax.txt",
+        "08-second-success.png",
+        "09-dialog-clears-stale-success.ax.txt",
+        "09-dialog-clears-stale-success.png"
+      ]
+    },
+    {
+      "id": "successful-edit-dialog-close",
+      "description": "Resubmitting unchanged dedicated test item succeeds and closes editor; real before/after values and release unchanged",
+      "status": "PASS",
+      "evidence": [
+        "10-save-closes-dialog.ax.txt",
+        "10-save-closes-dialog.png"
+      ]
+    },
+    {
+      "id": "key-search-folded-target",
+      "description": "Real Key match unfolds target and selects its filtered table",
+      "status": "PASS",
+      "evidence": [
+        "11-collapsed-target.ax.txt",
+        "11-collapsed-target.png",
+        "12-key-result-dropdown.ax.txt",
+        "12-key-result-dropdown.png",
+        "13-key-target-unfolded.ax.txt",
+        "13-key-target-unfolded.png"
+      ]
+    },
+    {
+      "id": "key-search-text-target",
+      "description": "Real Key match returns text-mode target to filtered table, retaining unrelated folded namespace",
+      "status": "PASS",
+      "evidence": [
+        "14-unrelated-namespace-folded.ax.txt",
+        "14-unrelated-namespace-folded.png",
+        "15-target-text-mode.ax.txt",
+        "15-target-text-mode.png",
+        "16-text-mode-key-result.ax.txt",
+        "16-text-mode-key-result.png",
+        "17-key-target-table-unrelated-preserved.ax.txt",
+        "17-key-target-table-unrelated-preserved.png"
+      ]
+    },
+    {
+      "id": "native-cluster-page",
+      "description": "Source-style compact management page loads both real clusters and assignment controls",
+      "status": "PASS",
+      "evidence": [
+        "18-cluster-management.ax.txt",
+        "18-cluster-management.png"
+      ]
+    },
+    {
+      "id": "normal-app-keyboard-search",
+      "description": "Ordinary app autocomplete Enter returns to actual app config",
+      "status": "PASS",
+      "evidence": [
+        "19-app-search-keyboard-navigation.ax.txt",
+        "19-app-search-keyboard-navigation.png"
+      ]
+    }
+  ],
+  "observations": {
+    "successVisible": true,
+    "successVisibleDuringInput": true,
+    "successGoneWithoutDismiss": true,
+    "successExpiryObservedUpperBoundMs": 50588,
+    "exact5000msDelayVerifiedByUnitAndSDK": true,
+    "focusBeforeExpiry": "104 text field (settable) \u641c\u7d22\u914d\u7f6e\u9879 application, Value: native, Placeholder: \u641c\u7d22\u914d\u7f6e\u9879",
+    "focusAfterExpiry": "104 text field (settable) \u641c\u7d22\u914d\u7f6e\u9879 application, Value: native, Placeholder: \u641c\u7d22\u914d\u7f6e\u9879",
+    "cursorProofInputAfterTyping": "nativxe",
+    "staleSuccessCleared": true,
+    "successfulSaveClosesDialog": true,
+    "keyAfterFoldRevealsTable": true,
+    "keyAfterTextRevealsTable": true,
+    "unrelatedFoldRetained": true,
+    "normalAppSearchKeyboardNavigation": true
+  },
+  "timerBoundary": "Native before/after proves dismissal without a user action; exact5000ms comes from timer tests and ~5.4s SDK measurement. Native observation is a later upper-bound check, not an exact5s timing claim.",
+  "dataScope": {
+    "appId": "DBXNative20261020",
+    "namespace": "application",
+    "key": "native.acceptance",
+    "draftValue": "native-v2",
+    "comment": "Native DBX real Apollo acceptance",
+    "publishedValue": "native-v1",
+    "releaseKeyUnchanged": true,
+    "operations": "two favorite toggles and one unchanged existing-item submission; new-item dialog canceled; no DELETE, publish, rollback, user/permission/API-key changes",
+    "readbackEvidence": [
+      "before-native-save.json",
+      "after-native-save.json"
+    ]
+  },
+  "historicalUXFinding": {
+    "id": "NATIVE-UX-01",
+    "RC1": "historical finding remains OPEN in original RC1 record",
+    "RC2": "FIXED in source/unit/real-SDK and verified in native DBX here"
+  },
+  "finalUI": "test application open; both namespaces expanded; temporary filter closed; no stale success",
+  "remaining": [
+    "Full24-page/31-dialog/all-state 1:1 remains FAIL",
+    "Multi-environment aggregation is tested against literal actual controller DTO structure, not a reconfigured multi-environment native installation",
+    "No production/MySQL, native full cold-start/file-transfer, multi-account permission matrix or Windows/Linux runtime verdict"
+  ],
+  "evidenceDirectory": "output/playwright/native-rc2",
+  "files": [
+    {
+      "name": "01-installed.ax.txt",
+      "sha256": "e5884733fc67d3815863328c2f926e887f88a52ceffb00cffeebb1e85187d2c1",
+      "bytes": 4663
+    },
+    {
+      "name": "01-installed.png",
+      "sha256": "3528e9fab318eea37903e09c37de873dd8d47cb02346615bf6bf72041eeb2859",
+      "bytes": 201444,
+      "width": 4718592,
+      "height": 4292935744
+    },
+    {
+      "name": "02-saved-connection.ax.txt",
+      "sha256": "e689a6dd94eab6a333cacde816dd11827bc5dbc6237b53563b2324a29a12f4ec",
+      "bytes": 5469
+    },
+    {
+      "name": "02-saved-connection.png",
+      "sha256": "1ac34f386de9176837e0d2a4954cfcf5d80b49a0ebe49bdc8da75bc1b4fbc3a1",
+      "bytes": 201407,
+      "width": 4718592,
+      "height": 4292935744
+    },
+    {
+      "name": "03-success-visible.ax.txt",
+      "sha256": "58c6e2aa25341f0d064bf5174a21cfe8c5b9df302c71aabec1dd2db654f1b72b",
+      "bytes": 5740
+    },
+    {
+      "name": "03-success-visible.png",
+      "sha256": "8dd5441da416506f1f3a4c6d7195e29a5237e4f31257e077cee59b4379ebfbb4",
+      "bytes": 206770,
+      "width": 4718592,
+      "height": 4292935744
+    },
+    {
+      "name": "04-input-during-success.ax.txt",
+      "sha256": "a44431780810817db5e345df78be3355050102caa774f948c01e7b2dc62dc778",
+      "bytes": 5755
+    },
+    {
+      "name": "04-input-during-success.png",
+      "sha256": "78c25d842f70ca9968477f82642f176c18ef0d8115542601a2878a24047a6996",
+      "bytes": 210239,
+      "width": 4718592,
+      "height": 4292935744
+    },
+    {
+      "name": "05-success-auto-closed.ax.txt",
+      "sha256": "f2b6f218656f8b1e02318e4fa6a35131cb0f448ca955b6cd3ab67c1dfae8990c",
+      "bytes": 5684
+    },
+    {
+      "name": "05-success-auto-closed.png",
+      "sha256": "c4c694952cf98cae9f27062387d9fa85c95c881043e96c4edbbf8b29d828b60a",
+      "bytes": 208201,
+      "width": 4718592,
+      "height": 4292935744
+    },
+    {
+      "name": "06-focus-selection-preserved.ax.txt",
+      "sha256": "89f1cfd4b902acc063afcf185ff608709b46dc7fd6ac6823bb26308592df302c",
+      "bytes": 5278
+    },
+    {
+      "name": "06-focus-selection-preserved.png",
+      "sha256": "6199febd31652ab5cc057f8f422aaf3f01614473a8c9d39758ecfe84075e3ea8",
+      "bytes": 196547,
+      "width": 4718592,
+      "height": 4292935744
+    },
+    {
+      "name": "07-filter-restored.ax.txt",
+      "sha256": "f2b6f218656f8b1e02318e4fa6a35131cb0f448ca955b6cd3ab67c1dfae8990c",
+      "bytes": 5684
+    },
+    {
+      "name": "07-filter-restored.png",
+      "sha256": "aa1c5421566cba7b5612b0474a5e95edf397878a69b369b59f159bd6f7c78ecc",
+      "bytes": 208324,
+      "width": 4718592,
+      "height": 4292935744
+    },
+    {
+      "name": "08-second-success.ax.txt",
+      "sha256": "b6edadc1127998cadf0fa52b5968c268457632c1a9f9bcf373e6436abf2762ed",
+      "bytes": 5755
+    },
+    {
+      "name": "08-second-success.png",
+      "sha256": "132f8a5695ef82b46933b31d1ce9f5dc7b8f330f413848c710468852a5ac18b5",
+      "bytes": 206403,
+      "width": 4718592,
+      "height": 4292935744
+    },
+    {
+      "name": "09-dialog-clears-stale-success.ax.txt",
+      "sha256": "1077031f90835bf96be864b19a02cbf0926fcbd0ddb5e3630a46d9855c2a0b7a",
+      "bytes": 7072
+    },
+    {
+      "name": "09-dialog-clears-stale-success.png",
+      "sha256": "8386f633a145e3e36ede2a33e1807cabba76f24a22476a7e4c373a39cf2107b1",
+      "bytes": 143138,
+      "width": 4718592,
+      "height": 4292935744
+    },
+    {
+      "name": "10-save-closes-dialog.ax.txt",
+      "sha256": "b6edadc1127998cadf0fa52b5968c268457632c1a9f9bcf373e6436abf2762ed",
+      "bytes": 5755
+    },
+    {
+      "name": "10-save-closes-dialog.png",
+      "sha256": "d8b15c067131ddaf86b7d00005dbf8a403cae1a84c59f4feea6665291023f13f",
+      "bytes": 206292,
+      "width": 4718592,
+      "height": 4292935744
+    },
+    {
+      "name": "11-collapsed-target.ax.txt",
+      "sha256": "3d5e87606b3f659d0f7a71398d3a878edfc9a68c42343a9490c15d62e657c611",
+      "bytes": 4484
+    },
+    {
+      "name": "11-collapsed-target.png",
+      "sha256": "705737c9a379051b1728644c4b6069b08ecf43765633614041e5e00157b574c2",
+      "bytes": 158917,
+      "width": 4718592,
+      "height": 4292935744
+    },
+    {
+      "name": "12-key-result-dropdown.ax.txt",
+      "sha256": "c66ccb65135bcf847fc52538e2f3957b06fb5644317060f7ae5c6ba512fcbe2c",
+      "bytes": 4739
+    },
+    {
+      "name": "12-key-result-dropdown.png",
+      "sha256": "93bd593509a1f7087c7f9fa2ae4abe59dc690b4244939936164b0c117ca85aa5",
+      "bytes": 162249,
+      "width": 4718592,
+      "height": 4292935744
+    },
+    {
+      "name": "13-key-target-unfolded.ax.txt",
+      "sha256": "437cb43c2feb5e3539f5494717626c947ef396a4e02461c5b5d9eff0ad7f61b4",
+      "bytes": 5695
+    },
+    {
+      "name": "13-key-target-unfolded.png",
+      "sha256": "0b4f9ec4ab696e577dfd9dda6b0df23e6dc84e348f5696c04d51e19ed98175f4",
+      "bytes": 205188,
+      "width": 4718592,
+      "height": 4292935744
+    },
+    {
+      "name": "14-unrelated-namespace-folded.ax.txt",
+      "sha256": "d75d848eec72dad463368ce79b0d608cf8d72a073de10a275ab7e72403c28100",
+      "bytes": 5059
+    },
+    {
+      "name": "14-unrelated-namespace-folded.png",
+      "sha256": "815320326b2a8537b46a2101b00fac39ac1153fcb34acd0ee163d04766863864",
+      "bytes": 178024,
+      "width": 4718592,
+      "height": 4292935744
+    },
+    {
+      "name": "15-target-text-mode.ax.txt",
+      "sha256": "56793db5a79e576410f212a8a8698ac8513efe7a6c29e741be3ac57f3734c077",
+      "bytes": 4435
+    },
+    {
+      "name": "15-target-text-mode.png",
+      "sha256": "4968020018ee1eac40e27de6812381e49075730f217bb0e18432849afcebe9b2",
+      "bytes": 152796,
+      "width": 4718592,
+      "height": 4292935744
+    },
+    {
+      "name": "16-text-mode-key-result.ax.txt",
+      "sha256": "2ba9f0a77941d09cf74641ead9efe1a5b3280393bcedf228aa0db17043a4fe93",
+      "bytes": 4690
+    },
+    {
+      "name": "16-text-mode-key-result.png",
+      "sha256": "847d645c46d79b7892e4af18592b5240f379365110195d4f46062bd233a7378b",
+      "bytes": 156502,
+      "width": 4718592,
+      "height": 4292935744
+    },
+    {
+      "name": "17-key-target-table-unrelated-preserved.ax.txt",
+      "sha256": "d75d848eec72dad463368ce79b0d608cf8d72a073de10a275ab7e72403c28100",
+      "bytes": 5059
+    },
+    {
+      "name": "17-key-target-table-unrelated-preserved.png",
+      "sha256": "b8c5513820d2371f54756b714fc761910c8dc5a7d060ec8811b90fb52cd79a7b",
+      "bytes": 177629,
+      "width": 4718592,
+      "height": 4292935744
+    },
+    {
+      "name": "18-cluster-management.ax.txt",
+      "sha256": "91e57956dabf96b58e005981476f69339408b5e447db818af86b38d6e9b9a79a",
+      "bytes": 3123
+    },
+    {
+      "name": "18-cluster-management.png",
+      "sha256": "6552ffcd895b0d9a43ca7f9599974886ae42a7ae67bff69e78895ef0dc59aa22",
+      "bytes": 105101,
+      "width": 4718592,
+      "height": 4292935744
+    },
+    {
+      "name": "19-app-search-keyboard-navigation.ax.txt",
+      "sha256": "d75d848eec72dad463368ce79b0d608cf8d72a073de10a275ab7e72403c28100",
+      "bytes": 5059
+    },
+    {
+      "name": "19-app-search-keyboard-navigation.png",
+      "sha256": "a2fa03aaa49bd68abdb9318ca44ecf72efec7cd0a9bb3ed9bc167b58c63aa1cb",
+      "bytes": 177618,
+      "width": 4718592,
+      "height": 4292935744
+    },
+    {
+      "name": "20-public-expanded.ax.txt",
+      "sha256": "437cb43c2feb5e3539f5494717626c947ef396a4e02461c5b5d9eff0ad7f61b4",
+      "bytes": 5695
+    },
+    {
+      "name": "20-public-expanded.png",
+      "sha256": "07419f4126efc0a17dd1b8406720345867f20dbe72e7b77d81fbf6d22aa7bec7",
+      "bytes": 205398,
+      "width": 4718592,
+      "height": 4292935744
+    },
+    {
+      "name": "21-native-final-workbench.ax.txt",
+      "sha256": "b69b63c48ece7a9d58899f79c33a93389494dd96fcf3eb39b5620d655d201b8d",
+      "bytes": 5555
+    },
+    {
+      "name": "21-native-final-workbench.png",
+      "sha256": "80408505d6b791979025e58cb4e56cf25bdd6a5cba25f4834653fe7b3662a138",
+      "bytes": 200898,
+      "width": 4718592,
+      "height": 4292935744
+    },
+    {
+      "name": "after-native-save.json",
+      "sha256": "24b28cad8d2805b1d1ad7e8024e949702e7f2f19c8d5199118f36ac4e3d57dc8",
+      "bytes": 2254
+    },
+    {
+      "name": "before-native-save.json",
+      "sha256": "5d4697cc103c9d06f58b97e1e50e5b4d8b72488d9285ec7f9e4908da30751650",
+      "bytes": 2254
+    },
+    {
+      "name": "native-observations.json",
+      "sha256": "034fd9998b1e524c276d7dcb6d68b248eed66b0e57f58feea8024b540c81b7fd",
+      "bytes": 709
+    }
+  ],
+  "releaseAuthorization": "User explicitly requested verification and one new release; author Preview retains failed full acceptance and maintainer-owned Store signing."
+}

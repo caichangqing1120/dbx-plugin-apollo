@@ -10,10 +10,10 @@
   "permissions": [
     "host.storage"
   ],
-  "source": "https://github.com/caichangqing1120/dbx-plugin-apollo/tree/v0.1.3-rc.1",
+  "source": "https://github.com/caichangqing1120/dbx-plugin-apollo/tree/v0.1.3-rc.2",
   "homepage": "https://github.com/caichangqing1120/dbx-plugin-apollo",
   "license": "Apache-2.0",
-  "releaseNotes": "0.1.3-rc.1 Preview: fix unintended Enter-key writes on Cancel/native selectors/closed user comboboxes; retain unsaved application/editor values across language changes; restore source form grids, Namespace prefixes, cluster success state and sidebar/footer flow. Distinct Apollo Portal Console names and explicit prerelease suffix. Full all-page/all-dialog 1:1 remains FAIL; fixture-only evidence, no live Apollo or native installation acceptance. Official review/signing required.",
+  "releaseNotes": "0.1.3-rc.2 Preview: success notices auto-dismiss after 5 seconds without resetting editors; stale feedback clears before new actions. Independently authored header autocomplete supports app/Key targets, retained-view normalization and multi-environment pagination. Source-measured menus, compact cluster rows and configuration table previews/badges/actions are repaired. Ten focused native DBX0.6.49 checks pass against real local Apollo2.5.2. Full all-page/all-dialog 1:1 remains FAIL. Author packages are unsigned candidates; official Store review/signing remains required.",
   "localizations": {
     "zh-CN": {
       "name": "Apollo Portal \u63a7\u5236\u53f0",

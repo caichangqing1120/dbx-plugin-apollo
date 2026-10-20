@@ -10,6 +10,15 @@ The new names and explicit SemVer prerelease avoid the separate Apollo plugin's 
 listing labels. The already signed `0.1.2` artifacts and source tag are preserved unchanged.
 See [review follow-up](docs/review-follow-up-2026-10-20.md) for the exact current boundaries.
 
+**RC2 release preparation: `0.1.3-rc.2`**, awaiting the authorized manual delivery.
+This continuation fixes automatic success-feedback dismissal, header app/Key autocomplete,
+retained Key-target views and multi-environment search pagination, and restores measured
+navigation, compact cluster rows and configuration-table details. See the
+[continuation verification](docs/continuation-validation-2026-10-20-rc2.md).
+The exact local ARM64 candidate is now installed in native DBX 0.6.49: ten focused cases
+pass against actual Apollo 2.5.2, including automatic success dismissal, input focus/cursor
+retention, submitted-dialog closure and Key/app search. See [native RC2 evidence](docs/native-rc2-validation-2026-10-20.md).
+
 **Independently authored management pages**, using Apollo 2.5.2 as the visual/interaction
 reference. Not an embedded website and not the original Portal frontend packaged in DBX.
 The 0.1.2 continuation restores all-environment role groups, independently authored searchable
@@ -94,10 +103,35 @@ These changes apply to the `0.1.3-rc.1` author Preview, not the immutable signed
 - Current normal form-control geometry, conditional flows and warning comparisons have
   separate evidence. A passing control/frame check is not whole-page pixel acceptance.
 
-**Still not accepted as a full 1:1 replica.** Navigation/search-picker details, other
-administration tables/forms, previews/editors and some conditional/delete contexts remain
-developer-owned work. Live Apollo persistence, authentication/authorization integration and
-native DBX installation/restart/save-file acceptance are separate, unverified gates.
+### Local RC2 Continuation
+
+These changes are in the local `0.1.3-rc.2` source and packages, not the published RC1 assets.
+
+- Success notices disappear after five seconds without clicking X. A later success receives
+  its own interval; opening another action/dialog/navigation clears stale feedback. Expiry
+  removes only the notice, retaining editor nodes, unsaved text, focus and selection.
+  Completed mutation dialogs close automatically; previews and second-stage confirmations
+  still require explicit confirmation, and important error messages remain visible.
+- An independently authored header combobox provides 400ms-debounced app/Key search, paged
+  results, keyboard selection, Escape/outside dismissal and stale-response protection without
+  replacing a live form. Key matches retain environment/cluster/Namespace identity and expand
+  only their target into the filtered table, even after it was folded or in text mode.
+- Multi-environment Key pagination follows Apollo's per-environment page size and maximum
+  total. A merged first page of 40 rows with `size=20,total=30` still exposes the next page;
+  it does not stop at the merged result count or merge distinct same-app matches.
+- Administrator/ordinary-user tool entries and logout grouping follow the original source.
+  Compact cluster management restores environment groups, source labels and assignment icons.
+- Configuration tables restore 250-character previews with full-value inspection, `new` /
+  `modified` / `deleted` badges, source image actions, eight source-width columns and empty
+  headers without an invented placeholder row. Deleted rows have no edit/delete actions.
+
+**Still not accepted as a full 1:1 replica.** Other administration tables/forms,
+configuration toolbar/sidebar/icons, never-published hints/instance counters, previews/editors
+and some conditional/delete contexts remain
+developer-owned work. Focused native macOS checks now cover a real local Apollo 2.5.2
+backend, ordinary password login, configuration writes/releases/rollback, cluster/Namespace
+creation and persisted-data reconnect. Production/MySQL, multi-account permissions, cold DBX
+restart and native file-transfer acceptance remain separate, unverified gates.
 
 ## Local Development
 
@@ -129,11 +163,11 @@ that host is for development only, not the DBX production Secret Store.
 ```sh
 npm run package:macos
 npm run package:all
-python3 scripts/verify-package.py dist/release-v0.1.3-rc.1/io.github.caichangqing1120.apollo-0.1.3-rc.1-darwin-arm64.dbxp --handshake
+python3 scripts/verify-package.py dist/release-v0.1.3-rc.2/io.github.caichangqing1120.apollo-0.1.3-rc.2-darwin-arm64.dbxp --handshake
 ```
 
-`package:macos` builds Darwin ARM64 under `dist/release-v0.1.3-rc.1/darwin-arm64/`; `package:all`
-builds Darwin ARM64/x64, Windows x64 and Linux x64/ARM64 under `dist/release-v0.1.3-rc.1/`.
+`package:macos` builds Darwin ARM64 under `dist/release-v0.1.3-rc.2/darwin-arm64/`; `package:all`
+builds Darwin ARM64/x64, Windows x64 and Linux x64/ARM64 under `dist/release-v0.1.3-rc.2/`.
 Single-target output never replaces the complete set's merged index. Every package contains the complete UI, licensed
 assets and its native Go sidecar. Explicit GOOS/GOARCH/CGO settings and actual Mach-O/PE/ELF
 headers prevent misleading target labels. All file checksums, source/UI equality, package
@@ -150,6 +184,11 @@ and [privacy/security boundaries](docs/security.md).
 
 ## Release And Update Policy
 
+- `0.1.3-rc.2` is prepared for an explicitly authorized manual Preview release. Its five unsigned packages have checksum/source/UI
+  verification and both packaged macOS sidecars pass initialize/full controlled-fixture smoke;
+  this is not official signing or full native acceptance. Ten focused native DBX cases
+  separately pass. Prior RC1/0.1.2 tags and bytes remain unchanged; delivery status is
+  recorded separately rather than inferred from local package verification.
 - The author Preview `0.1.3-rc.1` is published with five CI-built unsigned native packages,
   exact-byte readback and a versioned visual report. Store update PR #304 is awaiting
   maintainer review/signing; it is not an officially signed catalog update yet. Preserve
@@ -172,19 +211,35 @@ values from screenshots and logs. The original DBX request is not the ongoing pl
 
 ## Testing Boundaries
 
-Current scoped checks: **176 JS + 14 packaging regressions**, **14 Go race tests + vet**,
-**16 normal form controls**, **14 paired warning interiors**, and the creation, keyboard,
-language/theme/narrow and sidebar-flow checks documented in [the current audit](docs/parity-polish.md).
-The [current package proof](docs/package-verification-0.1.3-rc.1.json) records exact unsigned
-local hashes and native targets. The [published delivery receipt](docs/delivery-0.1.3-rc.1.json)
+The [2026-10-20 native validation](docs/live-apollo-validation-2026-10-20.md) uses actual
+DBX 0.6.49 and the published macOS ARM64 RC package against upstream Apollo 2.5.2 Assembly
+with persistent H2 files, not the fixture or SDK sandbox. Fifteen focused manual scenarios
+pass with independent Portal/ConfigService readback, including backend restart and native
+reconnect without retyping the password. This is a local unsigned development installation,
+not official signed-package or production acceptance. Its historical RC1 finding
+`NATIVE-UX-01` records success notices persisting beneath later dialogs, not a stuck request.
+The RC2 repair passes timer/draft/focus regressions, real-Apollo SDK checks and
+[ten focused actual native DBX cases](docs/native-rc2-validation-2026-10-20.md).
+`NATIVE-UX-01` is fixed in RC2; the original RC1 evidence remains historical, not rewritten.
+
+Current local checks: **207 JS + 14 packaging regressions**, **14 Go race tests + vet**,
+both packaged macOS sidecar smoke flows and real-Apollo SDK notice/search/context checks.
+Selected search/cluster geometry matches within 0.016px; configuration table sizes/column widths
+match but its shared vertical position is 1.125px off, so that check is not full-table/page PASS.
+Exact current results and residuals are in the [RC2 continuation record](docs/continuation-validation-2026-10-20-rc2.md).
+The earlier **16 normal form controls**, **14 paired warning interiors** and creation/keyboard/
+context/sidebar checks remain scoped historical RC1 evidence in [the prior audit](docs/parity-polish.md),
+not a fresh all-state RC2 census. The [local RC2 package proof](docs/package-verification-0.1.3-rc.2.json)
+records exact unsigned hashes and native targets. The [published delivery receipt](docs/delivery-0.1.3-rc.1.json)
 records the matching CI/published bytes, downloaded macOS smoke and separate Store gates.
 None of these counts is a full 1:1 or live-installation verdict.
 
 `npm run test:smoke` starts a controlled loopback HTTP fixture and a real Go sidecar and checks
 JSON-RPC login/edit/publish/history/rollback, gray merge, sync, key/consumer/role/admin APIs,
 commit history/revocation and 2 MiB chunked requests/replies under the Host message limit. This fixture is
-NOT an actual Apollo installation. UI screenshots also use that fixture and the actual DBX
-SDK sandbox. Neither is evidence of production or live Apollo acceptance.
+NOT an actual Apollo installation. The historical SDK screenshots also use that fixture;
+they are not evidence of live Apollo acceptance. The separate native report records the
+new real-backend checks and their explicit remaining boundaries, not a blanket acceptance.
 
 See [current repair evidence](docs/parity-polish.md), [reference evidence](docs/reference.md),
 [verification history](docs/verification.md), and the
