@@ -1,0 +1,255 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-10-20T09:46:53.186967+00:00",
+  "plugin": {
+    "id": "io.github.caichangqing1120.apollo",
+    "name": "Apollo Portal Console",
+    "version": "0.1.3-rc.2",
+    "publisher": "caichangqing1120",
+    "permissions": [
+      "host.storage"
+    ]
+  },
+  "authorization": "User explicitly requested verification and a new release; ordinary manual unsigned Preview flow, no signing or full1to1 acceptance bypass.",
+  "source": {
+    "repository": "https://github.com/caichangqing1120/dbx-plugin-apollo",
+    "branch": "main",
+    "tag": "v0.1.3-rc.2",
+    "tagCommit": "8319a49a391d926d1f9c2f1047629f783ad23129",
+    "productCommit": "8319a49a391d926d1f9c2f1047629f783ad23129",
+    "review": "Fresh scoped independent review with2P2 search findings fixed in oneRED/GREEN pass;fullsuite207green",
+    "immutablePreviousTags": {
+      "v0.1.2": "d19dc4acf32e3f741543328a28ea563e124941e1",
+      "v0.1.3-rc.1": "727c0a689ed89508db0c166cab41838961c63b23"
+    },
+    "pushedMainReadBackExact": true
+  },
+  "release": {
+    "state": "AUTHOR_PREVIEW_PUBLISHED_AND_DOWNLOADED_VERIFIED",
+    "prerelease": true,
+    "unsigned": true,
+    "tag": "v0.1.3-rc.2",
+    "url": "https://github.com/caichangqing1120/dbx-plugin-apollo/releases/tag/v0.1.3-rc.2",
+    "workflow": "https://github.com/caichangqing1120/dbx-plugin-apollo/actions/runs/39401872416",
+    "workflowRunId": 39401872416,
+    "workflowConclusion": "success",
+    "downloadedAndVerifiedTargets": 5,
+    "localVerifiedArtifacts": [
+      {
+        "target": "darwin-arm64",
+        "url": "io.github.caichangqing1120.apollo-0.1.3-rc.2-darwin-arm64.dbxp",
+        "sha256": "2753212b424b227352c3f05b97450a4b236461fd7b16f7745cafd62971c5701f",
+        "size": 2812660
+      },
+      {
+        "target": "darwin-x64",
+        "url": "io.github.caichangqing1120.apollo-0.1.3-rc.2-darwin-x64.dbxp",
+        "sha256": "c3bd6bb0a6ed3c8bc252289aa53ea1ff5e2ff0bd370c0dfefaf95e3b1953c73b",
+        "size": 3025192
+      },
+      {
+        "target": "windows-x64",
+        "url": "io.github.caichangqing1120.apollo-0.1.3-rc.2-windows-x64.dbxp",
+        "sha256": "cee97a4f1c04611c2f5487121383abe2cca3e4a59d9a5a4a56a57ff7d44336df",
+        "size": 3042445
+      },
+      {
+        "target": "linux-x64",
+        "url": "io.github.caichangqing1120.apollo-0.1.3-rc.2-linux-x64.dbxp",
+        "sha256": "409843ab9508b988b6d1e507c3762b2f7bf4b1c52b07151ca662240eb3436aef",
+        "size": 3001102
+      },
+      {
+        "target": "linux-arm64",
+        "url": "io.github.caichangqing1120.apollo-0.1.3-rc.2-linux-arm64.dbxp",
+        "sha256": "d069d0a5795e1eaf406e828cf7ce1d72e1b0cc8fd5a27e81fc7b870fbc460699",
+        "size": 2739566
+      }
+    ],
+    "publishedAt": "2026-10-20T09:38:12Z",
+    "localAndCIBytesIdentical": true,
+    "assetCountIncludingVisualReport": 14,
+    "artifacts": [
+      {
+        "target": "darwin-arm64",
+        "url": "io.github.caichangqing1120.apollo-0.1.3-rc.2-darwin-arm64.dbxp",
+        "sha256": "2753212b424b227352c3f05b97450a4b236461fd7b16f7745cafd62971c5701f",
+        "size": 2812660
+      },
+      {
+        "target": "darwin-x64",
+        "url": "io.github.caichangqing1120.apollo-0.1.3-rc.2-darwin-x64.dbxp",
+        "sha256": "c3bd6bb0a6ed3c8bc252289aa53ea1ff5e2ff0bd370c0dfefaf95e3b1953c73b",
+        "size": 3025192
+      },
+      {
+        "target": "windows-x64",
+        "url": "io.github.caichangqing1120.apollo-0.1.3-rc.2-windows-x64.dbxp",
+        "sha256": "cee97a4f1c04611c2f5487121383abe2cca3e4a59d9a5a4a56a57ff7d44336df",
+        "size": 3042445
+      },
+      {
+        "target": "linux-x64",
+        "url": "io.github.caichangqing1120.apollo-0.1.3-rc.2-linux-x64.dbxp",
+        "sha256": "409843ab9508b988b6d1e507c3762b2f7bf4b1c52b07151ca662240eb3436aef",
+        "size": 3001102
+      },
+      {
+        "target": "linux-arm64",
+        "url": "io.github.caichangqing1120.apollo-0.1.3-rc.2-linux-arm64.dbxp",
+        "sha256": "d069d0a5795e1eaf406e828cf7ce1d72e1b0cc8fd5a27e81fc7b870fbc460699",
+        "size": 2739566
+      }
+    ],
+    "releaseNotesReadBackExact": true,
+    "downloadedExactAssetSetReadBack": true
+  },
+  "validation": {
+    "javascriptTests": 207,
+    "packagingRegressionTests": 14,
+    "goRaceTests": 14,
+    "goVet": "pass",
+    "nativeDBXFocusedCases": 10,
+    "nativeDBXVersion": "0.6.49",
+    "nativeApolloVersion": "2.5.2",
+    "nativeInstalledPackageSHA256": "2753212b424b227352c3f05b97450a4b236461fd7b16f7745cafd62971c5701f",
+    "nativeUISHA256": "8b27d57514a7bbb4fa57a4292d4eb4c7238462b4dc166f4347283259f93356b6",
+    "nativeSourceSHA256": "37382be7b2423f15fc6905c0bd05675b5506b2f0696a1bd700e7247e644c71a7",
+    "localMacArm64HandshakeAndFullFixtureSmoke": "pass",
+    "localMacX64HandshakeAndFullFixtureSmoke": "pass",
+    "nativeEvidence": "native-rc2-validation-2026-10-20.json",
+    "full1to1Acceptance": "FAIL",
+    "downloadedMacArm64HandshakeAndFullFixtureSmoke": "pass",
+    "downloadedMacX64HandshakeAndFullFixtureSmoke": "pass",
+    "ciPackagedLinuxX64InitializeAndFullFixtureSmoke": "pass",
+    "all5PublishedPackageProof": [
+      {
+        "target": "darwin-arm64",
+        "url": "io.github.caichangqing1120.apollo-0.1.3-rc.2-darwin-arm64.dbxp",
+        "sha256": "2753212b424b227352c3f05b97450a4b236461fd7b16f7745cafd62971c5701f",
+        "size": 2812660,
+        "archiveEntries": 26,
+        "verifiedChecksumEntries": 25,
+        "binary": "Mach-O 64-bit arm64",
+        "nativeUISHA256": "8b27d57514a7bbb4fa57a4292d4eb4c7238462b4dc166f4347283259f93356b6",
+        "nativeSourceSHA256": "37382be7b2423f15fc6905c0bd05675b5506b2f0696a1bd700e7247e644c71a7",
+        "unsigned": true,
+        "initializeHandshake": "pass",
+        "initializePlugin": {
+          "id": "io.github.caichangqing1120.apollo",
+          "version": "0.1.3-rc.2"
+        },
+        "downloadedFullFixtureSmoke": "pass"
+      },
+      {
+        "target": "darwin-x64",
+        "url": "io.github.caichangqing1120.apollo-0.1.3-rc.2-darwin-x64.dbxp",
+        "sha256": "c3bd6bb0a6ed3c8bc252289aa53ea1ff5e2ff0bd370c0dfefaf95e3b1953c73b",
+        "size": 3025192,
+        "archiveEntries": 26,
+        "verifiedChecksumEntries": 25,
+        "binary": "Mach-O 64-bit x64",
+        "nativeUISHA256": "8b27d57514a7bbb4fa57a4292d4eb4c7238462b4dc166f4347283259f93356b6",
+        "nativeSourceSHA256": "37382be7b2423f15fc6905c0bd05675b5506b2f0696a1bd700e7247e644c71a7",
+        "unsigned": true,
+        "initializeHandshake": "pass",
+        "initializePlugin": {
+          "id": "io.github.caichangqing1120.apollo",
+          "version": "0.1.3-rc.2"
+        },
+        "downloadedFullFixtureSmoke": "pass"
+      },
+      {
+        "target": "windows-x64",
+        "url": "io.github.caichangqing1120.apollo-0.1.3-rc.2-windows-x64.dbxp",
+        "sha256": "cee97a4f1c04611c2f5487121383abe2cca3e4a59d9a5a4a56a57ff7d44336df",
+        "size": 3042445,
+        "archiveEntries": 26,
+        "verifiedChecksumEntries": 25,
+        "binary": "PE32+ x64",
+        "nativeUISHA256": "8b27d57514a7bbb4fa57a4292d4eb4c7238462b4dc166f4347283259f93356b6",
+        "nativeSourceSHA256": "37382be7b2423f15fc6905c0bd05675b5506b2f0696a1bd700e7247e644c71a7",
+        "unsigned": true,
+        "initializeHandshake": "not run (cross target)"
+      },
+      {
+        "target": "linux-x64",
+        "url": "io.github.caichangqing1120.apollo-0.1.3-rc.2-linux-x64.dbxp",
+        "sha256": "409843ab9508b988b6d1e507c3762b2f7bf4b1c52b07151ca662240eb3436aef",
+        "size": 3001102,
+        "archiveEntries": 26,
+        "verifiedChecksumEntries": 25,
+        "binary": "ELF 64-bit x64",
+        "nativeUISHA256": "8b27d57514a7bbb4fa57a4292d4eb4c7238462b4dc166f4347283259f93356b6",
+        "nativeSourceSHA256": "37382be7b2423f15fc6905c0bd05675b5506b2f0696a1bd700e7247e644c71a7",
+        "unsigned": true,
+        "initializeHandshake": "not run (cross target)"
+      },
+      {
+        "target": "linux-arm64",
+        "url": "io.github.caichangqing1120.apollo-0.1.3-rc.2-linux-arm64.dbxp",
+        "sha256": "d069d0a5795e1eaf406e828cf7ce1d72e1b0cc8fd5a27e81fc7b870fbc460699",
+        "size": 2739566,
+        "archiveEntries": 26,
+        "verifiedChecksumEntries": 25,
+        "binary": "ELF 64-bit arm64",
+        "nativeUISHA256": "8b27d57514a7bbb4fa57a4292d4eb4c7238462b4dc166f4347283259f93356b6",
+        "nativeSourceSHA256": "37382be7b2423f15fc6905c0bd05675b5506b2f0696a1bd700e7247e644c71a7",
+        "unsigned": true,
+        "initializeHandshake": "not run (cross target)"
+      }
+    ]
+  },
+  "visualReport": {
+    "path": "dist/release-v0.1.3-rc.2/apollo-parity-report-v0.1.3-rc.2.html",
+    "sha256": "b166a25fb00b0c94457affffa3b9e9d9987d221c276afef4f5b87758ef851497",
+    "bytes": 2784052,
+    "expectedSections": 11,
+    "expectedImages": 16,
+    "scope": "9 real-Apollo SDK/reference images plus7 actual native DBX images; full1to1 FAIL",
+    "qa": {
+      "sections": 11,
+      "images": 16,
+      "broken": 0,
+      "title": "Apollo RC2 Local Repairs - Full 1:1 FAIL"
+    },
+    "downloadedExactMatch": true
+  },
+  "store": {
+    "url": "https://github.com/t8y2/dbx-store/pull/304",
+    "action": "Update existing candidate-only PR304 to verified RC2 after public downloads; no competing submission",
+    "state": "RC2_CANDIDATE_SUBMITTED_PENDING_MAINTAINER_REVIEW_SIGNING",
+    "signing": "Maintainer-owned;not triggered or bypassed",
+    "officialSignedLatestVersion": "0.1.2",
+    "automationPR": "https://github.com/t8y2/dbx-store/pull/298",
+    "automation": "Separate open registration; this iteration manually released/submitted",
+    "candidateCommit": "58a17f3db6a2a702dabb27bced2c31238a5be8a6",
+    "pullRequestTitle": "Apollo Portal Console 0.1.3-rc.2 Preview candidates",
+    "candidateOnlyChangedFiles": [
+      "candidates/io.github.caichangqing1120.apollo.json"
+    ],
+    "remoteCandidateReadBackExact": true,
+    "synchronizer": "Official source sync script with actual public tagged metadata/release URL",
+    "planValidation": "pass",
+    "synchronizerTestsPassed": 6,
+    "ordinaryValidation": "expected red:open candidate awaiting DBX Store signing",
+    "ci": "https://github.com/t8y2/dbx-store/actions/runs/39402649401/job/118560888074",
+    "ciConclusion": "expected failure:open candidate awaiting DBX Store signing",
+    "ciFailureLogChecked": true,
+    "automationUntouched": true,
+    "storeSynchronizerTestCount": 6
+  },
+  "remainingAcceptance": [
+    "Full24-page/31-dialog/all-state1:1 remainsFAIL",
+    "Production/MySQL and multi-account permission matrix not accepted",
+    "Native cold-start/file-transfer not accepted",
+    "Windows/Linux runtime exceptCIpackagedLinuxx64 smoke remains unverified",
+    "OfficialStore review/signing/merge are maintainer-owned"
+  ],
+  "runtime": {
+    "realApollo": "Requested loopback job kept running",
+    "nativeDBX": "InstalledRC2 and saved test connection open;other sessions preserved",
+    "ownedBrowserServices": "ReportQA browser/server closed;no SDK/browser listener left",
+    "cleanupVerified": "No task-owned browser/SDK/report listener remains;requested loopbackApollo and nativeDBX retained"
+  }
+}

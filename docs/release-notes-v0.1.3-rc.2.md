@@ -39,7 +39,14 @@ See [continuation evidence](https://github.com/caichangqing1120/dbx-plugin-apoll
 [native RC2 evidence](https://github.com/caichangqing1120/dbx-plugin-apollo/blob/v0.1.3-rc.2/docs/native-rc2-validation-2026-10-20.md) and
 [package verification](https://github.com/caichangqing1120/dbx-plugin-apollo/blob/v0.1.3-rc.2/docs/package-verification-0.1.3-rc.2.json) in the tagged source.
 Published CI bytes/downloaded verification and Store status are recorded separately in the
-versioned delivery receipt after the manual release finishes.
+versioned delivery receipt rather than inferred from local packaging.
+
+The manual author release now passes source CI and exact-byte readback of all five targets;
+both downloaded macOS packages pass full sidecar smoke. The existing
+[Store candidate PR #304](https://github.com/t8y2/dbx-store/pull/304) is updated to RC2 and
+awaits protected maintainer review/signing. See [the current delivery receipt](https://github.com/caichangqing1120/dbx-plugin-apollo/blob/main/docs/delivery-0.1.3-rc.2.json).
+The immutable tag preserves the pre-publication notes; the published Release body and main
+README carry the verified delivery status.
 
 ## Known Limitations And Trust
 

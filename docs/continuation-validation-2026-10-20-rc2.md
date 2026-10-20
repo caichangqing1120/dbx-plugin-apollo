@@ -3,6 +3,9 @@
 Date: 2026-10-20. Version: **0.1.3-rc.2**. The repair phase initially produced local
 unsigned candidates only. The user subsequently authorized verification and one manual
 Preview release; publication/signing status is recorded separately from these checks.
+That delivery is now published and all five targets re-downloaded/verified; the existing
+Store PR #304 is updated to RC2 and awaits official review/signing. Exact source/tag/CI,
+published-byte and separate Store receipts are in [the RC2 delivery record](delivery-0.1.3-rc.2.json).
 
 **The full 24-page / 31-dialog / all-state 1:1 gate remains FAIL.** This report records
 completed scoped repairs, not a replacement acceptance census. The immutable published
@@ -142,7 +145,8 @@ SHA-256 `2753212b424b227352c3f05b97450a4b236461fd7b16f7745cafd62971c5701f`.
    restart, native file transfer and Windows/Linux runtime when those environments exist.
 4. Keep release/signing/Store integration separate. The repair-phase status checks showed
    RC1 candidate PR #304 and automation PR #298 OPEN. The later authorized RC2 manual
-   delivery must report its actual source, CI, published bytes and candidate update separately.
+   delivery records its actual source, CI, published bytes and candidate update separately;
+   author publication does not complete official signing, merge or full acceptance.
 
 Raw PNG/log evidence and a self-contained local visual report are under ignored
 `output/playwright/continue/`. Their hashes/results are retained in the tracked machine

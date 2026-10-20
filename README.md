@@ -2,15 +2,17 @@
 
 DBX issue [#12466](https://github.com/t8y2/dbx/issues/12466).
 
-Current author Preview: **Apollo Portal Console / Apollo Portal 控制台**, [`0.1.3-rc.1`](https://github.com/caichangqing1120/dbx-plugin-apollo/releases/tag/v0.1.3-rc.1).
+Current author Preview: **Apollo Portal Console / Apollo Portal 控制台**, [`0.1.3-rc.2`](https://github.com/caichangqing1120/dbx-plugin-apollo/releases/tag/v0.1.3-rc.2).
 All five unsigned native packages are published and re-downloaded/verified. The Store update
 is [PR #304](https://github.com/t8y2/dbx-store/pull/304), pending maintainer review/signing;
 the last officially signed Store version remains `0.1.2`.
 The new names and explicit SemVer prerelease avoid the separate Apollo plugin's identical
 listing labels. The already signed `0.1.2` artifacts and source tag are preserved unchanged.
-See [review follow-up](docs/review-follow-up-2026-10-20.md) for the exact current boundaries.
+The [review follow-up](docs/review-follow-up-2026-10-20.md) preserves the earlier naming /
+signed-0.1.2 boundary; the current RC2 delivery is recorded separately.
 
-**RC2 release preparation: `0.1.3-rc.2`**, awaiting the authorized manual delivery.
+**RC2 is published and byte-verified.** Source CI passes; all five downloaded packages
+match the local verified bytes, including the exact ARM64 candidate installed in DBX.
 This continuation fixes automatic success-feedback dismissal, header app/Key autocomplete,
 retained Key-target views and multi-environment search pagination, and restores measured
 navigation, compact cluster rows and configuration-table details. See the
@@ -32,7 +34,7 @@ and the [historical 0.1.2 audit](docs/parity-finish.md).
 The strict all-page, all-dialog 1:1 gate still FAILS; the author Release contains unsigned
 Preview candidates, not an accepted replica or a promise of completed visual parity.
 
-[Current delivery receipt](docs/delivery-0.1.3-rc.1.json) | [Source CI](https://github.com/caichangqing1120/dbx-plugin-apollo/actions/runs/39375019013) | [Marketplace candidate PR #304](https://github.com/t8y2/dbx-store/pull/304) | [Self-contained visual report](https://github.com/caichangqing1120/dbx-plugin-apollo/releases/download/v0.1.3-rc.1/apollo-parity-report-v0.1.3-rc.1.html).
+[Current delivery receipt](docs/delivery-0.1.3-rc.2.json) | [Source CI](https://github.com/caichangqing1120/dbx-plugin-apollo/actions/runs/39401872416) | [Marketplace candidate PR #304](https://github.com/t8y2/dbx-store/pull/304) | [Self-contained visual report](https://github.com/caichangqing1120/dbx-plugin-apollo/releases/download/v0.1.3-rc.2/apollo-parity-report-v0.1.3-rc.2.html).
 Official signing of all five `0.1.2` targets and PR #295's maintainer merge completed on
 2026-10-20. The author Release assets remain unsigned review candidates, distinct from
 the official signed Store artifacts. The [historical 0.1.2 receipt](docs/delivery-0.1.2.json)
@@ -103,9 +105,9 @@ These changes apply to the `0.1.3-rc.1` author Preview, not the immutable signed
 - Current normal form-control geometry, conditional flows and warning comparisons have
   separate evidence. A passing control/frame check is not whole-page pixel acceptance.
 
-### Local RC2 Continuation
+### RC2 Continuation
 
-These changes are in the local `0.1.3-rc.2` source and packages, not the published RC1 assets.
+These changes are in the published `0.1.3-rc.2` source and packages, not the immutable RC1 assets.
 
 - Success notices disappear after five seconds without clicking X. A later success receives
   its own interval; opening another action/dialog/navigation clears stale feedback. Expiry
@@ -179,20 +181,20 @@ must retain a prerelease suffix such as `-rc.1` in the manifest, sidecar, tag an
 
 Unsigned packages require explicitly enabling development packages in DBX. Official
 marketplace installation requires DBX Store review, signing and merge; the author cannot
-self-assign official trust or publish signed catalog entries. See [current Preview notes](docs/release-notes-v0.1.3-rc.1.md)
+self-assign official trust or publish signed catalog entries. See [current Preview notes](docs/release-notes-v0.1.3-rc.2.md)
 and [privacy/security boundaries](docs/security.md).
 
 ## Release And Update Policy
 
-- `0.1.3-rc.2` is prepared for an explicitly authorized manual Preview release. Its five unsigned packages have checksum/source/UI
-  verification and both packaged macOS sidecars pass initialize/full controlled-fixture smoke;
-  this is not official signing or full native acceptance. Ten focused native DBX cases
-  separately pass. Prior RC1/0.1.2 tags and bytes remain unchanged; delivery status is
-  recorded separately rather than inferred from local package verification.
-- The author Preview `0.1.3-rc.1` is published with five CI-built unsigned native packages,
-  exact-byte readback and a versioned visual report. Store update PR #304 is awaiting
-  maintainer review/signing; it is not an officially signed catalog update yet. Preserve
-  existing version-addressed source tags, unsigned candidates and official signed assets.
+- `0.1.3-rc.2` is published through the manually initiated CI workflow. All five unsigned
+  public packages are re-downloaded and match exact local SHA-256/size/source/UI/native
+  metadata. Both downloaded macOS sidecars pass initialize/full controlled smoke; CI also
+  passes packaged Linux x64 smoke. Ten focused native DBX checks separately pass using
+  the byte-identical ARM64 package. This is not official signing or full native acceptance.
+- Existing Store candidate PR #304 is updated to RC2, not duplicated. Its only changed
+  file is the candidate JSON; it awaits maintainer review/signing. Ordinary Store CI is
+  intentionally red for the documented pending-signing guard, not a claimed successful
+  catalog update. Prior RC1/0.1.2 tags, unsigned packages and signed assets remain immutable.
 - This validation iteration uses manual release submission: an author-initiated tag/Preview
   Release, CI-built candidate packages and an author-submitted Store candidate PR. Review,
   protected signing and maintainer merge are still required.
@@ -222,17 +224,19 @@ The RC2 repair passes timer/draft/focus regressions, real-Apollo SDK checks and
 [ten focused actual native DBX cases](docs/native-rc2-validation-2026-10-20.md).
 `NATIVE-UX-01` is fixed in RC2; the original RC1 evidence remains historical, not rewritten.
 
-Current local checks: **207 JS + 14 packaging regressions**, **14 Go race tests + vet**,
-both packaged macOS sidecar smoke flows and real-Apollo SDK notice/search/context checks.
+Current local and source CI checks: **207 JS + 14 packaging regressions**, **14 Go race tests + vet**,
+both downloaded macOS sidecar smoke flows, CI Linux x64 smoke, real-Apollo SDK checks
+and ten focused actual native DBX cases.
 Selected search/cluster geometry matches within 0.016px; configuration table sizes/column widths
 match but its shared vertical position is 1.125px off, so that check is not full-table/page PASS.
 Exact current results and residuals are in the [RC2 continuation record](docs/continuation-validation-2026-10-20-rc2.md).
 The earlier **16 normal form controls**, **14 paired warning interiors** and creation/keyboard/
 context/sidebar checks remain scoped historical RC1 evidence in [the prior audit](docs/parity-polish.md),
 not a fresh all-state RC2 census. The [local RC2 package proof](docs/package-verification-0.1.3-rc.2.json)
-records exact unsigned hashes and native targets. The [published delivery receipt](docs/delivery-0.1.3-rc.1.json)
+records exact unsigned hashes and native targets. The [published RC2 delivery receipt](docs/delivery-0.1.3-rc.2.json)
 records the matching CI/published bytes, downloaded macOS smoke and separate Store gates.
-None of these counts is a full 1:1 or live-installation verdict.
+The [RC1 receipt](docs/delivery-0.1.3-rc.1.json) remains historical. None of these counts
+is a full 1:1, complete native acceptance or production verdict.
 
 `npm run test:smoke` starts a controlled loopback HTTP fixture and a real Go sidecar and checks
 JSON-RPC login/edit/publish/history/rollback, gray merge, sync, key/consumer/role/admin APIs,

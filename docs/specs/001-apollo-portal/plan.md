@@ -328,11 +328,20 @@ confirmation request. Preserve the full 1:1 FAIL and all prior immutable source/
   closure, folded/text Key navigation, unrelated state, cluster page and ordinary app search.
 - [x] Record actual native proof and independent unchanged draft/published HTTP readbacks;
   rerun full JS/Python/Go race/vet before source delivery.
-- [ ] Commit/push the reviewed RC2 product/docs to author main; create the immutable
+- [x] Commit/push the reviewed RC2 product/docs to author main; create the immutable
   `v0.1.3-rc.2` tag and manually trigger the existing CI unsigned Preview release workflow.
-- [ ] Download all five CI-published targets, verify exact source/UI/native/checksum metadata,
+- [x] Download all five CI-published targets, verify exact source/UI/native/checksum metadata,
   and execute both downloaded macOS sidecars' initialize/full controlled smoke.
-- [ ] Update the existing candidate-only Store PR #304 to the verified RC2 rather than open
+- [x] Update the existing candidate-only Store PR #304 to the verified RC2 rather than open
   a competing candidate for the same plugin. Keep automation PR #298/signing policy separate.
-- [ ] Update README/release notes/delivery receipt with actual results; preserve real Apollo
+- [x] Update README/release notes/delivery receipt with actual results; preserve real Apollo
   and native DBX, and close any task-owned validation/browser services.
+
+RC2 author delivery: immutable source `8319a49`, manually dispatched source CI `39401872416`
+passes; all five published packages and 14 total assets are downloaded/verified. Exact local /
+CI / published ARM64 bytes match the installed native test package. Downloaded macOS ARM64 /
+x64 and CI packaged Linux x64 sidecar smoke pass. The 11-section / 16-image report decodes
+fully and downloads byte-for-byte. Store PR #304 is updated candidate-only at `58a17f3`;
+its CI red result is confirmed as the documented pending-signing guard. Review/signing/merge
+remain maintainer-owned; automation PR #298 is untouched. The full 1:1 gate still FAILS.
+See `../../delivery-0.1.3-rc.2.json` for exact provenance and separate acceptance boundaries.

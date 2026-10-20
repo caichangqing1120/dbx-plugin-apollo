@@ -1490,32 +1490,26 @@
     "distribution": "local unsigned candidate only; not published or submitted"
   },
   "remoteDelivery": {
-    "newPush": false,
-    "newTag": false,
-    "newRelease": false,
-    "newStoreSubmission": false,
-    "storePRsReadOnlyStatus": [
-      {
-        "headRefOid": "bfe99846deef574c8f8f17365f09d401a2101cae",
-        "mergedAt": null,
-        "number": 298,
-        "state": "OPEN",
-        "url": "https://github.com/t8y2/dbx-store/pull/298"
-      },
-      {
-        "headRefOid": "640510f8abe2af1e719306a2ea3b1ebf1c4b712b",
-        "mergedAt": null,
-        "number": 304,
-        "state": "OPEN",
-        "url": "https://github.com/t8y2/dbx-store/pull/304"
-      }
-    ],
+    "repairPhaseSnapshot": {
+      "newPush": false,
+      "newTag": false,
+      "newRelease": false,
+      "newStoreSubmission": false
+    },
+    "subsequentUserAuthorizedRC2Delivery": {
+      "sourcePushed": true,
+      "tag": "v0.1.3-rc.2",
+      "tagCommit": "8319a49a391d926d1f9c2f1047629f783ad23129",
+      "authorPrereleasePublished": true,
+      "all5PublicPackagesDownloadedVerified": true,
+      "storePR304UpdatedCandidateOnly": true,
+      "officialSigningMerge": "pending maintainer",
+      "receipt": "delivery-0.1.3-rc.2.json"
+    },
     "immutableTags": {
       "v0.1.2": "d19dc4acf32e3f741543328a28ea563e124941e1",
       "v0.1.3-rc.1": "727c0a689ed89508db0c166cab41838961c63b23"
-    },
-    "rc2ManualReleaseAuthorized": true,
-    "publicationReceipt": "delivery-0.1.3-rc.2.json will record actual author publication and Store candidate separately"
+    }
   },
   "remaining": [
     "Full 24-page/31-dialog/all-state 1:1 remains FAIL. Historical census is not reclassified by these selected checks.",
