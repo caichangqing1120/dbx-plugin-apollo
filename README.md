@@ -1,6 +1,11 @@
-# DBX Apollo Config Plugin
+# DBX Apollo Portal Console
 
 DBX issue [#12466](https://github.com/t8y2/dbx/issues/12466).
+
+Development identity: **Apollo Portal Console / Apollo Portal 控制台**, `0.1.3-rc.1` (not yet released).
+The new names and explicit SemVer prerelease avoid the separate Apollo plugin's identical
+listing labels. The already signed `0.1.2` artifacts and source tag are preserved unchanged.
+See [review follow-up](docs/review-follow-up-2026-10-20.md) for the exact current boundaries.
 
 **Independently authored management pages**, using Apollo 2.5.2 as the visual/interaction
 reference. Not an embedded website and not the original Portal frontend packaged in DBX.
@@ -14,7 +19,9 @@ candidate, not an accepted replica. The [v0.1.2 release](https://github.com/caic
 contains complete native candidate packages, not a promise of completed visual parity.
 
 [Delivery receipt](docs/delivery-0.1.2.json) | [Source CI](https://github.com/caichangqing1120/dbx-plugin-apollo/actions/runs/39250298164) | [Marketplace candidate PR #295](https://github.com/t8y2/dbx-store/pull/295).
-Official signing and maintainer merge are separate from the published unsigned Preview.
+Official signing of all five `0.1.2` targets and PR #295's maintainer merge completed on
+2026-10-20. The author Release assets remain unsigned review candidates, distinct from
+the official signed Store artifacts.
 
 ## Current Route Coverage (Not Original-Workflow Parity)
 
@@ -69,17 +76,19 @@ that host is for development only, not the DBX production Secret Store.
 ```sh
 npm run package:macos
 npm run package:all
-python3 scripts/verify-package.py dist/release-v0.1.2/io.github.caichangqing1120.apollo-0.1.2-darwin-arm64.dbxp --handshake
+python3 scripts/verify-package.py dist/release-v0.1.3-rc.1/io.github.caichangqing1120.apollo-0.1.3-rc.1-darwin-arm64.dbxp --handshake
 ```
 
-`package:macos` builds Darwin ARM64 under `dist/release-v0.1.2/darwin-arm64/`; `package:all`
-builds Darwin ARM64/x64, Windows x64 and Linux x64/ARM64 under `dist/release-v0.1.2/`.
+`package:macos` builds Darwin ARM64 under `dist/release-v0.1.3-rc.1/darwin-arm64/`; `package:all`
+builds Darwin ARM64/x64, Windows x64 and Linux x64/ARM64 under `dist/release-v0.1.3-rc.1/`.
 Single-target output never replaces the complete set's merged index. Every package contains the complete UI, licensed
 assets and its native Go sidecar. Explicit GOOS/GOARCH/CGO settings and actual Mach-O/PE/ELF
 headers prevent misleading target labels. All file checksums, source/UI equality, package
 metadata and the current-host initialize handshake are checked. Cross-target runtime
 acceptance is separate. The merged `release-candidates.json` follows the store synchronizer's
-`plugin` plus `artifacts` contract; it is not a catalog entry.
+`plugin` plus `artifacts` contract; it is not a catalog entry. The Preview packaging
+path now rejects stable-looking or invalid SemVer versions; all future Preview releases
+must retain a prerelease suffix such as `-rc.1` in the manifest, sidecar, tag and metadata.
 
 Unsigned packages require explicitly enabling development packages in DBX. Official
 marketplace installation requires DBX Store review, signing and merge; the author cannot

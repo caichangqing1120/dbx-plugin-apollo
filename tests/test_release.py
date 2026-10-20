@@ -50,11 +50,11 @@ class ReleaseTests(unittest.TestCase):
             (self.root / directory).mkdir()
         self.manifest = json.loads((ROOT / "manifest.json").read_text())
         (self.root / "manifest.json").write_text(json.dumps(self.manifest))
-        (self.root / "package.json").write_text(json.dumps({"version": "0.1.2"}))
+        (self.root / "package.json").write_text(json.dumps({"version": "0.1.3-rc.1"}))
         (self.root / "assets/icon.png").write_bytes(b"controlled-test-icon")
         (self.root / "ui/index.html").write_bytes(b"<!doctype html><p>controlled UI</p>")
         (self.root / "src/app.js").write_bytes(b"// controlled test source\n")
-        self.output = self.root / "dist/release-v0.1.2"
+        self.output = self.root / "dist/release-v0.1.3-rc.1"
 
     def package(self, target="darwin-arm64", data=None):
         binary = self.root / "compiled-sidecar"
@@ -124,10 +124,10 @@ class ReleaseTests(unittest.TestCase):
         self.release.write_release_metadata(self.root, paths, self.output)
         release = json.loads((self.output / "release-candidates.json").read_text())
         self.assertEqual(release["plugin"]["id"], "io.github.caichangqing1120.apollo")
-        self.assertEqual(release["plugin"]["version"], "0.1.2")
+        self.assertEqual(release["plugin"]["version"], "0.1.3-rc.1")
         self.assertEqual(release["plugin"]["permissions"], ["host.storage"])
         self.assertEqual([a["target"] for a in release["artifacts"]], ["darwin-arm64", "windows-x64"])
-        self.assertEqual(len((self.output / "SHA256SUMS-v0.1.2.txt").read_text().splitlines()), 2)
+        self.assertEqual(len((self.output / "SHA256SUMS-v0.1.3-rc.1.txt").read_text().splitlines()), 2)
         for artifact, path in zip(release["artifacts"], paths):
             self.assertEqual(artifact["url"], path.name)
             self.assertEqual(artifact["size"], path.stat().st_size)
@@ -190,9 +190,31 @@ class ReleaseTests(unittest.TestCase):
              mock.patch.object(self.release.subprocess, "check_output", return_value="go version controlled-compiler\n"):
             self.release.main()
         self.assertEqual((self.output / "release-candidates.json").read_bytes(), before)
-        isolated = self.output / "darwin-arm64" / "io.github.caichangqing1120.apollo-0.1.2-darwin-arm64.dbxp"
+        isolated = self.output / "darwin-arm64" / "io.github.caichangqing1120.apollo-0.1.3-rc.1-darwin-arm64.dbxp"
         self.assertTrue(isolated.is_file())
         self.assertEqual(self.release.verify_package(isolated, self.root)["target"], "darwin-arm64")
+
+    def test_preview_packaging_rejects_versions_the_catalog_would_treat_as_stable(self):
+        for version in ("0.1.3", "0.1.3+preview", "0.1.3-rc.01", "0.1.3-", "01.1.3-rc.1"):
+            with self.subTest(version=version):
+                self.manifest["version"] = version
+                (self.root / "manifest.json").write_text(json.dumps(self.manifest))
+                (self.root / "package.json").write_text(json.dumps({"version": version}))
+                with self.assertRaisesRegex(ValueError, "prerelease|SemVer"):
+                    self.package()
+
+    def test_rc_suffix_survives_packaging_and_store_release_metadata(self):
+        self.manifest["version"] = "0.1.3-rc.1"
+        self.manifest["name"] = "Apollo Portal Console"
+        (self.root / "manifest.json").write_text(json.dumps(self.manifest))
+        (self.root / "package.json").write_text(json.dumps({"version": "0.1.3-rc.1"}))
+        artifact = self.package()
+        self.assertEqual(artifact.name, "io.github.caichangqing1120.apollo-0.1.3-rc.1-darwin-arm64.dbxp")
+        self.release.write_release_metadata(self.root, [artifact], self.output)
+        release = json.loads((self.output / "release-candidates.json").read_text())
+        self.assertEqual(release["plugin"]["version"], "0.1.3-rc.1")
+        self.assertEqual(release["plugin"]["name"], "Apollo Portal Console")
+        self.assertEqual(self.release.verify_package(artifact, self.root)["target"], "darwin-arm64")
 
 
 if __name__ == "__main__":

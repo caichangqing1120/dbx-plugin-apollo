@@ -191,3 +191,20 @@ different DBX repository, so secondary plugin/store repositories use git worktre
 Author delivery is recorded in `../../delivery-0.1.2.json`: source/tag/CI-built Preview
 assets are published and re-downloaded, candidate PR #295 is open. Official signing and
 merge remain pending; this completes author-side submission only, not full parity or listing.
+
+## Task 12: Non-Blocking Marketplace Review Follow-Up
+
+User supplied the maintainer's 2026-10-20 feedback. Reuse the clean isolated plugin worktree;
+preserve the official signing bot's commits and all published 0.1.2 bytes.
+
+- [x] Verify official signing completed and inspect the distinct-plugin naming conflict.
+- [x] Rename next-version display identity to Apollo Portal Console / Apollo Portal 控制台.
+- [x] Prepare development version 0.1.3-rc.1 and test that package metadata preserves its
+  suffix; require a valid prerelease SemVer for Preview packages and workflow publication.
+- [x] Validate complete packages/native identity and regression suites (161 JS, 14 package
+  regressions, 14 Go race tests plus vet; both packaged macOS smoke flows pass).
+
+Delivery is source-only plus a reply on PR #295. Do not publish another version or edit
+the signed catalog; preserve the officially merged 0.1.2 entry and all immutable artifacts.
+
+Current versus next-version boundaries are in `../../review-follow-up-2026-10-20.md`.

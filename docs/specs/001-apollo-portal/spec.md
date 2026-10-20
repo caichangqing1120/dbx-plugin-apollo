@@ -21,7 +21,10 @@ of scope. The plugin does not operate Apollo's database directly.
 
 ## Contracts
 
-- Plugin ID `io.github.caichangqing1120.apollo`, version `0.1.2`, Host API `1`.
+- Plugin ID `io.github.caichangqing1120.apollo`, development version `0.1.3-rc.1`, Host API `1`.
+  Display identity is `Apollo Portal Console` / `Apollo Portal 控制台`; the already signed
+  `0.1.2` tag/assets remain immutable. This metadata-only follow-up is not a new release
+  or a change to the failed full 1:1 acceptance gate.
 - Connection fields: host, port, scheme (`http`/`https`), optional context path, username,
   password (`binding: secret`); password and cookies never enter UI context or storage.
 - `connection/test`, `connection/connect`, `connection/disconnect` follow DBX SDK v1.

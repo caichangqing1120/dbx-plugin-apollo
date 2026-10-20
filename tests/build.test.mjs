@@ -15,4 +15,5 @@ test("standalone build embeds every asset and never includes original Portal run
   assert.doesNotMatch(html, /<(?:script|link)[^>]+(?:src|href)=/);
   assert.doesNotMatch(html, /angular\.module\(|ng-app=|bootstrap\.min/);
   assert.match(html, /data:image\/svg\+xml;base64,/);
+  assert.match(html, /<title>Apollo Portal Console<\/title>/);
 });

@@ -7,6 +7,7 @@ import json
 import os
 from pathlib import Path, PurePosixPath
 import platform
+import re
 import struct
 import subprocess
 import tempfile
@@ -65,9 +66,21 @@ def source_files(root):
     return files
 
 
+def require_preview_version(version):
+    match = re.fullmatch(
+        r"(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)"
+        r"-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)(?:\+[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?",
+        version,
+    )
+    require(match is not None, "Preview packages require a SemVer prerelease suffix, for example 0.1.3-rc.1")
+    require(all(not part.isdigit() or part == "0" or not part.startswith("0")
+                for part in match.group(1).split(".")), "Invalid SemVer prerelease numeric identifier")
+
+
 def package_manifest(root, target):
     manifest = json.loads((root / "manifest.json").read_text())
     require(manifest["version"] == json.loads((root / "package.json").read_text())["version"], "Version mismatch")
+    require_preview_version(manifest["version"])
     binary = PurePosixPath(manifest["entrypoints"]["backend"]["executable"]).name
     if target.startswith("windows-"):
         binary += ".exe"
@@ -189,6 +202,7 @@ def main():
     parser.add_argument("--target", choices=("all",) + TARGETS, default="all")
     args = parser.parse_args()
     manifest = json.loads((ROOT / "manifest.json").read_text())
+    require_preview_version(manifest["version"])
     output = ROOT / "dist" / f"release-v{manifest['version']}"
     selected = TARGETS if args.target == "all" else (args.target,)
     if args.target != "all":

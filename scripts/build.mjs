@@ -51,7 +51,7 @@ const code = result.outputFiles[0].text;
 await mkdir(resolve(root, "ui"), { recursive: true });
 await writeFile(
   resolve(root, "ui/index.html"),
-  '<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Apollo Config</title><style>' +
+  '<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Apollo Portal Console</title><style>' +
     css +
     '</style></head><body><div id="app"></div><script>(()=>{' +
     code.replace(/<\/script/gi, "<\\/script") +
