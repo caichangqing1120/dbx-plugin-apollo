@@ -261,20 +261,19 @@ export async function handleReferenceAction(action, element, ctx, data = {}) {
           { name: data.name, comment: data.comment, appId: route.appId },
         );
         created.push(env);
-        if (s.advancedFormValues)
+        if (s.route === route && s.advancedFormValues)
           s.advancedFormValues.data["env_" + env] = false;
       } catch (error) {
+        if (s.route !== route) return;
         throw Error(
           `${created.join(", ")} ${created.length ? t("createdSuccessfully") : ""}; ${env}: ${error.message}`,
         );
       }
     }
-    await navigate({
-      ...route,
-      view: "config",
-      env: envs[0],
-      cluster: data.name,
-    });
+    if (s.route !== route) return;
+    s.clusterCreated = { name: data.name, environments: created };
+    s.advancedFormValues = null;
+    render();
     return;
   }
   if (action === "key-create-inline") {

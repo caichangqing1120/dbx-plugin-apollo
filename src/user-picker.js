@@ -1,10 +1,14 @@
 import { escapeHTML as e, attr } from './ui.js';
+import { referenceRow } from './reference-fields.js';
 let serial = 0;
 
-export function userSelector(name, label, value, s, required = true) {
+export function userSelector(name, label, value, s, required = true, layout = null) {
   const id = 'user-options-' + ++serial, multiple = name === 'admins';
   const choices = s.userChoices || s.users || [];
-  return `<div class="form-field"><span><label for="${id}-input">${required ? '<b>*</b> ' : ''}${e(label)}</label></span><div class="user-picker${multiple ? ' user-picker-multiple' : ''}" data-user-picker="${attr(name)}"${multiple ? ' data-multiple' : ''}>${multiple ? `<input type="hidden" name="${attr(name)}" value="${attr(value || '')}"><span class="user-picker-tags"></span>` : ''}<input id="${id}-input" ${multiple ? '' : `name="${attr(name)}"`} class="user-picker-input" value="${attr(multiple ? '' : value || '')}" autocomplete="off" role="combobox" aria-label="${attr(label)}" aria-autocomplete="list" aria-expanded="false" aria-controls="${id}"${required && !multiple ? ' required' : ''}><button type="button" class="user-picker-toggle" data-action="user-picker-toggle" aria-label="${attr(label)}">▾</button><div id="${id}" class="user-picker-options" role="listbox" hidden>${choices.map(user => `<button type="button" role="option" data-action="user-picker-select" data-user-id="${attr(user.userId)}" data-search="${attr((user.userId + ' ' + (user.name || '')).toLowerCase())}">${e(user.userId)}${user.name && user.name !== user.userId ? ` (${e(user.name)})` : ''}</button>`).join('')}</div></div></div>`;
+  const picker = `<div class="user-picker${multiple ? ' user-picker-multiple' : ''}" data-user-picker="${attr(name)}"${multiple ? ' data-multiple' : ''}>${multiple ? `<input type="hidden" name="${attr(name)}" value="${attr(value || '')}"><span class="user-picker-tags"></span>` : ''}<input id="${id}-input" ${multiple ? '' : `name="${attr(name)}"`} class="user-picker-input" value="${attr(multiple ? '' : value || '')}" autocomplete="off" role="combobox" aria-label="${attr(label)}" aria-autocomplete="list" aria-expanded="false" aria-controls="${id}"${required && !multiple ? ' required' : ''}><button type="button" class="user-picker-toggle" data-action="user-picker-toggle" aria-label="${attr(label)}">▾</button><div id="${id}" class="user-picker-options" role="listbox" hidden>${choices.map(user => `<button type="button" role="option" data-action="user-picker-select" data-user-id="${attr(user.userId)}" data-search="${attr((user.userId + ' ' + (user.name || '')).toLowerCase())}">${e(user.userId)}${user.name && user.name !== user.userId ? ` (${e(user.name)})` : ''}</button>`).join('')}</div></div>`;
+  return layout
+    ? referenceRow(label, picker, { ...layout, required, labelFor: id + '-input' })
+    : `<div class="form-field"><span><label for="${id}-input">${required ? '<b>*</b> ' : ''}${e(label)}</label></span>${picker}</div>`;
 }
 
 function setOpen(picker, open) {
@@ -51,7 +55,17 @@ export function userPickerAction(action, element, root) {
 
 export function userPickerKey(event, root) {
   const picker = event.target.closest('[data-user-picker]');
-  if (!picker || event.target.getAttribute('aria-expanded') !== 'true') return false;
+  if (!picker || !event.target.classList.contains('user-picker-input')) return false;
+  if (event.target.getAttribute('aria-expanded') !== 'true') {
+    if (!['Enter','ArrowDown','ArrowUp'].includes(event.key)) return false;
+    event.preventDefault();
+    const options = [...picker.querySelectorAll('[role="option"]')];
+    for (const option of options) { option.hidden = false; option.classList.remove('highlighted'); }
+    const selected = options.find(option => option.dataset.userId === event.target.value);
+    (selected || options[event.key === 'ArrowUp' ? options.length - 1 : 0])?.classList.add('highlighted');
+    setOpen(picker, true);
+    return true;
+  }
   const options = [...picker.querySelectorAll('[role="option"]')].filter(option => !option.hidden), selected = options.findIndex(option => option.classList.contains('highlighted'));
   if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
     event.preventDefault(); options.forEach(option => option.classList.remove('highlighted'));

@@ -13,7 +13,10 @@ The 0.1.2 continuation restores all-environment role groups, independently autho
 user controls, dedicated warning flows, real lock-info modifiers and gray inherited configuration.
 It also fixes stale editor/rollback responses, precision-losing JSON formatting and a footer
 hit-testing regression found during final browser traversal.
-See [current repairs, measurements and remaining differences](docs/parity-finish.md).
+The next-version continuation repairs shared form columns/help/static values, keeps cluster
+creation on the original success page, and restores public Namespace department-prefix
+display, draft retention and keyboard focus. See [current repairs and verification scope](docs/parity-polish.md)
+and the [historical 0.1.2 audit](docs/parity-finish.md).
 The strict all-page, all-dialog 1:1 gate still FAILS; this is an unsigned Preview/development
 candidate, not an accepted replica. The [v0.1.2 release](https://github.com/caichangqing1120/dbx-plugin-apollo/releases/tag/v0.1.2)
 contains complete native candidate packages, not a promise of completed visual parity.
@@ -22,6 +25,23 @@ contains complete native candidate packages, not a promise of completed visual p
 Official signing of all five `0.1.2` targets and PR #295's maintainer merge completed on
 2026-10-20. The author Release assets remain unsigned review candidates, distinct from
 the official signed Store artifacts.
+
+## Installation And Connection
+
+In DBX's plugin marketplace, identify the signed plugin by publisher **caichangqing1120**
+and ID **`io.github.caichangqing1120.apollo`**. The published `0.1.2` entry still uses the old
+name **Apollo Config / Apollo 配置中心**; the distinct Portal Console names are for the next
+release. A similarly named Apollo plugin from another publisher is a different product.
+
+After installation, create an Apollo connection with the Portal hostname, port (normally
+8070), HTTP/HTTPS, optional context path and an existing ordinary username/password. Use a
+hostname rather than a full URL. The backend logs in to the Portal; no website is embedded.
+Test against a non-production environment before using configuration writes or deletions.
+SSO/OIDC, LDAP and token-only connection authentication are not supported.
+
+The official signed package is different from the author's unsigned GitHub Release
+candidate. Unsigned packages require DBX's explicit development-package setting; do not
+disable signature checks or invent a signing key to install a candidate as a trusted package.
 
 ## Current Route Coverage (Not Original-Workflow Parity)
 
@@ -41,11 +61,40 @@ the official signed Store artifacts.
 
 All pages, dialogs, CSS, router and API clients are independently written. The original
 Apollo 2.5.2 frontend is used only as an external reference, never loaded by the plugin.
-The developer re-captured all 24 management pages and 53 native normal page/dialog/subview
+For the historical 0.1.2 baseline, the developer captured 24 management pages and 53 native normal page/dialog/subview
 states, triggered 14 warning scenarios on both original and SDK surfaces, and compared
 normalized copy, computed fonts, dialog geometry and cropped pixels. Key workflows, user
 controls, gray inheritance, language/theme/narrow contexts and sidebar hit-testing are
 verified separately. These checks do not close the remaining page/form/context differences.
+
+## Current Repair Scope
+
+These changes apply to the development version, not the immutable signed `0.1.2` release.
+
+- Creation/settings forms use independently authored column gutters, correctly grouped help
+  text, source labels/format ordering and non-editable route identities that retain form data.
+- Cluster creation shows the source-style success state instead of immediately navigating
+  away. Completed forms cannot be resubmitted; a new visit resets the form and late replies
+  cannot replace another route.
+- Public Namespace names show the selected application's department prefix. Prefix/type
+  changes preserve the name, format, comment and keyboard focus; the server still performs
+  the actual namespace creation and permission checks.
+- Enter submits only from text-like inputs. Cancel buttons and native selectors keep their
+  own keyboard actions, so Enter on a destructive dialog's Cancel cannot execute its write.
+  Enter/arrow keys on a closed user combobox open choices rather than accidentally saving
+  the enclosing application or permission form.
+- Language changes retain unsaved application/editor values and owner/administrator
+  selections in memory. Drafts are not written to Host storage; a removed administrator
+  chip is not resurrected by rerendering.
+- Configuration columns keep a tall sidebar in document flow so the footer stays below
+  its content, while desktop and narrow-host column positions remain unchanged.
+- Current normal form-control geometry, conditional flows and warning comparisons have
+  separate evidence. A passing control/frame check is not whole-page pixel acceptance.
+
+**Still not accepted as a full 1:1 replica.** Navigation/search-picker details, other
+administration tables/forms, previews/editors and some conditional/delete contexts remain
+developer-owned work. Live Apollo persistence, authentication/authorization integration and
+native DBX installation/restart/save-file acceptance are separate, unverified gates.
 
 ## Local Development
 
@@ -56,6 +105,7 @@ The release workflow pins Go 1.26.3 and uses only standard-library cross-target 
 npm ci
 npm test
 npm run test:backend
+(cd backend && go vet ./...)
 npm run test:smoke
 npm run build
 dbx-plugin dev --path . --port 5198
@@ -92,10 +142,28 @@ must retain a prerelease suffix such as `-rc.1` in the manifest, sidecar, tag an
 
 Unsigned packages require explicitly enabling development packages in DBX. Official
 marketplace installation requires DBX Store review, signing and merge; the author cannot
-self-assign official trust or publish signed catalog entries. See [release notes](docs/release-notes-v0.1.2.md)
+self-assign official trust or publish signed catalog entries. See [current Preview notes](docs/release-notes-v0.1.3-rc.1.md)
 and [privacy/security boundaries](docs/security.md).
 
+## Release And Update Policy
+
+- Current development identity is `0.1.3-rc.1`; it is not a published update yet. Preserve
+  existing version-addressed source tags, unsigned candidates and official signed assets.
+- This validation iteration uses manual release submission: an author-initiated tag/Preview
+  Release, CI-built candidate packages and an author-submitted Store candidate PR. Review,
+  protected signing and maintainer merge are still required.
+- [Automation registration PR #298](https://github.com/t8y2/dbx-store/pull/298) registers future
+  release discovery only. It does not publish this development version or change signing policy.
+- Store discovery currently skips GitHub Draft/Prerelease releases. An RC remains a Preview
+  and is submitted manually; do not disguise it as a stable release to bypass that filter.
+
 ## Testing Boundaries
+
+Current scoped checks: **176 JS + 14 packaging regressions**, **14 Go race tests + vet**,
+**16 normal form controls**, **14 paired warning interiors**, and the creation, keyboard,
+language/theme/narrow and sidebar-flow checks documented in [the current audit](docs/parity-polish.md).
+The [current package proof](docs/package-verification-0.1.3-rc.1.json) records exact unsigned
+hashes and native targets. None of these counts is a full 1:1 or live-installation verdict.
 
 `npm run test:smoke` starts a controlled loopback HTTP fixture and a real Go sidecar and checks
 JSON-RPC login/edit/publish/history/rollback, gray merge, sync, key/consumer/role/admin APIs,
@@ -103,6 +171,7 @@ commit history/revocation and 2 MiB chunked requests/replies under the Host mess
 NOT an actual Apollo installation. UI screenshots also use that fixture and the actual DBX
 SDK sandbox. Neither is evidence of production or live Apollo acceptance.
 
-See [reference evidence](docs/reference.md), [verification](docs/verification.md), and the
+See [current repair evidence](docs/parity-polish.md), [reference evidence](docs/reference.md),
+[verification history](docs/verification.md), and the
 [implementation spec](docs/specs/001-apollo-portal/spec.md). The SDK in `backend/sdk` is vendored
 from DBX under Apache-2.0 to avoid requiring a local DBX checkout to build.

@@ -1659,9 +1659,150 @@ test('gray item deletion checks its lock and uses the source key/value confirmat
 test('source parity: application forms keep source-specific owner and administrator labels',async()=>{
  const {win,root,client,app}=await setup();
  await app.navigate({view:'create-project'});
- assert.match(root.querySelector('[data-user-picker="ownerName"]').parentElement.textContent,/应用负责人/);
- assert.match(root.querySelector('[data-user-picker="admins"]').parentElement.textContent,/应用管理员/);
+ const owner=root.querySelector('[data-user-picker="ownerName"]');
+ assert.match(owner.closest('.form-field').textContent,/应用负责人/);
+ assert.equal(owner.closest('.form-field').querySelector('label').htmlFor,owner.querySelector('.user-picker-input').id);
+ assert.match(root.querySelector('[data-user-picker="admins"]').closest('.form-field').textContent,/应用管理员/);
  await app.navigate({...base,view:'project'});
- assert.equal(root.querySelector('.reference-section h4').textContent.startsWith('管理员'),true);
+ assert.equal(root.querySelector('.project-section-title').textContent.startsWith('管理员'),true);
+ await win.happyDOM.close();
+});
+
+test('cluster creation retains the source success page and cannot replay the completed form', async () => {
+ const {win,root,client,app}=await setup();
+ const calls=[];client.createCluster=async(scope,body)=>{calls.push({scope,body});return body;};
+ await app.navigate({...base,view:'cluster-create'});
+ await submitInline(root,app,win,'[data-submit-action="cluster-create-submit"]',{name:'new-cluster',comment:'test',env_DEV:true});
+ assert.equal(calls.length,1);
+ assert.equal(calls[0].scope.env,'DEV');
+ assert.equal(calls[0].body.name,'new-cluster');
+ assert.equal(app.state.route.view,'cluster-create');
+ assert.match(root.querySelector('[data-creation-complete]')?.textContent || '',/创建成功/);
+ assert.equal(root.querySelector('[data-submit-action="cluster-create-submit"]'),null);
+ await app.navigate({view:'home'});
+ await app.navigate({...base,view:'cluster-create'});
+ assert.ok(root.querySelector('[data-submit-action="cluster-create-submit"]'));
+ assert.equal(calls.length,1);
+ await win.happyDOM.close();
+});
+
+test('public Namespace prefixes follow the app department and preserve drafts when toggled', async () => {
+ const {win,root,client,app}=await setup();
+ await app.navigate({...base,view:'namespace-create'});
+ root.querySelector('input[name=name]').value='metrics';
+ const publicType=root.querySelector('input[name=namespaceType][value=public]');publicType.focus();publicType.checked=true;
+ publicType.dispatchEvent(new win.Event('input',{bubbles:true}));await app.idle();
+ assert.equal(root.querySelector('[data-namespace-prefix]')?.textContent,'D.');
+ assert.equal(root.querySelector('input[name=name]').value,'metrics');
+ assert.equal(win.document.activeElement?.name,'namespaceType');
+ assert.equal(win.document.activeElement?.value,'public');
+ const prefix=root.querySelector('input[name=appendPrefix]');prefix.focus();prefix.checked=false;
+ prefix.dispatchEvent(new win.Event('input',{bubbles:true}));await app.idle();
+ assert.equal(root.querySelector('[data-namespace-prefix]'),null);
+ assert.equal(root.querySelector('input[name=name]').value,'metrics');
+ assert.equal(root.querySelector('input[name=appendPrefix]').checked,false);
+ assert.equal(win.document.activeElement?.name,'appendPrefix');
+ await win.happyDOM.close();
+});
+
+test('late cluster creation completion cannot replace the next route', async () => {
+ const {win,root,client,app}=await setup();let finish;
+ client.createCluster=()=>new Promise(resolve=>{finish=resolve;});
+ await app.navigate({...base,view:'cluster-create'});
+ const form=root.querySelector('[data-submit-action="cluster-create-submit"]');
+ form.querySelector('input[name=name]').value='delayed';form.querySelector('input[name=env_DEV]').checked=true;
+ form.dispatchEvent(new win.Event('submit',{bubbles:true,cancelable:true}));
+ await Promise.resolve();assert.equal(typeof finish,'function');
+ await app.navigate({view:'home'});finish({name:'delayed'});await app.idle();
+ assert.equal(app.state.route.view,'home');
+ assert.equal(root.querySelector('[data-creation-complete]'),null);
+ await win.happyDOM.close();
+});
+
+test('late cluster creation errors do not annotate another route', async () => {
+ const {win,root,client,app}=await setup();let reject;
+ client.createCluster=()=>new Promise((_resolve,failure)=>{reject=failure;});
+ await app.navigate({...base,view:'cluster-create'});
+ const form=root.querySelector('[data-submit-action="cluster-create-submit"]');
+ form.querySelector('input[name=name]').value='delayed-error';form.querySelector('input[name=env_DEV]').checked=true;
+ form.dispatchEvent(new win.Event('submit',{bubbles:true,cancelable:true}));await Promise.resolve();
+ await app.navigate({view:'home'});reject(Error('cluster request failed'));await app.idle();
+ assert.equal(app.state.route.view,'home');
+ assert.equal(root.textContent.includes('cluster request failed'),false);
+ await win.happyDOM.close();
+});
+
+test('cluster creation failure on the same route remains visible and never renders success', async () => {
+ const {win,root,client,app}=await setup();client.createCluster=async()=>{throw Error('creation refused');};
+ await app.navigate({...base,view:'cluster-create'});
+ await submitInline(root,app,win,'[data-submit-action="cluster-create-submit"]',{name:'denied',env_DEV:true});
+ assert.equal(root.textContent.includes('creation refused'),true);
+ assert.equal(root.querySelector('[data-creation-complete]'),null);
+ assert.ok(root.querySelector('[data-submit-action="cluster-create-submit"]'));
+ await win.happyDOM.close();
+});
+
+test('Enter on a destructive dialog cancel button never submits the pending write', async () => {
+ const {win,root,client,app}=await setup();let writes=0;client.deleteItem=async()=>{writes++;};
+ await app.navigate({...base,view:'config'});
+ root.querySelector('[data-action=delete-item]').click();await app.idle();
+ const cancel=root.querySelector('[role=dialog] footer [data-action=cancel-dialog]');assert.ok(cancel);
+ const key=new win.KeyboardEvent('keydown',{key:'Enter',bubbles:true,cancelable:true});cancel.dispatchEvent(key);await app.idle();
+ assert.equal(writes,0);assert.equal(key.defaultPrevented,false);
+ cancel.click();await app.idle();assert.equal(root.querySelector('[role=dialog]'),null);
+ await win.happyDOM.close();
+});
+
+test('Enter on a Namespace format selector does not submit its creation form', async () => {
+ const {win,root,client,app}=await setup();let writes=0;client.createNamespace=async()=>{writes++;return {name:'metrics'};};
+ await app.navigate({...base,view:'namespace-create'});root.querySelector('input[name=name]').value='metrics';
+ const select=root.querySelector('select[name=format]'),key=new win.KeyboardEvent('keydown',{key:'Enter',bubbles:true,cancelable:true});
+ select.dispatchEvent(key);await app.idle();assert.equal(writes,0);assert.equal(key.defaultPrevented,false);
+ assert.equal(app.state.route.view,'namespace-create');await win.happyDOM.close();
+});
+
+test('Enter on a closed owner combobox opens choices instead of creating an application', async () => {
+ const {win,root,client,app}=await setup();let writes=0;client.saveApp=async()=>{writes++;return {appId:'NewApp'};};
+ await app.navigate({view:'create-project'});
+ root.querySelector('input[name=appId]').value='NewApp';root.querySelector('input[name=name]').value='New App';
+ root.querySelector('select[name=orgId]').value='D';const owner=root.querySelector('input[name=ownerName]');owner.value='apollo';
+ owner.dispatchEvent(new win.KeyboardEvent('keydown',{key:'Enter',bubbles:true,cancelable:true}));await app.idle();
+ assert.equal(writes,0);assert.equal(root.querySelector('input[name=ownerName]').getAttribute('aria-expanded'),'true');
+ owner.dispatchEvent(new win.KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true}));
+ assert.equal(owner.getAttribute('aria-expanded'),'false');
+ owner.dispatchEvent(new win.KeyboardEvent('keydown',{key:'ArrowDown',bubbles:true,cancelable:true}));
+ assert.equal(owner.getAttribute('aria-expanded'),'true');assert.equal(writes,0);
+ assert.equal(app.state.route.view,'create-project');await win.happyDOM.close();
+});
+
+test('language changes retain unsaved application fields and selected owner/admin values without persisting the draft', async () => {
+ const {win,root,client,app,saved}=await setup();client.users=async()=>[{userId:'alice'},{userId:'bob'}];
+ await app.navigate({view:'create-project'});
+ for(const [name,value] of Object.entries({appId:'DraftApp',name:'Draft Name',orgId:'D'})){
+  const control=root.querySelector(`[name=${name}]`);control.value=value;control.dispatchEvent(new win.Event('input',{bubbles:true}));
+ }
+ const owner=root.querySelector('[name=ownerName]');owner.value='ali';owner.dispatchEvent(new win.Event('input',{bubbles:true}));
+ owner.dispatchEvent(new win.KeyboardEvent('keydown',{key:'Enter',bubbles:true,cancelable:true}));
+ root.querySelector('[data-user-picker=admins] [data-action=user-picker-toggle]').click();
+ root.querySelector('[data-user-picker=admins] [data-user-id=bob]').click();await app.idle();
+ await app.setLocale('en');
+ assert.equal(root.querySelector('[name=appId]').value,'DraftApp');assert.equal(root.querySelector('[name=name]').value,'Draft Name');
+ assert.equal(root.querySelector('[name=orgId]').value,'D');assert.equal(root.querySelector('[name=ownerName]').value,'alice');
+ assert.equal(root.querySelector('[name=admins]').value,'bob');assert.equal(root.querySelectorAll('[data-user-chip]').length,1);
+ root.querySelector('[data-user-picker=admins] [data-action=user-picker-remove]').click();await app.idle();await app.setLocale('zh-CN');
+ assert.equal(root.querySelector('[name=admins]').value,'');assert.equal(root.querySelectorAll('[data-user-chip]').length,0);
+ assert.equal(client.calls.filter(c=>c[0]==='saveApp').length,0);
+ assert.equal(saved.some(value=>value.includes('Draft Name')),false);
+ await win.happyDOM.close();
+});
+
+test('language changes retain an unsaved item editor without sending a write', async () => {
+ const {win,root,client,app}=await setup();let writes=0;client.updateItem=async()=>{writes++;};
+ await app.navigate({...base,view:'config'});root.querySelector('[data-action=edit-item]').click();await app.idle();
+ for(const [name,value] of Object.entries({value:'unsaved <&> value',comment:'kept comment'})){
+  const control=root.querySelector(`[role=dialog] [name=${name}]`);control.value=value;control.dispatchEvent(new win.Event('input',{bubbles:true}));
+ }
+ await app.setLocale('en');assert.equal(root.querySelector('[role=dialog] [name=value]').value,'unsaved <&> value');
+ assert.equal(root.querySelector('[role=dialog] [name=comment]').value,'kept comment');assert.equal(writes,0);
  await win.happyDOM.close();
 });

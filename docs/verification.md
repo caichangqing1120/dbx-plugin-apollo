@@ -1,5 +1,9 @@
 # Verification - Apollo Handwritten Plugin 0.1.2
 
+Current unpublished development repairs are tracked separately in [parity-polish.md](parity-polish.md)
+and [parity/polish-manifest.json](parity/polish-manifest.json), with `0.1.3-rc.1` package proof.
+The following 0.1.2 checks remain historical, not evidence for the latest changed source.
+
 Date: 2026-10-19. **Full original-page/modal 1:1 acceptance remains FAIL.**
 This is an independently authored implementation and an unsigned local candidate, not an
 embedded Portal or an accepted full replica. Current repairs and precise remaining items are

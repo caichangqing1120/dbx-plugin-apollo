@@ -1,0 +1,1523 @@
+{
+  "auditDate": "2026-10-20",
+  "referenceTag": "v2.5.2",
+  "referenceCommit": "ed9785c87b390c22efece9ea7ec7eeab2d20a042",
+  "verdict": "FAIL",
+  "acceptancePassed": false,
+  "environment": "loopback controlled fixture + real SDK sandbox and Go sidecar; original UI separate reference only",
+  "viewport": {
+    "reference": [
+      1304,
+      876
+    ],
+    "nativeInner": [
+      1304,
+      876
+    ]
+  },
+  "pages": [
+    {
+      "source": "index.html",
+      "native": "index",
+      "status": "FAIL",
+      "evidenceKind": "historical 0.1.2 baseline pair/source finding; not freshly reverified after this increment",
+      "referenceImage": "baseline/reference-index.png",
+      "nativeImage": "baseline/native-index.png",
+      "finding": "顶栏搜索仍不是原版 Select2，部分图标/控件细节不同。",
+      "remediation": "导航、语言页签、应用列表和页脚对照",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    },
+    {
+      "source": "app.html",
+      "native": "app",
+      "status": "FAIL",
+      "evidenceKind": "current paired normal page; selected control/frame geometry only, not complete-page pixel acceptance",
+      "referenceImage": "after-reference-app.png",
+      "nativeImage": "after-native-app.png",
+      "finding": "本页选定普通控件及面板高度已按原版修复并复测；导航、选择器内部和其他条件状态仍不能据此判整页 1:1。",
+      "remediation": "自写单/多用户选择器，原版负责人/管理员标签和表单顺序",
+      "scopedControlChecks": [
+        {
+          "source": "app.html",
+          "field": "appId",
+          "nativeBox": {
+            "x": 457.65625,
+            "y": 172.84375,
+            "width": 179.328125,
+            "height": 34
+          },
+          "referenceBox": {
+            "x": 457.65625,
+            "y": 172.84375,
+            "width": 179.328125,
+            "height": 34
+          },
+          "differences": [],
+          "passed": true
+        },
+        {
+          "source": "app.html",
+          "field": "name",
+          "nativeBox": {
+            "x": 457.65625,
+            "y": 240.625,
+            "width": 318.875,
+            "height": 34
+          },
+          "referenceBox": {
+            "x": 457.65625,
+            "y": 240.625,
+            "width": 318.875,
+            "height": 34
+          },
+          "differences": [],
+          "passed": true
+        },
+        {
+          "source": "app.html",
+          "field": "owner",
+          "nativeBox": {
+            "x": 457.65625,
+            "y": 308.40625,
+            "width": 450,
+            "height": 28
+          },
+          "referenceBox": {
+            "x": 457.65625,
+            "y": 308.40625,
+            "width": 450,
+            "height": 28
+          },
+          "differences": [],
+          "passed": true
+        },
+        {
+          "source": "app.html",
+          "field": "department",
+          "nativeBox": {
+            "x": 457.65625,
+            "y": 129.84375,
+            "width": 179.328125,
+            "height": 28
+          },
+          "referenceBox": {
+            "x": 457.65625,
+            "y": 129.84375,
+            "width": 179.328125,
+            "height": 28
+          },
+          "differences": [],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "source": "config.html",
+      "native": "config",
+      "status": "FAIL",
+      "evidenceKind": "historical 0.1.2 baseline pair/source finding; not freshly reverified after this increment",
+      "referenceImage": "baseline/reference-config.png",
+      "nativeImage": "baseline/native-config.png",
+      "finding": "主灰切换、表格列宽/排序图标及行操作排列仍不同；不能判整页 1:1。",
+      "remediation": "类型/空值、过滤/文本/提交历史、发布/回滚、灰度 Key 跳转",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    },
+    {
+      "source": "app/setting.html",
+      "native": "app-setting",
+      "status": "FAIL",
+      "evidenceKind": "current paired normal page; selected control/frame geometry only, not complete-page pixel acceptance",
+      "referenceImage": "after-reference-app-setting.png",
+      "nativeImage": "after-native-app-setting.png",
+      "finding": "本页选定普通控件及面板高度已按原版修复并复测；导航、选择器内部和其他条件状态仍不能据此判整页 1:1。",
+      "remediation": "默认只读、独立编辑、管理员选择、最后管理员专用警告",
+      "scopedControlChecks": [
+        {
+          "source": "app/setting.html",
+          "field": "appId",
+          "nativeBox": {
+            "x": 333.78125,
+            "y": 418.78125,
+            "width": 70.375,
+            "height": 34
+          },
+          "referenceBox": {
+            "x": 333.765625,
+            "y": 418.78125,
+            "width": 70.375,
+            "height": 34
+          },
+          "differences": [],
+          "passed": true
+        },
+        {
+          "source": "app/setting.html",
+          "field": "name",
+          "nativeBox": {
+            "x": 333.78125,
+            "y": 510.78125,
+            "width": 303.21875,
+            "height": 34
+          },
+          "referenceBox": {
+            "x": 333.765625,
+            "y": 510.78125,
+            "width": 303.21875,
+            "height": 34
+          },
+          "differences": [],
+          "passed": true
+        },
+        {
+          "source": "app/setting.html",
+          "field": "owner",
+          "nativeBox": {
+            "x": 333.78125,
+            "y": 578.5625,
+            "width": 450,
+            "height": 28
+          },
+          "referenceBox": {
+            "x": 333.765625,
+            "y": 578.5625,
+            "width": 450,
+            "height": 28
+          },
+          "differences": [],
+          "passed": true
+        },
+        {
+          "source": "app/setting.html",
+          "field": "department",
+          "nativeBox": {
+            "x": 333.78125,
+            "y": 467.78125,
+            "width": 219.90625,
+            "height": 28
+          },
+          "referenceBox": {
+            "x": 333.765625,
+            "y": 467.78125,
+            "width": 219.90625,
+            "height": 28
+          },
+          "differences": [],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "source": "app/access_key.html",
+      "native": "app-access_key",
+      "status": "FAIL",
+      "evidenceKind": "historical 0.1.2 baseline pair/source finding; not freshly reverified after this increment",
+      "referenceImage": "baseline/reference-app-access_key.png",
+      "nativeImage": "baseline/native-app-access_key.png",
+      "finding": "列宽、环境选择文案和表头/操作细节仍需对齐。",
+      "remediation": "原版明文授权页、适用模式操作、全部环境及原版空态",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    },
+    {
+      "source": "app/manage_cluster.html",
+      "native": "app-manage_cluster",
+      "status": "FAIL",
+      "evidenceKind": "historical 0.1.2 baseline pair/source finding; not freshly reverified after this increment",
+      "referenceImage": "baseline/reference-app-manage_cluster.png",
+      "nativeImage": "baseline/native-app-manage_cluster.png",
+      "finding": "标题/分组留白与行内按钮图标仍不同。",
+      "remediation": "紧凑集群行、按环境分组、右侧授权",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    },
+    {
+      "source": "cluster.html",
+      "native": "cluster",
+      "status": "FAIL",
+      "evidenceKind": "current paired normal page; selected control/frame geometry only, not complete-page pixel acceptance",
+      "referenceImage": "after-reference-cluster.png",
+      "nativeImage": "after-native-cluster.png",
+      "finding": "本页选定普通控件及面板高度已按原版修复并复测；导航、选择器内部和其他条件状态仍不能据此判整页 1:1。",
+      "remediation": "四条真实说明、独立创建、多环境和备注",
+      "scopedControlChecks": [
+        {
+          "source": "cluster.html",
+          "field": "appId",
+          "nativeBox": {
+            "x": 387.875,
+            "y": 310.171875,
+            "width": 70.375,
+            "height": 34
+          },
+          "referenceBox": {
+            "x": 387.875,
+            "y": 310.171875,
+            "width": 70.375,
+            "height": 34
+          },
+          "differences": [],
+          "passed": true
+        },
+        {
+          "source": "cluster.html",
+          "field": "name",
+          "nativeBox": {
+            "x": 387.875,
+            "y": 359.171875,
+            "width": 388.65625,
+            "height": 34
+          },
+          "referenceBox": {
+            "x": 387.875,
+            "y": 359.171875,
+            "width": 388.65625,
+            "height": 34
+          },
+          "differences": [],
+          "passed": true
+        },
+        {
+          "source": "cluster.html",
+          "field": "comment",
+          "nativeBox": {
+            "x": 387.875,
+            "y": 426.953125,
+            "width": 388.65625,
+            "height": 74
+          },
+          "referenceBox": {
+            "x": 387.875,
+            "y": 426.953125,
+            "width": 388.65625,
+            "height": 74
+          },
+          "differences": [],
+          "passed": true
+        },
+        {
+          "source": "cluster.html",
+          "field": "DEV",
+          "nativeBox": {
+            "x": 395.875,
+            "y": 547.734375,
+            "width": 13,
+            "height": 13
+          },
+          "referenceBox": {
+            "x": 395.875,
+            "y": 547.734375,
+            "width": 13,
+            "height": 13
+          },
+          "differences": [],
+          "passed": true
+        },
+        {
+          "source": "cluster.html",
+          "field": "UAT",
+          "nativeBox": {
+            "x": 395.875,
+            "y": 586.296875,
+            "width": 13,
+            "height": 13
+          },
+          "referenceBox": {
+            "x": 395.875,
+            "y": 586.296875,
+            "width": 13,
+            "height": 13
+          },
+          "differences": [],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "source": "cluster/ns_role.html",
+      "native": "cluster-ns_role",
+      "status": "FAIL",
+      "evidenceKind": "historical 0.1.2 baseline pair/source finding; not freshly reverified after this increment",
+      "referenceImage": "baseline/reference-cluster-ns_role.png",
+      "nativeImage": "baseline/native-cluster-ns_role.png",
+      "finding": "授权标签的边界、横向比例和组间间距仍有差异。",
+      "remediation": "真实 DTO、单独修改/发布授权、可搜索用户控件",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    },
+    {
+      "source": "namespace.html",
+      "native": "namespace",
+      "status": "FAIL",
+      "evidenceKind": "current paired normal page; selected control/frame geometry only, not complete-page pixel acceptance",
+      "referenceImage": "after-reference-namespace.png",
+      "nativeImage": "after-native-namespace.png",
+      "finding": "本页选定普通控件及面板高度已按原版修复并复测；导航、选择器内部和其他条件状态仍不能据此判整页 1:1。",
+      "remediation": "创建/关联模式、公开/私有、格式和原版说明",
+      "scopedControlChecks": [
+        {
+          "source": "namespace.html",
+          "field": "name",
+          "nativeBox": {
+            "x": 442.65625,
+            "y": 492.625,
+            "width": 318.875,
+            "height": 34
+          },
+          "referenceBox": {
+            "x": 442.65625,
+            "y": 492.625,
+            "width": 318.875,
+            "height": 34
+          },
+          "differences": [],
+          "passed": true
+        },
+        {
+          "source": "namespace.html",
+          "field": "format",
+          "nativeBox": {
+            "x": 776.53125,
+            "y": 492.625,
+            "width": 109.546875,
+            "height": 34
+          },
+          "referenceBox": {
+            "x": 776.53125,
+            "y": 492.625,
+            "width": 109.546875,
+            "height": 34
+          },
+          "differences": [],
+          "passed": true
+        },
+        {
+          "source": "namespace.html",
+          "field": "comment",
+          "nativeBox": {
+            "x": 442.65625,
+            "y": 556.625,
+            "width": 458.4375,
+            "height": 74
+          },
+          "referenceBox": {
+            "x": 442.65625,
+            "y": 556.625,
+            "width": 458.4375,
+            "height": 74
+          },
+          "differences": [],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "source": "namespace/role.html",
+      "native": "namespace-role",
+      "status": "FAIL",
+      "evidenceKind": "historical 0.1.2 baseline pair/source finding; not freshly reverified after this increment",
+      "referenceImage": "baseline/reference-namespace-role.png",
+      "nativeImage": "baseline/native-namespace-role.png",
+      "finding": "组边距、用户控件/环境控件细节未达完整像素一致。",
+      "remediation": "同时展开全局/DEV/UAT 授权组，授予/移除保持行 scope",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    },
+    {
+      "source": "config/history.html",
+      "native": "config-history",
+      "status": "FAIL",
+      "evidenceKind": "historical 0.1.2 baseline pair/source finding; not freshly reverified after this increment",
+      "referenceImage": "baseline/reference-config-history.png",
+      "nativeImage": "baseline/native-config-history.png",
+      "finding": "详情按钮/图例及不同格式的版本内容仍需完整逐态对齐。",
+      "remediation": "真实 compare、时间线、10 条分页、选定版本真实 GET 和防串页",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    },
+    {
+      "source": "config/sync.html",
+      "native": "config-sync",
+      "status": "FAIL",
+      "evidenceKind": "historical 0.1.2 baseline pair/source finding; not freshly reverified after this increment",
+      "referenceImage": "baseline/reference-config-sync.png",
+      "nativeImage": "baseline/native-config-sync.png",
+      "finding": "表头排序按钮样式、选择表列宽及预览布局仍不同。",
+      "remediation": "原版默认目标/源行、两条原版说明、两步流程",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    },
+    {
+      "source": "config/diff.html",
+      "native": "config-diff",
+      "status": "FAIL",
+      "evidenceKind": "historical 0.1.2 baseline pair/source finding; not freshly reverified after this increment",
+      "referenceImage": "baseline/reference-config-diff.png",
+      "nativeImage": "baseline/native-config-diff.png",
+      "finding": "选择表宽度、间距及差异高亮仍需逐态对齐。",
+      "remediation": "表格/文本模式、联合 Key、空源比较和原版说明",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    },
+    {
+      "source": "user-manage.html",
+      "native": "user-manage",
+      "status": "FAIL",
+      "evidenceKind": "historical 0.1.2 baseline pair/source finding; not freshly reverified after this increment",
+      "referenceImage": "baseline/reference-user-manage.png",
+      "nativeImage": "baseline/native-user-manage.png",
+      "finding": "部分列名/提示、编辑字段比例和按钮排列仍有差异。",
+      "remediation": "同页新增/编辑、筛选/重置、账号状态",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    },
+    {
+      "source": "server_config_manage.html",
+      "native": "server_config_manage",
+      "status": "FAIL",
+      "evidenceKind": "historical 0.1.2 baseline pair/source finding; not freshly reverified after this increment",
+      "referenceImage": "baseline/reference-server_config_manage.png",
+      "nativeImage": "baseline/native-server_config_manage.png",
+      "finding": "说明文案、编辑控件及行/页签几何仍有差异。",
+      "remediation": "Portal/ConfigDB 页签、过滤及内联编辑",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    },
+    {
+      "source": "system-role-manage.html",
+      "native": "system-role-manage",
+      "status": "FAIL",
+      "evidenceKind": "historical 0.1.2 baseline pair/source finding; not freshly reverified after this increment",
+      "referenceImage": "baseline/reference-system-role-manage.png",
+      "nativeImage": "baseline/native-system-role-manage.png",
+      "finding": "查询提示、标签/按钮位置和表单高度仍不同。",
+      "remediation": "横排选择/查询、Master 捕获目标、条件变化立即失效",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    },
+    {
+      "source": "system_info.html",
+      "native": "system_info",
+      "status": "FAIL",
+      "evidenceKind": "historical 0.1.2 baseline pair/source finding; not freshly reverified after this increment",
+      "referenceImage": "baseline/reference-system_info.png",
+      "nativeImage": "baseline/native-system_info.png",
+      "finding": "标题/说明和段落留白仍不同；并非原版长页像素一致。",
+      "remediation": "按环境两类服务、真实 Eureka appName 和健康查询",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    },
+    {
+      "source": "open/manage.html",
+      "native": "open-manage",
+      "status": "FAIL",
+      "evidenceKind": "historical 0.1.2 baseline pair/source finding; not freshly reverified after this increment",
+      "referenceImage": "baseline/reference-open-manage.png",
+      "nativeImage": "baseline/native-open-manage.png",
+      "finding": "表头文案、表格边界/列宽、按钮图标和页面高度仍有差异。",
+      "remediation": "创建/Token 授权入口、源删除确认与列表",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    },
+    {
+      "source": "open/add-consumer.html",
+      "native": "open-add-consumer",
+      "status": "FAIL",
+      "evidenceKind": "historical 0.1.2 baseline pair/source finding; not freshly reverified after this increment",
+      "referenceImage": "baseline/reference-open-add-consumer.png",
+      "nativeImage": "baseline/native-open-add-consumer.png",
+      "finding": "复选框说明、查询/授权表单间距及部分动态状态仍需对齐。",
+      "remediation": "共享 AppId、保留创建草稿、键盘选用户、原版限流条件",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    },
+    {
+      "source": "config_export.html",
+      "native": "config_export",
+      "status": "FAIL",
+      "evidenceKind": "historical 0.1.2 baseline pair/source finding; not freshly reverified after this increment",
+      "referenceImage": "baseline/reference-config_export.png",
+      "nativeImage": "baseline/native-config_export.png",
+      "finding": "环境选项布局、提示/冲突选择及文件/按钮位置仍不同。",
+      "remediation": "环境/应用集群页签、查询导出及 ZIP 导入",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    },
+    {
+      "source": "delete_app_cluster_namespace.html",
+      "native": "delete_app_cluster_namespace",
+      "status": "FAIL",
+      "evidenceKind": "historical 0.1.2 baseline pair/source finding; not freshly reverified after this increment",
+      "referenceImage": "baseline/reference-delete_app_cluster_namespace.png",
+      "nativeImage": "baseline/native-delete_app_cluster_namespace.png",
+      "finding": "查询结果区/说明/字段比例及删除确认还未完全等价。",
+      "remediation": "分资源查询/回显后删除、条件变化失效",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    },
+    {
+      "source": "audit_log_menu.html",
+      "native": "audit_log_menu",
+      "status": "FAIL",
+      "evidenceKind": "historical 0.1.2 baseline pair/source finding; not freshly reverified after this increment",
+      "referenceImage": "baseline/reference-audit_log_menu.png",
+      "nativeImage": "baseline/native-audit_log_menu.png",
+      "finding": "筛选区与列表面板边界、表头文案和间距仍有差异。",
+      "remediation": "查询日期/操作名称、真实审计行及链路入口",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    },
+    {
+      "source": "audit_log_trace_detail.html",
+      "native": "audit_log_trace_detail",
+      "status": "FAIL",
+      "evidenceKind": "historical 0.1.2 baseline pair/source finding; not freshly reverified after this increment",
+      "referenceImage": "baseline/reference-audit_log_trace_detail.png",
+      "nativeImage": "baseline/native-audit_log_trace_detail.png",
+      "finding": "标题/徽标/空态及非空属性历史未完成所有浏览器状态的像素验收。",
+      "remediation": "等宽三栏、树/实体/属性历史联动和分页",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    },
+    {
+      "source": "global_search_value.html",
+      "native": "global_search_value",
+      "status": "FAIL",
+      "evidenceKind": "historical 0.1.2 baseline pair/source finding; not freshly reverified after this increment",
+      "referenceImage": "baseline/reference-global_search_value.png",
+      "nativeImage": "baseline/native-global_search_value.png",
+      "finding": "列名、查询控件/空态几何仍未全部一致。",
+      "remediation": "查询表、去除多余空行、原版空态图和页脚",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    }
+  ],
+  "dialogs": [
+    {
+      "source": "app/setting.html",
+      "id": "warning",
+      "kind": "confirm",
+      "line": 171,
+      "status": "PASS",
+      "evidenceKind": "current browser-triggered rendered state; copy/font/frame/cropped pixels, not background or all possible contexts",
+      "referenceImage": "reference-dialog-warning.png",
+      "nativeImage": "native-dialog-warning.png",
+      "finding": "本声明列出的实际提示状态通过文案、字体、框体和内部像素门禁；不代表背景页或全部应用验收通过。",
+      "remediation": "原版专用流程已独立实现，并在原版和实际 SDK 两侧用同一受控场景触发。",
+      "verifiedStates": [
+        {
+          "id": "warning",
+          "scenario": "normal",
+          "copyEqual": true,
+          "fontEqual": true,
+          "nativeBox": {
+            "x": 172,
+            "y": 30,
+            "width": 960,
+            "height": 172.265625
+          },
+          "referenceBox": {
+            "x": 172,
+            "y": 30,
+            "width": 960,
+            "height": 172.265625
+          },
+          "pixels": {
+            "id": "warning",
+            "exactEqualPixelPercent": 100,
+            "meanAbsoluteRGBError": 0,
+            "crop": {
+              "borderExcluded": 3,
+              "width": 954,
+              "height": 166
+            }
+          }
+        }
+      ]
+    },
+    {
+      "source": "config/history.html",
+      "id": "rollbackAlertDialog",
+      "kind": "confirm",
+      "line": 317,
+      "status": "FAIL",
+      "evidenceKind": "historical baseline normal dialog; not current complete-context acceptance",
+      "referenceImage": "baseline/reference-modal-rollback-confirm.png",
+      "nativeImage": "baseline/native-modal-rollback-confirm.png",
+      "finding": "正常截图和流程回归不替代完整 1:1：字段比例、差异展示、按钮或特定状态尚未全部一致。",
+      "remediation": "对应原生流程、真实接口/DTO及保护回归已实现；正常状态已捕获。",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    },
+    {
+      "source": "config.html",
+      "id": "createBranchTips",
+      "kind": "modal",
+      "line": 347,
+      "status": "PASS",
+      "evidenceKind": "current browser-triggered rendered state; copy/font/frame/cropped pixels, not background or all possible contexts",
+      "referenceImage": "reference-dialog-createBranchTips.png",
+      "nativeImage": "native-dialog-createBranchTips.png",
+      "finding": "本声明列出的实际提示状态通过文案、字体、框体和内部像素门禁；不代表背景页或全部应用验收通过。",
+      "remediation": "原版专用流程已独立实现，并在原版和实际 SDK 两侧用同一受控场景触发。",
+      "verifiedStates": [
+        {
+          "id": "createBranchTips",
+          "scenario": "normal",
+          "copyEqual": true,
+          "fontEqual": true,
+          "nativeBox": {
+            "x": 172,
+            "y": 30,
+            "width": 960,
+            "height": 376.453125
+          },
+          "referenceBox": {
+            "x": 172,
+            "y": 30,
+            "width": 960,
+            "height": 376.453125
+          },
+          "pixels": {
+            "id": "createBranchTips",
+            "exactEqualPixelPercent": 100,
+            "meanAbsoluteRGBError": 0,
+            "crop": {
+              "borderExcluded": 3,
+              "width": 954,
+              "height": 370
+            }
+          }
+        }
+      ]
+    },
+    {
+      "source": "config.html",
+      "id": "deleteConfirmDialog",
+      "kind": "confirm",
+      "line": 260,
+      "status": "FAIL",
+      "evidenceKind": "historical baseline normal dialog; not current complete-context acceptance",
+      "referenceImage": "baseline/reference-modal-item-delete.png",
+      "nativeImage": "baseline/native-modal-item-delete.png",
+      "finding": "正常截图和流程回归不替代完整 1:1：字段比例、差异展示、按钮或特定状态尚未全部一致。",
+      "remediation": "对应原生流程、真实接口/DTO及保护回归已实现；正常状态已捕获。",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    },
+    {
+      "source": "config.html",
+      "id": "releaseNoPermissionDialog",
+      "kind": "confirm",
+      "line": 265,
+      "status": "PASS",
+      "evidenceKind": "current browser-triggered rendered state; copy/font/frame/cropped pixels, not background or all possible contexts",
+      "referenceImage": "reference-dialog-releaseNoPermissionDialog.png",
+      "nativeImage": "native-dialog-releaseNoPermissionDialog.png",
+      "finding": "本声明列出的实际提示状态通过文案、字体、框体和内部像素门禁；不代表背景页或全部应用验收通过。",
+      "remediation": "原版专用流程已独立实现，并在原版和实际 SDK 两侧用同一受控场景触发。",
+      "verifiedStates": [
+        {
+          "id": "releaseNoPermissionDialog",
+          "scenario": "modify-only",
+          "copyEqual": true,
+          "fontEqual": true,
+          "nativeBox": {
+            "x": 172,
+            "y": 30,
+            "width": 960,
+            "height": 172.265625
+          },
+          "referenceBox": {
+            "x": 172,
+            "y": 30,
+            "width": 960,
+            "height": 172.265625
+          },
+          "pixels": {
+            "id": "releaseNoPermissionDialog",
+            "exactEqualPixelPercent": 100,
+            "meanAbsoluteRGBError": 0,
+            "crop": {
+              "borderExcluded": 3,
+              "width": 954,
+              "height": 166
+            }
+          }
+        }
+      ]
+    },
+    {
+      "source": "config.html",
+      "id": "modifyNoPermissionDialog",
+      "kind": "confirm",
+      "line": 271,
+      "status": "PASS",
+      "evidenceKind": "current browser-triggered rendered state; copy/font/frame/cropped pixels, not background or all possible contexts",
+      "referenceImage": "reference-dialog-modifyNoPermissionDialog.png",
+      "nativeImage": "native-dialog-modifyNoPermissionDialog.png",
+      "finding": "本声明列出的实际提示状态通过文案、字体、框体和内部像素门禁；不代表背景页或全部应用验收通过。",
+      "remediation": "原版专用流程已独立实现，并在原版和实际 SDK 两侧用同一受控场景触发。",
+      "verifiedStates": [
+        {
+          "id": "modifyNoPermissionDialog",
+          "scenario": "no-permissions",
+          "copyEqual": true,
+          "fontEqual": true,
+          "nativeBox": {
+            "x": 172,
+            "y": 30,
+            "width": 960,
+            "height": 172.265625
+          },
+          "referenceBox": {
+            "x": 172,
+            "y": 30,
+            "width": 960,
+            "height": 172.265625
+          },
+          "pixels": {
+            "id": "modifyNoPermissionDialog",
+            "exactEqualPixelPercent": 100,
+            "meanAbsoluteRGBError": 0,
+            "crop": {
+              "borderExcluded": 3,
+              "width": 954,
+              "height": 166
+            }
+          }
+        }
+      ]
+    },
+    {
+      "source": "config.html",
+      "id": "masterNoPermissionDialog",
+      "kind": "confirm",
+      "line": 277,
+      "status": "PASS",
+      "evidenceKind": "current browser-triggered rendered state; copy/font/frame/cropped pixels, not background or all possible contexts",
+      "referenceImage": "reference-dialog-masterNoPermissionDialog.png",
+      "nativeImage": "native-dialog-masterNoPermissionDialog.png",
+      "finding": "本声明列出的实际提示状态通过文案、字体、框体和内部像素门禁；不代表背景页或全部应用验收通过。",
+      "remediation": "原版专用流程已独立实现，并在原版和实际 SDK 两侧用同一受控场景触发。",
+      "verifiedStates": [
+        {
+          "id": "masterNoPermissionDialog",
+          "scenario": "no-master",
+          "copyEqual": true,
+          "fontEqual": true,
+          "nativeBox": {
+            "x": 172,
+            "y": 30,
+            "width": 960,
+            "height": 172.265625
+          },
+          "referenceBox": {
+            "x": 172,
+            "y": 30,
+            "width": 960,
+            "height": 172.265625
+          },
+          "pixels": {
+            "id": "masterNoPermissionDialog",
+            "exactEqualPixelPercent": 100,
+            "meanAbsoluteRGBError": 0,
+            "crop": {
+              "borderExcluded": 3,
+              "width": 954,
+              "height": 166
+            }
+          },
+          "nativeTriggerContext": {
+            "hostWidth": 1180,
+            "hostHeight": 1200,
+            "reason": "Keep the long sidebar control fully inside the Host before opening; final capture viewport remains 1304x876"
+          }
+        }
+      ]
+    },
+    {
+      "source": "config.html",
+      "id": "namespaceLockedDialog",
+      "kind": "confirm",
+      "line": 283,
+      "status": "PASS",
+      "evidenceKind": "current browser-triggered rendered state; copy/font/frame/cropped pixels, not background or all possible contexts",
+      "referenceImage": "reference-dialog-namespaceLockedDialog.png",
+      "nativeImage": "native-dialog-namespaceLockedDialog.png",
+      "finding": "本声明列出的实际提示状态通过文案、字体、框体和内部像素门禁；不代表背景页或全部应用验收通过。",
+      "remediation": "原版专用流程已独立实现，并在原版和实际 SDK 两侧用同一受控场景触发。",
+      "verifiedStates": [
+        {
+          "id": "namespaceLockedDialog",
+          "scenario": "locked",
+          "copyEqual": true,
+          "fontEqual": true,
+          "nativeBox": {
+            "x": 172,
+            "y": 30,
+            "width": 960,
+            "height": 172.265625
+          },
+          "referenceBox": {
+            "x": 172,
+            "y": 30,
+            "width": 960,
+            "height": 172.265625
+          },
+          "pixels": {
+            "id": "namespaceLockedDialog",
+            "exactEqualPixelPercent": 100,
+            "meanAbsoluteRGBError": 0,
+            "crop": {
+              "borderExcluded": 3,
+              "width": 954,
+              "height": 166
+            }
+          }
+        }
+      ]
+    },
+    {
+      "source": "config.html",
+      "id": "rollbackAlertDialog",
+      "kind": "confirm",
+      "line": 288,
+      "status": "FAIL",
+      "evidenceKind": "historical baseline normal dialog; not current complete-context acceptance",
+      "referenceImage": "baseline/reference-modal-rollback-confirm.png",
+      "nativeImage": "baseline/native-modal-rollback-confirm.png",
+      "finding": "正常截图和流程回归不替代完整 1:1：字段比例、差异展示、按钮或特定状态尚未全部一致。",
+      "remediation": "对应原生流程、真实接口/DTO及保护回归已实现；正常状态已捕获。",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    },
+    {
+      "source": "config.html",
+      "id": "emergencyPublishAlertDialog",
+      "kind": "confirm",
+      "line": 293,
+      "status": "PASS",
+      "evidenceKind": "current browser-triggered rendered state; copy/font/frame/cropped pixels, not background or all possible contexts",
+      "referenceImage": "reference-dialog-emergencyPublishAlertDialog.png",
+      "nativeImage": "native-dialog-emergencyPublishAlertDialog.png",
+      "finding": "本声明列出的实际提示状态通过文案、字体、框体和内部像素门禁；不代表背景页或全部应用验收通过。",
+      "remediation": "原版专用流程已独立实现，并在原版和实际 SDK 两侧用同一受控场景触发。",
+      "verifiedStates": [
+        {
+          "id": "emergencyPublishAlertDialog",
+          "scenario": "self-lock",
+          "copyEqual": true,
+          "fontEqual": true,
+          "nativeBox": {
+            "x": 172,
+            "y": 30,
+            "width": 960,
+            "height": 172.265625
+          },
+          "referenceBox": {
+            "x": 172,
+            "y": 30,
+            "width": 960,
+            "height": 172.265625
+          },
+          "pixels": {
+            "id": "emergencyPublishAlertDialog",
+            "exactEqualPixelPercent": 100,
+            "meanAbsoluteRGBError": 0,
+            "crop": {
+              "borderExcluded": 3,
+              "width": 954,
+              "height": 166
+            }
+          }
+        }
+      ]
+    },
+    {
+      "source": "config.html",
+      "id": "deleteBranchDialog",
+      "kind": "confirm",
+      "line": 299,
+      "status": "FAIL",
+      "evidenceKind": "historical baseline normal dialog; not current complete-context acceptance",
+      "referenceImage": "baseline/reference-modal-delete-gray.png",
+      "nativeImage": "baseline/native-modal-delete-gray.png",
+      "finding": "正常截图和流程回归不替代完整 1:1：字段比例、差异展示、按钮或特定状态尚未全部一致。",
+      "remediation": "对应原生流程、真实接口/DTO及保护回归已实现；正常状态已捕获。",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    },
+    {
+      "source": "config.html",
+      "id": "updateRuleTips",
+      "kind": "confirm",
+      "line": 305,
+      "status": "PASS",
+      "evidenceKind": "current browser-triggered rendered state; copy/font/frame/cropped pixels, not background or all possible contexts",
+      "referenceImage": "reference-dialog-updateRuleTips.png",
+      "nativeImage": "native-dialog-updateRuleTips.png",
+      "finding": "本声明列出的实际提示状态通过文案、字体、框体和内部像素门禁；不代表背景页或全部应用验收通过。",
+      "remediation": "原版专用流程已独立实现，并在原版和实际 SDK 两侧用同一受控场景触发。",
+      "verifiedStates": [
+        {
+          "id": "updateRuleTips",
+          "scenario": "normal",
+          "copyEqual": true,
+          "fontEqual": true,
+          "nativeBox": {
+            "x": 172,
+            "y": 30,
+            "width": 960,
+            "height": 172.265625
+          },
+          "referenceBox": {
+            "x": 172,
+            "y": 30,
+            "width": 960,
+            "height": 172.265625
+          },
+          "pixels": {
+            "id": "updateRuleTips",
+            "exactEqualPixelPercent": 100,
+            "meanAbsoluteRGBError": 0,
+            "crop": {
+              "borderExcluded": 3,
+              "width": 954,
+              "height": 166
+            }
+          }
+        }
+      ]
+    },
+    {
+      "source": "config.html",
+      "id": "mergeAndReleaseDenyDialog",
+      "kind": "confirm",
+      "line": 309,
+      "status": "PASS",
+      "evidenceKind": "current browser-triggered rendered state; copy/font/frame/cropped pixels, not background or all possible contexts",
+      "referenceImage": "reference-dialog-mergeAndReleaseDenyDialog.png",
+      "nativeImage": "native-dialog-mergeAndReleaseDenyDialog.png",
+      "finding": "本声明列出的实际提示状态通过文案、字体、框体和内部像素门禁；不代表背景页或全部应用验收通过。",
+      "remediation": "原版专用流程已独立实现，并在原版和实际 SDK 两侧用同一受控场景触发。",
+      "verifiedStates": [
+        {
+          "id": "mergeAndReleaseDenyDialog",
+          "scenario": "master-pending",
+          "copyEqual": true,
+          "fontEqual": true,
+          "nativeBox": {
+            "x": 172,
+            "y": 30,
+            "width": 960,
+            "height": 172.265625
+          },
+          "referenceBox": {
+            "x": 172,
+            "y": 30,
+            "width": 960,
+            "height": 172.265625
+          },
+          "pixels": {
+            "id": "mergeAndReleaseDenyDialog",
+            "exactEqualPixelPercent": 100,
+            "meanAbsoluteRGBError": 0,
+            "crop": {
+              "borderExcluded": 3,
+              "width": 954,
+              "height": 166
+            }
+          }
+        }
+      ]
+    },
+    {
+      "source": "config.html",
+      "id": "grayReleaseWithoutRulesTips",
+      "kind": "confirm",
+      "line": 313,
+      "status": "PASS",
+      "evidenceKind": "current browser-triggered rendered state; copy/font/frame/cropped pixels, not background or all possible contexts",
+      "referenceImage": "reference-dialog-grayReleaseWithoutRulesTips.png",
+      "nativeImage": "native-dialog-grayReleaseWithoutRulesTips.png",
+      "finding": "本声明列出的实际提示状态通过文案、字体、框体和内部像素门禁；不代表背景页或全部应用验收通过。",
+      "remediation": "原版专用流程已独立实现，并在原版和实际 SDK 两侧用同一受控场景触发。",
+      "verifiedStates": [
+        {
+          "id": "grayReleaseWithoutRulesTips",
+          "scenario": "normal",
+          "copyEqual": true,
+          "fontEqual": true,
+          "nativeBox": {
+            "x": 172,
+            "y": 30,
+            "width": 960,
+            "height": 172.265625
+          },
+          "referenceBox": {
+            "x": 172,
+            "y": 30,
+            "width": 960,
+            "height": 172.265625
+          },
+          "pixels": {
+            "id": "grayReleaseWithoutRulesTips",
+            "exactEqualPixelPercent": 100,
+            "meanAbsoluteRGBError": 0,
+            "crop": {
+              "borderExcluded": 3,
+              "width": 954,
+              "height": 166
+            }
+          }
+        }
+      ]
+    },
+    {
+      "source": "config.html",
+      "id": "deleteNamespaceDenyForMasterInstanceDialog",
+      "kind": "confirm",
+      "line": 318,
+      "status": "BLOCKED",
+      "evidenceKind": "source-inventory-only; not-a-rendered-browser-state",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "pinned 原版仅有声明而无调用路径；实际删除使用 usage/force-delete 弹窗。",
+      "remediation": "保留完整声明清单，未伪造原版运行状态。",
+      "unreachableOrTemplate": true
+    },
+    {
+      "source": "config.html",
+      "id": "deleteNamespaceDenyForBranchInstanceDialog",
+      "kind": "confirm",
+      "line": 324,
+      "status": "BLOCKED",
+      "evidenceKind": "source-inventory-only; not-a-rendered-browser-state",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "pinned 原版仅有声明而无调用路径；实际删除使用 usage/force-delete 弹窗。",
+      "remediation": "保留完整声明清单，未伪造原版运行状态。",
+      "unreachableOrTemplate": true
+    },
+    {
+      "source": "config.html",
+      "id": "deleteNamespaceDenyForPublicNamespaceDialog",
+      "kind": "confirm",
+      "line": 330,
+      "status": "BLOCKED",
+      "evidenceKind": "source-inventory-only; not-a-rendered-browser-state",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "pinned 原版仅有声明而无调用路径；实际删除使用 usage/force-delete 弹窗。",
+      "remediation": "保留完整声明清单，未伪造原版运行状态。",
+      "unreachableOrTemplate": true
+    },
+    {
+      "source": "config.html",
+      "id": "syntaxCheckFailedDialog",
+      "kind": "confirm",
+      "line": 335,
+      "status": "PASS",
+      "evidenceKind": "current browser-triggered rendered state; copy/font/frame/cropped pixels, not background or all possible contexts",
+      "referenceImage": "reference-dialog-syntaxCheckFailedDialog.png",
+      "nativeImage": "native-dialog-syntaxCheckFailedDialog.png",
+      "finding": "本声明列出的实际提示状态通过文案、字体、框体和内部像素门禁；不代表背景页或全部应用验收通过。",
+      "remediation": "原版专用流程已独立实现，并在原版和实际 SDK 两侧用同一受控场景触发。",
+      "verifiedStates": [
+        {
+          "id": "syntaxCheckFailedDialog",
+          "scenario": "syntax-error",
+          "copyEqual": true,
+          "fontEqual": true,
+          "nativeBox": {
+            "x": 172,
+            "y": 30,
+            "width": 960,
+            "height": 172.265625
+          },
+          "referenceBox": {
+            "x": 172,
+            "y": 30,
+            "width": 960,
+            "height": 172.265625
+          },
+          "pixels": {
+            "id": "syntaxCheckFailedDialog",
+            "exactEqualPixelPercent": 100,
+            "meanAbsoluteRGBError": 0,
+            "crop": {
+              "borderExcluded": 3,
+              "width": 954,
+              "height": 166
+            }
+          }
+        }
+      ]
+    },
+    {
+      "source": "config.html",
+      "id": "revokeItemConfirmDialog",
+      "kind": "confirm",
+      "line": 340,
+      "status": "FAIL",
+      "evidenceKind": "historical baseline normal dialog; not current complete-context acceptance",
+      "referenceImage": "baseline/reference-modal-revoke.png",
+      "nativeImage": "baseline/native-modal-revoke.png",
+      "finding": "正常截图和流程回归不替代完整 1:1：字段比例、差异展示、按钮或特定状态尚未全部一致。",
+      "remediation": "对应原生流程、真实接口/DTO及保护回归已实现；正常状态已捕获。",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    },
+    {
+      "source": "open/grant-permission-modal.html",
+      "id": "grantPermissionModal",
+      "kind": "modal",
+      "line": 1,
+      "status": "FAIL",
+      "evidenceKind": "historical baseline normal dialog; not current complete-context acceptance",
+      "referenceImage": "baseline/reference-modal-consumer-authorize.png",
+      "nativeImage": "baseline/native-modal-consumer-authorize.png",
+      "finding": "正常截图和流程回归不替代完整 1:1：字段比例、差异展示、按钮或特定状态尚未全部一致。",
+      "remediation": "对应原生流程、真实接口/DTO及保护回归已实现；正常状态已捕获。",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    },
+    {
+      "source": "open/manage.html",
+      "id": "deleteConsumerDialog",
+      "kind": "confirm",
+      "line": 112,
+      "status": "FAIL",
+      "evidenceKind": "historical baseline normal dialog; not current complete-context acceptance",
+      "referenceImage": "baseline/reference-modal-consumer-delete.png",
+      "nativeImage": "baseline/native-modal-consumer-delete.png",
+      "finding": "正常截图和流程回归不替代完整 1:1：字段比例、差异展示、按钮或特定状态尚未全部一致。",
+      "remediation": "对应原生流程、真实接口/DTO及保护回归已实现；正常状态已捕获。",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    },
+    {
+      "source": "views/component/confirm-dialog.html",
+      "id": "{{dialogId}}",
+      "kind": "modal",
+      "line": 1,
+      "status": "BLOCKED",
+      "evidenceKind": "source-inventory-only; not-a-rendered-browser-state",
+      "referenceImage": null,
+      "nativeImage": null,
+      "finding": "可复用的确认模板，不是独立用户入口；由具体声明实例验证。",
+      "remediation": "保留完整声明清单，未伪造原版运行状态。",
+      "unreachableOrTemplate": true
+    },
+    {
+      "source": "views/component/delete-namespace-modal.html",
+      "id": "deleteNamespaceModal",
+      "kind": "modal",
+      "line": 1,
+      "status": "PASS",
+      "evidenceKind": "current browser-triggered rendered state; copy/font/frame/cropped pixels, not background or all possible contexts",
+      "referenceImage": "reference-dialog-deleteNamespaceModal-usage-master.png",
+      "nativeImage": "native-dialog-deleteNamespaceModal-usage-master.png",
+      "finding": "本声明列出的实际提示状态通过文案、字体、框体和内部像素门禁；不代表背景页或全部应用验收通过。",
+      "remediation": "原版专用流程已独立实现，并在原版和实际 SDK 两侧用同一受控场景触发。",
+      "verifiedStates": [
+        {
+          "id": "deleteNamespaceModal-usage-master",
+          "scenario": "usage-master",
+          "copyEqual": true,
+          "fontEqual": true,
+          "nativeBox": {
+            "x": 172,
+            "y": 30,
+            "width": 960,
+            "height": 300.78125
+          },
+          "referenceBox": {
+            "x": 172,
+            "y": 30,
+            "width": 960,
+            "height": 300.78125
+          },
+          "pixels": {
+            "id": "deleteNamespaceModal-usage-master",
+            "exactEqualPixelPercent": 100,
+            "meanAbsoluteRGBError": 0,
+            "crop": {
+              "borderExcluded": 3,
+              "width": 954,
+              "height": 295
+            }
+          }
+        },
+        {
+          "id": "deleteNamespaceModal-usage-gray",
+          "scenario": "usage-gray",
+          "copyEqual": true,
+          "fontEqual": true,
+          "nativeBox": {
+            "x": 172,
+            "y": 30,
+            "width": 960,
+            "height": 300.78125
+          },
+          "referenceBox": {
+            "x": 172,
+            "y": 30,
+            "width": 960,
+            "height": 300.78125
+          },
+          "pixels": {
+            "id": "deleteNamespaceModal-usage-gray",
+            "exactEqualPixelPercent": 100,
+            "meanAbsoluteRGBError": 0,
+            "crop": {
+              "borderExcluded": 3,
+              "width": 954,
+              "height": 295
+            }
+          }
+        }
+      ]
+    },
+    {
+      "source": "views/component/gray-release-rules-modal.html",
+      "id": "rulesModal",
+      "kind": "modal",
+      "line": 1,
+      "status": "FAIL",
+      "evidenceKind": "historical baseline normal dialog; not current complete-context acceptance",
+      "referenceImage": "baseline/reference-modal-gray-rule.png",
+      "nativeImage": "baseline/native-modal-gray-rule.png",
+      "finding": "正常截图和流程回归不替代完整 1:1：字段比例、差异展示、按钮或特定状态尚未全部一致。",
+      "remediation": "对应原生流程、真实接口/DTO及保护回归已实现；正常状态已捕获。",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    },
+    {
+      "source": "views/component/import-namespace-modal.html",
+      "id": "importNamespaceModal",
+      "kind": "modal",
+      "line": 1,
+      "status": "FAIL",
+      "evidenceKind": "historical baseline normal dialog; not current complete-context acceptance",
+      "referenceImage": "baseline/reference-modal-import-namespace.png",
+      "nativeImage": "baseline/native-modal-import-namespace.png",
+      "finding": "正常截图和流程回归不替代完整 1:1：字段比例、差异展示、按钮或特定状态尚未全部一致。",
+      "remediation": "对应原生流程、真实接口/DTO及保护回归已实现；正常状态已捕获。",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    },
+    {
+      "source": "views/component/item-modal.html",
+      "id": "itemModal",
+      "kind": "modal",
+      "line": 1,
+      "status": "FAIL",
+      "evidenceKind": "historical baseline normal dialog; not current complete-context acceptance",
+      "referenceImage": "baseline/reference-modal-item-edit.png",
+      "nativeImage": "baseline/native-modal-item-edit.png",
+      "finding": "正常截图和流程回归不替代完整 1:1：字段比例、差异展示、按钮或特定状态尚未全部一致。",
+      "remediation": "对应原生流程、真实接口/DTO及保护回归已实现；正常状态已捕获。",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    },
+    {
+      "source": "views/component/merge-and-publish-modal.html",
+      "id": "mergeAndPublishModal",
+      "kind": "modal",
+      "line": 1,
+      "status": "FAIL",
+      "evidenceKind": "historical baseline normal dialog; not current complete-context acceptance",
+      "referenceImage": "baseline/reference-modal-merge.png",
+      "nativeImage": "baseline/native-modal-merge.png",
+      "finding": "正常截图和流程回归不替代完整 1:1：字段比例、差异展示、按钮或特定状态尚未全部一致。",
+      "remediation": "对应原生流程、真实接口/DTO及保护回归已实现；正常状态已捕获。",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    },
+    {
+      "source": "views/component/publish-deny-modal.html",
+      "id": "publishDenyModal",
+      "kind": "modal",
+      "line": 1,
+      "status": "PASS",
+      "evidenceKind": "current browser-triggered rendered state; copy/font/frame/cropped pixels, not background or all possible contexts",
+      "referenceImage": "reference-dialog-publishDenyModal.png",
+      "nativeImage": "native-dialog-publishDenyModal.png",
+      "finding": "本声明列出的实际提示状态通过文案、字体、框体和内部像素门禁；不代表背景页或全部应用验收通过。",
+      "remediation": "原版专用流程已独立实现，并在原版和实际 SDK 两侧用同一受控场景触发。",
+      "verifiedStates": [
+        {
+          "id": "publishDenyModal",
+          "scenario": "self-lock",
+          "copyEqual": true,
+          "fontEqual": true,
+          "nativeBox": {
+            "x": 172,
+            "y": 30,
+            "width": 960,
+            "height": 209.609375
+          },
+          "referenceBox": {
+            "x": 172,
+            "y": 30,
+            "width": 960,
+            "height": 209.609375
+          },
+          "pixels": {
+            "id": "publishDenyModal",
+            "exactEqualPixelPercent": 100,
+            "meanAbsoluteRGBError": 0,
+            "crop": {
+              "borderExcluded": 3,
+              "width": 954,
+              "height": 204
+            }
+          }
+        }
+      ]
+    },
+    {
+      "source": "views/component/release-modal.html",
+      "id": "releaseModal",
+      "kind": "modal",
+      "line": 1,
+      "status": "FAIL",
+      "evidenceKind": "historical baseline normal dialog; not current complete-context acceptance",
+      "referenceImage": "baseline/reference-modal-release.png",
+      "nativeImage": "baseline/native-modal-release.png",
+      "finding": "正常截图和流程回归不替代完整 1:1：字段比例、差异展示、按钮或特定状态尚未全部一致。",
+      "remediation": "对应原生流程、真实接口/DTO及保护回归已实现；正常状态已捕获。",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    },
+    {
+      "source": "views/component/rollback-modal.html",
+      "id": "rollbackModal",
+      "kind": "modal",
+      "line": 1,
+      "status": "FAIL",
+      "evidenceKind": "historical baseline normal dialog; not current complete-context acceptance",
+      "referenceImage": "baseline/reference-modal-rollback.png",
+      "nativeImage": "baseline/native-modal-rollback.png",
+      "finding": "正常截图和流程回归不替代完整 1:1：字段比例、差异展示、按钮或特定状态尚未全部一致。",
+      "remediation": "对应原生流程、真实接口/DTO及保护回归已实现；正常状态已捕获。",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    },
+    {
+      "source": "views/component/show-text-modal.html",
+      "id": "showTextModal",
+      "kind": "modal",
+      "line": 1,
+      "status": "FAIL",
+      "evidenceKind": "historical baseline normal dialog; not current complete-context acceptance",
+      "referenceImage": "baseline/reference-modal-show-text.png",
+      "nativeImage": "baseline/native-modal-show-text.png",
+      "finding": "正常截图和流程回归不替代完整 1:1：字段比例、差异展示、按钮或特定状态尚未全部一致。",
+      "remediation": "对应原生流程、真实接口/DTO及保护回归已实现；正常状态已捕获。",
+      "evidenceNativeSourceSHA256": "8a94f26740c40b1c0ad678568012ecc4bbfa56750b9d110afff4a6527c69a519"
+    }
+  ],
+  "exclusions": [
+    {
+      "source": "login.html",
+      "reason": "DBX-owned connection/Secret Store login adaptation; not a management-page clone claim; separately tested username/password."
+    },
+    {
+      "source": "default_sso_heartbeat.html",
+      "reason": "SSO excluded by confirmed ordinary-password scope."
+    },
+    {
+      "source": "open/grant-permission-modal.html",
+      "reason": "Included in dialog census rather than counted twice as a page."
+    }
+  ],
+  "nativeSourceSHA256": "30cd8a8d84c44f715a9ef6ac0bae9a313bd85e37ba2af68b05bbb46b75f5f211",
+  "captureNotes": [
+    "Final paired viewports are 1304x876; tall Host viewports may be used to reach long-sidebar controls before opening. Trigger and final capture contexts are not claimed identical.",
+    "Shared browser-window viewport caching was corrected in the owned warning harness; no force-click or original UI-state injection.",
+    "Historical images are explicitly marked and carry the old source digest; they are not passed as current evidence.",
+    "Source-only declarations remain source-only; normal form geometry and selected warning interiors do not close full-page parity."
+  ],
+  "referenceCSSSHA256": "42c9b4ef04537e125ca7f0c57cdebdb8ca41019bd342aa7bcf43be87ee603f0c",
+  "referenceCSSVerification": "GitHub raw pinned-commit common-style.css equals local file; not a claim about every archive file.",
+  "phase": "polish",
+  "baseline": "finish-manifest.json",
+  "evidenceDirectory": "output/playwright/polish",
+  "nativeSourceHashAlgorithm": "sha256 of sorted src/name + NUL + file bytes",
+  "nativeUISHA256": "69feb497f53c0064c38863243a59a919d11913a9915ccc22b2b2e68411705efe",
+  "capturedNativeStates": 26,
+  "capturedReferencePages": 4,
+  "browserWriteChecks": 17,
+  "dialogRenderedStateGate": {
+    "normalizedCopy": true,
+    "computedTitleFont": true,
+    "frameTolerancePx": 0.1,
+    "croppedExactPixelMinimumPercent": 99.99,
+    "excludedBorderPx": 3,
+    "scope": "Rendered dialog interior only; neutral pointer and source transient toasts settled. Not page/background parity."
+  },
+  "note": "Current scoped repairs and evidence are separate from historical 0.1.2 pairs. All-page/all-context acceptance remains FAIL. No live Apollo or native installation acceptance.",
+  "additionalStates": [
+    {
+      "source": "公共 Namespace 部门前缀",
+      "status": "SCOPED PASS",
+      "referenceImage": "reference-namespace-public.png",
+      "nativeImage": "native-namespace-public.png",
+      "finding": "当前双侧实际触发；验证流程及指定布局，不宣称整个背景页 1:1。",
+      "evidenceKind": "current browser-triggered conditional/success state"
+    },
+    {
+      "source": "关闭前缀保留草稿",
+      "status": "SCOPED PASS",
+      "referenceImage": "reference-namespace-no-prefix.png",
+      "nativeImage": "native-namespace-no-prefix.png",
+      "finding": "当前双侧实际触发；验证流程及指定布局，不宣称整个背景页 1:1。",
+      "evidenceKind": "current browser-triggered conditional/success state"
+    },
+    {
+      "source": "集群创建成功页",
+      "status": "SCOPED PASS",
+      "referenceImage": "reference-cluster-created.png",
+      "nativeImage": "native-cluster-created.png",
+      "finding": "当前双侧实际触发；验证流程及指定布局，不宣称整个背景页 1:1。",
+      "evidenceKind": "current browser-triggered conditional/success state"
+    },
+    {
+      "source": "键盘取消无删除",
+      "status": "SCOPED PASS",
+      "referenceImage": null,
+      "nativeImage": "native-keyboard-cancel-safe.png",
+      "finding": "原生 SDK 操作/请求或上下文检查，非成对像素验收。",
+      "evidenceKind": "current SDK-only behavioral/context evidence"
+    },
+    {
+      "source": "格式选择器无创建",
+      "status": "SCOPED PASS",
+      "referenceImage": null,
+      "nativeImage": "native-keyboard-format-safe.png",
+      "finding": "原生 SDK 操作/请求或上下文检查，非成对像素验收。",
+      "evidenceKind": "current SDK-only behavioral/context evidence"
+    },
+    {
+      "source": "组合框无误提交",
+      "status": "SCOPED PASS",
+      "referenceImage": null,
+      "nativeImage": "native-keyboard-owner-safe.png",
+      "finding": "原生 SDK 操作/请求或上下文检查，非成对像素验收。",
+      "evidenceKind": "current SDK-only behavioral/context evidence"
+    },
+    {
+      "source": "英文草稿及深色宿主",
+      "status": "SCOPED PASS",
+      "referenceImage": null,
+      "nativeImage": "native-form-english-dark-host.png",
+      "finding": "原生 SDK 操作/请求或上下文检查，非成对像素验收。",
+      "evidenceKind": "current SDK-only behavioral/context evidence"
+    },
+    {
+      "source": "窄宿主横向布局",
+      "status": "SCOPED PASS",
+      "referenceImage": null,
+      "nativeImage": "native-form-narrow-host.png",
+      "finding": "原生 SDK 操作/请求或上下文检查，非成对像素验收。",
+      "evidenceKind": "current SDK-only behavioral/context evidence"
+    }
+  ],
+  "scopedVerification": {
+    "normalFormControls": {
+      "passed": 16,
+      "failed": 0
+    },
+    "creation": {
+      "passed": 7,
+      "failed": 0
+    },
+    "keyboard": {
+      "passed": 4,
+      "failed": 0
+    },
+    "contexts": {
+      "passed": 5,
+      "failed": 0
+    },
+    "sidebarFlow": {
+      "passed": 3,
+      "failed": 0
+    },
+    "warnings": {
+      "passed": 14,
+      "failed": 0
+    }
+  }
+}

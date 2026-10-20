@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """Compare recorded dialog interiors, not the differing background pages or shadows."""
 import json
+import sys
 from pathlib import Path
 from PIL import Image, ImageChops
 
 root = Path(__file__).resolve().parents[2]
-directory = root / "output/playwright/finish"
+directory = root / (sys.argv[1] if len(sys.argv) > 1 else "output/playwright/finish")
 records = json.loads((directory / "notices-verification.json").read_text())
 results = []
 for record in records["results"]:

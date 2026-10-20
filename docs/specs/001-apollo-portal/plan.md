@@ -208,3 +208,24 @@ Delivery is source-only plus a reply on PR #295. Do not publish another version 
 the signed catalog; preserve the officially merged 0.1.2 entry and all immutable artifacts.
 
 Current versus next-version boundaries are in `../../review-follow-up-2026-10-20.md`.
+
+## Task 13: Continue Measured Form And Workflow Repairs
+
+User explicitly requested continuing the remaining issues and updating README after fixes.
+The source automation registration is separate (#298); this iteration still uses manual
+release submission. Preserve 0.1.2 source tags/assets and the failed full acceptance gate.
+
+- [x] Reproduce four shared form-grid mismatches against the pinned original; add control
+  geometry regression, actual form-data/static-ID/copy checks and independent grid helpers.
+- [x] Restore source format order, Namespace department-prefix display/draft/focus behavior,
+  and the in-page cluster-created flow with a late-response route guard, test-first.
+- [x] Verify both declared Portal cluster endpoints and the original frontend's OpenAPI
+  controller path; add only the explicit missing reference-fixture route, not a wildcard.
+- [ ] Recheck form/conditional/success states and existing warnings across real SDK/original
+  browser surfaces, including representative locale/theme/viewport contexts.
+- [ ] Complete fresh suites, smoke/package proof and one scoped independent final review;
+  update README/current evidence with actual pass/fail and remaining developer-owned gaps.
+
+Files: `src/reference-fields.js`, affected page/picker/style/action modules, new regression
+tests and `scripts/parity/verify-{form-grid,creation-flows}.js`. The normal form-control
+geometry gate is 0.1px, independently of whole-page/pixel/conditional-state acceptance.

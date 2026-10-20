@@ -784,13 +784,19 @@ export async function startFixture(port = 0, { referenceRoot = null } = {}) {
           keys.filter((row) => row.appId === appId && row.env === env),
         );
       }
+      const referenceClusterCreate = req.method === 'POST' && u.pathname.match(
+        /^\/openapi\/v1\/envs\/([^/]+)\/apps\/([^/]+)\/clusters$/,
+      );
       match = u.pathname.match(
         /^\/apps\/([^/]+)\/envs\/([^/]+)\/clusters(?:\/([^/]+))?$/,
-      );
+      ) || (referenceClusterCreate ? [referenceClusterCreate[0], referenceClusterCreate[2], referenceClusterCreate[1], undefined] : null);
       if (match) {
         const [_, appId, env, name] = match;
         if (req.method === "POST") {
           const model = input();
+          if (referenceClusterCreate && model.appId !== appId)
+            return fail('AppId in path and payload must match');
+          if (!clusters[env]) return fail('Unknown fixture environment', 404);
           clusters[env].push({ ...model, appId });
           makeNamespace(appId, env, model.name, "application", null);
           return json(model);

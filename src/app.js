@@ -396,6 +396,20 @@ export function createPortalApp(root, options) {
     s.consumerDraft = Object.fromEntries(new win.FormData(form));
     for (const input of form.querySelectorAll('input[type="checkbox"]')) s.consumerDraft[input.name] = input.checked;
   }
+  function captureFormDraft(form) {
+    if (!form || !root.contains(form) || s.busy || s.loading) return;
+    if (!['advanced', 'dialog'].includes(form.dataset.form)) return;
+    const data = Object.fromEntries(new win.FormData(form));
+    for (const input of form.querySelectorAll('input[type="checkbox"]')) data[input.name] = input.checked;
+    if (form.dataset.form === 'dialog') {
+      if (s.dialog) s.dialog.values = data;
+    } else {
+      s.advancedFormValues = {
+        routeKey: formRouteKey(s.route), data,
+        formIndex: [...root.querySelectorAll('[data-form="advanced"]')].indexOf(form),
+      };
+    }
+  }
   async function action(element) {
     const action = element.dataset.action;
     const ns = s.namespaces.find(
@@ -403,7 +417,12 @@ export function createPortalApp(root, options) {
     );
     const selection = selected(element.dataset.ns);
     if (element.disabled || s.busy || s.loading) return;
-    if (action.startsWith('user-picker-')) { userPickerAction(action, element, root); captureConsumerDraft(element.closest('form')); return; }
+    if (action.startsWith('user-picker-')) {
+      const form = element.closest('form');
+      userPickerAction(action, element, root);
+      captureConsumerDraft(form); captureFormDraft(form);
+      return;
+    }
     if (action === 'request-modify-permission' || action === 'request-master-permission' ||
       (action === 'publish' && !s.permissions[selection.namespace]?.release && !s.readOnly)) {
       const ticket = revision, roles = client.appRoles ? await client.appRoles(selection.appId) : {};
@@ -1144,11 +1163,16 @@ export function createPortalApp(root, options) {
     run(() => action(element));
   }
   function onKey(event) {
-    if (userPickerKey(event, root)) { captureConsumerDraft(event.target.closest('form')); return; }
+    if (userPickerKey(event, root)) {
+      const form = event.target.closest('form');
+      captureConsumerDraft(form); captureFormDraft(form);
+      return;
+    }
     if (
       event.key === "Enter" &&
       event.target.closest("form") &&
-      event.target.tagName !== "TEXTAREA"
+      event.target.tagName === "INPUT" &&
+      ['text', 'search', 'password', 'email', 'url', 'tel', 'number'].includes(event.target.type)
     ) {
       event.preventDefault();
       onSubmit({ target: event.target.closest("form"), preventDefault() {} });
@@ -1188,6 +1212,7 @@ export function createPortalApp(root, options) {
     if (input.name === 'env' && input.closest('[data-submit-action="key-create-inline"]'))
       input.closest('form').querySelector('[data-action="submit-form"]').disabled = s.readOnly || !s.canManage || !input.value;
     captureConsumerDraft(input.closest('form'));
+    captureFormDraft(input.closest('form'));
     if (input.name === 'lookupAppId' && s.route.view === 'consumer-create') {
       s.advancedFormValues = null;
       s.consumerAppId = input.value;
@@ -1213,18 +1238,24 @@ export function createPortalApp(root, options) {
         return;
       }
     }
-    if (input.name === "namespaceType" && s.route.view === "namespace-create") {
+    if (["namespaceType", "appendPrefix"].includes(input.name) && s.route.view === "namespace-create") {
+      const restoreFocus = win.document.activeElement === input, focusValue = input.value;
       const form = input.closest("form"),
         data = Object.fromEntries(new win.FormData(form));
       for (const checkbox of form.querySelectorAll("input[type=checkbox]"))
         data[checkbox.name] = checkbox.checked;
-      s.namespacePublicType = input.value;
+      if (input.name === 'namespaceType') s.namespacePublicType = input.value;
+      else s.namespaceAppendPrefix = input.checked;
       s.advancedFormValues = {
         routeKey: formRouteKey(s.route),
         formIndex: 0,
         data,
       };
       render();
+      if (restoreFocus) {
+        const next = [...root.querySelectorAll(`input[name="${input.name}"]`)].find(control => input.name !== 'namespaceType' || control.value === focusValue);
+        next?.focus();
+      }
       return;
     }
     if (input.closest("[data-transfer-query]")) {

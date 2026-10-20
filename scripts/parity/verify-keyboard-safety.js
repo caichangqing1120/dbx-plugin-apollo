@@ -1,0 +1,44 @@
+async (page) => {
+  const sdk=page.context().pages().find(p=>p.url().startsWith('http://127.0.0.1:5198/'));
+  const iframe=sdk.locator('iframe[title="Apollo"]'),native=iframe.contentFrame();
+  const base='http://127.0.0.1:18070',ns='/apps/SampleApp/envs/DEV/clusters/default/namespaces/application';
+  const checks=[],errors=[];
+  const onError=error=>errors.push(error.message);sdk.on('pageerror',onError);
+  const calls=async()=>{const response=await page.request.get(base+'/fixture/calls');return await response.json();};
+  async function click(action){const control=native.locator(`[data-action="${action}"]`).first();if(!await control.isVisible()){const menu=control.locator('xpath=ancestor::details').first();if(await menu.count())await menu.locator('summary').click();}await control.click();await native.locator('.loading').waitFor({state:'hidden'});}
+  await page.request.post(base+'/fixture/scenario',{data:{mode:'normal'}});
+  await sdk.bringToFront();await sdk.setViewportSize({width:1501,height:1101});await sdk.setViewportSize({width:1500,height:1100});
+  await sdk.getByRole('button',{name:/重载页面/}).click();await sdk.getByRole('button',{name:'确认',exact:true}).click();await native.locator('.apollo-nav').waitFor();await native.locator('.loading').waitFor({state:'hidden'});
+  await click('home');await click('open-project');
+  const beforeDelete=(await calls()).filter(c=>c.method==='DELETE').length;
+  await click('delete-item');
+  await native.locator('[role=dialog] footer [data-action=cancel-dialog]').press('Enter');
+  await native.locator('[role=dialog]').waitFor({state:'hidden'});
+  const afterDelete=(await calls()).filter(c=>c.method==='DELETE').length;
+  const rows=await(await page.request.get(base+ns+'/items',{headers:{cookie:'SESSION=fixture-session'}})).json();
+  checks.push({id:'enter-cancel-zero-delete-requests',passed:afterDelete===beforeDelete&&rows.some(row=>row.key==='sample.key'),deleteRequestDelta:afterDelete-beforeDelete});
+  await iframe.screenshot({path:'output/playwright/polish/native-keyboard-cancel-safe.png'});
+  const beforeSave=(await calls()).filter(c=>c.method==='PUT'&&c.path===ns+'/item').length;
+  await click('edit-item');await native.locator('[role=dialog] [data-action=submit-form]').press('Enter');
+  await native.locator('[role=dialog]').waitFor({state:'hidden'});await native.locator('.loading').waitFor({state:'hidden'});
+  const afterSave=(await calls()).filter(c=>c.method==='PUT'&&c.path===ns+'/item').length;
+  checks.push({id:'enter-save-still-performs-explicit-write',passed:afterSave-beforeSave===1,saveRequestDelta:afterSave-beforeSave});
+  await click('new-namespace');await native.locator('input[name=name]').fill('not-created-by-enter');
+  const beforeCreate=(await calls()).filter(c=>c.method==='POST'&&c.path.endsWith('/appnamespaces')).length;
+  await native.locator('select[name=format]').press('Enter');await native.locator('select[name=format]').press('Escape');
+  const afterCreate=(await calls()).filter(c=>c.method==='POST'&&c.path.endsWith('/appnamespaces')).length;
+  checks.push({id:'enter-format-zero-namespace-creation',passed:afterCreate===beforeCreate&&await native.locator('[data-submit-action=namespace-create-submit]').count()===1,createRequestDelta:afterCreate-beforeCreate});
+  await iframe.screenshot({path:'output/playwright/polish/native-keyboard-format-safe.png'});
+  await click('home');await click('new-project');
+  await native.locator('input[name=appId]').fill('safety-no-submit');await native.locator('input[name=name]').fill('Safety no submit');
+  await native.locator('select[name=orgId]').selectOption('TEST1');
+  const owner=native.locator('[data-user-picker=ownerName] .user-picker-input');await owner.fill('apollo');
+  await native.locator('[data-user-picker=ownerName] [data-action=user-picker-select][data-user-id=apollo]').click();
+  const beforeApp=(await calls()).filter(c=>c.method==='POST'&&c.path==='/apps').length;
+  await owner.press('Enter');
+  const afterApp=(await calls()).filter(c=>c.method==='POST'&&c.path==='/apps').length;
+  checks.push({id:'enter-closed-owner-zero-app-creation',passed:afterApp===beforeApp&&await owner.getAttribute('aria-expanded')==='true',createRequestDelta:afterApp-beforeApp});
+  await iframe.screenshot({path:'output/playwright/polish/native-keyboard-owner-safe.png'});
+  sdk.off('pageerror',onError);
+  return {checks,passed:checks.filter(c=>c.passed).length,failed:checks.filter(c=>!c.passed).length,errors,scope:'Real SDK keyboard events and actual loopback sidecar HTTP calls; no production operations'};
+}

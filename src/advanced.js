@@ -374,14 +374,16 @@ export async function loadAdvancedRoute(route, s, client) {
       data.deleteLookups = {};
     }
   } else if (route.view === "cluster-create") {
+    data.clusterCreated = null;
     data.clusterCreateEnvs = await client.environments();
     data.canCreateCluster =
       s.isRoot ||
       (await client.appPermission(route.appId, "CreateCluster")).hasPermission;
   } else if (route.view === "namespace-create") {
-    const [tree, publicNamespaces] = await Promise.all([
+    const [tree, publicNamespaces, namespaceApp] = await Promise.all([
       client.tree(route.appId),
       client.publicNamespaces(),
+      client.app(route.appId),
     ]);
     if (tree.entities?.some((e) => e.code !== 200))
       throw Error("Environment lookup failed");
@@ -392,6 +394,8 @@ export async function loadAdvancedRoute(route, s, client) {
           .hasPermission,
       namespaceMode: "create",
       namespacePublicType: "private",
+      namespacePrefix: namespaceApp.orgId ? namespaceApp.orgId + '.' : '',
+      namespaceAppendPrefix: true,
       namespacePublic: publicNamespaces,
       namespaceChoices: (tree.entities || []).flatMap(({ body }) =>
         (body.clusters || []).map((cluster) => ({

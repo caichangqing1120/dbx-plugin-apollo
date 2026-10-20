@@ -1,4 +1,5 @@
 import { userSelector } from "./user-picker.js";
+import { referenceField, referenceRow } from './reference-fields.js';
 import {
   escapeHTML as e,
   attr,
@@ -19,15 +20,18 @@ const head = (title, subtitle = "", tools = "") =>
 const page = (body, kind = "") =>
   `<main class="reference-page ${kind}"><section class="reference-surface">${body}</section></main>`;
 const inlineActions = new Set(['app-admin-inline','grant-system-inline','master-lookup','consumer-lookup','delete-query','transfer-query']);
-const form = (action, body, label, extra = "", off = false) =>
-  `<form class="${inlineActions.has(action) ? 'reference-inline' : ''}" data-form="advanced" data-submit-action="${action}" ${extra}><fieldset${off ? " disabled" : ""}>${body}${label ? `<div class="reference-form-actions">${btn("submit-form", label, "", false, "primary")}</div>` : ""}</fieldset></form>`;
+const form = (action, body, label, extra = "", off = false, grid = null) => {
+  const submit = label ? btn('submit-form', label, '', false, 'primary') : '';
+  const actions = label ? grid ? referenceRow('', submit, { ...grid, columns: 12 - (grid.labelColumns || 2), className: 'reference-form-actions' }) : `<div class="reference-form-actions">${submit}</div>` : '';
+  return `<form class="${inlineActions.has(action) ? 'reference-inline' : ''}${grid ? ' reference-grid-form' : ''}" data-form="advanced" data-submit-action="${action}" ${extra}><fieldset${off ? " disabled" : ""}>${body}${actions}</fieldset></form>`;
+};
 const back = (t) => btn("back-config", t("returnHome"), " ", false, "info");
 const appSubtitle = (s) => `( AppId: ${s.route.appId} )`;
-function tags(users, action, extra = "", off = false, title = "") {
+function tags(users, action, extra = "", off = false, title = "", split = false) {
   return `<div class="reference-tags">${title ? `<h5>${e(title)}</h5>` : ""}${users
     .map((user) => {
       const id = user.userId || user;
-      return `<span class="reference-tag">${e(id)}${btn(action, "×", `${extra} data-user="${attr(id)}"`, off, "link")}</span>`;
+      return `<span class="reference-tag${split ? ' reference-admin-tag' : ''}">${split ? `<span class="reference-tag-name">${e(id)}</span>` : e(id)}${btn(action, "×", `${extra} data-user="${attr(id)}"`, off, split ? "default" : "link")}</span>`;
     })
     .join("")}</div>`;
 }
@@ -107,21 +111,18 @@ function projectPage(s, t) {
   const disabled =
     s.readOnly || (!creating && (!s.canManage || !s.projectEditing));
   const org = app.orgId || "";
-  const organizations = `<label class="form-field"><span><b>*</b> ${t("department")}</span><select name="orgId" required><option value="">${t("chooseDepartment")}</option>${(s.organizations || []).map((item) => `<option value="${attr(item.orgId)}"${item.orgId === org ? " selected" : ""}>${e(item.orgName)}(${e(item.orgId)})</option>`).join("")}</select></label>`;
-  const appIdField = field("appId", "AppId", app.appId, "text", true).replace(
-      'name="appId"',
-      `name="appId"${creating ? "" : " readonly"}`,
-    );
-  const fields = (creating ? organizations + appIdField + `<p class="reference-field-hint">${t('App.AppIdTips')}</p>` : appIdField + organizations) +
-    field("name", t("appName"), app.name, "text", true) +
-    `<p class="reference-field-hint">${t("applicationNameHint")}</p>` +
-    userSelector("ownerName", t("Common.AppOwnerLong"), creating ? '' : app.ownerName, s) +
+  const grid = { labelColumns: creating ? 3 : 2 };
+  const organizations = referenceRow(t('department'), `<select class="reference-compact-select" name="orgId" required><option value="">${t("chooseDepartment")}</option>${(s.organizations || []).map((item) => `<option value="${attr(item.orgId)}"${item.orgId === org ? " selected" : ""}>${e(item.orgName)}(${e(item.orgId)})</option>`).join("")}</select>`, { ...grid, columns: 3, required: true });
+  const appIdField = referenceField('appId', 'AppId', app.appId, { ...grid, columns: 3, required: true, type: creating ? 'text' : 'static', help: creating ? t('App.AppIdTips') : '' });
+  const fields = (creating ? organizations + appIdField : appIdField + organizations) +
+    referenceField('name', t('appName'), app.name, { ...grid, columns: creating ? 5 : 4, required: true, help: t('applicationNameHint') }) +
+    userSelector("ownerName", t("Common.AppOwnerLong"), creating ? '' : app.ownerName, s, true, grid) +
     (creating
-      ? userSelector("admins", t("Common.AppAdmin"), "", s, false) + `<p class="reference-field-hint">${t('App.AppAdminTips1')}<br>${t('App.AppAdminTips2')}</p>`
+      ? userSelector("admins", t("Common.AppAdmin"), "", s, false, { ...grid, columns: 8, help: [t('App.AppAdminTips1'), t('App.AppAdminTips2')] })
       : "");
   const administrators = creating
     ? ""
-    : `<section class="reference-section"><h4>${t("App.Setting.Admin")} <small>${t("appAdminHint")}</small></h4>${form("app-admin-inline", userSelector("user", t("user"), "", s) + btn("submit-form", t("add"), " ", s.readOnly || !s.canManage), "")}${tags(s.appRoles?.masterUsers || [], "app-remove-admin", "", s.readOnly || !s.canManage)}</section>`;
+    : `<section class="reference-section project-administrators"><h5 class="project-section-title">${t("App.Setting.Admin")} <small>${t("appAdminHint")}</small></h5><hr>${form("app-admin-inline", userSelector("user", t("user"), "", s) + ' ' + btn("submit-form", t("add"), " ", s.readOnly || !s.canManage), "")}${tags(s.appRoles?.masterUsers || [], "app-remove-admin", "", s.readOnly || !s.canManage, '', true)}</section>`;
   return page(
     head(
       t(creating ? "createProject" : "applicationManagement"),
@@ -129,7 +130,7 @@ function projectPage(s, t) {
       creating ? "" : back(t),
     ) +
       administrators +
-      `<section class="reference-section${creating ? ' create-app-fields' : ''}">${creating ? '' : `<h4>${t("baseInformation")}</h4>`}${form("save-project-submit", fields, creating || s.projectEditing ? t("save") : "", " ", disabled)}${!creating && !s.projectEditing ? `<div class="reference-form-actions">${btn("edit-project", t("editAppInfo"), "", s.readOnly || !s.canManage, "primary")}</div>` : ""}</section>`,
+      `<section class="reference-section${creating ? ' create-app-fields' : ' project-basics'}">${creating ? '' : `<h5 class="project-section-title">${t("baseInformation")}</h5><hr>`}${form("save-project-submit", fields, creating || s.projectEditing ? t("save") : "", " ", disabled, grid)}${!creating && !s.projectEditing ? `<div class="reference-grid-form">${referenceRow('', btn("edit-project", t("editAppInfo"), "", s.readOnly || !s.canManage, "primary"), { ...grid, columns: 9, className: 'reference-form-actions' })}</div>` : ""}</section>`,
     creating ? "create-app-page" : "app-management-page",
   );
 }
@@ -163,19 +164,17 @@ function clusterCreate(s, t) {
   return page(
     head(t("Cluster.CreateCluster"), "", back(t)) +
       hint(`<strong>Tips:</strong><ul>${[1,2,3,4].map(index => `<li>${t("Cluster.Tips."+index)}</li>`).join("")}</ul>`) +
-      form(
+      (s.clusterCreated ? `<section class="reference-create-state" data-creation-complete>${assetImage('created.png', t('creationDone'), 'creation-success-image')}<h3>${t('creationDone')}!</h3></section>` : form(
         "cluster-create-submit",
-        field("appId", "AppId", s.route.appId).replace(
-          'name="appId"',
-          'name="appId" readonly',
-        ) +
-          field("name", t("clusterName"), "", "text", true) + `<p class="reference-field-hint">${t("Cluster.CreateNameTips")}</p>` +
-          field("comment", t("clusterComment"), "", "textarea") + `<p class="reference-field-hint">${t("Cluster.CreateRemarksTips")}</p>` +
-          `<div class="form-field"><span>${t("selectEnvironment")} <b>*</b></span><div>${(s.clusterCreateEnvs || []).map((env) => `<label class="checkbox-label"><input type="checkbox" name="env_${attr(env)}"> ${e(env)}</label>`).join("")}</div></div>`,
+        referenceField('appId', 'AppId', s.route.appId, { type: 'static', required: true }) +
+          referenceField('name', t('clusterName'), '', { required: true, help: t('Cluster.CreateNameTips') }) +
+          referenceField('comment', t('clusterComment'), '', { type: 'textarea', help: t('Cluster.CreateRemarksTips') }) +
+          referenceRow(t('selectEnvironment'), `<table class="reference-environment-options"><tbody>${(s.clusterCreateEnvs || []).map((env, index) => `<tr><td><input type="checkbox" name="env_${attr(env)}" id="cluster-environment-${index}"></td><td><label for="cluster-environment-${index}">${e(env)}</label></td></tr>`).join('')}</tbody></table>`, { required: true, columns: 5 }),
         t("save"),
         " ",
         s.readOnly || !s.canCreateCluster,
-      ),
+        {},
+      )),
     "cluster-create-page",
   );
 }
@@ -454,13 +453,17 @@ function namespacePage(s, t) {
               ? "Namespace.CreatePublic.Tips"
               : "Namespace.CreatePrivate.Tips") + index,
         );
-  const controls = `<div class="reference-form-actions">${btn("namespace-mode", t("newNamespace"), 'data-mode="create"', false, mode === "create" ? "active" : "default")}${btn("namespace-mode", t("linkNamespace"), 'data-mode="link"', false, mode === "link" ? "active" : "default")}</div>`;
-  const targets = `<div class="form-field"><span>${t("chooseClusters")} <b>*</b></span><div class="namespace-targets">${s.namespaceChoices.map((target, index) => `<label class="checkbox-label"><input type="checkbox" name="target_${index}" checked> ${e(target.env)} / ${e(target.clusterName)}</label>`).join("")}</div></div>`;
+  const grid = { labelColumns: 3 };
+  const controls = referenceRow('', `<div class="namespace-mode-controls">${btn("namespace-mode", t("newNamespace"), 'data-mode="create"', false, mode === "create" ? "active" : "default")}${btn("namespace-mode", t("linkNamespace"), 'data-mode="link"', false, mode === "link" ? "active" : "default")}</div>`, { ...grid, columns: 5, className: 'namespace-mode-row' });
+  const targets = referenceRow(t('chooseClusters'), `<div class="namespace-targets">${s.namespaceChoices.map((target, index) => `<label class="checkbox-label"><input type="checkbox" name="target_${index}" checked> ${e(target.env)} / ${e(target.clusterName)}</label>`).join("")}</div>`, { ...grid, required: true });
   const fields =
     mode === "link"
       ? targets +
-        `<div class="form-field"><span>${t("publicNamespaces")} <b>*</b></span><div class="namespace-public-select">${s.namespacePublic.map((namespace, index) => `<label class="checkbox-label"><input type="checkbox" name="public_${index}"> ${e(namespace.name)} / ${e(namespace.appId)}</label>`).join("")}</div></div>`
-      : `<div class="form-field"><span>${t("type")}</span><label><input type="radio" name="namespaceType" value="private"${!publicType ? " checked" : ""}> private</label><label><input type="radio" name="namespaceType" value="public"${publicType ? " checked" : ""}> public</label></div><div class="form-field"><span>${t("namespaceName")} <b>*</b></span><input name="name" required><select name="format" class="namespace-format-select">${["properties", "xml", "yml", "yaml", "json", "txt"].map((format) => `<option>${format}</option>`).join("")}</select></div>${field("comment", t("comment"), "", "textarea")}${publicType ? field("appendPrefix", t("namespacePrefix"), true, "checkbox") : ""}`;
+        referenceRow(t('publicNamespaces'), `<div class="namespace-public-select">${s.namespacePublic.map((namespace, index) => `<label class="checkbox-label"><input type="checkbox" name="public_${index}"> ${e(namespace.name)} / ${e(namespace.appId)}</label>`).join("")}</div>`, { ...grid, columns: 4, required: true })
+      : referenceRow(t('type'), `<label class="reference-radio-inline"><input type="radio" name="namespaceType" value="private"${!publicType ? ' checked' : ''}> private</label> <label class="reference-radio-inline"><input type="radio" name="namespaceType" value="public"${publicType ? ' checked' : ''}> public</label>`, { ...grid, required: true, columns: 5 }) +
+        (publicType ? referenceRow(t('namespacePrefix'), `<div><label class="reference-checkbox-inline"><input type="checkbox" name="appendPrefix"${s.namespaceAppendPrefix !== false ? ' checked' : ''}> ${e(s.namespacePrefix || '')}</label></div>`, { ...grid, help: t('namespacePrefixHint') }) : '') +
+        referenceRow(t('namespaceName'), `<div class="namespace-name-group">${publicType && s.namespaceAppendPrefix !== false ? `<span class="namespace-prefix-addon" data-namespace-prefix>${e(s.namespacePrefix || '')}</span>` : ''}<input id="namespace-name-input" name="name" required></div>`, { ...grid, columns: 5, required: true, labelFor: 'namespace-name-input', trailing: `<div class="reference-control-extra"><select name="format" class="namespace-format-select" aria-label="${attr(t('type'))}">${['properties','xml','json','yml','yaml','txt'].map(format => `<option>${format}</option>`).join('')}</select></div>` }) +
+        referenceField('comment', t('comment'), '', { ...grid, columns: 7, type: 'textarea' });
   return page(
     head(t("newNamespace"), t("namespaceMoreHint"), back(t)) +
       hint(
@@ -468,10 +471,11 @@ function namespacePage(s, t) {
       ) +
       form(
         "namespace-create-submit",
-        `<input type="hidden" name="mode" value="${mode}">${controls}<div class="form-field"><span>AppId</span><output>${e(s.route.appId)}</output></div>${fields}`,
+        `<input type="hidden" name="mode" value="${mode}">${controls}${referenceField('appId', 'AppId', s.route.appId, { ...grid, type: 'static', className: 'namespace-app-identity' })}${fields}`,
         t("save"),
         " ",
         s.readOnly || !s.canCreateNamespace,
+        grid,
       ),
     "namespace-create-page",
   );

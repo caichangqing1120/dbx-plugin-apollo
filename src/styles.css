@@ -2849,8 +2849,6 @@ button:disabled {opacity:.65;}
 .reference-inline[data-submit-action=app-admin-inline] fieldset {grid-template-columns:16.6667% 450px max-content 1fr;}
 .reference-inline[data-submit-action=app-admin-inline] .form-field>span {visibility:hidden;}
 .app-management-page [data-submit-action=save-project-submit] input[name=appId] {background:transparent;}
-.app-management-page [data-submit-action=save-project-submit] input[name=name] {width:33.3333%;}
-.app-management-page [data-submit-action=save-project-submit] select[name=orgId] {width:25%;}
 .app-management-page .reference-section {margin-top:20px;padding-top:0;border-top:0;}
 .app-management-page .reference-section h4 {border-bottom:1px solid #eee;padding-bottom:15px;margin-bottom:15px;}
 .app-management-page .reference-tags {margin-left:16.6667%;padding:15px;}
@@ -2992,3 +2990,108 @@ input,select,textarea {font-size:14px;}
 .namespace-delete-usage .reference-table {table-layout:auto;}
 .namespace-delete-usage .reference-table th {text-align:center;font-weight:700;}
 .namespace-delete-usage .reference-table td {text-align:center;}
+
+.reference-page .reference-grid-row {
+  display:flex;
+  align-items:flex-start;
+  gap:0;
+  margin:0 -15px 15px;
+}
+.reference-page .reference-grid-row > .reference-grid-label {
+  width:calc(100% / 12 * var(--field-label-columns, 2));
+  flex:none;
+  padding:7px 15px 0;
+  font-weight:700;
+  text-align:right;
+}
+.reference-grid-label > label {margin:0;font-weight:inherit;}
+.reference-grid-row > .reference-control-column {
+  width:calc(100% / 12 * var(--field-control-columns, 6));
+  flex:none;
+  padding:0 15px;
+  font-weight:400;
+  text-align:left;
+}
+.reference-grid-row > .reference-control-column > input:not([type=hidden]),
+.reference-grid-row > .reference-control-column > textarea,
+.reference-grid-row > .reference-control-column > select {
+  display:block;
+  width:100%;
+  height:34px;
+  margin:0;
+  font-size:14px;
+  line-height:1.42857143;
+}
+.reference-grid-row > .reference-control-column > textarea {height:74px;min-height:74px;}
+.reference-grid-row > .reference-control-column > select.reference-compact-select {
+  height:28px;
+  padding:3px 8px;
+  font-size:13px;
+  border-color:#aaa;
+}
+.reference-control-column > small {font-size:85%;color:inherit;}
+.reference-control-column > .user-picker {display:flex;width:450px;max-width:none;}
+.reference-static-value {display:inline-block;min-height:34px;padding:7px 0;margin:0;font-weight:700;}
+.reference-grid-form .reference-form-actions {margin:0 -15px 15px;padding:0;}
+.create-app-page .reference-heading {min-height:0;}
+.app-management-page .project-basics > .reference-grid-form {padding:0;}
+.app-management-page .project-administrators,
+.app-management-page .project-basics {padding:0 30px;margin:10px 0 0;}
+.app-management-page .project-administrators {margin-top:0;padding-top:25px;}
+.project-section-title {font-size:14px;font-weight:500;line-height:1.1;margin:0;}
+.project-section-title small {font-size:75%;font-weight:400;line-height:1;color:#777;}
+.project-administrators > hr,.project-basics > hr {height:0;border:0;border-top:1px solid #eee;margin:20px 0;}
+.project-administrators .reference-inline > fieldset {display:block;padding:0;width:91.6666667%;margin-left:8.3333333%;}
+.project-administrators .reference-inline .form-field {display:inline-block;vertical-align:middle;margin:0;}
+.project-administrators .reference-inline .form-field > span {display:none;}
+.project-administrators .reference-inline .user-picker {width:450px;max-width:none;}
+.project-administrators .reference-inline .btn {vertical-align:middle;margin-left:20px;}
+.app-management-page .project-administrators > .reference-tags {display:block;margin:15px 0 0 8.3333333%;padding:20px 15px;min-height:76px;}
+.reference-admin-tag {display:inline-flex;padding:0;border:0;gap:0;margin:0 5px 0 0;vertical-align:middle;}
+.reference-admin-tag .reference-tag-name {border:1px solid #ccc;border-radius:4px 0 0 4px;padding:6px 12px;font-size:14px;line-height:20px;}
+.reference-admin-tag .btn {height:34px;width:38px;padding:6px 12px;border:1px solid #ccc;border-radius:0 4px 4px 0;margin-left:-1px;line-height:20px;}
+.cluster-create-page .reference-heading > span {font-size:18px;line-height:1.1;margin:10px 0;}
+.cluster-create-page .reference-heading {margin-bottom:15px;}
+.cluster-create-page .reference-hint {margin-top:15px;}
+.cluster-create-page .reference-hint ul {padding-left:40px;}
+.reference-environment-options {width:100px;border-collapse:collapse;margin:0 0 20px;}
+.reference-environment-options td {padding:8px;border-top:1px solid #ddd;}
+.reference-environment-options td:first-child {width:10%;}
+.reference-environment-options label {margin:0;font-weight:400;}
+.reference-page .reference-environment-options input[type=checkbox] {margin:4px 0 0;}
+.namespace-create-page .reference-heading {margin-bottom:15px;}
+.namespace-create-page .reference-hint {margin-top:15px;}
+.namespace-create-page .reference-hint ul {padding-left:40px;}
+.namespace-create-page .reference-grid-form {margin-top:30px;}
+.namespace-create-page .reference-grid-row > .reference-control-column {margin:0 -15px 15px;}
+.namespace-create-page .namespace-app-identity > .reference-control-column {margin-bottom:-15px;}
+.namespace-create-page .namespace-mode-row > .reference-control-column,
+.namespace-create-page .reference-form-actions > .reference-control-column {margin:0;}
+.namespace-mode-controls {display:inline-flex;margin-left:-15px;}
+.namespace-mode-controls .btn {height:30px;padding:5px 10px;font-size:12px;line-height:1.5;border-radius:0;margin:0;}
+.namespace-mode-controls .btn + .btn {margin-left:-1px;}
+.namespace-mode-controls .btn:first-child {border-radius:3px 0 0 3px;}
+.namespace-mode-controls .btn:last-child {border-radius:0 3px 3px 0;}
+.reference-control-column .reference-radio-inline {display:inline-block;position:relative;min-height:20px;padding:7px 0 0 20px;margin:0;vertical-align:middle;font-weight:400;}
+.reference-control-column .reference-radio-inline + .reference-radio-inline {margin-left:10px;}
+.reference-page .reference-radio-inline input[type=radio] {position:absolute;margin:4px 0 0 -20px;}
+.namespace-create-page .reference-control-extra {width:16.6666667%;padding:0 15px;flex:none;}
+.namespace-create-page .reference-control-extra > select {display:block;width:100%;height:34px;margin:0;font-size:14px;}
+.namespace-name-group {display:flex;width:100%;}
+.reference-page .namespace-name-group > input {display:block;width:100%;height:34px;min-width:0;flex:1;margin:0;font-size:14px;}
+.namespace-prefix-addon {padding:6px 12px;font-size:14px;line-height:20px;color:#555;background:#eee;border:1px solid #ccc;border-right:0;border-radius:4px 0 0 4px;white-space:nowrap;}
+.namespace-prefix-addon + input {border-radius:0 4px 4px 0;}
+.reference-checkbox-inline {display:inline-block;position:relative;min-height:20px;padding:7px 0 0 20px;vertical-align:middle;font-weight:400;}
+.reference-page .reference-checkbox-inline input[type=checkbox] {position:absolute;margin:4px 0 0 -20px;}
+.reference-create-state {display:flow-root;text-align:center;margin:0 -15px;}
+.creation-success-image {width:100px;height:100px;vertical-align:middle;}
+.reference-create-state h3 {font-size:24px;font-weight:500;line-height:1.1;color:inherit;margin:20px 0 10px;}
+
+/* Include a tall sidebar in document flow instead of painting it across the footer. */
+.project-layout {display:grid;grid-template-columns:220px minmax(0,1fr);column-gap:0;}
+.project-layout > .project-sidebar {position:relative;left:auto;top:auto;margin-top:15px;grid-column:1;}
+.project-layout > .config-main {margin-left:0;min-width:0;grid-column:2;}
+@media (max-width:700px) {
+  .project-layout {grid-template-columns:185px minmax(0,1fr);}
+  .project-layout > .project-sidebar {margin-top:10px;}
+}

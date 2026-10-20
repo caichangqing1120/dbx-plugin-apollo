@@ -1,0 +1,74 @@
+{
+  "goVersion": "go version go1.26.3 darwin/amd64",
+  "packages": [
+    {
+      "target": "darwin-arm64",
+      "url": "io.github.caichangqing1120.apollo-0.1.3-rc.1-darwin-arm64.dbxp",
+      "sha256": "000ab57db763335ffb8f9314518a1b31ab3e084e1f270774b4930ad57033f619",
+      "size": 2781834,
+      "archiveEntries": 24,
+      "verifiedChecksumEntries": 23,
+      "binary": "Mach-O 64-bit arm64",
+      "nativeUISHA256": "69feb497f53c0064c38863243a59a919d11913a9915ccc22b2b2e68411705efe",
+      "nativeSourceSHA256": "30cd8a8d84c44f715a9ef6ac0bae9a313bd85e37ba2af68b05bbb46b75f5f211",
+      "unsigned": true,
+      "initializeHandshake": "not run (cross target)"
+    },
+    {
+      "target": "darwin-x64",
+      "url": "io.github.caichangqing1120.apollo-0.1.3-rc.1-darwin-x64.dbxp",
+      "sha256": "0d935812d3b7f56ff3c920419ff893d0a0383de77d771f3d067caa13e9333326",
+      "size": 2994371,
+      "archiveEntries": 24,
+      "verifiedChecksumEntries": 23,
+      "binary": "Mach-O 64-bit x64",
+      "nativeUISHA256": "69feb497f53c0064c38863243a59a919d11913a9915ccc22b2b2e68411705efe",
+      "nativeSourceSHA256": "30cd8a8d84c44f715a9ef6ac0bae9a313bd85e37ba2af68b05bbb46b75f5f211",
+      "unsigned": true,
+      "initializeHandshake": "pass",
+      "initializePlugin": {
+        "id": "io.github.caichangqing1120.apollo",
+        "version": "0.1.3-rc.1"
+      }
+    },
+    {
+      "target": "windows-x64",
+      "url": "io.github.caichangqing1120.apollo-0.1.3-rc.1-windows-x64.dbxp",
+      "sha256": "2e3ee4974d50cc03f35f00a03fc5748d53ea15dff9bc38e8336b8eb127cb996b",
+      "size": 3011616,
+      "archiveEntries": 24,
+      "verifiedChecksumEntries": 23,
+      "binary": "PE32+ x64",
+      "nativeUISHA256": "69feb497f53c0064c38863243a59a919d11913a9915ccc22b2b2e68411705efe",
+      "nativeSourceSHA256": "30cd8a8d84c44f715a9ef6ac0bae9a313bd85e37ba2af68b05bbb46b75f5f211",
+      "unsigned": true,
+      "initializeHandshake": "not run (cross target)"
+    },
+    {
+      "target": "linux-x64",
+      "url": "io.github.caichangqing1120.apollo-0.1.3-rc.1-linux-x64.dbxp",
+      "sha256": "356dde5547ff67d6253fc3a88533d20bea5ecda0d73e6fe59fcc1cb1e22dd33c",
+      "size": 2970275,
+      "archiveEntries": 24,
+      "verifiedChecksumEntries": 23,
+      "binary": "ELF 64-bit x64",
+      "nativeUISHA256": "69feb497f53c0064c38863243a59a919d11913a9915ccc22b2b2e68411705efe",
+      "nativeSourceSHA256": "30cd8a8d84c44f715a9ef6ac0bae9a313bd85e37ba2af68b05bbb46b75f5f211",
+      "unsigned": true,
+      "initializeHandshake": "not run (cross target)"
+    },
+    {
+      "target": "linux-arm64",
+      "url": "io.github.caichangqing1120.apollo-0.1.3-rc.1-linux-arm64.dbxp",
+      "sha256": "9b1ac6dff1eaa383340486efa62930c1190e2e5f9b15ed7c3f5dbe6e26078cc6",
+      "size": 2708751,
+      "archiveEntries": 24,
+      "verifiedChecksumEntries": 23,
+      "binary": "ELF 64-bit arm64",
+      "nativeUISHA256": "69feb497f53c0064c38863243a59a919d11913a9915ccc22b2b2e68411705efe",
+      "nativeSourceSHA256": "30cd8a8d84c44f715a9ef6ac0bae9a313bd85e37ba2af68b05bbb46b75f5f211",
+      "unsigned": true,
+      "initializeHandshake": "not run (cross target)"
+    }
+  ]
+}

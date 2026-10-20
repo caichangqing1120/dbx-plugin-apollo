@@ -23,6 +23,7 @@ let body = "";
 for (const [heading, entries] of [
   ["Management Pages", data.pages],
   ["Dialog Declarations", data.dialogs],
+  ...(data.additionalStates?.length ? [["Additional Scoped States", data.additionalStates]] : []),
 ]) {
   body += `<h2>${heading} (${entries.length})</h2>`;
   for (const [index, entry] of entries.entries())

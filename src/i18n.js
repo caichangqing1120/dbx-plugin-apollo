@@ -520,12 +520,12 @@ const referencePageCopy = {
   applicationManagement: ["应用管理", "Application Management"],
   baseInformation: ["基本信息", "Basic information"],
   applicationNameHint: [
-    "建议格式: xx-yy-zz，例如 apollo-server",
-    "Suggested format: xx-yy-zz, e.g. apollo-server",
+    "（建议格式 xx-yy-zz 例: apollo-server）",
+    "(Suggested format xx-yy-zz e.g. apollo-server)",
   ],
   appAdminHint: [
-    "（应用管理员可创建 Namespace、集群，管理应用和授权）",
-    "(App admins manage namespaces, clusters, application and roles)",
+    "（应用管理员具有以下权限: 1. 创建 Namespace 2. 创建集群 3. 管理应用、Namespace 权限）",
+    "(Project administrators have the following permissions: 1. Create namespace 2. Create clusters 3. Manage project and namespace permissions)",
   ],
   editAppInfo: ["修改应用信息", "Edit application"],
   grantCreateApp: [
@@ -566,6 +566,11 @@ const referencePageCopy = {
   clusterComment: ["集群备注", "Cluster comment"],
   selectEnvironment: ["选择环境", "Select environments"],
   createdSuccessfully: ["已创建成功", "created successfully"],
+  creationDone: ["创建成功", "Created Successfully"],
+  namespacePrefixHint: [
+    "（公共 Namespace 的名称需要全局唯一，添加部门前缀有助于保证全局唯一性）",
+    "(The name of a public namespace needs to be globally unique, and adding a department prefix helps ensure global uniqueness)",
+  ],
   secret: ["访问密钥", "Access key"],
   keyCountHint: [
     "每个环境最多可添加 5 个访问密钥",

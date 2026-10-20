@@ -46,6 +46,23 @@ test("original reference-page prerequisites use real controller aliases without 
   }
 });
 
+test('reference cluster creation uses the pinned OpenAPI controller and real stored state', async () => {
+  const fixture = await startFixture();
+  try {
+    const base = `http://127.0.0.1:${fixture.port}`;
+    const headers = { Cookie: 'SESSION=fixture-session', 'Content-Type': 'application/json' };
+    const path = '/openapi/v1/envs/DEV/apps/SampleApp/clusters';
+    const body = { appId: 'SampleApp', name: 'reference-created', comment: 'source UI' };
+    const response = await fetch(base + path, { method: 'POST', headers, body: JSON.stringify(body) });
+    assert.equal(response.status, 200);
+    assert.deepEqual(await response.json(), body);
+    const stored = await fetch(base + '/apps/SampleApp/envs/DEV/clusters/reference-created', { headers });
+    assert.deepEqual(await stored.json(), body);
+    assert.equal((await fetch(base + path, { method: 'POST', headers, body: JSON.stringify({ ...body, appId: 'OtherApp' }) })).status, 400);
+    assert.equal((await fetch(base + path + '/unknown-action', { method: 'POST', headers, body: '{}' })).status, 404);
+  } finally { await fixture.close(); }
+});
+
 test("fixture exposes literal role/lock/history DTOs and keeps ItemDTO type after revoke", async () => {
   const fixture = await startFixture();
   try {
