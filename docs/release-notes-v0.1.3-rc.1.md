@@ -29,8 +29,8 @@ sidebar-flow widths. Fourteen actually triggered original/SDK warning states mat
 title fonts and final frames, with 100% equal interior pixels excluding a 3px border/shadow.
 These are scoped checks, not all-page or every-state acceptance.
 
-Full all-page/all-dialog 1:1 acceptance remains FAIL. This metadata follow-up does not fix
-the remaining parity differences or establish real Apollo/native desktop acceptance.
+Full all-page/all-dialog 1:1 acceptance remains FAIL. This Preview does not close the
+remaining parity differences or establish real Apollo/native desktop acceptance.
 See [the current repair evidence](https://github.com/caichangqing1120/dbx-plugin-apollo/blob/v0.1.3-rc.1/docs/parity-polish.md)
 and [the privacy/security boundaries](https://github.com/caichangqing1120/dbx-plugin-apollo/blob/v0.1.3-rc.1/docs/security.md).
 Ordinary Portal password authentication only; no SSO/OIDC/LDAP. Source/generated UI/runtime

@@ -221,11 +221,34 @@ release submission. Preserve 0.1.2 source tags/assets and the failed full accept
   and the in-page cluster-created flow with a late-response route guard, test-first.
 - [x] Verify both declared Portal cluster endpoints and the original frontend's OpenAPI
   controller path; add only the explicit missing reference-fixture route, not a wildcard.
-- [ ] Recheck form/conditional/success states and existing warnings across real SDK/original
+- [x] Recheck form/conditional/success states and existing warnings across real SDK/original
   browser surfaces, including representative locale/theme/viewport contexts.
-- [ ] Complete fresh suites, smoke/package proof and one scoped independent final review;
+- [x] Complete fresh suites, smoke/package proof and one scoped independent final review;
   update README/current evidence with actual pass/fail and remaining developer-owned gaps.
 
 Files: `src/reference-fields.js`, affected page/picker/style/action modules, new regression
 tests and `scripts/parity/verify-{form-grid,creation-flows}.js`. The normal form-control
 geometry gate is 0.1px, independently of whole-page/pixel/conditional-state acceptance.
+
+Task 13 increment is verified at product commit `6b2bdd3`: 176 JS, 14 packaging regressions,
+14 Go race tests plus vet; all five local packages and both packaged macOS smoke flows pass.
+Current browser records cover 16 normal controls, seven creation/prefix cases, four keyboard
+safety cases, five language/theme/narrow cases, three sidebar widths and 14 paired warning
+interiors. The 63-section report decodes all 113 embedded images with no broken images.
+Independent final review of `2bb1572..6b2bdd3` found no actionable correctness, regression or
+security issues. These scoped results do not close Task 7/8/9/10 full-parity or live gates.
+
+## Task 14: Authorized Manual RC Delivery
+
+The user's existing release authorization is unchanged: add source automation registration,
+but use a manually initiated release and candidate submission for this validation iteration.
+Preserve the signed 0.1.2 catalog, tag and bytes; do not alter signing or discovery policy.
+
+- [ ] Push the reviewed repair source and README to the author's main branch, then create
+  an immutable `v0.1.3-rc.1` tag and GitHub Prerelease with CI-built assets only.
+- [ ] Download every published target, verify exact hashes/size/content/native identities,
+  and run downloaded macOS packaged-sidecar handshake and full loopback smoke.
+- [ ] Submit one candidate-only Store PR from the latest official main, leaving protected
+  signing and merge to maintainers; keep automation PR #298 separate.
+- [ ] Update README and the versioned delivery receipt with actual release/submission state;
+  close only task-owned browser/services and retain unfinished parity work/evidence.
