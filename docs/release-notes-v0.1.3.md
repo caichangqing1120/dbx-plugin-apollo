@@ -34,6 +34,13 @@ full suites, five-target packages and actual macOS sidecars are revalidated for 
 Exact fresh counts, source/CI, downloaded artifact hashes and Store state are recorded in
 the versioned delivery receipt on the repository's main branch after publication.
 
+Stable delivery now passes [source CI](https://github.com/caichangqing1120/dbx-plugin-apollo/actions/runs/39894976659):
+207 JS, 28 release-packaging and 14 Go race tests plus vet. All five published packages
+are re-downloaded and match their local SHA-256/size/source/UI/native metadata; both
+downloaded macOS sidecars and CI Linux x64 pass initialize/full controlled smoke. GitHub
+reports `v0.1.3` as Latest with `draft=false` and `prerelease=false`. See the
+[current delivery receipt](https://github.com/caichangqing1120/dbx-plugin-apollo/blob/main/docs/delivery-0.1.3.json).
+
 **Full 24-page / 31-dialog / all-state 1:1 remains FAIL.** Toolbar/sidebar/icon/hint/counter
 details, some administration tables/forms, previews/editors and conditional/delete contexts
 remain incomplete. Production/MySQL, complete multi-account permission matrices, native
@@ -51,5 +58,7 @@ Registration [#298](https://github.com/t8y2/dbx-store/pull/298) is merged with a
 stable-release discovery. Closed RC submission #304 is not reopened. Discovery may create
 a new stable candidate PR; maintainers still own review, protected signing and merge. No
 signing key, generated catalog, trust setting or Store filter is changed by this release.
+The initial post-publication readback has not yet observed that automatic PR and the latest
+Store discovery run predates publication; the officially signed catalog remains `0.1.2`.
 
 [Source and follow-up Apollo issues](https://github.com/caichangqing1120/dbx-plugin-apollo/issues).

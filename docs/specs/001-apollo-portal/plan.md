@@ -374,10 +374,10 @@ non-draft/non-prerelease GitHub Release for automatic discovery. Store signing s
   packaged initialize/full sidecar smoke. Expected: stable identity everywhere; UI bytes
   equal tested RC2. Obtain one fresh scoped review before source push, fix Important findings
   in one RED/GREEN pass. No new UI feature or original evidence rewrite.
-- [ ] Push verified source to author main; create immutable `v0.1.3`, dispatch the existing
+- [x] Push verified source to author main; create immutable `v0.1.3`, dispatch the existing
   CI publisher and verify a stable (not prerelease/draft) release. Download all public
   targets and verify exact hashes/source/UI/native identities and executable smoke.
-- [ ] Verify registered discovery metadata is reachable; observe the automatic Store PR
+- [x] Verify registered discovery metadata is reachable; observe the automatic Store PR
   when available without manually duplicating it or invoking signing. Update README and
   delivery receipt with actual publication/discovery/signing state; preserve all worktrees,
   historical RC assets and unfinished full-parity evidence. No native app replacement is
@@ -395,3 +395,12 @@ existing complete releases are byte-verification-only. The `release: published` 
 removed: new publication is manually dispatched through the controlled draft path. Final
 local verification is 207 JS / 28 Python / 14 Go race tests plus vet; five packages and both
 macOS initialize/full sidecar smoke pass, with UI bytes identical to RC2.
+
+Stable delivery: source/tag `444909e`, source CI `39894976659` passes; stable Release is
+non-draft/non-prerelease and GitHub Latest. All 13 public assets / five platform packages
+are downloaded and match local hashes, sizes, source/UI/native metadata; downloaded macOS
+ARM64/x64 and CI Linux x64 sidecars pass initialize/full smoke. Registered Store automation
+is live, but no stable candidate PR is observed yet and its latest run predates publication.
+Official catalog remains `0.1.2`; signing/merge are not complete. No manual candidate,
+Store workflow dispatch, RC reopen or signing request is performed. Exact state is retained
+in `../../delivery-0.1.3.json`. Full 1:1 acceptance remains FAIL.

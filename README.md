@@ -2,7 +2,8 @@
 
 DBX issue [#12466](https://github.com/t8y2/dbx/issues/12466).
 
-Stable release preparation: **Apollo Portal Console / Apollo Portal 控制台 `0.1.3`**.
+Current author stable release: **Apollo Portal Console / Apollo Portal 控制台**,
+[`0.1.3`](https://github.com/caichangqing1120/dbx-plugin-apollo/releases/tag/v0.1.3).
 The user authorized promoting the tested RC2 behavior on 2026-10-23. Stable publication
 changes the version/channel, not the UI or the failed full 1:1 acceptance gate.
 The Store has no prerelease channel: signing any candidate makes it `latestVersion` for
@@ -10,10 +11,16 @@ all users. RC submission [#304](https://github.com/t8y2/dbx-store/pull/304) is t
 merged automation [#298](https://github.com/t8y2/dbx-store/pull/298) discovers eligible stable
 releases. Author publication, automatic candidate creation and official signing/merge are
 separate gates. The last confirmed signed Store version is `0.1.2`.
-The new names and explicit SemVer prerelease avoid the separate Apollo plugin's identical
-listing labels. The already signed `0.1.2` artifacts and source tag are preserved unchanged.
+The distinct names avoid the separate Apollo plugin's identical listing labels. Prior RC
+versions retain their explicit prerelease suffixes; all previous tags/assets remain immutable.
 The [review follow-up](docs/review-follow-up-2026-10-20.md) preserves the earlier naming /
-signed-0.1.2 boundary; the current RC2 delivery is recorded separately.
+signed-0.1.2 boundary; RC2 and stable delivery are recorded separately.
+
+The stable Release is non-draft/non-prerelease and GitHub Latest. Source CI passes; all
+five public packages and 13 assets are re-downloaded/verified, matching exact local bytes.
+Both downloaded macOS sidecars pass initialize/full smoke; CI also passes Linux x64 smoke.
+The bounded post-publication readback has not yet observed an automatic stable Store PR;
+the latest Store discovery run predates this release. Signing/listing are not complete.
 
 **Historical RC2 is published and byte-verified.** Source CI passes; all five downloaded packages
 match the local verified bytes, including the exact ARM64 candidate installed in DBX.
@@ -39,7 +46,7 @@ The strict all-page, all-dialog 1:1 gate still FAILS. Stable SemVer is the autho
 channel, not a claim that these gaps are fixed. Author packages remain unsigned Store inputs
 until protected signing; do not mistake an author stable Release for an official signed catalog.
 
-[Stable release notes](docs/release-notes-v0.1.3.md) | [Historical RC2 receipt](docs/delivery-0.1.3-rc.2.json) | [Historical RC2 visual report](https://github.com/caichangqing1120/dbx-plugin-apollo/releases/download/v0.1.3-rc.2/apollo-parity-report-v0.1.3-rc.2.html).
+[Stable delivery receipt](docs/delivery-0.1.3.json) | [Stable source CI](https://github.com/caichangqing1120/dbx-plugin-apollo/actions/runs/39894976659) | [Stable release notes](docs/release-notes-v0.1.3.md) | [Historical RC2 visual report](https://github.com/caichangqing1120/dbx-plugin-apollo/releases/download/v0.1.3-rc.2/apollo-parity-report-v0.1.3-rc.2.html).
 Official signing of all five `0.1.2` targets and PR #295's maintainer merge completed on
 2026-10-20. The author Release assets remain unsigned review candidates, distinct from
 the official signed Store artifacts. The [historical 0.1.2 receipt](docs/delivery-0.1.2.json)
@@ -247,6 +254,13 @@ records the matching CI/published bytes, downloaded macOS smoke and separate Sto
 The [RC1 receipt](docs/delivery-0.1.3-rc.1.json) remains historical. None of these counts
 is a full 1:1, complete native acceptance or production verdict. Stable-release verification
 is recorded separately; no new browser UI or native installation is implied by version promotion.
+
+Fresh `0.1.3` verification passes **207 JS / 28 release-packaging tests / 14 Go race tests
+and vet**, five package/source/UI/CPU/checksum checks, and both downloaded macOS sidecar
+initialize/full controlled smoke flows. CI passes the same suites and Linux x64 sidecar smoke.
+The stable [package proof](docs/package-verification-0.1.3.json) and
+[delivery record](docs/delivery-0.1.3.json) separate those results from automatic Store
+discovery, maintainer signing/merge and historical RC2 native evidence.
 
 `npm run test:smoke` starts a controlled loopback HTTP fixture and a real Go sidecar and checks
 JSON-RPC login/edit/publish/history/rollback, gray merge, sync, key/consumer/role/admin APIs,
