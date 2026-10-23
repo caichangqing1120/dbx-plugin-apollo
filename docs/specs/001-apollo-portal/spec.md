@@ -16,15 +16,20 @@ Keep Chinese/English support, light appearance and page structure, including on
 dark DBX hosts. A narrower window may scroll where the original desktop UI does.
 
 Authentication is ordinary Portal form login only. LDAP, SSO/OIDC, OpenAPI-token-only login,
-production writes during development, publishing, remote repository creation and push are out
-of scope. The plugin does not operate Apollo's database directly.
+production writes during development and automatic remote repository creation are out of
+scope. Source push/publication require explicit stage authorization; the user approved the
+stable `0.1.3` delivery on 2026-10-23. The plugin does not operate Apollo's database directly.
 
 ## Contracts
 
-- Plugin ID `io.github.caichangqing1120.apollo`, development version `0.1.3-rc.2`, Host API `1`.
+- Plugin ID `io.github.caichangqing1120.apollo`, stable release version `0.1.3`, Host API `1`.
   Display identity is `Apollo Portal Console` / `Apollo Portal 控制台`; the already signed
-  `0.1.2` and published `0.1.3-rc.1` tag/assets remain immutable. This local continuation
-  is not a new release or a change to the failed full 1:1 acceptance gate.
+  `0.1.2` and published `0.1.3-rc.1` / `0.1.3-rc.2` tags/assets remain immutable.
+  On 2026-10-23 the user authorized stable `0.1.3` publication after the Store maintainer
+  confirmed there is no prerelease channel: any signed version becomes `latestVersion`.
+  Stable promotion changes release identity/channel, not UI behavior or the failed full
+  1:1 acceptance gate. Only stable GitHub releases enter the Store's existing automation;
+  do not reopen the closed RC candidate, manually edit the catalog or bypass signing.
 - Success feedback automatically disappears after 5000ms; later successes have independent
   intervals. Starting another action/dialog/navigation clears old success feedback. Expiry
   must not rerender editors, discard unsaved drafts/focus/selection or dismiss important
@@ -60,7 +65,9 @@ of scope. The plugin does not operate Apollo's database directly.
    internal links remain in the workbench; RPC performs API reads and writes.
 4. Test configuration edit/publish/history/rollback and permission denial against a controlled
    server fixture. Explicitly distinguish fixture coverage from live Apollo acceptance.
-5. Package with `dbx-plugin package .`; inspect package contents. No publishing or push.
+5. Package with the source-validated cross-target release script; inspect package contents.
+   Push/publication only under the separately authorized delivery task; official signing
+   and full-page acceptance must not be inferred from author publication.
 
 ## Current Coverage And Acceptance Boundary
 

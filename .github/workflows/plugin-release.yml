@@ -1,12 +1,10 @@
 name: Release unsigned Apollo candidates
 
 on:
-  release:
-    types: [published]
   workflow_dispatch:
     inputs:
       tag:
-        description: Existing immutable prerelease source tag (for example v0.1.3-rc.1)
+        description: Existing immutable source tag (for example v0.1.3 or v0.1.3-rc.2)
         required: true
         type: string
 
@@ -49,7 +47,7 @@ jobs:
               throw new Error("Release tag, manifest and npm versions must match");
             }
           '
-          python3 -c 'import json, sys; sys.path.insert(0, "scripts"); from release import require_preview_version; require_preview_version(json.load(open("manifest.json"))["version"])'
+          python3 -c 'import json, sys; sys.path.insert(0, "scripts"); from release import release_is_prerelease; release_is_prerelease(json.load(open("manifest.json"))["version"])'
           test "$(git rev-parse HEAD)" = "$(git rev-list -n 1 "$RELEASE_TAG")"
       - run: npm ci --ignore-scripts
       - run: npm test
@@ -74,37 +72,7 @@ jobs:
           PY
           APOLLO_SMOKE_SIDECAR="$RUNNER_TEMP/apollo-packaged-smoke" npm run test:smoke
       - name: Publish immutable candidate assets
-        shell: bash
-        run: |
-          set -euo pipefail
-          if gh release view "$RELEASE_TAG" --json isPrerelease > /tmp/apollo-release-state.json; then
-            node --input-type=module -e '
-              import fs from "node:fs";
-              if (JSON.parse(fs.readFileSync("/tmp/apollo-release-state.json")).isPrerelease !== true) {
-                throw new Error("Unsigned Preview candidates require a GitHub prerelease; refusing stable publication");
-              }
-            '
-          else
-            gh release create "$RELEASE_TAG" --verify-tag --prerelease \
-              --title "Apollo Portal Console ${RELEASE_TAG#v} Preview" \
-              --notes-file "docs/release-notes-$RELEASE_TAG.md"
-          fi
-          directory="dist/release-$RELEASE_TAG"
-          temporary="$(mktemp -d)"
-          trap 'rm -rf "$temporary"' EXIT
-          for file in "$directory"/*.dbxp "$directory"/*.artifact.json \
-            "$directory"/release-candidates.json "$directory"/SHA256SUMS-"$RELEASE_TAG".txt \
-            "$directory"/package-verification.json; do
-            name="$(basename "$file")"
-            if gh release download "$RELEASE_TAG" --pattern "$name" --dir "$temporary" >/dev/null 2>&1; then
-              cmp "$file" "$temporary/$name" || {
-                echo "Refusing to replace immutable published bytes: $name" >&2
-                exit 1
-              }
-            else
-              gh release upload "$RELEASE_TAG" "$file"
-            fi
-          done
+        run: python3 scripts/publish-release.py --tag "$RELEASE_TAG"
       - uses: actions/upload-artifact@v4
         if: always()
         with:

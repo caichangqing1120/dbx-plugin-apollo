@@ -345,3 +345,53 @@ fully and downloads byte-for-byte. Store PR #304 is updated candidate-only at `5
 its CI red result is confirmed as the documented pending-signing guard. Review/signing/merge
 remain maintainer-owned; automation PR #298 is untouched. The full 1:1 gate still FAILS.
 See `../../delivery-0.1.3-rc.2.json` for exact provenance and separate acceptance boundaries.
+
+## Task 19: Authorized Stable 0.1.3 Promotion
+
+Spec: `./spec.md`. User explicitly requested stable publication on 2026-10-23. Live Store
+PR #298 is merged and registered with `autoUpdate: true`; RC candidate #304 is closed under
+the no-prerelease-channel policy. Reuse base `331ff55`; the original isolated worktree is
+read-only under the current sandbox, so a new linked worktree in writable `/private/tmp`
+preserves the original checkout/refs/evidence. No `.gitignore` setup change is committed.
+
+Files: `scripts/release.py`, new `scripts/publish-release.py`, `tests/test_release.py`,
+`.github/workflows/plugin-release.yml`, identity metadata, README and versioned delivery docs.
+Consumes the reviewed RC2 UI/behavior; produces unsigned stable `0.1.3` packages and a genuine
+non-draft/non-prerelease GitHub Release for automatic discovery. Store signing stays external.
+
+- [x] RED: exercise real stable packaging and release channel selection with controlled
+  `gh` process responses; reject malformed SemVer, tag/version mismatch, wrong draft/channel,
+  failed release lookup, and conflicting existing assets before upload. Keep RC suffix tests.
+  Run `python3 -m unittest discover -s tests -p test_release.py`; Expected: new cases fail
+  for absent stable/channel behavior, not unrelated fixture errors.
+- [x] GREEN: accept strict stable/prerelease SemVer, derive the GitHub channel from that
+  validated version, verify an existing release's exact tag/channel/non-draft state, fail
+  closed on lookup errors other than a real 404, preserve immutable asset checks; route CI
+  through the tested publisher. Run focused tests then `npm test`; Expected: all pass.
+- [x] Promote manifest/npm/sidecar/Store metadata to `0.1.3`, retain original UI/permissions,
+  and document stable policy plus actual remaining parity/native acceptance boundaries.
+- [x] Run full JS/Python, Go race/vet, build, five-target package proofs and both macOS
+  packaged initialize/full sidecar smoke. Expected: stable identity everywhere; UI bytes
+  equal tested RC2. Obtain one fresh scoped review before source push, fix Important findings
+  in one RED/GREEN pass. No new UI feature or original evidence rewrite.
+- [ ] Push verified source to author main; create immutable `v0.1.3`, dispatch the existing
+  CI publisher and verify a stable (not prerelease/draft) release. Download all public
+  targets and verify exact hashes/source/UI/native identities and executable smoke.
+- [ ] Verify registered discovery metadata is reachable; observe the automatic Store PR
+  when available without manually duplicating it or invoking signing. Update README and
+  delivery receipt with actual publication/discovery/signing state; preserve all worktrees,
+  historical RC assets and unfinished full-parity evidence. No native app replacement is
+  required for this metadata/channel-only promotion and no production write is authorized.
+
+Pre-flight: packaging and CI share the same SemVer/channel classifier; stable packages may
+not be labeled Preview by their metadata, while RC output must remain prerelease. A stable
+GitHub channel is eligibility for Store discovery, not evidence of signing or full parity.
+Self-review: all new behavior concerns release packaging/channel integrity only; exact API,
+credentials/read-only/transfer contracts and UI bytes remain unchanged.
+
+Fresh scoped review returned one P2: never supplement missing assets on an already-public
+release. One RED/GREEN pass now rejects incomplete published sets before any upload;
+existing complete releases are byte-verification-only. The `release: published` trigger is
+removed: new publication is manually dispatched through the controlled draft path. Final
+local verification is 207 JS / 28 Python / 14 Go race tests plus vet; five packages and both
+macOS initialize/full sidecar smoke pass, with UI bytes identical to RC2.

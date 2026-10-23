@@ -3,6 +3,8 @@ import hashlib
 import json
 from pathlib import Path
 import struct
+import subprocess
+import sys
 import tempfile
 import unittest
 from unittest import mock
@@ -198,10 +200,33 @@ class ReleaseTests(unittest.TestCase):
     def test_preview_packaging_rejects_versions_the_catalog_would_treat_as_stable(self):
         for version in ("0.1.3", "0.1.3+preview", "0.1.3-rc.01", "0.1.3-", "01.1.3-rc.1"):
             with self.subTest(version=version):
+                with self.assertRaisesRegex(ValueError, "prerelease|SemVer"):
+                    self.release.require_preview_version(version)
+
+    def test_stable_version_survives_package_and_discovery_metadata(self):
+        self.manifest["version"] = "0.1.3"
+        (self.root / "manifest.json").write_text(json.dumps(self.manifest))
+        (self.root / "package.json").write_text(json.dumps({"version": "0.1.3"}))
+        artifact = self.package()
+        self.assertEqual(artifact.name, "io.github.caichangqing1120.apollo-0.1.3-darwin-arm64.dbxp")
+        self.release.write_release_metadata(self.root, [artifact], self.output)
+        identity = json.loads((self.output / "release-candidates.json").read_text())["plugin"]
+        self.assertEqual(identity["version"], "0.1.3")
+        self.assertEqual(self.release.verify_package(artifact, self.root)["target"], "darwin-arm64")
+
+    def test_semver_classification_uses_prerelease_not_build_metadata(self):
+        for version, expected in [("0.1.3", False), ("0.1.3+linux-x64", False),
+                                  ("0.1.3-rc.2", True), ("0.1.3-rc.2+linux-x64", True)]:
+            with self.subTest(version=version):
+                self.assertIs(self.release.release_is_prerelease(version), expected)
+
+    def test_stable_packaging_still_rejects_malformed_semver(self):
+        for version in ("01.1.3", "0.1", "v0.1.3", "0.1.3-rc.01", "0.1.3-", "0.1.3+", "0.1.3\n"):
+            with self.subTest(version=version):
                 self.manifest["version"] = version
                 (self.root / "manifest.json").write_text(json.dumps(self.manifest))
                 (self.root / "package.json").write_text(json.dumps({"version": version}))
-                with self.assertRaisesRegex(ValueError, "prerelease|SemVer"):
+                with self.assertRaisesRegex(ValueError, "SemVer"):
                     self.package()
 
     def test_rc_suffix_survives_packaging_and_store_release_metadata(self):
@@ -216,6 +241,179 @@ class ReleaseTests(unittest.TestCase):
         self.assertEqual(release["plugin"]["version"], "0.1.3-rc.1")
         self.assertEqual(release["plugin"]["name"], "Apollo Portal Console")
         self.assertEqual(self.release.verify_package(artifact, self.root)["target"], "darwin-arm64")
+
+
+class PublishReleaseTests(unittest.TestCase):
+    package = ReleaseTests.package
+
+    def setUp(self):
+        ReleaseTests.setUp(self)
+        source = ROOT / "scripts/publish-release.py"
+        self.assertTrue(source.is_file(), "Stable/prerelease publisher is not implemented")
+        spec = importlib.util.spec_from_file_location("apollo_publisher", source)
+        self.publisher = importlib.util.module_from_spec(spec)
+        with mock.patch.dict(sys.modules, {"release": self.release}):
+            spec.loader.exec_module(self.publisher)
+
+    def prepare(self, version):
+        self.manifest["version"] = version
+        (self.root / "manifest.json").write_text(json.dumps(self.manifest))
+        (self.root / "package.json").write_text(json.dumps({"version": version}))
+        self.output = self.root / ("dist/release-v" + version)
+        (self.root / "docs").mkdir(exist_ok=True)
+        (self.root / "docs" / ("release-notes-v" + version + ".md")).write_text("Reviewed release notes\n")
+        artifacts = [self.package(target) for target in self.release.TARGETS]
+        self.release.write_release_metadata(self.root, artifacts, self.output)
+        (self.output / "package-verification.json").write_text(json.dumps({"packages": [
+            self.release.verify_package(path, self.root) for path in artifacts]}))
+
+    def remote(self, version, existing=False, channel=None, lookup_error=None, conflict=False, upload_failure=False):
+        prerelease = "-rc." in version if channel is None else channel
+        state = {"release": {"tag_name": "v" + version, "draft": False,
+                            "prerelease": prerelease, "assets": []} if existing else None,
+                 "calls": [], "uploaded": []}
+        if existing:
+            state["release"]["assets"] = [{"name": path.name} for path in self.output.iterdir()]
+
+        def call(command, **options):
+            self.assertEqual(command[0], "gh")
+            args = command[1:]
+            state["calls"].append(args)
+            stdout, stderr, code = "", "", 0
+            if args[0] == "api":
+                if lookup_error:
+                    code, stderr = 1, lookup_error
+                elif state["release"] is None:
+                    code, stderr = 1, "gh: Not Found (HTTP 404)"
+                else:
+                    stdout = json.dumps(state["release"])
+            elif args[:2] == ["release", "create"]:
+                state["release"] = {"tag_name": args[2], "draft": "--draft" in args,
+                                    "prerelease": "--prerelease" in args, "assets": []}
+            elif args[:2] == ["release", "upload"]:
+                if upload_failure:
+                    code, stderr = 1, "upload failed"
+                else:
+                    state["uploaded"].append(Path(args[3]).name)
+            elif args[:2] == ["release", "download"]:
+                name = args[args.index("--pattern") + 1]
+                directory = Path(args[args.index("--dir") + 1])
+                (directory / name).write_bytes(b"conflict" if conflict else (self.output / name).read_bytes())
+            elif args[:2] == ["release", "edit"]:
+                state["release"]["draft"] = False
+            else:
+                self.fail("Unexpected command: " + str(command))
+            result = subprocess.CompletedProcess(command, code, stdout, stderr)
+            if options.get("check") and code:
+                raise subprocess.CalledProcessError(code, command, stdout, stderr)
+            return result
+
+        return state, call
+
+    def test_new_stable_release_is_published_only_after_all_assets_are_uploaded(self):
+        self.prepare("0.1.3")
+        state, call = self.remote("0.1.3")
+        with mock.patch.object(self.publisher.subprocess, "run", side_effect=call):
+            self.publisher.publish(self.root, "v0.1.3")
+        create = next(args for args in state["calls"] if args[:2] == ["release", "create"])
+        self.assertIn("--draft", create)
+        self.assertNotIn("--prerelease", create)
+        self.assertEqual(len(state["uploaded"]), 13)
+        self.assertEqual(state["calls"][-2][:2], ["release", "edit"])
+        self.assertEqual(state["calls"][-1][0], "api")
+        self.assertIs(state["release"]["draft"], False)
+        self.assertIs(state["release"]["prerelease"], False)
+
+    def test_rc_release_keeps_prerelease_channel(self):
+        self.prepare("0.1.3-rc.3")
+        state, call = self.remote("0.1.3-rc.3")
+        with mock.patch.object(self.publisher.subprocess, "run", side_effect=call):
+            self.publisher.publish(self.root, "v0.1.3-rc.3")
+        create = next(args for args in state["calls"] if args[:2] == ["release", "create"])
+        self.assertIn("--prerelease", create)
+        self.assertIs(state["release"]["prerelease"], True)
+
+    def test_tag_identity_mismatch_causes_no_remote_calls(self):
+        self.prepare("0.1.3")
+        with mock.patch.object(self.publisher.subprocess, "run") as run:
+            with self.assertRaisesRegex(ValueError, "tag"):
+                self.publisher.publish(self.root, "v0.1.4")
+        run.assert_not_called()
+
+    def test_release_lookup_failure_does_not_create_or_upload(self):
+        self.prepare("0.1.3")
+        for failure in ["gh: Bad Gateway (HTTP 502)", "connection refused", "gh: Forbidden (HTTP 403)"]:
+            with self.subTest(failure=failure):
+                state, call = self.remote("0.1.3", lookup_error=failure)
+                with mock.patch.object(self.publisher.subprocess, "run", side_effect=call):
+                    with self.assertRaisesRegex((RuntimeError, subprocess.CalledProcessError), "lookup|502|refused|403"):
+                        self.publisher.publish(self.root, "v0.1.3")
+                self.assertEqual(len(state["calls"]), 1)
+
+    def test_existing_wrong_channel_is_rejected_without_modification(self):
+        self.prepare("0.1.3")
+        state, call = self.remote("0.1.3", existing=True, channel=True)
+        with mock.patch.object(self.publisher.subprocess, "run", side_effect=call):
+            with self.assertRaisesRegex(ValueError, "channel|prerelease"):
+                self.publisher.publish(self.root, "v0.1.3")
+        self.assertEqual(len(state["calls"]), 1)
+
+    def test_existing_draft_or_wrong_tag_is_not_silently_promoted(self):
+        self.prepare("0.1.3")
+        for changes in [{"draft": True}, {"tag_name": "v0.1.2"}]:
+            with self.subTest(changes=changes):
+                state, call = self.remote("0.1.3", existing=True)
+                state["release"].update(changes)
+                with mock.patch.object(self.publisher.subprocess, "run", side_effect=call):
+                    with self.assertRaisesRegex(ValueError, "draft|tag"):
+                        self.publisher.publish(self.root, "v0.1.3")
+                self.assertEqual(len(state["calls"]), 1)
+
+    def test_matching_published_assets_are_verified_without_reupload_or_release_edit(self):
+        self.prepare("0.1.3")
+        state, call = self.remote("0.1.3", existing=True)
+        with mock.patch.object(self.publisher.subprocess, "run", side_effect=call):
+            self.publisher.publish(self.root, "v0.1.3")
+        self.assertEqual(len([args for args in state["calls"] if args[:2] == ["release", "download"]]), 13)
+        self.assertFalse(any(args[:2] in [["release", "create"], ["release", "upload"], ["release", "edit"]]
+                             for args in state["calls"]))
+
+    def test_existing_asset_conflict_is_never_overwritten(self):
+        self.prepare("0.1.3")
+        state, call = self.remote("0.1.3", existing=True, conflict=True)
+        with mock.patch.object(self.publisher.subprocess, "run", side_effect=call):
+            with self.assertRaisesRegex(ValueError, "immutable|bytes"):
+                self.publisher.publish(self.root, "v0.1.3")
+        self.assertEqual(state["uploaded"], [])
+        self.assertFalse(any(args[:2] == ["release", "edit"] for args in state["calls"]))
+
+    def test_incomplete_published_release_is_rejected_without_uploading_or_editing(self):
+        self.prepare("0.1.3")
+        for missing in ["io.github.caichangqing1120.apollo-0.1.3-linux-arm64.dbxp", "release-candidates.json"]:
+            with self.subTest(missing=missing):
+                state, call = self.remote("0.1.3", existing=True, upload_failure=True)
+                state["release"]["assets"] = [row for row in state["release"]["assets"] if row["name"] != missing]
+                with mock.patch.object(self.publisher.subprocess, "run", side_effect=call):
+                    with self.assertRaisesRegex(ValueError, "Incomplete published"):
+                        self.publisher.publish(self.root, "v0.1.3")
+                self.assertEqual(len(state["calls"]), 1, "an incomplete public release is never repaired implicitly")
+
+    def test_failed_upload_leaves_new_release_in_draft(self):
+        self.prepare("0.1.3")
+        state, call = self.remote("0.1.3", upload_failure=True)
+        with mock.patch.object(self.publisher.subprocess, "run", side_effect=call):
+            with self.assertRaises(subprocess.CalledProcessError):
+                self.publisher.publish(self.root, "v0.1.3")
+        self.assertTrue(state["release"]["draft"])
+        self.assertFalse(any(args[:2] == ["release", "edit"] for args in state["calls"]))
+
+    def test_incomplete_target_set_is_rejected_before_remote_calls(self):
+        self.prepare("0.1.3")
+        next(self.output.glob("*linux-arm64.dbxp")).unlink()
+        with mock.patch.object(self.publisher.subprocess, "run") as run:
+            with self.assertRaisesRegex(ValueError, "target|package"):
+                self.publisher.publish(self.root, "v0.1.3")
+        run.assert_not_called()
 
 
 if __name__ == "__main__":

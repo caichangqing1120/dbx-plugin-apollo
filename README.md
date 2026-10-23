@@ -2,16 +2,20 @@
 
 DBX issue [#12466](https://github.com/t8y2/dbx/issues/12466).
 
-Current author Preview: **Apollo Portal Console / Apollo Portal 控制台**, [`0.1.3-rc.2`](https://github.com/caichangqing1120/dbx-plugin-apollo/releases/tag/v0.1.3-rc.2).
-All five unsigned native packages are published and re-downloaded/verified. The Store update
-is [PR #304](https://github.com/t8y2/dbx-store/pull/304), pending maintainer review/signing;
-the last officially signed Store version remains `0.1.2`.
+Stable release preparation: **Apollo Portal Console / Apollo Portal 控制台 `0.1.3`**.
+The user authorized promoting the tested RC2 behavior on 2026-10-23. Stable publication
+changes the version/channel, not the UI or the failed full 1:1 acceptance gate.
+The Store has no prerelease channel: signing any candidate makes it `latestVersion` for
+all users. RC submission [#304](https://github.com/t8y2/dbx-store/pull/304) is therefore closed;
+merged automation [#298](https://github.com/t8y2/dbx-store/pull/298) discovers eligible stable
+releases. Author publication, automatic candidate creation and official signing/merge are
+separate gates. The last confirmed signed Store version is `0.1.2`.
 The new names and explicit SemVer prerelease avoid the separate Apollo plugin's identical
 listing labels. The already signed `0.1.2` artifacts and source tag are preserved unchanged.
 The [review follow-up](docs/review-follow-up-2026-10-20.md) preserves the earlier naming /
 signed-0.1.2 boundary; the current RC2 delivery is recorded separately.
 
-**RC2 is published and byte-verified.** Source CI passes; all five downloaded packages
+**Historical RC2 is published and byte-verified.** Source CI passes; all five downloaded packages
 match the local verified bytes, including the exact ARM64 candidate installed in DBX.
 This continuation fixes automatic success-feedback dismissal, header app/Key autocomplete,
 retained Key-target views and multi-environment search pagination, and restores measured
@@ -31,10 +35,11 @@ The next-version continuation repairs shared form columns/help/static values, ke
 creation on the original success page, and restores public Namespace department-prefix
 display, draft retention and keyboard focus. See [current repairs and verification scope](docs/parity-polish.md)
 and the [historical 0.1.2 audit](docs/parity-finish.md).
-The strict all-page, all-dialog 1:1 gate still FAILS; the author Release contains unsigned
-Preview candidates, not an accepted replica or a promise of completed visual parity.
+The strict all-page, all-dialog 1:1 gate still FAILS. Stable SemVer is the authorized release
+channel, not a claim that these gaps are fixed. Author packages remain unsigned Store inputs
+until protected signing; do not mistake an author stable Release for an official signed catalog.
 
-[Current delivery receipt](docs/delivery-0.1.3-rc.2.json) | [Source CI](https://github.com/caichangqing1120/dbx-plugin-apollo/actions/runs/39401872416) | [Marketplace candidate PR #304](https://github.com/t8y2/dbx-store/pull/304) | [Self-contained visual report](https://github.com/caichangqing1120/dbx-plugin-apollo/releases/download/v0.1.3-rc.2/apollo-parity-report-v0.1.3-rc.2.html).
+[Stable release notes](docs/release-notes-v0.1.3.md) | [Historical RC2 receipt](docs/delivery-0.1.3-rc.2.json) | [Historical RC2 visual report](https://github.com/caichangqing1120/dbx-plugin-apollo/releases/download/v0.1.3-rc.2/apollo-parity-report-v0.1.3-rc.2.html).
 Official signing of all five `0.1.2` targets and PR #295's maintainer merge completed on
 2026-10-20. The author Release assets remain unsigned review candidates, distinct from
 the official signed Store artifacts. The [historical 0.1.2 receipt](docs/delivery-0.1.2.json)
@@ -44,8 +49,9 @@ records that version's author-submission snapshot, not the current Store review 
 
 In DBX's plugin marketplace, identify the signed plugin by publisher **caichangqing1120**
 and ID **`io.github.caichangqing1120.apollo`**. The published `0.1.2` entry still uses the old
-name **Apollo Config / Apollo 配置中心**; the distinct Portal Console names are for the next
-release. A similarly named Apollo plugin from another publisher is a different product.
+name **Apollo Config / Apollo 配置中心**; the stable update uses the distinct Portal Console
+names after Store review/signing/merge. A similarly named Apollo plugin from another publisher
+is a different product.
 
 After installation, create an Apollo connection with the Portal hostname, port (normally
 8070), HTTP/HTTPS, optional context path and an existing ordinary username/password. Use a
@@ -165,43 +171,46 @@ that host is for development only, not the DBX production Secret Store.
 ```sh
 npm run package:macos
 npm run package:all
-python3 scripts/verify-package.py dist/release-v0.1.3-rc.2/io.github.caichangqing1120.apollo-0.1.3-rc.2-darwin-arm64.dbxp --handshake
+python3 scripts/verify-package.py dist/release-v0.1.3/io.github.caichangqing1120.apollo-0.1.3-darwin-arm64.dbxp --handshake
 ```
 
-`package:macos` builds Darwin ARM64 under `dist/release-v0.1.3-rc.2/darwin-arm64/`; `package:all`
-builds Darwin ARM64/x64, Windows x64 and Linux x64/ARM64 under `dist/release-v0.1.3-rc.2/`.
+`package:macos` builds Darwin ARM64 under `dist/release-v0.1.3/darwin-arm64/`; `package:all`
+builds Darwin ARM64/x64, Windows x64 and Linux x64/ARM64 under `dist/release-v0.1.3/`.
 Single-target output never replaces the complete set's merged index. Every package contains the complete UI, licensed
 assets and its native Go sidecar. Explicit GOOS/GOARCH/CGO settings and actual Mach-O/PE/ELF
 headers prevent misleading target labels. All file checksums, source/UI equality, package
 metadata and the current-host initialize handshake are checked. Cross-target runtime
 acceptance is separate. The merged `release-candidates.json` follows the store synchronizer's
-`plugin` plus `artifacts` contract; it is not a catalog entry. The Preview packaging
-path now rejects stable-looking or invalid SemVer versions; all future Preview releases
-must retain a prerelease suffix such as `-rc.1` in the manifest, sidecar, tag and metadata.
+`plugin` plus `artifacts` contract; it is not a catalog entry. Packaging validates strict
+SemVer. The shared publisher keeps suffix versions such as `-rc.2` on GitHub's prerelease
+channel and publishes suffix-free `0.1.3` as stable. New releases stay draft until all five
+targets and pinned metadata are uploaded; wrong-channel releases, lookup failures and
+conflicting existing asset bytes fail closed without overwriting public artifacts.
+Already-published releases are verification-only and must contain the complete asset set;
+missing assets require explicit recovery. Publication is manually dispatched through CI,
+not triggered by creating an already-public empty Release.
 
 Unsigned packages require explicitly enabling development packages in DBX. Official
 marketplace installation requires DBX Store review, signing and merge; the author cannot
-self-assign official trust or publish signed catalog entries. See [current Preview notes](docs/release-notes-v0.1.3-rc.2.md)
+self-assign official trust or publish signed catalog entries. See [stable release notes](docs/release-notes-v0.1.3.md)
 and [privacy/security boundaries](docs/security.md).
 
 ## Release And Update Policy
 
-- `0.1.3-rc.2` is published through the manually initiated CI workflow. All five unsigned
-  public packages are re-downloaded and match exact local SHA-256/size/source/UI/native
-  metadata. Both downloaded macOS sidecars pass initialize/full controlled smoke; CI also
-  passes packaged Linux x64 smoke. Ten focused native DBX checks separately pass using
-  the byte-identical ARM64 package. This is not official signing or full native acceptance.
-- Existing Store candidate PR #304 is updated to RC2, not duplicated. Its only changed
-  file is the candidate JSON; it awaits maintainer review/signing. Ordinary Store CI is
-  intentionally red for the documented pending-signing guard, not a claimed successful
-  catalog update. Prior RC1/0.1.2 tags, unsigned packages and signed assets remain immutable.
-- This validation iteration uses manual release submission: an author-initiated tag/Preview
-  Release, CI-built candidate packages and an author-submitted Store candidate PR. Review,
-  protected signing and maintainer merge are still required.
+- `0.1.3` promotes tested RC2 behavior without changing UI/source assets. Stable and RC
+  tags/assets are immutable; never relabel an existing RC release or replace its packages.
+  Fresh suites/build/package tests prove the stable identity; RC2 native/pixel records are
+  historical behavior evidence, not a fresh stable native installation or full-parity verdict.
+- The maintainer closed RC candidate PR #304 because signing any version publishes it as
+  Store `latestVersion` for all users. Do not reopen it or request RC signing. Stable author
+  packages are unsigned; official review, protected signing and merge remain required.
 - [Automation registration PR #298](https://github.com/t8y2/dbx-store/pull/298) registers future
-  release discovery only and is pending merge. It does not publish this Preview or change signing policy.
-- Store discovery currently skips GitHub Draft/Prerelease releases. An RC remains a Preview
-  and is submitted manually; do not disguise it as a stable release to bypass that filter.
+  discovery and was merged on 2026-10-23 with `autoUpdate: true`. An eligible non-draft,
+  non-prerelease Release with `release-candidates.json` can create the Store candidate PR.
+  Do not duplicate the automatic candidate manually or change Store discovery/signing policy.
+- Publishing stable is explicitly authorized despite disclosed remaining parity gaps. It
+  does not silently claim production/MySQL, cold-start/file-transfer or multi-account
+  acceptance. Discovery and signing status are reported from actual readbacks only.
 
 ## Source And Feedback
 
@@ -224,7 +233,7 @@ The RC2 repair passes timer/draft/focus regressions, real-Apollo SDK checks and
 [ten focused actual native DBX cases](docs/native-rc2-validation-2026-10-20.md).
 `NATIVE-UX-01` is fixed in RC2; the original RC1 evidence remains historical, not rewritten.
 
-Current local and source CI checks: **207 JS + 14 packaging regressions**, **14 Go race tests + vet**,
+The RC2 local and source CI checks passed **207 JS + 14 packaging regressions**, **14 Go race tests + vet**,
 both downloaded macOS sidecar smoke flows, CI Linux x64 smoke, real-Apollo SDK checks
 and ten focused actual native DBX cases.
 Selected search/cluster geometry matches within 0.016px; configuration table sizes/column widths
@@ -236,7 +245,8 @@ not a fresh all-state RC2 census. The [local RC2 package proof](docs/package-ver
 records exact unsigned hashes and native targets. The [published RC2 delivery receipt](docs/delivery-0.1.3-rc.2.json)
 records the matching CI/published bytes, downloaded macOS smoke and separate Store gates.
 The [RC1 receipt](docs/delivery-0.1.3-rc.1.json) remains historical. None of these counts
-is a full 1:1, complete native acceptance or production verdict.
+is a full 1:1, complete native acceptance or production verdict. Stable-release verification
+is recorded separately; no new browser UI or native installation is implied by version promotion.
 
 `npm run test:smoke` starts a controlled loopback HTTP fixture and a real Go sidecar and checks
 JSON-RPC login/edit/publish/history/rollback, gray merge, sync, key/consumer/role/admin APIs,
