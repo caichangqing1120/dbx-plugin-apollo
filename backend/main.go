@@ -13,10 +13,11 @@ import (
 const pluginID = "io.github.caichangqing1120.apollo"
 
 type plugin struct {
-	mu        sync.Mutex
-	sessions  map[string]*portalSession
-	epochs    map[string]uint64
-	transfers map[string]*transferRecord
+	mu            sync.Mutex
+	sessions      map[string]*portalSession
+	epochs        map[string]uint64
+	transfers     map[string]*transferRecord
+	confirmations map[string]mcpConfirmation
 }
 
 func newPlugin() *plugin {
@@ -25,6 +26,10 @@ func newPlugin() *plugin {
 
 func (p *plugin) Handle(_ sdk.RequestContext, method string, raw json.RawMessage, _ *sdk.Emitter) (any, *sdk.PluginError) {
 	switch method {
+	case "mcp/tools":
+		return mcpTools(), nil
+	case "mcp/call":
+		return p.mcpCall(raw), nil
 	case "apollo/upload-start", "apollo/upload-chunk", "apollo/upload-finish", "apollo/upload-abort", "apollo/download-chunk", "apollo/download-close":
 		return p.transferRequest(method, raw)
 	case "apollo/consumer-authorize":
@@ -112,7 +117,7 @@ func (p *plugin) Handle(_ sdk.RequestContext, method string, raw json.RawMessage
 }
 
 func main() {
-	server := sdk.NewServer(sdk.Metadata{ID: pluginID, Version: "0.1.3", Capabilities: []string{"connections"}}, newPlugin())
+	server := sdk.NewServer(sdk.Metadata{ID: pluginID, Version: "0.2.0", Capabilities: []string{"connections", "mcp"}}, newPlugin())
 	if err := server.Serve(); err != nil {
 		log.Fatal(err)
 	}

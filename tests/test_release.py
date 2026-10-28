@@ -129,6 +129,7 @@ class ReleaseTests(unittest.TestCase):
         self.assertEqual(release["plugin"]["id"], "io.github.caichangqing1120.apollo")
         self.assertEqual(release["plugin"]["version"], "0.1.3-rc.1")
         self.assertEqual(release["plugin"]["permissions"], ["host.storage"])
+        self.assertTrue(release["plugin"].get("mcpTools"), "MCP candidates must advertise MCP tools without changing grants")
         self.assertEqual([a["target"] for a in release["artifacts"]], ["darwin-arm64", "windows-x64"])
         self.assertEqual(len((self.output / "SHA256SUMS-v0.1.3-rc.1.txt").read_text().splitlines()), 2)
         for artifact, path in zip(release["artifacts"], paths):

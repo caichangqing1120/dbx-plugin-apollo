@@ -2,7 +2,61 @@
 
 DBX issue [#12466](https://github.com/t8y2/dbx/issues/12466).
 
-Current author stable release: **Apollo Portal Console / Apollo Portal 控制台**,
+## 0.2.0 MCP Release
+
+The current source version is **0.2.0**, adding the updated MCP bridge.
+[Author release and notes](docs/release-notes-v0.2.0.md) distinguish unsigned
+publication, isolated local validation, official signing and service acceptance.
+Historical release status below refers to the previously published versions.
+
+Use matching updated DBX Desktop and standalone `dbx-mcp` versions implementing the
+manifest/tool access contract verified against DBX upstream `8c2bbe35b`. The existing
+engine floor is unchanged; it alone is not evidence that an older host understands
+the new MCP contribution. Older hosts predating MCP contributions may reject it.
+
+Enable the plugin in Plugin Center, then explicitly enable/authorize it in
+Settings -> MCP -> Capabilities. Choose allowed saved connections, an access ceiling
+and per-tool opt-outs in MCP permissions. Installing/upgrading never changes user
+grants. New or upgraded write/full tools remain subject to the host's acceptance and
+Call safety policies; a plugin-side confirmation never grants or elevates access.
+
+| Tool | Maximum Access | Behavior |
+| --- | --- | --- |
+| `apollo_read` | read | Allowlisted read-only service APIs, including syntax/diff computation and redacted export metadata |
+| `apollo_session` | read | Host lifecycle identity/read-only metadata only |
+| `apollo_write` | write | Favorites, single configuration items and creation of clusters/namespaces/gray branches |
+| `apollo_admin` | full | Confirmed destructive/bulk, releases/rollback, import, users, roles, access keys and system administration |
+| `apollo_authorize_consumer` | full | Confirmed grant by consumer appId; existing token resolved backend-side and never returned |
+
+The method/path/query allowlist and complete capability inventory are in
+[`docs/specs/002-mcp-tools/plan.md`](docs/specs/002-mcp-tools/plan.md). Requests use
+the same service methods and 4 MiB transport/25-second timeout as the UI. Model
+arguments cannot supply connection credentials, endpoints or routing. Each external
+call authenticates its own temporary host-lifecycle session without requiring an
+open UI or overwriting existing UI sessions; current read-only policy always applies.
+The existing non-GET restriction on read-only connections also covers the service's
+POST-only syntax/diff computations.
+
+Full tools first accept `phase: "prepare"`, which makes no network request and
+returns a two-minute single-use token. After explicit human approval, repeat the
+**exact same arguments** with `phase: "execute"` and `confirmationToken`. Tokens
+are bound to tool, connection credentials/routing/policy and request. They are
+consumed before authentication/dispatch, including on failure; writes are never
+automatically retried. User-management new passwords are provisioning input only
+on the confirmed full-access `/users` API, not connection authentication overrides.
+Contextual UI-only modal previews, in-use rechecks and multi-screen wizard state are
+not replayed by MCP. Review the exact service method/path/body before full-access
+approval; the MCP API workflow is not a 1:1 automation of the interactive UI.
+
+MCP results are untrusted service data: credential-named fields, secret-named config
+values and known authentication secrets are redacted; output is bounded to 512 KiB.
+Managed access keys/consumer tokens are never returned. Binary and unstructured file
+exports return metadata only, **not full-fidelity backup/export bytes**. The existing
+UI's deliberate raw export/reveal behavior and file-transfer APIs are unchanged.
+
+## Previous Published Release
+
+Previously published author stable release: **Apollo Portal Console / Apollo Portal 控制台**,
 [`0.1.3`](https://github.com/caichangqing1120/dbx-plugin-apollo/releases/tag/v0.1.3).
 The user authorized promoting the tested RC2 behavior on 2026-10-23. Stable publication
 changes the version/channel, not the UI or the failed full 1:1 acceptance gate.
@@ -273,3 +327,5 @@ See [current repair evidence](docs/parity-polish.md), [reference evidence](docs/
 [verification history](docs/verification.md), and the
 [implementation spec](docs/specs/001-apollo-portal/spec.md). The SDK in `backend/sdk` is vendored
 from DBX under Apache-2.0 to avoid requiring a local DBX checkout to build.
+
+Fresh isolated `dbx-mcp 0.4.134` host discovery, access ceilings, readonly execution/denial and revocation validation: [`release-validation.md`](docs/specs/002-mcp-tools/release-validation.md). This is not Desktop installer/signature or production-service acceptance.

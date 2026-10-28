@@ -198,6 +198,8 @@ def write_release_metadata(root, artifacts, output):
         metadata.append(actual)
     require(len({entry["target"] for entry in metadata}) == len(metadata), "Duplicate artifact targets")
     identity = {key: copy.deepcopy(manifest[key]) for key in ("id", "name", "version", "publisher", "description", "permissions")}
+    if any(item.get("type") == "mcp" for item in manifest.get("contributions", [])):
+        identity["mcpTools"] = True
     write_json(output / "release-candidates.json", {"plugin": identity, "artifacts": metadata})
     (output / f"SHA256SUMS-v{manifest['version']}.txt").write_text(
         "".join(f"{entry['sha256']}  {entry['url']}\n" for entry in metadata), encoding="utf-8")

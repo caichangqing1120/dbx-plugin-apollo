@@ -10,10 +10,11 @@
   "permissions": [
     "host.storage"
   ],
-  "source": "https://github.com/caichangqing1120/dbx-plugin-apollo/tree/v0.1.3",
+  "mcpTools": true,
+  "source": "https://github.com/caichangqing1120/dbx-plugin-apollo/tree/v0.2.0",
   "homepage": "https://github.com/caichangqing1120/dbx-plugin-apollo",
   "license": "Apache-2.0",
-  "releaseNotes": "0.1.3 stable: promotes the tested RC2 behavior without UI changes. Success feedback auto-dismisses after 5 seconds and successful editors close; app/Key search handles folded/text targets and multi-environment pagination. Retains measured menus, cluster rows and table repairs. Stable publication enables Store release discovery, not a full-parity claim: all-page/all-dialog 1:1 remains FAIL and native cold-start/file transfer/multi-account acceptance is incomplete. Author packages are unsigned inputs; official Store review, signing and merge remain required.",
+  "releaseNotes": "0.2.0 candidate: guarded MCP read previews, ordinary changes and explicitly confirmed administration across existing Apollo APIs. Managed secrets and raw binary export bytes are withheld from MCP; UI behavior is unchanged. Matching updated DBX and standalone MCP are required. No access is granted by upgrading. Prior visual/native acceptance gaps remain; author packages are unsigned inputs and publication/signing are separate gates.",
   "localizations": {
     "zh-CN": {
       "name": "Apollo Portal \u63a7\u5236\u53f0",

@@ -52,6 +52,8 @@ def publish(root, tag, repository="caichangqing1120/dbx-plugin-apollo"):
     require(all(path.is_file() and not path.is_symlink() for path in assets), "Missing or symlink release asset")
     aggregate = json.loads(index.read_text())
     expected_identity = {key: manifest[key] for key in ("id", "name", "version", "publisher", "description", "permissions")}
+    if any(item.get("type") == "mcp" for item in manifest.get("contributions", [])):
+        expected_identity["mcpTools"] = True
     require(aggregate.get("plugin") == expected_identity, "Release aggregate identity mismatch")
     expected_artifacts = sorted((metadata_for(path, row["target"]) for path, row in zip(packages, reports)), key=lambda row: row["target"])
     require(sorted(aggregate.get("artifacts", []), key=lambda row: row["target"]) == expected_artifacts,

@@ -3,7 +3,7 @@
   "manifest_version": 1,
   "id": "io.github.caichangqing1120.apollo",
   "name": "Apollo Portal Console",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "publisher": "caichangqing1120",
   "description": "Independently authored Apollo 2.x management UI with password login; known visual parity gaps remain",
   "icon": "assets/apollo.png",
@@ -28,6 +28,24 @@
     }
   },
   "contributions": [
+    {
+      "type": "mcp",
+      "id": "io.github.caichangqing1120.apollo.mcp",
+      "description": "Guarded Apollo configuration and administration APIs with secret-redacted previews",
+      "external_tools": true,
+      "ai_tools": true,
+      "toolsets": [
+        { "id": "configuration", "title": "Configuration And Read Previews" },
+        { "id": "administration", "title": "Confirmed Administration", "description": "Full-access destructive, bulk, release and permission changes" }
+      ],
+      "tools": {
+        "apollo_read": { "toolset": "configuration", "access": "read" },
+        "apollo_session": { "toolset": "configuration", "access": "read" },
+        "apollo_write": { "toolset": "configuration", "access": "write" },
+        "apollo_admin": { "toolset": "administration", "access": "full" },
+        "apollo_authorize_consumer": { "toolset": "administration", "access": "full" }
+      }
+    },
     {
       "type": "connection-provider",
       "id": "io.github.caichangqing1120.apollo.connection",
