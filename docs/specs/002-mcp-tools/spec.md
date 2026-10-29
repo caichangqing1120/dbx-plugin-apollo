@@ -30,3 +30,20 @@ Connection authentication and routing are exclusively host lifecycle input. Exis
 ## Delivery Authorization (2026-10-28)
 
 The user explicitly requests local verification, publication of the new version, and source-code push. This authorizes immutable v0.2.0 author releases in each repository's existing public/private channel, a tag-only source prerequisite, and then fast-forward updates to the existing source branches. It does not authorize production service writes, changing the user's real MCP grants, official Store signing, unrelated branch merges or overwriting prior assets.
+
+## Approved 0.2.1 Store Compatibility Patch (2026-10-29)
+
+The user explicitly approves the corrected patch release. For this focused patch,
+the active version requirement is `0.2.1`; the preceding `0.2.0` implementation
+and delivery record remain historical. Remove only the unsupported `mcpTools`
+field from `.dbx-store.json`, preserving the complete manifest MCP contribution,
+five tools/access declarations, service/UI behavior and user-controlled grants.
+
+Keep the release generator's top-level `plugin` identity plus `artifacts` format.
+The generated identity may retain its MCP hint, but current Store metadata and
+candidate schemas do not support that field and must not receive it. Verify
+against the actual Store importer/schema at
+`t8y2/dbx-plugin-store@5b8ab0045086a9838c35b730c5a37df02632f870`, with closed local
+fetch fixtures and all five target packages. Preserve immutable `0.2.0` assets
+and receipts. Local implementation/verification does not itself publish a
+release, submit/sign a Store candidate, install packages or change real profiles.

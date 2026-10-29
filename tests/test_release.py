@@ -1,6 +1,7 @@
 import importlib.util
 import hashlib
 import json
+import os
 from pathlib import Path
 import struct
 import subprocess
@@ -143,6 +144,82 @@ class ReleaseTests(unittest.TestCase):
         artifact.write_bytes(artifact.read_bytes() + b"unreviewed trailing payload")
         with self.assertRaisesRegex(ValueError, "metadata|[Hh]ash|size"):
             self.release.write_release_metadata(self.root, [artifact], self.output)
+
+    def store_import(self, metadata, version="0.2.1"):
+        self.manifest["version"] = version
+        (self.root / "manifest.json").write_text(json.dumps(self.manifest))
+        (self.root / "package.json").write_text(json.dumps({"version": version}))
+        paths = [self.package(target) for target in self.release.TARGETS]
+        self.release.write_release_metadata(self.root, paths, self.output)
+        fixture = ROOT / "tests/fixtures/dbx-plugin-store"
+        store = os.environ.get("DBX_STORE_ROOT")
+        script = Path(store).resolve() / "scripts/sync-release-candidate.mjs" if store else fixture / "sync-release-candidate.mjs"
+        schema = Path(store).resolve() / "schemas/plugin-candidate.schema.json" if store else fixture / "plugin-candidate.schema.json"
+        self.store_schema = json.loads(schema.read_text())
+        responses = {
+            "https://fixtures.invalid/release-candidates.json": json.loads((self.output / "release-candidates.json").read_text()),
+            "https://fixtures.invalid/.dbx-store.json": metadata,
+        }
+        (self.root / "store-responses.json").write_text(json.dumps(responses))
+        preload = self.root / "store-fetch.mjs"
+        preload.write_text("""import { readFileSync } from 'node:fs';
+const responses = JSON.parse(readFileSync(new URL('./store-responses.json', import.meta.url)));
+globalThis.fetch = async (url) => {
+  if (!Object.hasOwn(responses, url)) throw new Error('Unexpected network request: ' + url);
+  return new Response(JSON.stringify(responses[url]), {status: 200});
+};
+""")
+        result = subprocess.run([
+            "node", "--import", str(preload), str(script),
+            "--repository", "caichangqing1120/dbx-plugin-apollo", "--tag", "v" + version,
+            "--release-candidates-url", "https://fixtures.invalid/release-candidates.json",
+            "--metadata-url", "https://fixtures.invalid/.dbx-store.json",
+            "--output", "candidate.json",
+        ], cwd=self.root, text=True, capture_output=True, timeout=15)
+        return result, self.root / "candidate.json", paths
+
+    def test_store_import_rejects_legacy_mcp_metadata_without_emitting_candidate(self):
+        metadata = json.loads((ROOT / ".dbx-store.json").read_text())
+        metadata["mcpTools"] = True
+        result, candidate, _ = self.store_import(metadata, version="0.2.0")
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("Unsupported store metadata field 'mcpTools'", result.stderr)
+        self.assertFalse(candidate.exists())
+
+    def test_generated_patch_release_imports_with_supported_store_metadata(self):
+        metadata = json.loads((ROOT / ".dbx-store.json").read_text())
+        result, path, packages = self.store_import(metadata)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        candidate = json.loads(path.read_text())
+        self.assertEqual(candidate["version"], "0.2.1")
+        self.assertEqual(candidate["id"], self.manifest["id"])
+        self.assertEqual(candidate["publisher"], self.manifest["publisher"])
+        self.assertEqual(candidate["permissions"], self.manifest["permissions"])
+        self.assertNotIn("mcpTools", candidate)
+        self.assertFalse(self.store_schema["additionalProperties"])
+        self.assertLessEqual(set(candidate), set(self.store_schema["properties"]))
+        self.assertLessEqual(set(self.store_schema["required"]), set(candidate))
+        self.assertEqual({item["target"] for item in candidate["targets"]}, set(self.release.TARGETS))
+        for target in candidate["targets"]:
+            package = next(item for item in packages if target["url"].endswith("/" + item.name))
+            self.assertEqual(target["sha256"], hashlib.sha256(package.read_bytes()).hexdigest())
+            self.assertEqual(target["size"], package.stat().st_size)
+        self.assertEqual(candidate["source"], "https://github.com/caichangqing1120/dbx-plugin-apollo/tree/v0.2.1")
+        self.assertEqual(candidate["icon"], "https://raw.githubusercontent.com/caichangqing1120/dbx-plugin-apollo/v0.2.1/assets/apollo.png")
+        with zipfile.ZipFile(packages[0]) as archive:
+            packaged = json.loads(archive.read("manifest.json"))
+        mcp = [item for item in packaged["contributions"] if item["type"] == "mcp"]
+        self.assertEqual(mcp, [item for item in self.manifest["contributions"] if item["type"] == "mcp"])
+        self.assertTrue(mcp[0]["external_tools"])
+        self.assertEqual(len(mcp[0]["tools"]), 5)
+
+    def test_active_patch_versions_match_package_and_initialize_metadata(self):
+        self.assertEqual(json.loads((ROOT / "manifest.json").read_text())["version"], "0.2.1")
+        self.assertEqual(json.loads((ROOT / "package.json").read_text())["version"], "0.2.1")
+        lock = json.loads((ROOT / "package-lock.json").read_text())
+        self.assertEqual(lock["version"], "0.2.1")
+        self.assertEqual(lock["packages"][""]["version"], "0.2.1")
+        self.assertIn('Version: "0.2.1"', (ROOT / "backend/main.go").read_text())
 
     def rewrite_backend(self, artifact, change):
         with zipfile.ZipFile(artifact) as archive:

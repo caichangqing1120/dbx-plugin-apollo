@@ -2,11 +2,15 @@
 
 DBX issue [#12466](https://github.com/t8y2/dbx/issues/12466).
 
-## 0.2.0 MCP Release
+## 0.2.1 Store Metadata Patch
 
-The current source version is **0.2.0**, adding the updated MCP bridge.
-[Author release and notes](docs/release-notes-v0.2.0.md) distinguish unsigned
-publication, isolated local validation, official signing and service acceptance.
+The current source version is **0.2.1**. This patch removes an unsupported
+`mcpTools` field from Store metadata so the current Store release importer can
+consume the author candidate. All five MCP tools, manifest access declarations,
+service guards and UI behavior from **0.2.0** remain unchanged.
+[Patch notes](docs/release-notes-v0.2.1.md) distinguish unsigned candidate validation
+from publication, official Store signing and service acceptance.
+[0.2.0 notes](docs/release-notes-v0.2.0.md) remain historical.
 Historical release status below refers to the previously published versions.
 
 Use matching updated DBX Desktop and standalone `dbx-mcp` versions implementing the
@@ -232,11 +236,11 @@ that host is for development only, not the DBX production Secret Store.
 ```sh
 npm run package:macos
 npm run package:all
-python3 scripts/verify-package.py dist/release-v0.1.3/io.github.caichangqing1120.apollo-0.1.3-darwin-arm64.dbxp --handshake
+python3 scripts/verify-package.py dist/release-v0.2.1/io.github.caichangqing1120.apollo-0.2.1-darwin-arm64.dbxp --handshake
 ```
 
-`package:macos` builds Darwin ARM64 under `dist/release-v0.1.3/darwin-arm64/`; `package:all`
-builds Darwin ARM64/x64, Windows x64 and Linux x64/ARM64 under `dist/release-v0.1.3/`.
+`package:macos` builds Darwin ARM64 under `dist/release-v0.2.1/darwin-arm64/`; `package:all`
+builds Darwin ARM64/x64, Windows x64 and Linux x64/ARM64 under `dist/release-v0.2.1/`.
 Single-target output never replaces the complete set's merged index. Every package contains the complete UI, licensed
 assets and its native Go sidecar. Explicit GOOS/GOARCH/CGO settings and actual Mach-O/PE/ELF
 headers prevent misleading target labels. All file checksums, source/UI equality, package
@@ -244,7 +248,7 @@ metadata and the current-host initialize handshake are checked. Cross-target run
 acceptance is separate. The merged `release-candidates.json` follows the store synchronizer's
 `plugin` plus `artifacts` contract; it is not a catalog entry. Packaging validates strict
 SemVer. The shared publisher keeps suffix versions such as `-rc.2` on GitHub's prerelease
-channel and publishes suffix-free `0.1.3` as stable. New releases stay draft until all five
+channel and publishes suffix-free versions as stable. New releases stay draft until all five
 targets and pinned metadata are uploaded; wrong-channel releases, lookup failures and
 conflicting existing asset bytes fail closed without overwriting public artifacts.
 Already-published releases are verification-only and must contain the complete asset set;

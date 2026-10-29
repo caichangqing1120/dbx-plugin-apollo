@@ -95,3 +95,23 @@ Parent relayed user scope: model arguments cannot override connection authentica
 - Parent-confirmed boundary: do not recreate UI modals or preflight workflows. Retain backend guards and exact method/path/body confirmation; UI-only contextual previews/rechecks are explicitly not replayed.
 - Final inventory: five tools (two read, one write, two full); 109 finite method/path contracts (58 read, six write, 45 full), plus dedicated consumer lookup/grant and lifecycle metadata. 107 table-driven endpoint dispatch examples plus explicit `/user`, consumer and session tests cover the surface.
 - Validation and retained limitations: see `validation.md`. No commits, push, publication, installation, restart, access grants or real credentials were used.
+
+## Approved 0.2.1 Patch Execution (2026-10-29)
+
+This reuses `spec.md`'s approved patch scope; it does not repeat the completed
+MCP implementation or introduce another work package.
+
+- [x] Run clean-source baseline: Go tests, 207 Node tests and 28 release tests. Install only existing npm dependencies when absent.
+- [x] Add regression executing the actual current Store importer with generated five-target fixtures and a closed fetch map. Observe RED for unsupported `mcpTools` Store metadata and stale active versions; preserve the expected legacy rejection case.
+- [x] Remove the unsupported Store metadata key, align active manifest/backend/npm versions to `0.2.1`, and update active source/notes references. Keep manifest tools/access and the existing manifest-driven release generator unchanged.
+- [x] Re-run complete Go normal/race/vet, 207 Node tests, 31 release tests, UI build and controlled packaged-sidecar smoke. Explicitly use ARM64 for native Go checks; verify actual executable headers rather than target labels.
+- [x] Build all five targets serially with `scripts/release.py`; verify complete schemas, exact package hashes/checksums, ARM64 initialize and actual Store import/validation in disposable fixtures.
+- [x] Add truthful patch notes and `patch-validation-0.2.1.md`; leave historical receipts and all remote actions to the coordinating delivery step.
+
+Patch ledger: the actual importer rejects the old metadata with
+`Unsupported store metadata field 'mcpTools'`; the same generated `0.2.1`
+fixture succeeds after the source metadata fix. The release generator already
+reads active manifest/package versions and therefore needs no hardcoded version
+or shape change. The complete manifest is byte-equivalent after normalizing only
+its version. Detailed commands, evidence and remaining gates are recorded in
+`patch-validation-0.2.1.md`.

@@ -20,3 +20,17 @@ The installed `dbx-mcp 0.4.134` was exercised through its real stdio interface w
 The user explicitly authorizes local verification, immutable author publication and source push. Publication uses a source-commit tag prerequisite before Release creation, followed by fast-forward updates to each pre-existing implementation branch. Public plugins use GitHub author releases; private plugins remain on private GitLab. Official DBX Store signing/listing and production-service or desktop-installer acceptance are separate and not claimed.
 
 Published candidate bytes must exactly match the locally verified assets. Read every uploaded asset back and compare its SHA256/size; never overwrite an existing differing tag or asset. Published releases must contain the complete platform/metadata/checksum set before becoming visible.
+
+## 0.2.1 Patch Addendum - 2026-10-29
+
+The `0.2.0` checks above did not establish compatibility with the current Store
+metadata importer. That importer rejects `.dbx-store.json`'s `mcpTools` field;
+the supported `plugin` plus `artifacts` release shape itself was already correct.
+
+The approved `0.2.1` patch removes only the unsupported Store metadata key and
+updates active version/source references. MCP manifest/tool access, services and
+UI behavior remain unchanged. Fresh RED/GREEN, full tests, five-target packaging,
+complete schemas and actual Store importer/validator results are recorded in
+`patch-validation-0.2.1.md`. These are local unsigned-candidate checks, not proof
+of publication, official Store signing/merge, installation or production service
+acceptance. Historical `0.2.0` notes and immutable assets remain untouched.
