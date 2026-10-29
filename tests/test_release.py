@@ -145,7 +145,7 @@ class ReleaseTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "metadata|[Hh]ash|size"):
             self.release.write_release_metadata(self.root, [artifact], self.output)
 
-    def store_import(self, metadata, version="0.2.1"):
+    def store_import(self, metadata, version="0.2.2"):
         self.manifest["version"] = version
         (self.root / "manifest.json").write_text(json.dumps(self.manifest))
         (self.root / "package.json").write_text(json.dumps({"version": version}))
@@ -191,7 +191,7 @@ globalThis.fetch = async (url) => {
         result, path, packages = self.store_import(metadata)
         self.assertEqual(result.returncode, 0, result.stderr)
         candidate = json.loads(path.read_text())
-        self.assertEqual(candidate["version"], "0.2.1")
+        self.assertEqual(candidate["version"], "0.2.2")
         self.assertEqual(candidate["id"], self.manifest["id"])
         self.assertEqual(candidate["publisher"], self.manifest["publisher"])
         self.assertEqual(candidate["permissions"], self.manifest["permissions"])
@@ -204,8 +204,8 @@ globalThis.fetch = async (url) => {
             package = next(item for item in packages if target["url"].endswith("/" + item.name))
             self.assertEqual(target["sha256"], hashlib.sha256(package.read_bytes()).hexdigest())
             self.assertEqual(target["size"], package.stat().st_size)
-        self.assertEqual(candidate["source"], "https://github.com/caichangqing1120/dbx-plugin-apollo/tree/v0.2.1")
-        self.assertEqual(candidate["icon"], "https://raw.githubusercontent.com/caichangqing1120/dbx-plugin-apollo/v0.2.1/assets/apollo.png")
+        self.assertEqual(candidate["source"], "https://github.com/caichangqing1120/dbx-plugin-apollo/tree/v0.2.2")
+        self.assertEqual(candidate["icon"], "https://raw.githubusercontent.com/caichangqing1120/dbx-plugin-apollo/v0.2.2/assets/apollo.png")
         with zipfile.ZipFile(packages[0]) as archive:
             packaged = json.loads(archive.read("manifest.json"))
         mcp = [item for item in packaged["contributions"] if item["type"] == "mcp"]
@@ -214,12 +214,12 @@ globalThis.fetch = async (url) => {
         self.assertEqual(len(mcp[0]["tools"]), 5)
 
     def test_active_patch_versions_match_package_and_initialize_metadata(self):
-        self.assertEqual(json.loads((ROOT / "manifest.json").read_text())["version"], "0.2.1")
-        self.assertEqual(json.loads((ROOT / "package.json").read_text())["version"], "0.2.1")
+        self.assertEqual(json.loads((ROOT / "manifest.json").read_text())["version"], "0.2.2")
+        self.assertEqual(json.loads((ROOT / "package.json").read_text())["version"], "0.2.2")
         lock = json.loads((ROOT / "package-lock.json").read_text())
-        self.assertEqual(lock["version"], "0.2.1")
-        self.assertEqual(lock["packages"][""]["version"], "0.2.1")
-        self.assertIn('Version: "0.2.1"', (ROOT / "backend/main.go").read_text())
+        self.assertEqual(lock["version"], "0.2.2")
+        self.assertEqual(lock["packages"][""]["version"], "0.2.2")
+        self.assertIn('Version: "0.2.2"', (ROOT / "backend/main.go").read_text())
 
     def rewrite_backend(self, artifact, change):
         with zipfile.ZipFile(artifact) as archive:

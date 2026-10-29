@@ -2,16 +2,27 @@
 
 DBX issue [#12466](https://github.com/t8y2/dbx/issues/12466).
 
-## 0.2.1 Store Metadata Patch
+## 0.2.2 Store Update And CI Provenance
 
-The current source version is **0.2.1**. This patch removes an unsupported
-`mcpTools` field from Store metadata so the current Store release importer can
-consume the author candidate. All five MCP tools, manifest access declarations,
-service guards and UI behavior from **0.2.0** remain unchanged.
-[Patch notes](docs/release-notes-v0.2.1.md) distinguish unsigned candidate validation
-from publication, official Store signing and service acceptance.
-[0.2.0 notes](docs/release-notes-v0.2.0.md) remain historical.
-Historical release status below refers to the previously published versions.
+The current source version is **0.2.2**, the first Store update since **0.1.3**.
+Neither **0.2.0** nor **0.2.1** entered the Store, so the user-visible change is
+the five-tool MCP bridge, not only a metadata patch: read (`apollo_read`,
+`apollo_session`), write (`apollo_write`) and full-access administration
+(`apollo_admin`, `apollo_authorize_consumer`). These wrap the existing Apollo
+service API while preserving secret redaction, read-only and explicit-confirmation
+guards. Manifest permissions remain `host.storage` only; upgrading grants no access.
+UI behavior is unchanged, including the known visual/native acceptance gaps.
+
+The update also removes the unsupported `mcpTools` Store metadata field that
+blocked release import. Source is pinned to
+[`v0.2.2`](https://github.com/caichangqing1120/dbx-plugin-apollo/tree/v0.2.2).
+The new release must be built by clean CI through the official reusable workflow,
+with complete VCS provenance verified by the release helper before publication or
+Store resubmission. CI, provenance verification, publication and Store signing are
+pending delivery gates, not results established by these source edits.
+[0.2.2 notes](docs/release-notes-v0.2.2.md) record the complete Store-facing change
+and release requirements. [0.2.1 notes](docs/release-notes-v0.2.1.md) and
+[0.2.0 notes](docs/release-notes-v0.2.0.md) remain immutable historical records.
 
 Use matching updated DBX Desktop and standalone `dbx-mcp` versions implementing the
 manifest/tool access contract verified against DBX upstream `8c2bbe35b`. The existing
@@ -68,7 +79,8 @@ The Store has no prerelease channel: signing any candidate makes it `latestVersi
 all users. RC submission [#304](https://github.com/t8y2/dbx-store/pull/304) is therefore closed;
 merged automation [#298](https://github.com/t8y2/dbx-store/pull/298) discovers eligible stable
 releases. Author publication, automatic candidate creation and official signing/merge are
-separate gates. The last confirmed signed Store version is `0.1.2`.
+separate gates. At that publication snapshot, the last confirmed signed Store
+version was `0.1.2`; the current Store baseline for the `0.2.2` review is `0.1.3`.
 The distinct names avoid the separate Apollo plugin's identical listing labels. Prior RC
 versions retain their explicit prerelease suffixes; all previous tags/assets remain immutable.
 The [review follow-up](docs/review-follow-up-2026-10-20.md) preserves the earlier naming /
@@ -113,9 +125,9 @@ records that version's author-submission snapshot, not the current Store review 
 ## Installation And Connection
 
 In DBX's plugin marketplace, identify the signed plugin by publisher **caichangqing1120**
-and ID **`io.github.caichangqing1120.apollo`**. The published `0.1.2` entry still uses the old
-name **Apollo Config / Apollo 配置中心**; the stable update uses the distinct Portal Console
-names after Store review/signing/merge. A similarly named Apollo plugin from another publisher
+and ID **`io.github.caichangqing1120.apollo`**. The historical `0.1.2` entry used the old
+name **Apollo Config / Apollo 配置中心**; `0.2.2` is an update from Store version `0.1.3`,
+not a new listing. A similarly named Apollo plugin from another publisher
 is a different product.
 
 After installation, create an Apollo connection with the Portal hostname, port (normally

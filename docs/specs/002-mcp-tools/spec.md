@@ -47,3 +47,36 @@ against the actual Store importer/schema at
 fetch fixtures and all five target packages. Preserve immutable `0.2.0` assets
 and receipts. Local implementation/verification does not itself publish a
 release, submit/sign a Store candidate, install packages or change real profiles.
+
+## Maintainer Review Response 0.2.2 (2026-10-29)
+
+The active release version is now `0.2.2`. Earlier 0.2.0/0.2.1 scope and receipts
+remain historical and immutable; do not replace their tags or assets. The current
+Store baseline is Apollo 0.1.3: neither 0.2.0 nor 0.2.1 entered the Store. Active
+Store notes must disclose the full five-tool read/write/full MCP upgrade since
+that baseline, as well as removal of the unsupported `mcpTools` listing field.
+Use the exact reviewer wording retained in `../../release-notes-v0.2.2.md` and
+pin listing source to the repository's `tree/v0.2.2`, not its moving root.
+
+Only active version/listing metadata and release workflow/provenance verification
+change. Preserve the complete manifest contributions, `host.storage` permission,
+plugin ID/publisher, service API, UI, lifecycle identity, redaction, read-only and
+explicit-confirmation guards. Upgrading grants no access. Matching updated DBX
+Desktop and standalone MCP are required; known visual/native acceptance gaps
+remain unchanged.
+
+Build 0.2.2 in clean CI through the official reusable workflow pinned at
+`417c1bfc28ea8669dfbc2e1525f54e3b68285b1c`, with `install-plugin-cli: false`,
+Go 1.26.3 and the existing backend `replace ... => ./sdk` retained. Invoke
+`scripts/package-ci.py` with `RELEASE_TAG=v0.2.2` and `DBX_PLUGIN_TARGET`.
+Verify full packaged executable VCS provenance, including `vcs.revision` equal
+to the resolved tag commit and `vcs.modified=false`; retain complete build info
+and a per-target provenance record beside package/artifact metadata. Missing or
+mismatched provenance must fail packaging. All five targets, final hashes/sizes,
+initialize identity/version and actual Store import/validation are required.
+
+Fresh CI, downloaded-byte/provenance verification, publication and Store
+review/signing remain pending delivery gates until separately evidenced. Source
+edits or historical receipts cannot be described as those results. No live
+service calls, Desktop installs, user-grant changes or official signing are
+authorized by this source implementation subtask.

@@ -115,3 +115,23 @@ reads active manifest/package versions and therefore needs no hardcoded version
 or shape change. The complete manifest is byte-equivalent after normalizing only
 its version. Detailed commands, evidence and remaining gates are recorded in
 `patch-validation-0.2.1.md`.
+
+## Maintainer Review Response 0.2.2
+
+**Spec:** `spec.md`, Maintainer Review Response 0.2.2 (2026-10-29). Reuse this
+canonical package; earlier completed tasks and release evidence remain historical.
+The coordinating delivery step owns CI helpers/workflows, full tests, commits and
+remote actions. No execution helper or legacy ledger is used for these edits.
+
+- [x] Verify the existing isolated worktree/branch and clean starting state; read the bound Spec and plan.
+- [x] Align active manifest/backend/npm/lock versions to 0.2.2 without changing manifest contributions or permissions.
+- [x] Replace Store notes with the exact first-update-since-0.1.3 MCP disclosure and pin source to `tree/v0.2.2`.
+- [x] Add 0.2.2 notes/README requirements, explicitly preserving old tags/assets/receipts and known acceptance gaps.
+- [x] Run focused metadata/diff invariants: active versions agree, manifest/tools/permissions and dependency graph are unchanged, Store notes/source match the release scope, and `git diff --check` passes.
+- [x] Coordinating delivery step runs applicable complete tests and builds after version-aware checks are updated.
+- [ ] Complete clean CI via the official pinned reusable workflow and provenance-aware helper; require full tag-matching VCS stamps and `vcs.modified=false` for every target.
+- [ ] Verify downloaded package bytes/provenance and actual Store import/validation before separately authorized publication and Store resubmission.
+
+Fresh CI/publication/Store signing are pending, not results established by this
+metadata/docs edit. Preserve all five MCP tools, access declarations, service
+contracts, UI and user grants throughout delivery.

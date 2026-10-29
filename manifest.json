@@ -3,7 +3,7 @@
   "manifest_version": 1,
   "id": "io.github.caichangqing1120.apollo",
   "name": "Apollo Portal Console",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "publisher": "caichangqing1120",
   "description": "Independently authored Apollo 2.x management UI with password login; known visual parity gaps remain",
   "icon": "assets/apollo.png",

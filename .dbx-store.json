@@ -10,10 +10,10 @@
   "permissions": [
     "host.storage"
   ],
-  "source": "https://github.com/caichangqing1120/dbx-plugin-apollo/tree/v0.2.1",
+  "source": "https://github.com/caichangqing1120/dbx-plugin-apollo/tree/v0.2.2",
   "homepage": "https://github.com/caichangqing1120/dbx-plugin-apollo",
   "license": "Apache-2.0",
-  "releaseNotes": "0.2.1 candidate: fixes Store release import by removing the unsupported mcpTools Store metadata field. All five manifest MCP tools, access declarations, guards and UI behavior are unchanged from 0.2.0. Matching updated DBX and standalone MCP are required. Upgrading grants no access. Prior visual/native acceptance gaps remain; these are unsigned author candidates, not officially signed Store artifacts. Publication, Store review/signing and service acceptance are separate gates.",
+  "releaseNotes": "0.2.2 is the first Store update since 0.1.3. It exposes five MCP tools over the existing Apollo service API: read (apollo_read, apollo_session), write (apollo_write) and full-access administration (apollo_admin, apollo_authorize_consumer), while keeping the existing secret redaction, read-only and explicit-confirmation guards; manifest permissions are unchanged (host.storage only) and upgrading grants no access. It also removes the unsupported mcpTools Store metadata field that blocked release import. UI behavior is unchanged. A matching updated DBX Desktop and standalone MCP are required.",
   "localizations": {
     "zh-CN": {
       "name": "Apollo Portal \u63a7\u5236\u53f0",
